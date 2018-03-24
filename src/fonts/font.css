@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url(../fonts/roboto/roboto-light.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(../fonts/roboto/roboto.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(../fonts/roboto/roboto-bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: HelveticaNeue Thin;
+  src: url("/../fonts/HelveticaNeue Thin.ttf") format("opentype");
+}
+@font-face {
+  font-family: Helvetica Neu Bold;
+  src: url("/../fonts/Helvetica Neu Bold.ttf") format("opentype");
+}

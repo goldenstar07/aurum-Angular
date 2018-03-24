@@ -1,0 +1,75 @@
+body {
+  background: #0d0d0d !important;
+  overflow-x: hidden;
+}
+
+
+.auth-container {
+  background-color: #0d0d0d;
+  height: 100vh;
+  .login-container {
+    background: #fff;
+    border: 2px solid #15668C;
+    border-radius: 30px;
+    color: #000;
+    margin: auto;
+    margin-top: 30%;
+    max-width: 100%;
+    max-height: 100%;
+    width: 500px;
+
+    .user-login-text {/*
+    font-weight: 200;*/
+      padding-right: 10px;
+      color: #000;
+      margin-top: 12px;
+    }
+    .fa-user{
+      padding-right: 10px;
+      color: #000;
+    }
+  }
+  .form-login{
+    padding: 20px;
+    float: right;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .user-name{
+      margin-bottom: 20px;
+    }
+    .password{
+      margin-bottom: 20px;
+    }
+  }
+  .forget-password{
+    display: flex;
+    justify-content: flex-end;
+    .anchor-default {
+      color: #176F98;
+      a {
+        text-decoration: none;
+        background-color: transparent;
+      }
+    }
+  }
+  .main-logo{
+    background: url("../../images/aurum-logo-slogan.png");
+    height: 500px;
+    width: 500px;
+    margin-top: 50px;
+  }
+}
+
+/*
+.login-content {
+  background: #120D0C;
+  color: aliceblue;
+  .login-form {
+
+  }
+  .login-logo {
+  }
+}
+*/

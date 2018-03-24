@@ -1,0 +1,61 @@
+<div class="auth-container align-items-md-center justify-content-center d-flex">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="container login-container">
+        <h1 class="user-login-text"><i class="fa fa-user"></i>User Login</h1>
+
+       <!-- <div ng-if="error" class="alert alert-danger error-user-name">User name or Password is incorrect. Please try again</div>-->
+        <div class="row">
+          <form class="form-login" (ngSubmit)="onSignin(f)" #f="ngForm">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="user-name">
+                  <input type="textbox" name="email" ngModel class="form-control" placeholder="user name">
+                  <!--<div class="user-name" ng-class="{ 'has-error': error }">-->
+                  <!--<input ng-model="user.email" type="textbox" class="form-control" name="email" placeholder="user name">-->
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="password">
+                  <input type="password" name="password" ngModel class="form-control" placeholder="password">
+                <!--<div class="password" ng-class="{ 'has-error': error }">
+                  <input ng-model="user.password" type="password" class="form-control" name="password"    placeholder="password">-->
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="button">
+                 <!-- <button ng-if="!loading || error" ng-click="login()" class="btn btn-lg btn-primary btn-default" type="Login">Login</button>
+                  <img ng-if="loading && !error" src="1234567890/images/loading.gif" />-->
+                  <button class="btn btn-lg btn-primary btn-default" type="Login">Login</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="forget-password">
+                  <a class="anchor-default" href="#">Forgot Password</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="image">
+      <div class="col-md-6">
+        <div class="main-logo"></div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,78 @@
+/*Specification*/
+
+$color-ff:             #e61818;
+$primary-color:        #0d0d0d;
+$title-color:          #E8E721;
+$font-main:            Helvetica Neue;
+$font-thin:            HelveticaNeue Thin;
+$font-gray:            #76756F;
+$font-gray2:           #575652;
+$font-gray3:           #E6E5E2;
+$font-gray4:           #F3F2F0;
+$font-gray5:           #76756F;
+$font-bold:            700;
+$font-sz-12:           12px;
+
+
+body {
+  font-family: $font-main, Helvetica,  Arial,sans-serif;
+  overflow-x: hidden;
+  height: 100vh;
+  font-weight: $font-bold;
+}
+a , a:hover {
+  text-decoration: none;
+  color: #fff;
+  outline: none;
+}
+#logo {
+  background: #0d0d0d;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  .logo__item {
+    background: url("../images/logo__image.png");
+    height: 72px;
+    width: 72px;
+  }
+}
+#header {
+  width: auto;
+  background: $primary-color;
+  height: 55px;
+  margin-left: 72px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  .header__text {
+    color: $title-color;
+    font-size: 28px;
+    padding: 8px 8px 8px 25px;
+    text-transform: uppercase;
+  }
+}
+
+/*
+header {
+  .header {
+    background: #120D0C;
+    display: flex;
+    height: 60px;
+  }
+  .main-logo {
+    background-image: url("../images/aurum-logo.png");
+    height: 50px;
+    width: 50px;
+    margin-left: 28px;
+    margin-top: 5px;
+  }
+  .page-name {
+    padding-left: 25px;
+    padding-top: 11px;
+    font-size: 23px;
+    color: #FFFF00;
+  }
+}
+*/
