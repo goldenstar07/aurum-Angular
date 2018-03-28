@@ -5,15 +5,16 @@ import {AuthService} from '../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
+
   constructor(private http: Http,
               private authService: AuthService) {
   }
 
-  /* storeRecipes(){
-       this.http.put('');
-  }*/
-  getData() {
+
+  getData(){
     const token = this.authService.getToken();
   }
+
+
 }
 

@@ -2,7 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AngularFireModule} from "angularfire2";
+import firestore = firebase.firestore;
+import * as firebase from "firebase/app";
+import {AngularFirestoreModule} from "angularfire2/firestore";
 
 
 import { AppComponent } from './app.component';
@@ -27,7 +31,17 @@ import { ChangePropertyComponent } from './change-property/change-property.compo
 import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
 import {DataStorageService} from './shared/data-storage.service';
+import { MainHomePageComponent } from './home/main-home-page/main-home-page.component';
+import {HomeService} from "./home/home.service";
 
+  var firebaseConfig = {
+    apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
+    authDomain: "aurum-249ae.firebaseapp.com",
+    databaseURL: "https://aurum-249ae.firebaseio.com",
+    projectId: "aurum-249ae",
+    storageBucket: "aurum-249ae.appspot.com",
+    messagingSenderId: "1041935493149"
+  };
 
 @NgModule({
   declarations: [
@@ -49,16 +63,20 @@ import {DataStorageService} from './shared/data-storage.service';
     EmployeeComponent,
     BillsMiscComponent,
     FormsComponent,
-    ChangePropertyComponent
+    ChangePropertyComponent,
+    MainHomePageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
-  providers: [ DataStorageService, AuthService],
+  providers: [ DataStorageService, AuthService, HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
