@@ -22,8 +22,12 @@ body {
 }
 a , a:hover {
   text-decoration: none;
-  color: #fff;
+  color: $title-color;
+  font-weight: $font-bold;
   outline: none;
+}
+a:hover,select:hover{
+  background-color: $primary-color;
 }
 #logo {
   background: #0d0d0d;
@@ -31,12 +35,23 @@ a , a:hover {
   height: 100vh;
   top: 0;
   left: 0;
+  overflow: hidden;
   .logo__item {
     background: url("../images/logo__image.png");
     height: 72px;
     width: 72px;
   }
 }
+#logo:hover {
+  width: 310px;
+  z-index: 1;
+  overflow: visible;
+  #menu-sidebar {
+    display: block;
+    margin-left: 72px;
+  }
+}
+
 #header {
   width: auto;
   background: $primary-color;
@@ -52,6 +67,9 @@ a , a:hover {
     padding: 8px 8px 8px 25px;
     text-transform: uppercase;
   }
+}
+#header:hover {
+  z-index: 999;
 }
 
 /*
@@ -76,3 +94,94 @@ header {
   }
 }
 */
+
+#menu-sidebar {
+  padding-left: 12px;
+  background-color: #76756F;
+  height: 100vh;
+  width: 240px;
+  margin-top: -18px;
+  display: none;
+}
+
+
+.select__block {
+  padding: 20px;
+  .select__item {
+    display: block;
+    margin-bottom: 12px;
+    padding: 10px 10px 10px 25px;
+    width: 240px;
+    margin-left: -32px;
+  }
+  .select__item:nth-child(1) {
+    margin-top: 25%;
+  }
+}
+.dropbtn {
+  background-color: $font-gray;
+  color: $title-color;
+  padding: 10px 10px 10px 25px;
+  font-weight: $font-bold;
+  border: none;
+  cursor: pointer;
+  display: block;
+  width:220px;
+  margin-left: -20px;
+  margin-bottom: 6px;
+}
+.circle__block {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: relative;
+  .arrow__triangle {
+    width: 18px;
+    position: absolute;
+    top: -132px;
+    left: 3px;
+  }
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: $font-gray;
+  min-width: 190px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: $title-color;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  margin-left: 30px;
+}
+
+.dropdown-content a:hover {
+  background-color: $primary-color;
+  width: 248px;
+  margin-left: -20px;
+  padding-left: 67px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  width: 227px;
+  margin-left: -20px;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: $font-gray;
+}
+.dropbtn:focus {
+  text-decoration: none;
+  outline: none;
+}

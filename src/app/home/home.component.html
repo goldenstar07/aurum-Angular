@@ -9,15 +9,6 @@
       <p>Current Users</p>
     </div>
     <div class="main__table">
-     <!-- <ul *ngFor="let manager of managers | async">
-        <li>
-          <strong>{{ manager.name }}</strong>
-          <br>
-          {{ manager.email }}
-          {{ manager.role }}
-        </li>
-      </ul>-->
-
      <div class="table__block" *ngFor="let manager of managers | async" (click)="getManager(manager.id)">
        <div class="text__block__btn" (click)="deleteManager(manager.id)">
        <!--<div class="text__block__btn" (click)="openDeleteComform(contentDeleteComform)">-->
@@ -30,9 +21,14 @@
        </div>
        <div class="role__block">
          <p class="text__block__email">Role</p>
-         <span class="prof__name">{{ manager.data.role }}</span>
+         <!--<span class="prof__name">{{ manager.data.role }}</span>-->
+         <span class="prof__name">Manager</span>
        </div>
      </div>
+      <div class="plus__circle" (click)="openNewUser(contentNewUser)">
+        <p>+</p>
+      </div>
+    </div>
    </div>
 
   <!--
@@ -65,10 +61,7 @@
          <span class="prof__name">Manager</span>
        </div>
      </div>-->
-      <div class="plus__circle" (click)="openNewUser(contentNewUser)">
-        <p>+</p>
-      </div>
-    </div>
+
 
     <div class="delete__button">
       <button type="button" class="button__item" (click)="open(content)">Delete Property</button>
@@ -89,7 +82,7 @@
             <input type="text" placeholder="" name="email" class="input" required>
           </div>
           <div class="pass__block">
-            <label for="psw"><p>Password:</p></label>
+            <label for="password"><p>Password:</p></label>
             <input type="password" placeholder="" name="psw" class="input" required>
           </div>
           <button type="submit" class="form__btn">
@@ -109,24 +102,27 @@
         </button>
       </div>
       <div class="user__block">
-        <form action="#" class="user__form">
+        <form action="#" class="user__form" (ngSubmit)="onSignup(f)" #f="ngForm">
           <div class="name__block">
             <label for="name"><p>Name:</p></label>
-            <input type="text" [(ngModel)]="name" placeholder="" name="name" class="input_user" required>
+            <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input_user" required>
           </div>
           <div class="email__block">
             <label for="email"><p>Email:</p></label>
-            <input type="email" [(ngModel)]="email" placeholder="" name="email" class="input_user" required>
+            <input type="email" id="email" [(ngModel)]="email" placeholder="" name="email" class="input_user" required>
           </div>
           <div class="pass__user-block">
-            <label for="psw"><p>Password:</p></label>
-            <input type="password" [(ngModel)]="role" placeholder="" name="psw" class="input_user" required>
+            <label for="password"><p>Password:</p></label>
+            <input type="password" id="password" [(ngModel)]="password" placeholder="" name="password" class="input_user" required>
           </div>
+          <button type="submit" class="confirm__user" (click)="addNewUser()" value="submit">
+            Confirm New User
+          </button>
         </form>
       </div>
-      <button type="submit" class="confirm__user" (click)="addNewUser()">
+     <!-- <button type="submit" class="confirm__user" (click)="addNewUser()" value="submit">
         Confirm New User
-      </button>
+      </button>-->
     </div>
   </ng-template>
 

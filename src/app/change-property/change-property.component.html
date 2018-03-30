@@ -1,3 +1,105 @@
-<p>
-  change-property works!
-</p>
+<app-header></app-header>
+
+<section id="main">
+  <div class="main__block">
+    <div class="main__title">
+      <h2>Select a property</h2>
+    </div>
+    <div class="main__table">
+      <div class="table__block" *ngFor="let hotel of hotels | async" (click)="getHotel(hotel.id)">
+        <img [src]="(featuredPhotoStream | async)?.url1" alt="hotel" class="table__image__item">
+        <hr> <hr>
+        <a href="#" class="table__link__item">{{ hotel.data.name }}e</a>
+      </div>
+      <!--<div class="table__block">
+        <img src="../images/hotels/hotel-2.png" alt="hotel" class="table__image__item">
+        <hr>
+        <a href="#" class="table__link__item">Red Roof Inn</a>
+      </div>
+      <div class="table__block">
+        <img src="../images/hotels/hotel-3.png" alt="hotel" class="table__image__item">
+        <hr>
+        <a href="#" class="table__link__item">Super 8 Oceanside</a>
+      </div>
+      <div class="table__block">
+        <img src="../images/hotels/hotel-1.png" alt="hotel" class="table__image__item">
+        <hr>
+        <a href="#" class="table__link__item">Saurabh Test (Do Not Delete)</a>
+      </div>
+      <div class="table__block">
+        <img src="../images/hotels/hotel-5.png" alt="hotel" class="table__image__item">
+        <hr>
+        <a href="#" class="table__link__item">Quality Inn</a>
+      </div>
+      <div class="table__block">
+        <img src="../images/hotels/hotel-6.png" alt="hotel" class="table__image__item">
+        <hr>
+        <a href="#" class="table__link__item">Days Inn</a>
+      </div>
+      <div class="table__block">
+        <img src="../images/hotels/hotel-7.png" alt="hotel" class="table__image__item">
+        <hr>
+        <a href="#" class="table__link__item">HIE Banning</a>
+      </div>-->
+      <div class="plus__circle" (click)="openNewHotel(contentNewHotel)">
+        <p>+</p>
+      </div>
+  </div>
+  </div>
+
+
+  <!--POPUP ADD HOTEL FORM-->
+  <ng-template #contentNewHotel let-c="close" let-d="dismiss">
+    <div class="user__component d-flex flex-column">
+      <!--<div class="user__block">
+        <div class="user__block__header d-flex justify-content-between align-items-center">-->
+          <div class="user__text">
+            <p>Add Property</p>
+          </div>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true" class="cros">&times;</span>
+          </button>
+        </div>
+        <hr>
+        <form action="#" class="user__form">
+          <div class="name__block">
+            <label for="name"><p>Name:</p></label>
+            <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input" required>
+          </div>
+          <div class="address__block">
+            <label for="address"><p>Address:</p></label>
+            <input type="text" id="address" [(ngModel)]="address"  placeholder="" name="address" class="input" required>
+          </div>
+          <div class="city__block">
+            <label for="city"><p>City:</p></label>
+            <input type="text"  id="city" [(ngModel)]="city" placeholder="" name="city" class="input" required>
+          </div>
+          <!--<div class="image__block">
+            <label for="image"><p>Image</p></label>
+            <button type="button" class="image__btn">
+              <button type="button" class="image__btn">
+              <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+              Upload
+            </button>
+            </button>
+          </div>-->
+          <div class="image__block">
+            <label for="image"><p>Image</p></label>
+            <button type="button" class="image__btn">
+                <input type="file" class="image__btn" (change)="featuredPhotoSelected($event)">
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                Upload
+            </button>
+          </div>
+         <!-- <form action="/action_page.php">
+            <input type="file" name="pic" accept="image/*">
+            <input type="submit">
+          </form>-->
+
+          <button type="submit" class="add__btn" (click)="addNewHotel()" value="submit">Add Property</button>
+        </form>
+      <!--</div>
+    </div>-->
+  </ng-template>
+
+</section>

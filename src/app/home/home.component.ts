@@ -4,11 +4,14 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import {NgForm} from '@angular/forms';
+
+import {AuthService} from '../auth/auth.service';
 
 interface Manager {
   email: string;
   name: string;
-  role: string;
+  /*password: string;*/
 }
 
 interface ManagerId extends Manager {
@@ -29,14 +32,15 @@ export class HomeComponent implements OnInit {
 
   name: string;
   email: string;
-  role: string;
+  /*password: string;*/
 
   managerDoc: AngularFirestoreDocument<Manager>;
   manager: Observable<Manager>;
 
   constructor(private router: Router,
               private modalService: NgbModal,
-              private afs: AngularFirestore) { }
+              private afs: AngularFirestore,
+              private authService: AuthService) { }
 
 
   ngOnInit() {
@@ -88,14 +92,21 @@ export class HomeComponent implements OnInit {
 
   addNewUser() {
     /*this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'role': this.role});*/
-    this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'role': this.role});
+    /*this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'password': this.password});*/
+    this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'role': 'manager'});
   }
   getManager(managerId) {
-    this.managerDoc = this.afs.doc('managers/'+managerId);
+    this.managerDoc = this.afs.doc('managers/' + managerId);
     this.manager = this.managerDoc.valueChanges();
   }
   deleteManager(managerId) {
     this.afs.doc('managers/'+managerId).delete();
+  }
+
+  onSignup(form: NgForm) {
+    const email = form.value.email;
+    const password = form.value.password;
+    this.authService.signupUser(email, password);
   }
 }
 

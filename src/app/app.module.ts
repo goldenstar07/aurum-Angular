@@ -7,7 +7,7 @@ import {AngularFireModule} from "angularfire2";
 import firestore = firebase.firestore;
 import * as firebase from "firebase/app";
 import {AngularFirestoreModule} from "angularfire2/firestore";
-
+import {AngularFireDatabaseModule} from "angularfire2/database";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -74,7 +74,8 @@ import {HomeService} from "./home/home.service";
     AppRoutingModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireDatabaseModule
   ],
   providers: [ DataStorageService, AuthService, HomeService],
   bootstrap: [AppComponent]
