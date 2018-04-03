@@ -11,36 +11,6 @@
         <hr> <hr>
         <a href="#" class="table__link__item">{{ hotel.data.name }}</a>
       </div>
-      <!--<div class="table__block">
-        <img src="../images/hotels/hotel-2.png" alt="hotel" class="table__image__item">
-        <hr>
-        <a href="#" class="table__link__item">Red Roof Inn</a>
-      </div>
-      <div class="table__block">
-        <img src="../images/hotels/hotel-3.png" alt="hotel" class="table__image__item">
-        <hr>
-        <a href="#" class="table__link__item">Super 8 Oceanside</a>
-      </div>
-      <div class="table__block">
-        <img src="../images/hotels/hotel-1.png" alt="hotel" class="table__image__item">
-        <hr>
-        <a href="#" class="table__link__item">Saurabh Test (Do Not Delete)</a>
-      </div>
-      <div class="table__block">
-        <img src="../images/hotels/hotel-5.png" alt="hotel" class="table__image__item">
-        <hr>
-        <a href="#" class="table__link__item">Quality Inn</a>
-      </div>
-      <div class="table__block">
-        <img src="../images/hotels/hotel-6.png" alt="hotel" class="table__image__item">
-        <hr>
-        <a href="#" class="table__link__item">Days Inn</a>
-      </div>
-      <div class="table__block">
-        <img src="../images/hotels/hotel-7.png" alt="hotel" class="table__image__item">
-        <hr>
-        <a href="#" class="table__link__item">HIE Banning</a>
-      </div>-->
 
       <div class="plus__circle" (click)="openNewHotel(contentNewHotel)">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="70px" height="70px">
@@ -81,15 +51,6 @@
             <label for="city"><p>City:</p></label>
             <input type="text"  id="city" [(ngModel)]="city" placeholder="" name="city" class="input" required>
           </div>
-          <!--<div class="image__block">
-            <label for="image"><p>Image</p></label>
-            <button type="button" class="image__btn">
-              <button type="button" class="image__btn">
-              <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-              Upload
-            </button>
-            </button>
-          </div>-->
 
           <div class="image__block">
             <label for="image"><p>Image</p></label>
@@ -99,15 +60,6 @@
                 Upload
             </button>
           </div>
-
-          <!--<div [ngClass]="{'placeholder': !storeLogo}" class="image__block">
-            <label for="image"><p>Image</p></label>
-            <button *ngIf="!storeLogo" (click)="file.click()" type="button" class="image__btn">
-              <input (change)="uploadImg($event)" type="file" accept="image/*" #file type="file" class="image__btn">
-              <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-              Upload
-            </button>
-          </div>-->
 
           <button type="submit" class="add__btn" (click)="addNewHotel()" value="submit">Add Property</button>
           <h1 (click)="upload()">CLICK</h1>

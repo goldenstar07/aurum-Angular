@@ -74,7 +74,8 @@ import {HomeService} from "./home/home.service";
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [ DataStorageService, AuthService, HomeService, UploadFileService],
   bootstrap: [AppComponent]

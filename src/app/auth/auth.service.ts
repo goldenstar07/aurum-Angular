@@ -58,4 +58,14 @@ export class AuthService {
       );
     return this.token;
   }
+
+  onLogout() {
+    firebase.auth().signOut();
+    this.router.navigate(['/login']);
+    this.token = null;
+  }
+
+  isAuthenticated() {
+    return this.token != null;
+  }
 }

@@ -1,3 +1,176 @@
-<p>
-  transactions works!
-</p>
+<app-header></app-header>
+
+
+<section id="main">
+  <div class="main__block">
+
+    <div class="search__block d-flex align-items-center justify-content-around">
+
+      <div class="search__text__block d-flex flex-column">
+        <p>Search Transaction History</p>
+        <div class="search__buttons d-flex justify-content-center align-items-center">
+          <div class="date_button">
+            <a href="#" class="button__item">By Date</a>
+          </div>
+          <div class="type_button">
+            <a href="#" class="button__item">By Type</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="search__date__block d-flex flex-column justify-content-center">
+        <div class="search__date__item">12/4/17</div>
+        <p>Previous date entries from</p>
+        <p>date selected will also show</p>
+      </div>
+
+
+      <div class="search__date-range__block d-flex justify-content-around align-items-center">
+        <select class="custom-select">
+          <option selected>Select Type</option>
+          <option value="1">Visa</option>
+          <option value="2">Amex</option>
+          <option value="3">Checks</option>
+        </select>
+        <div class="date-range__item d-flex justify-content-center align-items-center">
+          <div class="search__date__item">12/4/17</div>
+          <p class="date-range__title">Date Range</p>
+          <div class="search__date__item">12/4/17</div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+
+    <div class="main__title d-flex align-items-center">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col" class="col__items">
+            12/4/17
+            <i class="far fa-edit"></i>
+          </th>
+          <th scope="col" class="col__items">12/03/17
+            <i class="far fa-edit"></i>
+          </th>
+          <th scope="col" class="col__items">12/02/17
+            <i class="far fa-edit"></i>
+          </th>
+          <th scope="col" class="col__items">12/01/17
+            <i class="far fa-edit"></i>
+          </th>
+          <th scope="col" class="col__items">11/31/17
+            <i class="far fa-edit"></i>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td scope="row" class="type">Visa</td>
+          <td>
+            <p class="td-numb">$3,349.95</p>
+            <input type="text" class="td-input" placeholder="$3,349.95">
+          </td>
+          <td>
+            <p class="td-numb">$0.00</p>
+            <input type="text" class="td-input" placeholder="$0.00">
+          </td>
+          <td>
+            <p class="td-numb">$3,349.95</p>
+            <input type="text" class="td-input" placeholder="$3,349.95">
+          </td>
+          <td>
+            <p class="td-numb">$406.67</p>
+            <input type="text" class="td-input" placeholder="$406.67">
+          </td>
+          <td>
+            <p class="td-numb">$3,349.95</p>
+            <input type="text" class="td-input" placeholder="$3,349.95">
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" class="type">Visa/MC</td>
+          <td>
+            <p class="td-numb">$3,349.95</p>
+            <input type="text" class="td-input" placeholder="$3,349.95">
+          </td>
+          <td>
+            <p class="td-numb">$3,349.95</p>
+            <input type="text" class="td-input" placeholder="$3,349.95">
+          </td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" class="type">Amex</td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+          <td>
+            <p class="td-numb">$870.86</p>
+            <input type="text" class="td-input" placeholder="870.86">
+          </td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" class="type">Checks</td>
+          <td>
+            <p class="td-numb">$0.00</p>
+            <input type="text" class="td-input" placeholder="$0.00">
+          </td>
+          <td>
+            <p class="td-numb">$0.00</p>
+            <input type="text" class="td-input" placeholder="$0.00">
+          </td>
+          <td>
+            <p class="td-numb">$535.34</p>
+            <input type="text" class="td-input" placeholder="$535.34">
+          </td>
+          <td>
+            <p class="td-numb">$870.86</p>
+            <input type="text" class="td-input" placeholder="$870.86">
+          </td>
+          <td>
+            <p class="td-numb">$870.86</p>
+            <input type="text" class="td-input" placeholder="$870.86">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="plus__circle">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
+                    <g>
+                        <path d="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M26,50C12.767,50,2,39.233,2,26   S12.767,2,26,2s24,10.767,24,24S39.233,50,26,50z" fill="#707070"/>
+                        <path d="M38.5,25H27V14c0-0.553-0.448-1-1-1s-1,0.447-1,1v11H13.5c-0.552,0-1,0.447-1,1s0.448,1,1,1H25v12c0,0.553,0.448,1,1,1   s1-0.447,1-1V27h11.5c0.552,0,1-0.447,1-1S39.052,25,38.5,25z" fill="#707070"/>
+                    </g>
+                </svg>
+      </div>
+      <div class="save__button">
+        <button class="button__item">Save</button>
+      </div>
+    </div>
+  </div>
+</section>
