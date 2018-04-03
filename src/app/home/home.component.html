@@ -119,15 +119,21 @@
           </div>
           <div class="pass__user-block form-group">
             <label for="Password" class="control-label"><p>Password:</p></label>
+          <!--  <input name="userName"
+                   type="password"
+                   id="Password"
+                   [ngModel]="user.userName"
+                   minlength="5"
+                   #uname="ngModel">
+            &lt;!&ndash;<div *ngIf="uname.errors?.minlength">Minimum of 6 characters</div>&ndash;&gt;-->
             <input
               type="password"
               id="Password"
               [(ngModel)]="password"
-              placeholder=""
+              placeholder="Min of 6 characters"
               name="password"
               class="input_user"
               required>
-            <div class="help-block">Minimum of 6 characters</div>
           </div>
           <button type="submit" class="confirm__user" (click)="addNewUser()" value="submit">
             Confirm New User
