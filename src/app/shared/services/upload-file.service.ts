@@ -1,17 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import * as firebase from 'firebase';
-
-class FileUpload {
-  key: string;
-  name: string;
-  url: string;
-  file: File;
-
-  constructor(file: File) {
-    this.file = file;
-  }
-}
+import { FileUpload } from '../classes/file-upload';
 
 @Injectable()
 export class UploadFileService {
