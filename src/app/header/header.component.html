@@ -77,7 +77,10 @@
         </div>
         <!--<a class="select__item" (click)="onLogout()"
            *ngIf="authService.isAuthenticated()">Logout</a>-->
-        <a href="#" class="select__item">Logout</a>
+        <!--<a href="#" class="select__item">Logout</a>-->
+        <a (click)="onLogout()"
+           *ngIf="authService.isAuthenticated()"
+           class="select__item">Logout</a>
       </div>
     </div>
   </div>
