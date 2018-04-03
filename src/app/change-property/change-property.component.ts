@@ -5,21 +5,33 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import {AngularFireDatabase} from "angularfire2/database";
-import * as firebase from 'firebase';
-import {FirebaseObjectObservable} from "angularfire2/database-deprecated";
+import { UploadFileService } from '../shared/services/upload-file.service';
 
 import {AuthService} from '../auth/auth.service';
 
+class FileUpload {
 
+  key: string;
+  name: string;
+  url: string;
+  file: File;
+
+  constructor(file: File) {
+    this.file = file;
+  }
+}
 
 interface Hotel {
   address: any;
   city: string;
   name: string;
+  url: string;
+  image?: string;
 }
 
 interface HotelId extends Hotel {
   id: string;
+
 }
 
 interface FeaturedPhotosUrls {
@@ -33,6 +45,11 @@ interface FeaturedPhotosUrls {
   styleUrls: ['./change-property.component.scss']
 })
 export class ChangePropertyComponent implements OnInit {
+
+  selectedFiles: FileList;
+  currentFileUpload: FileUpload;
+  progress: { percentage: number } = { percentage: 0 };
+
   closeResult: string;
 
   hotelsCol: AngularFirestoreCollection<Hotel>;
@@ -52,9 +69,10 @@ export class ChangePropertyComponent implements OnInit {
               private modalService: NgbModal,
               private afs: AngularFirestore,
               private authService: AuthService,
-              private db: AngularFireDatabase) {
-   /* this.featuredPhotoStream = this.db.object('/photos/featured');*/
-  }
+              private db: AngularFireDatabase,
+              private uploadService: UploadFileService
+
+  ) {}
 
   ngOnInit() {
     this.hotelsCol = this.afs.collection('hotels');
@@ -88,21 +106,35 @@ export class ChangePropertyComponent implements OnInit {
   }
 
   addNewHotel() {
-    this.afs.collection('hotels').add({'name': this.name, 'address': this.address, 'city': this.city});
+    this.afs.collection('hotels').add({
+      'name': this.name,
+      'address': this.address,
+      'city': this.city,
+      'image': this.currentFileUpload.url
+    });
   }
   getHotel(hotelId) {
     this.hotelDoc = this.afs.doc('hotels/' + hotelId);
     this.hotel = this.hotelDoc.valueChanges();
   }
 
-  featuredPhotoSelected(event: any) {
-    const file: File = event.target.files[0];
-    console.log("Selected filename: ", file.name);
+  upload() {
+    const file = this.selectedFiles.item(0);
+    this.selectedFiles = undefined;
 
-    const metaData = {'contentType': file.type};
-    const storeageRef: firebase.storage.Reference = firebase.storage().ref('/photos/featured/url1');
-    storeageRef.put(file, metaData);
-    console.log("Uploading: ", file.name);
+    this.currentFileUpload = new FileUpload(file);
+    this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress);
+  }
+
+  selectFile(event) {
+    const file = event.target.files.item(0);
+
+    if (file.type.match('image.*')) {
+      this.selectedFiles = event.target.files;
+    } else {
+      alert('invalid format!');
+    }
+    this.upload();
   }
 }
 

@@ -31,6 +31,7 @@ import { ChangePropertyComponent } from './change-property/change-property.compo
 import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
 import {DataStorageService} from './shared/data-storage.service';
+import {UploadFileService} from './shared/services/upload-file.service';
 import { MainHomePageComponent } from './home/main-home-page/main-home-page.component';
 import {HomeService} from "./home/home.service";
 
@@ -77,7 +78,7 @@ import {HomeService} from "./home/home.service";
     AngularFirestoreModule,
     AngularFireDatabaseModule
   ],
-  providers: [ DataStorageService, AuthService, HomeService],
+  providers: [ DataStorageService, AuthService, HomeService, UploadFileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
