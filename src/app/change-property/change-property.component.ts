@@ -5,8 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import {AngularFireDatabase} from "angularfire2/database";
-import * as firebase from 'firebase';
-import { UploadFileService } from "../shared/services/upload-file.service";
+import { UploadFileService } from '../shared/services/upload-file.service';
 
 import {AuthService} from '../auth/auth.service';
 
@@ -23,7 +22,6 @@ class FileUpload {
 }
 
 interface Hotel {
-  id?: string;
   address: any;
   city: string;
   name: string;
@@ -31,9 +29,10 @@ interface Hotel {
   image?: string;
 }
 
-/*interface HotelId extends Hotel {
+interface HotelId extends Hotel {
   id: string;
-}*/
+
+}
 
 interface FeaturedPhotosUrls {
   url1?: string;
@@ -46,6 +45,7 @@ interface FeaturedPhotosUrls {
   styleUrls: ['./change-property.component.scss']
 })
 export class ChangePropertyComponent implements OnInit {
+
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
   progress: { percentage: number } = { percentage: 0 };
@@ -70,9 +70,9 @@ export class ChangePropertyComponent implements OnInit {
               private afs: AngularFirestore,
               private authService: AuthService,
               private db: AngularFireDatabase,
-              private uploadService: UploadFileService) {
-  /*this.featuredPhotoStream = this.db.object('/photos/featured');*/
-  }
+              private uploadService: UploadFileService
+
+  ) {}
 
   ngOnInit() {
     this.hotelsCol = this.afs.collection('hotels');
@@ -136,16 +136,6 @@ export class ChangePropertyComponent implements OnInit {
     }
     this.upload();
   }
-
-  /*featuredPhotoSelected(event: any) {
-    const file: File = event.target.files[0];
-    console.log("Selected filename: ", file.name);
-
-    const metaData = {'contentType': file.type};
-    const storeageRef: firebase.storage.Reference = firebase.storage().ref('/photos/featured/url1');
-    storeageRef.put(file, metaData);
-    console.log("Uploading: ", file.name);
-  }*/
 }
 
 
