@@ -96,26 +96,26 @@ header {
 */
 
 #menu-sidebar {
-  padding-left: 12px;
+  padding-left: 21px;
   background-color: #76756F;
   height: 100vh;
-  width: 240px;
+  width: 238px;
   margin-top: -18px;
   display: none;
 }
 
 
 .select__block {
-  padding: 20px;
+  padding: 0px 50px 0px 10px;
   .select__item {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     padding: 10px 10px 10px 25px;
     width: 240px;
     margin-left: -32px;
   }
   .select__item:nth-child(1) {
-    margin-top: 25%;
+    margin-top: 20%;
   }
 }
 .dropbtn {
