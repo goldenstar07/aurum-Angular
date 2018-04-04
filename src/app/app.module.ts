@@ -27,12 +27,13 @@ import { CredentialsComponent } from './property/credentials/credentials.compone
 import { EmployeeComponent } from './property/employee/employee.component';
 import { BillsMiscComponent } from './upload/bills-misc/bills-misc.component';
 import { FormsComponent } from './upload/forms/forms.component';
-import { ChangePropertyComponent } from './change-property/change-property.component';
 import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
-import {DataStorageService} from './shared/data-storage.service';
+import {DataStorageService} from './shared/services/data-storage.service';
 import {UploadFileService} from './shared/services/upload-file.service';
 import {HomeService} from "./home/home.service";
+import { HotelsComponent } from './hotels/hotels.component';
+import { HotelService } from './hotels/services/hotel.service';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -63,7 +64,7 @@ import {HomeService} from "./home/home.service";
     EmployeeComponent,
     BillsMiscComponent,
     FormsComponent,
-    ChangePropertyComponent
+    HotelsComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +78,13 @@ import {HomeService} from "./home/home.service";
     AngularFireDatabaseModule,
     ReactiveFormsModule
   ],
-  providers: [ DataStorageService, AuthService, HomeService, UploadFileService],
+  providers: [
+    DataStorageService,
+    AuthService,
+    HomeService,
+    UploadFileService,
+    HotelService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

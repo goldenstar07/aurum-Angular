@@ -39,7 +39,7 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
-          this.router.navigate(['/change_property']);
+          this.router.navigate(['/hotels']);
           firebase.auth().currentUser.getIdToken()
             .then(
               (token: string) => this.token = token

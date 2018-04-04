@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
@@ -10,11 +10,9 @@ export class DataStorageService {
               private authService: AuthService) {
   }
 
-
   getData(){
     const token = this.authService.getToken();
   }
-
 
 }
 
