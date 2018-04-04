@@ -1,5 +1,4 @@
-/*
-!*Specification*!
+/*Specification*/
 
 $primary-color:        #0d0d0d;
 $title-color:          #E8E721;
@@ -13,14 +12,14 @@ $font-sz-12:           12px;
 $font-gray2:           #575652;
 $font-gray3:           #E6E5E2;
 
-!*@font-face {
+/*@font-face {
   font-family: HelveticaNeue Thin;
   src: url("../../fonts/HelveticaNeue Thin.ttf") format("opentype");
 }
 @font-face {
   font-family: Helvetica Neu Bold;
   src: url("../../fonts/Helvetica Neu Bold.ttf") format("opentype");
-}*!
+}*/
 
 body {
   font-family: $font-main, Helvetica,  Arial,sans-serif;
@@ -125,7 +124,7 @@ hr {
   }
 }
 
-!*POPUP ADD PROPERTY FORM*!
+/*POPUP ADD PROPERTY FORM*/
 .main__block {
   border: 20px solid $font-gray;
   position: relative;
@@ -202,4 +201,3 @@ hr {
 }
 
 
-*/

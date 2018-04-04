@@ -8,6 +8,39 @@ import firestore = firebase.firestore;
 import * as firebase from "firebase/app";
 import {AngularFirestoreModule} from "angularfire2/firestore";
 import {AngularFireDatabaseModule} from "angularfire2/database";
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule } from '@angular/material';
+import 'hammerjs';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -33,6 +66,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {DataStorageService} from './shared/data-storage.service';
 import {UploadFileService} from './shared/services/upload-file.service';
 import {HomeService} from "./home/home.service";
+import { TransactionsHeaderComponent } from './transactions/transactions-header/transactions-header.component';
+import { TransactionsDateComponent } from './transactions/transactions-date/transactions-date.component';
+import { TransactionsTypeComponent } from './transactions/transactions-type/transactions-type.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -63,7 +99,10 @@ import {HomeService} from "./home/home.service";
     EmployeeComponent,
     BillsMiscComponent,
     FormsComponent,
-    ChangePropertyComponent
+    ChangePropertyComponent,
+    TransactionsHeaderComponent,
+    TransactionsDateComponent,
+    TransactionsTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -75,9 +114,45 @@ import {HomeService} from "./home/home.service";
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    /*MaterialModule.forRoot()*/
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule
   ],
-  providers: [ DataStorageService, AuthService, HomeService, UploadFileService],
+  providers: [
+    DataStorageService,
+    AuthService,
+    HomeService,
+    UploadFileService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

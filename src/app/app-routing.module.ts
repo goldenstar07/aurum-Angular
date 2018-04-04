@@ -5,6 +5,8 @@ import {LoginComponent} from './auth/login/login.component';
 import {HomeComponent} from './home/home.component';
 import {ChangePropertyComponent} from './change-property/change-property.component';
 import {TransactionsComponent} from './transactions/transactions.component';
+import {TransactionsDateComponent} from "./transactions/transactions-date/transactions-date.component";
+import {TransactionsTypeComponent} from "./transactions/transactions-type/transactions-type.component";
 
 
 const appRoutes: Routes = [
@@ -12,7 +14,9 @@ const appRoutes: Routes = [
   { path: 'login', component:  LoginComponent },
   { path: 'home', component:  HomeComponent },
   { path: 'change_property', component: ChangePropertyComponent },
-  { path: 'transactions', component: TransactionsComponent }
+  { path: 'transactions', component: TransactionsComponent },
+  { path: 'transactions-date', component: TransactionsDateComponent },
+  { path: 'transactions-type', component: TransactionsTypeComponent }
 ];
 
 @NgModule({
