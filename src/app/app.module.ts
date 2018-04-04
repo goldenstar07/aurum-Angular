@@ -27,7 +27,6 @@ import { CredentialsComponent } from './property/credentials/credentials.compone
 import { EmployeeComponent } from './property/employee/employee.component';
 import { BillsMiscComponent } from './upload/bills-misc/bills-misc.component';
 import { FormsComponent } from './upload/forms/forms.component';
-import { ChangePropertyComponent } from './change-property/change-property.component';
 import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
 import {DataStorageService} from './shared/services/data-storage.service';
@@ -65,7 +64,6 @@ import { HotelService } from './hotels/services/hotel.service';
     EmployeeComponent,
     BillsMiscComponent,
     FormsComponent,
-    ChangePropertyComponent,
     HotelsComponent
   ],
   imports: [
