@@ -4,18 +4,22 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import {NgForm} from '@angular/forms';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
 
 import {AuthService} from '../auth/auth.service';
 
 interface Manager {
+  id?: string;
   email: string;
   name: string;
   /*password: string;*/
 }
 
-interface ManagerId extends Manager {
+/*interface ManagerId extends Manager {
   id: string;
+}*/
+interface Hotel {
+  id?: string;
 }
 
 @Component({
@@ -37,13 +41,32 @@ export class HomeComponent implements OnInit {
   managerDoc: AngularFirestoreDocument<Manager>;
   manager: Observable<Manager>;
 
+  hotelDoc: AngularFirestoreDocument<Hotel>;
+  hotel: Observable<Hotel>;
+  /*loginForm: any;*/
+
+  /*model = {
+    password: ""
+  }*/
+
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private formBuilder:FormBuilder) {}
 
 
   ngOnInit() {
+
+    /*FORM VALIDATION*/
+    /*this.loginForm = this.formBuilder.group({
+      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])
+    })*/
+   /* this.loginForm = new FormGroup({
+      password: new FormControl()
+    });*/
+
+
     this.managersCol = this.afs.collection('managers');
     /*this.managers = this.managersCol.valueChanges();*/
     this.managers = this.managersCol.snapshotChanges()
@@ -53,7 +76,7 @@ export class HomeComponent implements OnInit {
           const id = a.payload.doc.id;
           return { id, data };
         })
-      })
+      });
   }
 
   open(content) {
@@ -95,7 +118,7 @@ export class HomeComponent implements OnInit {
     /*this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'password': this.password});*/
     this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'role': 'manager'});
   }
-  getManager(managerId) {
+  getManager(managerId, hotelId) {
     this.managerDoc = this.afs.doc('managers/' + managerId);
     this.manager = this.managerDoc.valueChanges();
   }

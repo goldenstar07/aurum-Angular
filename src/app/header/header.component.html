@@ -8,7 +8,7 @@
     <div id="menu-sidebar">
       <div class="select__block">
         <a routerLink="/home" class="select__item">Home</a>
-        <a href="#" class="select__item">Daily Transactions</a>
+        <a routerLink="/transactions" class="select__item">Daily Transactions</a>
         <a href="#" class="select__item">HK Goals</a>
         <div class="dropdown">
           <button class="dropbtn d-flex align-items-center justify-content-between">
@@ -75,7 +75,12 @@
             <a href="#">Forms</a>
           </div>
         </div>
-        <a href="#" class="select__item">Logout</a>
+        <!--<a class="select__item" (click)="onLogout()"
+           *ngIf="authService.isAuthenticated()">Logout</a>-->
+        <!--<a href="#" class="select__item">Logout</a>-->
+        <a (click)="onLogout()"
+           *ngIf="authService.isAuthenticated()"
+           class="select__item">Logout</a>
       </div>
     </div>
   </div>

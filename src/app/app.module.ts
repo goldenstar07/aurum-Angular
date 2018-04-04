@@ -77,7 +77,8 @@ import { HotelService } from './hotels/services/hotel.service';
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [
     DataStorageService,

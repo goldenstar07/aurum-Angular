@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
-import { Observable} from "rxjs/Observable";
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireDatabase} from 'angularfire2/database';
 import { UploadFileService } from '../shared/services/upload-file.service';
 
 import {AuthService} from '../auth/auth.service';
