@@ -9,6 +9,8 @@ $font-gray:            #707070;
 $font-gray4:           #F3F2F0;
 $font-bold:            700;
 $font-sz-12:           12px;
+$font-gray2:           #575652;
+$font-gray3:           #E6E5E2;
 
 /*@font-face {
   font-family: HelveticaNeue Thin;
@@ -230,6 +232,86 @@ hr {
     outline: none;
   }
 }
+
+/*POPUP ADD PROPERTY FORM*/
+.main__block {
+  border: 20px solid $font-gray;
+  position: relative;
+  height: calc(100vh - 55px);
+  overflow-y: auto;
+}
+.transaction__block {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .select__date {
+    margin-top: 40px;
+  }
+  .search__date__item {
+    border: 1px solid $font-gray;
+    width: 100px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: $font-bold;
+    background-color: $font-gray4;
+    margin-left: 37px;
+    box-shadow: 0 4px 5px -2px #000;
+
+  }
+  .input__transaction {
+    margin-top: 20px;
+  }
+  .td-input {
+    width: 100px;
+    height: 35px;
+    padding-left: 8px;
+    color: $primary-color;
+    font-size: 20px;
+    text-align: center;
+    font-weight: $font-bold;
+    box-shadow: 0 4px 5px -2px #000;
+  }
+  .td-input:nth-child(2) {
+    margin-left: 20px;
+  }
+  ::placeholder {
+    color: $font-gray2;
+    font-size: 20px;
+    text-align: center;
+    font-weight: $font-bold;
+  }
+  input:focus {
+    outline: none;
+  }
+  .plus__circle {
+    cursor: pointer;
+    position: relative;
+    left: 150px;
+    bottom: 38px;
+  }
+  .save__button {
+    .button__item {
+      font-size: 26px;
+      border: 1px solid $color-fff;
+      padding: 0 20px;
+      width: 120px;
+      text-align: center;
+      border-radius: 15px;
+      background-color: $primary-color;
+      color: $color-fff;
+      font-weight: $font-bold;
+      cursor: pointer;
+    }
+  }
+}
+
+
+
+
 //==========media screen===========
 @media screen and (max-width:1199px){
   .search__block .search__date__block {
