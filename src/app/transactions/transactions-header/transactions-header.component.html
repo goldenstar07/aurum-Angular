@@ -28,14 +28,18 @@
       <option value="3">Checks</option>
     </select>
     <div class="date-range__item d-flex justify-content-center align-items-center">
-        <div class="datapicker">
-          <mat-form-field>
+      <mat-form-field class="datepicker-form">
         <input matInput [matDatepicker]="picker1" placeholder="" [formControl]="date">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
-        </div>
+      <p class="date-range__title">Date Range</p>
 
+      <mat-form-field class="datepicker-form">
+        <input matInput [matDatepicker]="picker" placeholder="">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
       <!--<div class="search__date__item">12/4/17</div>
       <p class="date-range__title">Date Range</p>
       <div class="search__date__item">12/4/17</div>-->
