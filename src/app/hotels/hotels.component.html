@@ -6,10 +6,10 @@
       <h2>Select a property</h2>
     </div>
     <div class="main__table">
-      <div class="table__block" *ngFor="let hotel of hotels | async" (click)="getHotel(hotel.id)">
+      <div class="table__block" *ngFor="let hotel of hotels | async" (click)="goToHotelUsers(hotel.id)">
         <img [src]="hotel.data.image" alt="hotel" class="table__image__item">
         <hr> <hr>
-        <a href="#" class="table__link__item">{{ hotel.data.name }}</a>
+        <p class="table__link__item">{{ hotel.data.name }}</p>
       </div>
       <!--<div class="table__block">
         <img src="../images/hotels/hotel-2.png" alt="hotel" class="table__image__item">
@@ -94,7 +94,7 @@
       <div class="image__block">
         <label for="image"><p>Image</p></label>
         <button type="button" class="image__btn">
-          <input type="file" class="image__btn" (change)="selectFile($event)">
+          <input type="file" class="image__btn" (change)="selectFile($event)" id="image">
           <i class="fa fa-cloud-upload" aria-hidden="true"></i>
           Upload
         </button>

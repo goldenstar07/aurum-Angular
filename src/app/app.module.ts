@@ -31,7 +31,6 @@ import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
 import {DataStorageService} from './shared/services/data-storage.service';
 import {UploadFileService} from './shared/services/upload-file.service';
-import {HomeService} from "./home/home.service";
 import { HotelsComponent } from './hotels/hotels.component';
 import { HotelService } from './hotels/services/hotel.service';
 
@@ -81,7 +80,6 @@ import { HotelService } from './hotels/services/hotel.service';
   providers: [
     DataStorageService,
     AuthService,
-    HomeService,
     UploadFileService,
     HotelService
   ],

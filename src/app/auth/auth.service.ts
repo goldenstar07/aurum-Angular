@@ -26,10 +26,20 @@ export class AuthService {
   name: string;
   email: string;
 
-  constructor(private router: Router,
-              private afs: AngularFirestore,) {}
-  signupUser(email: string, password: string) {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+  constructor(
+    private router: Router,
+    private afs: AngularFirestore
+  ) {}
+
+  signupUser(user) {
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+      .then(response => {
+        this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user)).then(response => {
+        })
+          .catch(
+          error => console.log(error)
+        );
+      })
       .catch(
         error => console.log(error)
       );

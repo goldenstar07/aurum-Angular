@@ -86,4 +86,9 @@ export class HotelsComponent implements OnInit {
     }
     this.upload();
   }
+
+  goToHotelUsers(hotelId) {
+    this.hotelService.setCurrentHotel(hotelId);
+    this.router.navigate(['home']);
+  }
 }

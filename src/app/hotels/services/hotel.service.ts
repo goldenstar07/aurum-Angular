@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
 import {AngularFireDatabase} from "angularfire2/database";
 // Interfaces
-import {Hotel} from '../interfaces/hotel'
+import {Hotel} from '../interfaces/hotel';
 
 @Injectable()
 export class HotelService {
 
+  currentHotelId: string;
   hotelsCol: AngularFirestoreCollection<Hotel>;
   hotels: any;
 
@@ -28,6 +29,10 @@ export class HotelService {
 
   addHotel(hotel) {
     this.afs.collection('hotels').add(hotel);
+  }
+
+  setCurrentHotel(hotelId) {
+    this.currentHotelId = hotelId;
   }
 
 
