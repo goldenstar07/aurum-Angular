@@ -7,7 +7,7 @@
 
     <div id="menu-sidebar">
       <div class="select__block">
-        <a routerLink="/home" class="select__item">Home</a>
+        <a routerLink="/home" class="select__item" *ngIf="isAdmin">Home</a>
         <a routerLink="/transactions" class="select__item">Daily Transactions</a>
         <a href="#" class="select__item">HK Goals</a>
         <div class="dropdown">
@@ -75,11 +75,8 @@
             <a href="#">Forms</a>
           </div>
         </div>
-        <!--<a class="select__item" (click)="onLogout()"
-           *ngIf="authService.isAuthenticated()">Logout</a>-->
-        <!--<a href="#" class="select__item">Logout</a>-->
+        <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/hotels">Properties</a>
         <a (click)="onLogout()"
-           *ngIf="authService.isAuthenticated()"
            class="select__item">Logout</a>
       </div>
     </div>

@@ -8,6 +8,7 @@ import {UploadFileService} from '../shared/services/upload-file.service';
 import {HotelService} from "./services/hotel.service";
 // Classes
 import {FileUpload} from '../shared/classes/file-upload';
+import {DataStorageService} from "../shared/services/data-storage.service";
 
 
 @Component({
@@ -33,6 +34,7 @@ export class HotelsComponent implements OnInit {
   constructor(private router: Router,
               private modalService: NgbModal,
               private authService: AuthService,
+              private dataStorageService: DataStorageService,
               private uploadService: UploadFileService,
               private hotelService: HotelService
   ) { }
@@ -88,7 +90,7 @@ export class HotelsComponent implements OnInit {
   }
 
   goToHotelUsers(hotelId) {
-    this.hotelService.setCurrentHotel(hotelId);
+    this.dataStorageService.setHotelId(hotelId);
     this.router.navigate(['home']);
   }
 }

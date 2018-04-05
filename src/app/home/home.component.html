@@ -9,7 +9,7 @@
       <p>Current Users</p>
     </div>
     <div class="main__table">
-     <div class="table__block" *ngFor="let manager of managers | async" (click)="getManager(manager.id)">
+     <div class="table__block" *ngFor="let manager of managers" (click)="getManager(manager.id)">
        <div class="text__block__btn" (click)="deleteManager(manager.id)">
        <!--<div class="text__block__btn" (click)="openDeleteComform(contentDeleteComform)">-->
          <button class="btn__item">Delete</button>
@@ -22,7 +22,7 @@
        <div class="role__block">
          <p class="text__block__email">Role</p>
          <!--<span class="prof__name">{{ manager.data.role }}</span>-->
-         <span class="prof__name">Manager</span>
+         <span class="prof__name">{{ manager.data.role }}</span>
        </div>
      </div>
       <div class="plus__circle" (click)="openNewUser(contentNewUser)">

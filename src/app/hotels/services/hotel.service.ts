@@ -3,15 +3,17 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {AngularFireDatabase} from "angularfire2/database";
 // Interfaces
 import {Hotel} from '../interfaces/hotel';
+import {HelperService} from "../../shared/services/helper.service";
+import {DataStorageService} from "../../shared/services/data-storage.service";
 
 @Injectable()
 export class HotelService {
 
-  currentHotelId: string;
   hotelsCol: AngularFirestoreCollection<Hotel>;
   hotels: any;
 
   constructor(private afs: AngularFirestore,
+              private dataStorageService: DataStorageService,
               private db: AngularFireDatabase) {
   }
 
@@ -30,10 +32,4 @@ export class HotelService {
   addHotel(hotel) {
     this.afs.collection('hotels').add(hotel);
   }
-
-  setCurrentHotel(hotelId) {
-    this.currentHotelId = hotelId;
-  }
-
-
 }

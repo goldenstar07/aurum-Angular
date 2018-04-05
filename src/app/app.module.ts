@@ -33,6 +33,10 @@ import {DataStorageService} from './shared/services/data-storage.service';
 import {UploadFileService} from './shared/services/upload-file.service';
 import { HotelsComponent } from './hotels/hotels.component';
 import { HotelService } from './hotels/services/hotel.service';
+import {HelperService} from "./shared/services/helper.service";
+import {AutGuard} from "./shared/classes/auth.guard";
+import {AdminGuard} from "./shared/classes/admin.guard";
+import {DataProcessingService} from "./shared/services/data-processing.service";
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -79,9 +83,13 @@ import { HotelService } from './hotels/services/hotel.service';
   ],
   providers: [
     DataStorageService,
+    DataProcessingService,
     AuthService,
+    HelperService,
     UploadFileService,
-    HotelService
+    HotelService,
+    AutGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

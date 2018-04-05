@@ -12,16 +12,16 @@ import {AuthService} from '../auth.service';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
   }
 
- onSignin(form: NgForm) {
+  onSignin(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
-    /*this.authService.signupUser(email, password);*/
-   this.authService.signinUser(email, password);
- }
+    this.authService.signInUser(email, password);
+  }
 
 }

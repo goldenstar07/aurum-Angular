@@ -4,56 +4,44 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-
-
-interface Manager {
-  email: string;
-  name: string;
-  /*password: string;*/
-}
-
-interface ManagerId extends Manager {
-  id: string;
-}
+import {DataStorageService} from "../shared/services/data-storage.service";
 
 @Injectable()
 export class AuthService {
-  token: string
-  managersCol: AngularFirestoreCollection<Manager>;
-  managers: any;
-  managerDoc;
-  /*managers: Observable<Manager>;*/
-  name: string;
-  email: string;
 
-  constructor(
-    private router: Router,
-    private afs: AngularFirestore
-  ) {}
+  constructor(private router: Router,
+              private afs: AngularFirestore,
+              private dataStoreService: DataStorageService) {
+  }
 
-  signupUser(user) {
-    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+
+  signUpUser(user, password) {
+    firebase.auth().createUserWithEmailAndPassword(user.email, password)
       .then(response => {
-        this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user)).then(response => {
-        })
-          .catch(
-          error => console.log(error)
-        );
+        this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user))
       })
       .catch(
         error => console.log(error)
       );
   }
 
-  signinUser(email: string, password: string) {
+  signInUser(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
-          this.router.navigate(['/hotels']);
-          firebase.auth().currentUser.getIdToken()
-            .then(
-              (token: string) => this.token = token
-            );
+          this.afs.doc('managers/' + response.uid).valueChanges().subscribe(res => {
+            this.dataStoreService.setUser(res);
+            switch (res.role) {
+              case "manager":
+                this.router.navigate(['transactions']);
+                this.dataStoreService.setHotelId(res.hotelId);
+                break;
+              case "admin":
+                this.router.navigate(['hotels']);
+                break
+              default:  this.router.navigate(['login']);
+            }
+          });
         }
       )
       .catch(
@@ -63,19 +51,7 @@ export class AuthService {
 
   logout() {
     firebase.auth().signOut();
-    this.token = null;
     this.router.navigate(['/login']);
   }
 
-  getToken() {
-    firebase.auth().currentUser.getIdToken()
-      .then(
-        (token: string) => this.token = token
-      );
-    return this.token;
-  }
-
-  isAuthenticated() {
-    return this.token != null;
-  }
 }

@@ -10,6 +10,9 @@ import {AuthService} from '../auth/auth.service';
 import {HotelService} from "../hotels/services/hotel.service";
 // interfaces
 import {Manager} from './interfaces/manager';
+import {DataStorageService} from "../shared/services/data-storage.service";
+import {HelperService} from "../shared/services/helper.service";
+import {DataProcessingService} from "../shared/services/data-processing.service";
 
 @Component({
   selector: 'app-home',
@@ -21,81 +24,45 @@ export class HomeComponent implements OnInit {
   closeResult: string;
 
   managersCol: any;
-  /*managers: Observable<Manager[]>;*/
-  managers: any;
+  managers: Array<Manager>;
 
   name: string;
   email: string;
   password: string;
-
-  // managerDoc: AngularFirestoreDocument<Manager>;
-  // manager: Observable<Manager>;
 
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
               private authService: AuthService,
               private formBuilder:FormBuilder,
-              private hotelSevice: HotelService
+              private hotelSevice: HotelService,
+              public dataProcessingService: DataProcessingService
   ) {}
 
   ngOnInit() {
-
-    // this.managersCol = this.afs.collection("managers").valueChanges().snapshotChanges()
-    //   .map(actions => {
-    //     return actions.map(a=> {
-    //       const data = a.payload.doc.data() as Manager;
-    //       const id = a.payload.doc.id;
-    //       return { id, data };
-    //     })
-    //   });
-
-    // docRef.get().then(function(doc) {
-    //   if (doc.exists) {
-    //     console.log("Document data:", doc.data());
-    //   } else {
-    //     // doc.data() will be undefined in this case
-    //     console.log("No such document!");
-    //   }
-    // }).catch(function(error) {
-    //   console.log("Error getting document:", error);
-    // });
-
-    this.managersCol = this.afs.collection('managers').doc(this.hotelSevice.currentHotelId);
-    setTimeout(function () {
-        this.managersCol
+    this.managersCol = this.afs.collection('managers');
+    this.managersCol.snapshotChanges()
+      .map(actions => {
+        return actions.map(a=> {
+          const data = a.payload.doc.data() as Manager;
+          const id = a.payload.doc.id;
+          return { id, data };
+        })
+      })
+      .subscribe(res => {
+        this.managers = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
         debugger
-      },5000)
-    // this.managers = this.managersCol.snapshotChanges()
-    //   .map(actions => {
-    //     return actions.map(a=> {
-    //       const data = a.payload.doc.data() as Manager;
-    //       const id = a.payload.doc.id;
-    //       return { id, data };
-    //     })
-    //   });
-    // setTimeout(function () {
-    //   this.managers
-    //   debugger
-    // },5000)his.managersCol.subscribe(data => console.log(data) )
-    /*FORM VALIDATION*/
-    /*this.loginForm = this.formBuilder.group({
-     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])
-     })*/
-    /* this.loginForm = new FormGroup({
-     password: new FormControl()
-     });*/
+      })
   }
 
   addNewManager() {
-    let manager = {
+    let manager : Manager = {
       name: this.name,
       email: this.email,
-      password: this.password,
       role: "manager",
-      hotelId: this.hotelSevice.currentHotelId
+      hotelId: localStorage.hotelId
     }
-    this.authService.signupUser(manager);
+    this.authService.signUpUser(manager, this.password);
   }
 
   open(content) {

@@ -184,3 +184,17 @@
   </ng-template>-->
 
 </section>
+
+
+
+
+HOME
+
+
+    /*FORM VALIDATION*/
+    /*this.loginForm = this.formBuilder.group({
+     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])
+     })*/
+    /* this.loginForm = new FormGroup({
+     password: new FormControl()
+     });*/

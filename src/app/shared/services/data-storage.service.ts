@@ -1,18 +1,30 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-
-import {AuthService} from '../../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
 
-  constructor(private http: Http,
-              private authService: AuthService) {
+  constructor() {
   }
 
-  getData(){
-    const token = this.authService.getToken();
+  static get isAuthorization() : boolean {
+    return !!localStorage.user;
   }
 
+  static get isAdmin() : boolean {
+    if(localStorage.user) return JSON.parse(localStorage.user).role === 'admin';
+    return false;
+  }
+
+  setHotelId(id){
+    localStorage.hotelId = id;
+  }
+
+  setUser(user) : void{
+    localStorage.user = JSON.stringify(user);
+  }
+
+  removeDataFromLocalStorage() {
+    localStorage.clear();
+  }
 }
 
