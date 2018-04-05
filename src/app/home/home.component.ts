@@ -41,25 +41,61 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    // this.managersCol = this.afs.collection("managers").valueChanges().snapshotChanges()
+    //   .map(actions => {
+    //     return actions.map(a=> {
+    //       const data = a.payload.doc.data() as Manager;
+    //       const id = a.payload.doc.id;
+    //       return { id, data };
+    //     })
+    //   });
+
+    // docRef.get().then(function(doc) {
+    //   if (doc.exists) {
+    //     console.log("Document data:", doc.data());
+    //   } else {
+    //     // doc.data() will be undefined in this case
+    //     console.log("No such document!");
+    //   }
+    // }).catch(function(error) {
+    //   console.log("Error getting document:", error);
+    // });
+
+    this.managersCol = this.afs.collection('managers').doc(this.hotelSevice.currentHotelId);
+    setTimeout(function () {
+        this.managersCol
+        debugger
+      },5000)
+    // this.managers = this.managersCol.snapshotChanges()
+    //   .map(actions => {
+    //     return actions.map(a=> {
+    //       const data = a.payload.doc.data() as Manager;
+    //       const id = a.payload.doc.id;
+    //       return { id, data };
+    //     })
+    //   });
+    // setTimeout(function () {
+    //   this.managers
+    //   debugger
+    // },5000)his.managersCol.subscribe(data => console.log(data) )
     /*FORM VALIDATION*/
     /*this.loginForm = this.formBuilder.group({
-      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])
-    })*/
-   /* this.loginForm = new FormGroup({
-      password: new FormControl()
-    });*/
+     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])
+     })*/
+    /* this.loginForm = new FormGroup({
+     password: new FormControl()
+     });*/
+  }
 
-
-    this.managersCol = this.afs.collection('managers');
-    /*this.managers = this.managersCol.valueChanges();*/
-    this.managers = this.managersCol.snapshotChanges()
-      .map(actions => {
-        return actions.map(a=> {
-          const data = a.payload.doc.data() as Manager;
-          const id = a.payload.doc.id;
-          return { id, data };
-        })
-      });
+  addNewManager() {
+    let manager = {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      role: "manager",
+      hotelId: this.hotelSevice.currentHotelId
+    }
+    this.authService.signupUser(manager);
   }
 
   open(content) {
