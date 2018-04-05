@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import 'rxjs/add/operator/map';
+// Services
+import {TransactionService} from '../services/transaction.service';
 
 @Component({
   selector: 'app-transactions-date',
@@ -10,10 +13,18 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class TransactionsDateComponent implements OnInit {
   closeResult: string;
 
+  transactions: any;
+
+  type: string;
+  value: any;
+  date: any;
+
   constructor(private router: Router,
-              private modalService: NgbModal,) { }
+              private modalService: NgbModal,
+              private transactionService: TransactionService) { }
 
   ngOnInit() {
+    this.transactions = this.transactionService.getTransactions();
   }
 
   openNewProperty(contentNewProperty) {
@@ -33,4 +44,14 @@ export class TransactionsDateComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
+
+  addNewProperty() {
+    this.transactionService.addTransaction({
+      'type': this.type,
+      'value': this.value,
+      'date': this.date
+    });
+  }
+
+
 }

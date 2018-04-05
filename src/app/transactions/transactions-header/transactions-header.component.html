@@ -14,7 +14,7 @@
   </div>
 
   <div class="search__date__block d-flex flex-column justify-content-center">
-    <div class="search__date__item">12/4/17</div>
+    <div class="search__date__item"></div>
     <p>Previous date entries from</p>
     <p>date selected will also show</p>
   </div>
@@ -36,9 +36,9 @@
       <p class="date-range__title">Date Range</p>
 
       <mat-form-field class="datepicker-form">
-        <input matInput [matDatepicker]="picker" placeholder="">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput [matDatepicker]="picker2" placeholder="" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
       <!--<div class="search__date__item">12/4/17</div>
       <p class="date-range__title">Date Range</p>

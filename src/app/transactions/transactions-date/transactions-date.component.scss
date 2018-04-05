@@ -123,6 +123,23 @@ hr {
     outline: none;
   }
 }
+.save__btn {
+  .button__item {
+    font-size: 26px;
+    border: 1px solid $color-fff;
+    padding: 0 20px;
+    width: 120px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: $primary-color;
+    color: $color-fff;
+    font-weight: $font-bold;
+    cursor: pointer;
+  }
+  .button__item:focus {
+    outline: none;
+  }
+}
 
 /*POPUP ADD PROPERTY FORM*/
 .main__block {
@@ -138,6 +155,9 @@ hr {
   align-items: center;
   .select__date {
     margin-top: 40px;
+    .datepicker-form {
+      width: 97px;
+    }
   }
   .search__date__item {
     border: 1px solid $font-gray;
@@ -155,6 +175,14 @@ hr {
   }
   .input__transaction {
     margin-top: 20px;
+    .custom-select {
+      height: 43px;
+    }
+    .custom-select:focus {
+      text-decoration: none;
+      outline: none;
+      border: none;
+    }
   }
   .td-input {
     width: 100px;

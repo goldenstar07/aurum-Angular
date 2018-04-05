@@ -65,10 +65,11 @@ import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
 import {DataStorageService} from './shared/data-storage.service';
 import {UploadFileService} from './shared/services/upload-file.service';
-import {HomeService} from "./home/home.service";
+import {HomeService} from './home/home.service';
 import { TransactionsHeaderComponent } from './transactions/transactions-header/transactions-header.component';
 import { TransactionsDateComponent } from './transactions/transactions-date/transactions-date.component';
 import { TransactionsTypeComponent } from './transactions/transactions-type/transactions-type.component';
+import {TransactionService} from './transactions/services/transaction.service';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -151,7 +152,8 @@ import { TransactionsTypeComponent } from './transactions/transactions-type/tran
     DataStorageService,
     AuthService,
     HomeService,
-    UploadFileService],
+    UploadFileService,
+    TransactionService],
 
   bootstrap: [AppComponent]
 })

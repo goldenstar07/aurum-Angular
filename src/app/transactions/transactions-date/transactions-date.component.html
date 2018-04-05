@@ -6,12 +6,15 @@
     <app-transactions-header></app-transactions-header>
 
     <div class="main__title d-flex align-items-center">
+      <!--<table class="table table-bordered" *ngFor="let transaction of transactions | async" (click)="getTransactions(transaction.id)">-->
       <table class="table table-bordered">
         <thead>
         <tr>
           <th scope="col">Type</th>
-          <th scope="col" class="col__items">
-            12/4/17
+          <!--<th scope="col" class="col__items">{{transaction.data.date}}
+            <i class="far fa-edit"></i>
+          </th>-->
+          <th scope="col" class="col__items">12/03/17
             <i class="far fa-edit"></i>
           </th>
           <th scope="col" class="col__items">12/03/17
@@ -23,17 +26,23 @@
           <th scope="col" class="col__items">12/01/17
             <i class="far fa-edit"></i>
           </th>
-          <th scope="col" class="col__items">11/31/17
+          <th scope="col" class="col__items">12/01/17
             <i class="far fa-edit"></i>
           </th>
         </tr>
         </thead>
         <tbody>
         <tr>
+         <!-- <td scope="row" class="type">{{transaction.data.type}}</td>
+          <td>
+            <p class="td-numb">{{transaction.data.value}}</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>-->
           <td scope="row" class="type">Visa</td>
           <td>
-            <p class="td-numb">$3,349.95</p>
-            <input type="text" class="td-input" placeholder="$3,349.95">
+            <!--<p class="td-numb">{{transaction.data.value}}</p>-->
+            <p class="td-numb">200$</p>
+            <input type="text" class="td-input" placeholder="">
           </td>
           <td>
             <p class="td-numb">$0.00</p>
@@ -53,10 +62,15 @@
           </td>
         </tr>
         <tr>
+          <!--<td scope="row" class="type">{{transaction.data.type}}</td>
+          <td>
+            <p class="td-numb">{{transaction.data.value}}</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>-->
           <td scope="row" class="type">Visa/MC</td>
           <td>
-            <p class="td-numb">$3,349.95</p>
-            <input type="text" class="td-input" placeholder="$3,349.95">
+            <p class="td-numb">200$</p>
+            <input type="text" class="td-input" placeholder="">
           </td>
           <td>
             <p class="td-numb">$3,349.95</p>
@@ -76,10 +90,15 @@
           </td>
         </tr>
         <tr>
+          <!--<td scope="row" class="type">{{transaction.data.type}}</td>
+          <td>
+            <p class="td-numb">{{transaction.data.value}}</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>-->
           <td scope="row" class="type">Amex</td>
           <td>
-            <p class="td-numb">$535.34</p>
-            <input type="text" class="td-input" placeholder="$535.34">
+            <p class="td-numb">300$</p>
+            <input type="text" class="td-input" placeholder="">
           </td>
           <td>
             <p class="td-numb">$535.34</p>
@@ -99,10 +118,15 @@
           </td>
         </tr>
         <tr>
+          <!--<td scope="row" class="type">{{transaction.data.type}}</td>-->
+          <!--<td>
+            <p class="td-numb">{{transaction.data.value}}</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>-->
           <td scope="row" class="type">Checks</td>
           <td>
-            <p class="td-numb">$0.00</p>
-            <input type="text" class="td-input" placeholder="$0.00">
+            <p class="td-numb">500$</p>
+            <input type="text" class="td-input" placeholder="">
           </td>
           <td>
             <p class="td-numb">$0.00</p>
@@ -131,6 +155,7 @@
                     </g>
                 </svg>
       </div>
+
       <div class="save__button">
         <button class="button__item">Save</button>
       </div>
@@ -146,17 +171,30 @@
       <div class="transaction__block d-flex flex-column align-items-center">
         <h1>Create New Transaction</h1>
         <div class="select__date d-flex justify-content-center align-items-center">
-          <p>Select Date.</p>
-          <div class="search__date__item">12/4/17</div>
+          <p>Select Date:</p>
+          <div class="search__date__item">
+            <mat-form-field class="datepicker-form">
+              <input matInput [matDatepicker]="picker1" placeholder="" [formControl]="date" name="data" id="data" [(ngModel)]="data">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 class="datepicker-calendar"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!--<input type="text" class="search__date__item" placeholder="">-->
         </div>
         <div class="input__transaction">
-          <input type="text" class="td-input" placeholder="Cash">
-          <input type="text" class="td-input" placeholder="$98.55">
+          <input type="text" class="td-input" placeholder="" name="type" id="type" [(ngModel)]="type">
+          <!--<select class="custom-select td-input">
+            <option selected>Select Type</option>
+            <option value="1">Visa</option>
+            <option value="2">Amex</option>
+            <option value="3">Checks</option>
+          </select>-->
+          <input type="text" class="td-input" placeholder="" name="value" id="value" [(ngModel)]="value">
         </div>
-        <div class="input__transaction">
+        <!--<div class="input__transaction">
           <input type="text" class="td-input" placeholder="Amex">
           <input type="text" class="td-input" placeholder="$24.64">
-        </div>
+        </div>-->
         <div class="plus__circle">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
                     <g>
@@ -165,8 +203,8 @@
                     </g>
                 </svg>
         </div>
-        <div class="save__button" (click)="addNewProperty()">
-          <button class="button__item">Save</button>
+        <div class="save__btn">
+          <button class="button__item" (click)="addNewProperty()" value="submit">Save</button>
         </div>
       </div>
     </div>

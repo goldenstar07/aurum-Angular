@@ -114,8 +114,6 @@ export class HomeComponent implements OnInit {
   }
 
   addNewUser() {
-    /*this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'role': this.role});*/
-    /*this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'password': this.password});*/
     this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'role': 'manager'});
   }
   getManager(managerId, hotelId) {
