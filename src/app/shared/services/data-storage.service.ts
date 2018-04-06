@@ -23,6 +23,10 @@ export class DataStorageService {
     localStorage.user = JSON.stringify(user);
   }
 
+  getUser() {
+    return JSON.parse(localStorage.user);
+  }
+
   removeDataFromLocalStorage() {
     localStorage.clear();
   }

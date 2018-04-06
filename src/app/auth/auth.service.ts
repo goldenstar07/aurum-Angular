@@ -31,10 +31,11 @@ export class AuthService {
         response => {
           this.afs.doc('managers/' + response.uid).valueChanges().subscribe(res => {
             this.dataStoreService.setUser(res);
-            switch (res.role) {
+            let currentUser = this.dataStoreService.getUser();
+            switch (currentUser.role) {
               case "manager":
                 this.router.navigate(['transactions']);
-                this.dataStoreService.setHotelId(res.hotelId);
+                this.dataStoreService.setHotelId(currentUser.hotelId);
                 break;
               case "admin":
                 this.router.navigate(['hotels']);

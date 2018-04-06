@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
       })
       .subscribe(res => {
         this.managers = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
-        debugger
       })
   }
 
