@@ -60,12 +60,17 @@ import { CredentialsComponent } from './property/credentials/credentials.compone
 import { EmployeeComponent } from './property/employee/employee.component';
 import { BillsMiscComponent } from './upload/bills-misc/bills-misc.component';
 import { FormsComponent } from './upload/forms/forms.component';
-import { ChangePropertyComponent } from './change-property/change-property.component';
 import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
-import {DataStorageService} from './shared/data-storage.service';
+import {DataStorageService} from './shared/services/data-storage.service';
 import {UploadFileService} from './shared/services/upload-file.service';
-import {HomeService} from './home/home.service';
+import { HotelsComponent } from './hotels/hotels.component';
+import { HotelService } from './hotels/services/hotel.service';
+import {HelperService} from "./shared/services/helper.service";
+import {AutGuard} from "./shared/classes/auth.guard";
+import {AdminGuard} from "./shared/classes/admin.guard";
+import {DataProcessingService} from "./shared/services/data-processing.service";
+import {HomeService} from './home/services/home.service';
 import { TransactionsHeaderComponent } from './transactions/transactions-header/transactions-header.component';
 import { TransactionsDateComponent } from './transactions/transactions-date/transactions-date.component';
 import { TransactionsTypeComponent } from './transactions/transactions-type/transactions-type.component';
@@ -104,7 +109,7 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
     EmployeeComponent,
     BillsMiscComponent,
     FormsComponent,
-    ChangePropertyComponent,
+    HotelsComponent,
     TransactionsHeaderComponent,
     TransactionsDateComponent,
     TransactionsTypeComponent,
@@ -158,11 +163,16 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
   ],
   providers: [
     DataStorageService,
+    DataProcessingService,
     AuthService,
-    HomeService,
+    HelperService,
     UploadFileService,
-    TransactionService],
-
+    HotelService,
+    AutGuard,
+    AdminGuard,
+    TransactionService,
+    HomeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,8 +3,11 @@ import {RouterModule, Routes, PreloadAllModules} from '@angular/router';
 
 import {LoginComponent} from './auth/login/login.component';
 import {HomeComponent} from './home/home.component';
-import {ChangePropertyComponent} from './change-property/change-property.component';
 import {TransactionsComponent} from './transactions/transactions.component';
+import {HotelsComponent} from './hotels/hotels.component';
+import {CanActivate} from "@angular/router";
+import {AdminGuard} from "./shared/classes/admin.guard";
+import {AutGuard} from "./shared/classes/auth.guard";
 import {TransactionsDateComponent} from "./transactions/transactions-date/transactions-date.component";
 import {TransactionsTypeComponent} from "./transactions/transactions-type/transactions-type.component";
 import {HkGoalsDataComponent} from "./housekeeping/hk-goals-data/hk-goals-data.component";
@@ -18,17 +21,17 @@ import {FdMiscComponent} from "./inventory/fd-misc/fd-misc.component";
 const appRoutes: Routes = [
   { path: '',  redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component:  LoginComponent },
-  { path: 'home', component:  HomeComponent },
-  { path: 'change_property', component: ChangePropertyComponent },
-  { path: 'transactions', component: TransactionsComponent },
-  { path: 'transactions-date', component: TransactionsDateComponent },
-  { path: 'transactions-type', component: TransactionsTypeComponent },
-  { path: 'houskeeping-date', component: HkGoalsDataComponent },
-  { path: 'houskeeping-hk', component: HkGoalsHkComponent },
-  { path: 'room', component: RoomComponent },
-  { path: 'maintenance', component: MaintenanceComponent },
-  { path: 'fb', component: FbComponent },
-  { path: 'fd-misc', component: FdMiscComponent }
+  { path: 'home', component:  HomeComponent , canActivate: [AutGuard, AdminGuard] },
+  { path: 'transactions', component: TransactionsComponent , canActivate: [AutGuard] },
+  { path: 'hotels', component:  HotelsComponent , canActivate: [AutGuard, AdminGuard] },
+  { path: 'transactions-date', component: TransactionsDateComponent, canActivate: [AutGuard] },
+  { path: 'transactions-type', component: TransactionsTypeComponent, canActivate: [AutGuard] },
+  { path: 'houskeeping-date', component: HkGoalsDataComponent, canActivate: [AutGuard] },
+  { path: 'houskeeping-hk', component: HkGoalsHkComponent, canActivate: [AutGuard] },
+  { path: 'room', component: RoomComponent, canActivate: [AutGuard] },
+  { path: 'maintenance', component: MaintenanceComponent, canActivate: [AutGuard] },
+  { path: 'fb', component: FbComponent, canActivate: [AutGuard] },
+  { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] }
 ];
 
 @NgModule({

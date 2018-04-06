@@ -5,78 +5,63 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
-
+// services
 import {AuthService} from '../auth/auth.service';
-
-interface Manager {
-  id?: string;
-  email: string;
-  name: string;
-  /*password: string;*/
-}
-
-/*interface ManagerId extends Manager {
-  id: string;
-}*/
-interface Hotel {
-  id?: string;
-}
+import {HotelService} from "../hotels/services/hotel.service";
+// interfaces
+import {Manager} from './interfaces/manager';
+import {DataStorageService} from "../shared/services/data-storage.service";
+import {HelperService} from "../shared/services/helper.service";
+import {DataProcessingService} from "../shared/services/data-processing.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
   closeResult: string;
 
-  managersCol: AngularFirestoreCollection<Manager>;
-  /*managers: Observable<Manager[]>;*/
-  managers: any;
+  managersCol: any;
+  managers: Array<Manager>;
 
   name: string;
   email: string;
-  /*password: string;*/
-
-  managerDoc: AngularFirestoreDocument<Manager>;
-  manager: Observable<Manager>;
-
-  hotelDoc: AngularFirestoreDocument<Hotel>;
-  hotel: Observable<Hotel>;
-  /*loginForm: any;*/
-
-  /*model = {
-    password: ""
-  }*/
+  password: string;
 
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
               private authService: AuthService,
-              private formBuilder:FormBuilder) {}
-
+              private formBuilder:FormBuilder,
+              private hotelSevice: HotelService,
+              public dataProcessingService: DataProcessingService
+  ) {}
 
   ngOnInit() {
-
-    /*FORM VALIDATION*/
-    /*this.loginForm = this.formBuilder.group({
-      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])
-    })*/
-   /* this.loginForm = new FormGroup({
-      password: new FormControl()
-    });*/
-
-
     this.managersCol = this.afs.collection('managers');
-    /*this.managers = this.managersCol.valueChanges();*/
-    this.managers = this.managersCol.snapshotChanges()
+    this.managersCol.snapshotChanges()
       .map(actions => {
         return actions.map(a=> {
           const data = a.payload.doc.data() as Manager;
           const id = a.payload.doc.id;
           return { id, data };
         })
-      });
+      })
+      .subscribe(res => {
+        this.managers = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
+      })
+  }
+
+  addNewManager() {
+    let manager : Manager = {
+      name: this.name,
+      email: this.email,
+      role: "manager",
+      hotelId: localStorage.hotelId
+    }
+    this.authService.signUpUser(manager, this.password);
   }
 
   open(content) {
@@ -113,21 +98,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  addNewUser() {
-    this.afs.collection('managers').add({'name': this.name, 'email': this.email, 'role': 'manager'});
-  }
-  getManager(managerId, hotelId) {
-    this.managerDoc = this.afs.doc('managers/' + managerId);
-    this.manager = this.managerDoc.valueChanges();
-  }
   deleteManager(managerId) {
     this.afs.doc('managers/'+managerId).delete();
   }
 
-  onSignup(form: NgForm) {
-    const email = form.value.email;
-    const password = form.value.password;
-    this.authService.signupUser(email, password);
-  }
 }
 

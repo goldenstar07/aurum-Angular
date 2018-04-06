@@ -29,11 +29,6 @@ interface Hotel {
   image?: string;
 }
 
-interface HotelId extends Hotel {
-  id: string;
-
-}
-
 interface FeaturedPhotosUrls {
   url1?: string;
   url2?: string;
@@ -76,7 +71,6 @@ export class ChangePropertyComponent implements OnInit {
 
   ngOnInit() {
     this.hotelsCol = this.afs.collection('hotels');
-    /*this.hotels = this.hotelsCol.valueChanges();*/
     this.hotels = this.hotelsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a=> {

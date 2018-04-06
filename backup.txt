@@ -9,7 +9,7 @@
       <p>Current Users</p>
     </div>
     <div class="main__table">
-     <div class="table__block" *ngFor="let manager of managers" (click)="getManager(manager.id)">
+     <div class="table__block" *ngFor="let manager of managers | async" (click)="getManager(manager.id)">
        <div class="text__block__btn" (click)="deleteManager(manager.id)">
        <!--<div class="text__block__btn" (click)="openDeleteComform(contentDeleteComform)">-->
          <button class="btn__item">Delete</button>
@@ -22,7 +22,7 @@
        <div class="role__block">
          <p class="text__block__email">Role</p>
          <!--<span class="prof__name">{{ manager.data.role }}</span>-->
-         <span class="prof__name">{{ manager.data.role }}</span>
+         <span class="prof__name">Manager</span>
        </div>
      </div>
       <div class="plus__circle" (click)="openNewUser(contentNewUser)">
@@ -108,7 +108,7 @@
         </button>
       </div>
       <div class="user__block">
-        <form action="#" class="user__form" (ngSubmit)="onSignup(f)" #f="ngForm">
+        <form action="#" class="user__form" (ngSubmit)="onSignup(f)" #f="ngForm" [formGroup]="loginForm">
           <div class="name__block">
             <label for="name"><p>Name:</p></label>
             <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input_user" required>
@@ -117,18 +117,29 @@
             <label for="email"><p>Email:</p></label>
             <input type="email" id="email" [(ngModel)]="email" placeholder="" name="email" class="input_user" required>
           </div>
-          <div class="pass__user-block">
-            <label for="password"><p>Password:</p></label>
-            <input type="password" id="password" [(ngModel)]="password" placeholder="" name="password" class="input_user" required>
+          <div class="pass__user-block form-group">
+            <label for="Password" class="control-label"><p>Password:</p></label>
+          <!--  <input name="userName"
+                   type="password"
+                   id="Password"
+                   [ngModel]="user.userName"
+                   minlength="5"
+                   #uname="ngModel">
+            &lt;!&ndash;<div *ngIf="uname.errors?.minlength">Minimum of 6 characters</div>&ndash;&gt;-->
+            <input
+              type="password"
+              id="Password"
+              [(ngModel)]="password"
+              placeholder="Min of 6 characters"
+              name="password"
+              class="input_user"
+              required>
           </div>
-          <button type="submit" class="confirm__user" (click)="addNewManager()" value="submit">
+          <button type="submit" class="confirm__user" (click)="addNewUser()" value="submit">
             Confirm New User
           </button>
         </form>
       </div>
-     <!-- <button type="submit" class="confirm__user" (click)="addNewUser()" value="submit">
-        Confirm New User
-      </button>-->
     </div>
   </ng-template>
 
@@ -173,3 +184,17 @@
   </ng-template>-->
 
 </section>
+
+
+
+
+HOME
+
+
+    /*FORM VALIDATION*/
+    /*this.loginForm = this.formBuilder.group({
+     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])
+     })*/
+    /* this.loginForm = new FormGroup({
+     password: new FormControl()
+     });*/
