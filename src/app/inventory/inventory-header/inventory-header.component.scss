@@ -9,6 +9,17 @@ $font-gray:            #707070;
 $font-gray4:           #F3F2F0;
 $font-bold:            700;
 $font-sz-12:           12px;
+$font-gray2:           #575652;
+$font-gray3:           #E6E5E2;
+
+/*@font-face {
+  font-family: HelveticaNeue Thin;
+  src: url("../../fonts/HelveticaNeue Thin.ttf") format("opentype");
+}
+@font-face {
+  font-family: Helvetica Neu Bold;
+  src: url("../../fonts/Helvetica Neu Bold.ttf") format("opentype");
+}*/
 
 body {
   font-family: $font-main, Helvetica,  Arial,sans-serif;
@@ -27,15 +38,7 @@ hr {
   height: 1px;
   opacity: 0.5;
 }
-#main {
-  padding: 55px 0 0 72px;
-}
-.main__block {
-  border: 20px solid $font-gray;
-  position: relative;
-  height: calc(100vh - 55px);
-  overflow-y: auto;
-}
+
 .search__block {
   padding: 20px;
   .search__text__block {
@@ -122,84 +125,11 @@ hr {
       font-weight: $font-bold;
     }
   }
-}
-.table {
-  width: 600px;
-  margin-top: 70px;
-  margin-left: 30px;
-  th {
-    background-color: $font-gray4;
-    text-align: center;
-  }
-  td {
-    padding: 5px;
-  }
-  .type {
-    width: 15%;
-    text-align: center;
-    vertical-align: middle;
-  }
-  .col__items {
-    width: 105px;
-    text-align: center;
-    vertical-align: middle;
-    padding: 0;
-    font-size: 14px;
-  }
-  .fa-edit {
-    color: gray;
-    font-size: 20px;
-    cursor: pointer;
-    position: relative;
-    top: 2px;
-  }
-  .td-numb {
-    text-align: center;
-    margin: 5px;
-    display: block;
-  }
-  .td-input {
-    width: 80px;
-    height: 40px;
-    display: none;
-    padding-left: 8px;
-    color: $primary-color;
-    font-size: 14px;
-  }
-  ::placeholder {
-    color: $primary-color;
-    font-size: 14px;
-  }
-  input:focus {
-    outline: none;
+  .datepicker-form {
+    width: 97px;
   }
 }
-.plus__circle {
-  margin-left: 25px;
-  margin-bottom: 170px;
-  cursor: pointer;
-}
-.save__button {
-  position: relative;
-  top: 160px;
-  right: 20px;
-  display: none;
-  .button__item {
-    font-size: 26px;
-    border: 1px solid $color-fff;
-    padding: 0 20px;
-    width: 120px;
-    text-align: center;
-    border-radius: 15px;
-    background-color: $primary-color;
-    color: $color-fff;
-    font-weight: $font-bold;
-    cursor: pointer;
-  }
-  .button__item:focus {
-    outline: none;
-  }
-}
+
 //==========media screen===========
 @media screen and (max-width:1199px){
   .search__block .search__date__block {
@@ -209,4 +139,3 @@ hr {
     width: 25%;
   }
 }
-

@@ -2,14 +2,21 @@
 
 $primary-color:        #0d0d0d;
 $title-color:          #E8E721;
-$color-fff:             #fff;
+$font-fff:             #fff;
 $font-main:            Helvetica Neue;
 $font-thin:            HelveticaNeue Thin;
 $font-gray:            #707070;
 $font-gray4:           #F3F2F0;
 $font-bold:            700;
-$font-sz-12:           12px;
 
+/*@font-face {
+  font-family: HelveticaNeue Thin;
+  src: url("../fonts/HelveticaNeue Thin.ttf") format("opentype");
+}
+@font-face {
+  font-family: Helvetica Neu Bold;
+  src: url("../fonts/Helvetica Neu Bold.ttf") format("opentype");
+}*/
 body {
   font-family: $font-main, Helvetica,  Arial,sans-serif;
   overflow-x: hidden;
@@ -26,6 +33,30 @@ hr {
   margin: 0;
   height: 1px;
   opacity: 0.5;
+}
+#logo {
+  background: #0d0d0d;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+#header {
+  width: 100%;
+  background: $primary-color;
+  height: 55px;
+  margin-left: 72px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-weight: $font-bold;
+  .header__text {
+    color: $title-color;
+    font-size: 28px;
+    padding: 8px 8px 8px 25px;
+    text-transform: uppercase;
+  }
 }
 #main {
   padding: 55px 0 0 72px;
@@ -45,6 +76,10 @@ hr {
   }
   .type_button {
     margin-left: 15px;
+    .button__item {
+      background-color: $font-gray;
+      color: $font-fff;
+    }
   }
   .button__item {
     font-size: 16px;
@@ -53,12 +88,12 @@ hr {
     width: 20%;
     text-align: center;
     border-radius: 50px;
-    background-color: $color-fff;
+    background-color: $font-fff;
     box-shadow: 0 4px 5px -2px #000;;
   }
   .button__item:hover {
     background-color: $font-gray;
-    color: $color-fff;
+    color: $font-fff;
   }
   .search__date__block {
     border-radius: 60px;
@@ -66,17 +101,17 @@ hr {
     height: 120px;
     border: 1px solid $font-gray;
     box-shadow: 0 4px 5px -2px #000;
+    background-color: $font-gray4;
     .search__date__item {
       border: 1px solid $font-gray;
       width: 110px;
       height: 35px;
+      margin: 0 auto;
+      font-size: 14px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto;
-      font-size: 14px;
       font-weight: $font-bold;
-      background-color: $font-gray4;
     }
     p {
       text-align: center;
@@ -87,7 +122,6 @@ hr {
     }
   }
   .search__date-range__block {
-    background-color: $font-gray4;
     border-radius: 60px;
     width: 40%;
     height: 120px;
@@ -101,7 +135,6 @@ hr {
     .custom-select:focus {
       text-decoration: none;
       outline: none;
-      border: none;
     }
   }
   .date-range__item {
@@ -118,95 +151,67 @@ hr {
     .date-range__title {
       color: $font-gray;
       margin-bottom: 4rem;
-      opacity: 0.5;
       font-weight: $font-bold;
+      opacity: 0.5;
     }
   }
 }
+.type__money {
+  font-size: 22px;
+  margin-top: 30px;
+  margin-left: 30px;
+}
 .table {
-  width: 600px;
-  margin-top: 70px;
+  width: 35%;
+  margin-top: 0;
   margin-left: 30px;
   th {
+    text-align: center;
+  }
+  th:nth-child(2) {
     background-color: $font-gray4;
+  }
+  td{
     text-align: center;
   }
-  td {
-    padding: 5px;
+  p {
+    padding: 0;
+    margin: 0;
   }
-  .type {
-    width: 15%;
-    text-align: center;
-    vertical-align: middle;
+  .date__money {
+    font-weight: $font-bold;
+    font-size: 14px;
   }
   .col__items {
     width: 105px;
     text-align: center;
     vertical-align: middle;
     padding: 0;
-    font-size: 14px;
   }
-  .fa-edit {
-    color: gray;
-    font-size: 20px;
+  .edit__svg {
     cursor: pointer;
-    position: relative;
-    top: 2px;
   }
-  .td-numb {
-    text-align: center;
-    margin: 5px;
-    display: block;
+  .min__so {
+    font-weight: 100;
+    color: $font-gray;
+    font-size: 12px;
   }
-  .td-input {
-    width: 80px;
-    height: 40px;
-    display: none;
-    padding-left: 8px;
-    color: $primary-color;
+  .numb__block {
+    padding: 19px;
+  }
+  .numb__left {
     font-size: 14px;
+    color: $font-gray;
   }
-  ::placeholder {
-    color: $primary-color;
+  .text__right {
+    color: $font-gray;
     font-size: 14px;
-  }
-  input:focus {
-    outline: none;
   }
 }
 .plus__circle {
-  margin-left: 25px;
-  margin-bottom: 170px;
   cursor: pointer;
-}
-.save__button {
   position: relative;
-  top: 160px;
-  right: 20px;
-  display: none;
-  .button__item {
-    font-size: 26px;
-    border: 1px solid $color-fff;
-    padding: 0 20px;
-    width: 120px;
-    text-align: center;
-    border-radius: 15px;
-    background-color: $primary-color;
-    color: $color-fff;
-    font-weight: $font-bold;
-    cursor: pointer;
-  }
-  .button__item:focus {
-    outline: none;
-  }
-}
-//==========media screen===========
-@media screen and (max-width:1199px){
-  .search__block .search__date__block {
-    width: 200px;
-  }
-  .search__block .search__date-range__block .custom-select {
-    width: 25%;
-  }
+  left: 20px;
+  bottom: 125px;
 }
 

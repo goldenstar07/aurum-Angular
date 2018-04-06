@@ -70,6 +70,10 @@ import { TransactionsHeaderComponent } from './transactions/transactions-header/
 import { TransactionsDateComponent } from './transactions/transactions-date/transactions-date.component';
 import { TransactionsTypeComponent } from './transactions/transactions-type/transactions-type.component';
 import {TransactionService} from './transactions/services/transaction.service';
+import { HkGoalsDataComponent } from './housekeeping/hk-goals-data/hk-goals-data.component';
+import { HkGoalsHkComponent } from './housekeeping/hk-goals-hk/hk-goals-hk.component';
+import { HkHeaderComponent } from './housekeeping/hk-header/hk-header.component';
+import { InventoryHeaderComponent } from './inventory/inventory-header/inventory-header.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -103,7 +107,11 @@ import {TransactionService} from './transactions/services/transaction.service';
     ChangePropertyComponent,
     TransactionsHeaderComponent,
     TransactionsDateComponent,
-    TransactionsTypeComponent
+    TransactionsTypeComponent,
+    HkGoalsDataComponent,
+    HkGoalsHkComponent,
+    HkHeaderComponent,
+    InventoryHeaderComponent
   ],
   imports: [
     BrowserModule,
