@@ -30,7 +30,9 @@ a:hover {
   text-shadow: 1px 0 10px #0d0d0d, 1px 1px 3px yellow;;
 }
 img {
-  max-width: 100%; height: auto;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
 }
 hr {
   width: 100%;
@@ -195,61 +197,22 @@ input:focus {
   border-radius: 5px;
   border: 1px solid $primary-color;
 }
-
-
-
 /*Media Screen*/
-@media screen and (max-width: 768px) {
-
+@media screen and (max-width: 872px){
+  .main__table {
+    justify-content: center;
+  }
+  .plus__circle {
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 535px){
+  .table__block {
+    max-width: 90%;
+    }
   .main__title h2 {
     font-size: 25px;
   }
-  .main__block .table__block {
-    border: 1px solid #000;
-    width: 250px;
-    /*margin-bottom: 15%;*/
-    margin: 20px auto;
-  }
-  .main__block {
-    border: 15px solid #707070;
-    height: 85%;
-  }
 }
-@media screen and (max-width: 575px) {
-
-  .main__title h2 {
-    font-size: 20px;
-  }
-  .main__block .table__block {
-    border: 1px solid #000;
-    width: 220px;
-  }
-}
-@media screen and (max-width: 465px) {
-
-  .main__table {
-    display: block;
-  }
-  .main__block {
-    border: 10px solid #707070;
-  }
-  .table__block {
-    padding: 20px 10px 20px 25px;
-  }
-}
-@media screen and (max-width: 375px) {
-
-  .main__title h2 {
-    font-size: 20px;
-  }
-  .main__block .table__block {
-    width: 200px;
-  }
-  .main__block {
-    border: 5px solid #707070;
-  }
-  .table__block {
-    padding: 20px 10px 20px 20px!important;
-  }
-}
-
