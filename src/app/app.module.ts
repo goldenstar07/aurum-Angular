@@ -79,6 +79,7 @@ import { HkGoalsDataComponent } from './housekeeping/hk-goals-data/hk-goals-data
 import { HkGoalsHkComponent } from './housekeeping/hk-goals-hk/hk-goals-hk.component';
 import { HkHeaderComponent } from './housekeeping/hk-header/hk-header.component';
 import { InventoryHeaderComponent } from './inventory/inventory-header/inventory-header.component';
+import {ChangePropertyComponent} from './change-property/change-property.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -116,7 +117,8 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
     HkGoalsDataComponent,
     HkGoalsHkComponent,
     HkHeaderComponent,
-    InventoryHeaderComponent
+    InventoryHeaderComponent,
+    ChangePropertyComponent
   ],
   imports: [
     BrowserModule,
