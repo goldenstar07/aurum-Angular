@@ -80,6 +80,14 @@ import { HkGoalsHkComponent } from './housekeeping/hk-goals-hk/hk-goals-hk.compo
 import { HkHeaderComponent } from './housekeeping/hk-header/hk-header.component';
 import { InventoryHeaderComponent } from './inventory/inventory-header/inventory-header.component';
 import {ChangePropertyComponent} from './change-property/change-property.component';
+import {ChatFormComponent} from "./activity/chat-form/chat-form.component";
+import { FeedComponent } from './activity/feed/feed.component';
+import { MessageComponent } from './activity/message/message.component';
+import { UserListComponent } from './activity/user-list/user-list.component';
+import { UserItemComponent } from './activity/user-item/user-item.component';
+import {ChatService} from "./activity/chat.service";
+import { ChatComponent } from './activity/chat/chat.component';
+import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -118,7 +126,14 @@ import {ChangePropertyComponent} from './change-property/change-property.compone
     HkGoalsHkComponent,
     HkHeaderComponent,
     InventoryHeaderComponent,
-    ChangePropertyComponent
+    ChangePropertyComponent,
+    ChatFormComponent,
+    FeedComponent,
+    MessageComponent,
+    UserListComponent,
+    UserItemComponent,
+    ChatComponent,
+    ActivityChatComponent
   ],
   imports: [
     BrowserModule,
@@ -173,7 +188,8 @@ import {ChangePropertyComponent} from './change-property/change-property.compone
     AutGuard,
     AdminGuard,
     TransactionService,
-    HomeService
+    HomeService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

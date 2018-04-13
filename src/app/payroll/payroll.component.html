@@ -1,3 +1,117 @@
-<p>
-  payroll works!
-</p>
+<app-header></app-header>
+
+<section id="main">
+  <div class="main__block">
+    <h1 class="main-title">Previous Hours Summary List</h1>
+    <div class="main__title d-flex align-items-center">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col" class="col__items">Regular Time
+          </th>
+          <th scope="col" class="col__items">Over Time
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td scope="row" class="type">Bob</td>
+          <td>
+            <p class="td-numb">23</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
+          <td>
+            <p class="td-numb">3</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" class="type">John</td>
+          <td>
+            <p class="td-numb">23</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
+          <td>
+            <p class="td-numb">2,4</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" class="type">Wrx</td>
+          <td>
+            <p class="td-numb">23</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
+          <td>
+            <p class="td-numb">65</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
+                    <g>
+                        <path d="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M26,50C12.767,50,2,39.233,2,26   S12.767,2,26,2s24,10.767,24,24S39.233,50,26,50z" fill="#707070"/>
+                        <path d="M38.5,25H27V14c0-0.553-0.448-1-1-1s-1,0.447-1,1v11H13.5c-0.552,0-1,0.447-1,1s0.448,1,1,1H25v12c0,0.553,0.448,1,1,1   s1-0.447,1-1V27h11.5c0.552,0,1-0.447,1-1S39.052,25,38.5,25z" fill="#707070"/>
+                    </g>
+        </svg>
+      </div>
+
+      <div class="save__button">
+        <button class="button__item">Save</button>
+      </div>
+
+
+      <!--POPUP ADD PROPERTY FORM-->
+      <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
+        <div class="modal-container" style="width: 800px; background: white;">
+          <div class="main__block d-flex justify-content-center align-items-center">
+            <div class="housekeeper__block d-flex flex-column align-items-center">
+              <button type="button" class="close close-cross" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true" class="cros">&times;</span>
+              </button>
+              <h1>Add Hours</h1>
+              <form action="#" class="user__form">
+                <div class="select__date d-flex justify-content-between align-items-center">
+                  <div>Select Date.</div>
+                  <div class="search__date__item">12/4/17</div>
+                </div>
+                <div class="name__block">
+                  <label for="Employee Name" style="width: 120px"><p>Bob</p></label>
+                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
+                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
+                </div>
+                <div class="name__block">
+                  <label for="Employee Name" style="width: 120px"><p>John</p></label>
+                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
+                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
+                </div>
+                <div class="name__block">
+                  <label for="Employee Name" style="width: 120px"><p>Liza</p></label>
+                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
+                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
+                </div>
+                <div class="name__block">
+                  <input type="text" placeholder="Name" name="Employee Name" class="input__name" required>
+                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
+                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
+                </div>
+                <div class="add__item__block">
+                  <button type="button" class="add__item__btn">
+                    Add Person
+                  </button>
+                </div>
+              </form>
+              <div class="save__button">
+                <button class="button__item">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</section>

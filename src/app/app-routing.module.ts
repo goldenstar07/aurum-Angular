@@ -16,6 +16,12 @@ import {RoomComponent} from "./inventory/room/room.component";
 import {MaintenanceComponent} from "./inventory/maintenance/maintenance.component";
 import {FbComponent} from "./inventory/fb/fb.component";
 import {FdMiscComponent} from "./inventory/fd-misc/fd-misc.component";
+import {PayrollComponent} from "./payroll/payroll.component";
+import {VendorsComponent} from "./property/vendors/vendors.component";
+import {EmployeeComponent} from "./property/employee/employee.component";
+import {CredentialsComponent} from "./property/credentials/credentials.component";
+import {ActivityComponent} from "./activity/activity.component";
+import {ActivityChatComponent} from "./activity/activity-chat/activity-chat.component";
 
 
 const appRoutes: Routes = [
@@ -31,7 +37,13 @@ const appRoutes: Routes = [
   { path: 'room', component: RoomComponent, canActivate: [AutGuard] },
   { path: 'maintenance', component: MaintenanceComponent, canActivate: [AutGuard] },
   { path: 'fb', component: FbComponent, canActivate: [AutGuard] },
-  { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] }
+  { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] },
+  { path: 'payroll', component: PayrollComponent, canActivate: [AutGuard] },
+  { path: 'vendors', component: VendorsComponent, canActivate: [AutGuard] },
+  { path: 'employee', component: EmployeeComponent, canActivate: [AutGuard] },
+  { path: 'credentials', component: CredentialsComponent, canActivate: [AutGuard] },
+  { path: 'activity', component: ActivityComponent, canActivate: [AutGuard] },
+  { path: 'activity-chat', component: ActivityChatComponent, canActivate: [AutGuard] },
 ];
 
 @NgModule({
