@@ -7,13 +7,13 @@ import {Transaction} from '../interfaces/transaction';
 
 @Injectable()
 export class TransactionService {
-  transactionsCol: AngularFirestoreCollection<Transaction>;
-  transactions: any;
+/*  transactionsCol: AngularFirestoreCollection<Transaction>;
+  transactions: any;*/
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase) {}
 
-  getTransactions() {
+  /*getTransactions() {
     this.transactionsCol = this.afs.collection('transactions');
     return this.transactionsCol.snapshotChanges()
       .map(actions => {
@@ -27,5 +27,5 @@ export class TransactionService {
 
   addTransaction(transaction) {
     this.afs.collection('transactions').add(transaction);
-  }
+  }*/
 }
