@@ -1,7 +1,7 @@
-/*
-export interface Housekeeping {
-  type: string;
-  value: any;
-  date: any;
+export interface Goal {
+  name: string;
+  dnd: any;
+  so: any;
+  min: any;
+  hotelId: string;
 }
-*/

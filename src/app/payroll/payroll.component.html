@@ -67,48 +67,39 @@
       <!--POPUP ADD PROPERTY FORM-->
       <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
         <div class="modal-container" style="width: 800px; background: white;">
-          <div class="main__block d-flex justify-content-center align-items-center">
+          <form class="main__block d-flex justify-content-center align-items-center" [formGroup]="form" (submit)="saveFormInput()">
             <div class="housekeeper__block d-flex flex-column align-items-center">
               <button type="button" class="close close-cross" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true" class="cros">&times;</span>
               </button>
               <h1>Add Hours</h1>
-              <form action="#" class="user__form">
+              <div class="user__form">
                 <div class="select__date d-flex justify-content-between align-items-center">
-                  <div>Select Date.</div>
-                  <div class="search__date__item">12/4/17</div>
+                  <div>Select Date:</div>
+                  <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
                 </div>
-                <div class="name__block">
-                  <label for="Employee Name" style="width: 120px"><p>Bob</p></label>
-                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
-                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
+                <button type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true" class="cros">&times;</span>
+                </button>
+                <hr>
+                <form formArrayName="payrolls" *ngFor="let payroll of form.get('payrolls').controls; let i=index" class="user__form">
+                <div class="name__block" [formGroupName]="i">
+                  <input type="text"  formControlName="name" id="name" placeholder="Name" class="input__name">
+                  <input type="text"  formControlName="regular" id="regular" placeholder="Regular Time" class="input">
+                  <input type="text"  formControlName="over" id="over" placeholder="Over Time" class="input">
                 </div>
-                <div class="name__block">
-                  <label for="Employee Name" style="width: 120px"><p>John</p></label>
-                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
-                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
-                </div>
-                <div class="name__block">
-                  <label for="Employee Name" style="width: 120px"><p>Liza</p></label>
-                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
-                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
-                </div>
-                <div class="name__block">
-                  <input type="text" placeholder="Name" name="Employee Name" class="input__name" required>
-                  <input type="text" placeholder="Regular Time" name="Employee Name" class="input" required>
-                  <input type="text" placeholder="Over Time" name="Employee Name" class="input" required>
-                </div>
-                <div class="add__item__block">
+                </form>
+                <div class="add__item__block" (click)="addFormInput()">
                   <button type="button" class="add__item__btn">
                     Add Person
                   </button>
                 </div>
-              </form>
-              <div class="save__button">
+              </div>
+              <div class="save__btn" (click)="addNewPayroll()">
                 <button class="button__item">Save</button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </ng-template>
 

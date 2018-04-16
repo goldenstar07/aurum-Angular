@@ -13,11 +13,6 @@ import {DataStorageService} from "../../shared/services/data-storage.service";
 import * as firebase from "firebase/app";
 /*import Transaction = firebase.firestore.Transaction;*/
 
-/*interface Transaction {
-  type: string;
-  price: any;
-  hotelId: string;
-}*/
 
 @Component({
   selector: 'app-transactions-date',
