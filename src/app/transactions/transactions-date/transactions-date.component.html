@@ -178,18 +178,18 @@
               <mat-datepicker #picker1 class="datepicker-calendar"></mat-datepicker>
             </mat-form-field>
           </div>-->
-          <input type="date" class="search__date__item" placeholder="">
+          <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
         </div>
-        <div class="input__transaction">
+        <!--<div class="input__transaction">
           <input type="text" class="td-input" formControlName="inputType" id="inputType" placeholder="">
           <input type="text" class="td-input" formControlName="inputPrice" id="inputPrice" placeholder="">
-          <!--<select class="custom-select td-input">
+          &lt;!&ndash;<select class="custom-select td-input">
             <option selected>Select Type</option>
             <option value="1">Visa</option>
             <option value="2">Amex</option>
             <option value="3">Checks</option>
-          </select>-->
-        </div>
+          </select>&ndash;&gt;
+        </div>-->
         <form formArrayName="transactions" *ngFor="let transaction of form.get('transactions').controls; let i=index">
           <div class="input__transaction" [formGroupName]="i">
             <input type="text" class="td-input" formControlName="type" id="type" placeholder="">

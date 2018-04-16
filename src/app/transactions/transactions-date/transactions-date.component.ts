@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
+/*Interfaces */
+import {Transaction} from "../interfaces/transaction";
 // Services
 import {TransactionService} from '../services/transaction.service';
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
@@ -9,7 +11,7 @@ import {AngularFirestore} from "angularfire2/firestore";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import * as firebase from "firebase/app";
-import Transaction = firebase.firestore.Transaction;
+/*import Transaction = firebase.firestore.Transaction;*/
 
 /*interface Transaction {
   type: string;
@@ -45,8 +47,8 @@ export class TransactionsDateComponent implements OnInit {
     /*this.transactions = this.transactionService.getTransactions();
   }*/
     this.form = this.formBuilder.group({
-      inputType: [''],
-      inputPrice: [''],
+      date: [''],
+      /*inputPrice: [''],*/
       transactions: this.formBuilder.array([this.createFormInput()])
     });
     console.log(this.form);
