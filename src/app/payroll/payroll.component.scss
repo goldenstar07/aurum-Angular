@@ -174,7 +174,7 @@ hr {
 }
 .input {
   height: 35px;
-  width: 150px;
+  width: 120px;
   padding-left: 20px;
   border: 1px solid $primary-color;
   margin-left: 20px;
@@ -205,6 +205,7 @@ hr {
     color: $title-color;
     border-radius: 3px;
     padding: 5px 10px;
+    margin-top: 25px;
   }
 }
 .save__btn {
