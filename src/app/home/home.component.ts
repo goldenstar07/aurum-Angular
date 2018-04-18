@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
               private modalService: NgbModal,
               private afs: AngularFirestore,
               private authService: AuthService,
-              private formBuilder:FormBuilder,
+              private formBuilder: FormBuilder,
               private hotelSevice: HotelService,
               public dataProcessingService: DataProcessingService
   ) {}

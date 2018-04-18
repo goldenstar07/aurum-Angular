@@ -3,22 +3,22 @@
 <section id="main">
   <div class="main__block">
     <div class="main__table">
-      <div class="table__block">
+      <div class="table__block" *ngFor="let vendor of vendors | async" (click)="setVendors(vendor.id)">
         <div class="text__block__btn">
-          <span><h3>TEXT</h3></span>
-          <button class="btn__item">Delete</button>
+          <span><h3>{{vendor.data.name}}</h3></span>
+          <button class="btn__item" (click)="deleteVendor(vendor.id)">Delete</button>
         </div>
         <div class="email__block">
           <p class="text__block__email">Contact Person:</p>
-          <span class="email__name"></span>
+          <span class="email__name">{{ vendor.data.person }}</span>
         </div>
         <div class="email__block">
           <p class="text__block__email">Phone:</p>
-          <span class="email__name"></span>
+          <span class="email__name">{{ vendor.data.phone }}</span>
         </div>
         <div class="email__block">
           <p class="text__block__email">Email:</p>
-          <span class="email__name"></span>
+          <span class="email__name">{{ vendor.data.email }}</span>
         </div>
       </div>
       <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
@@ -41,27 +41,27 @@
           <span aria-hidden="true" class="cros">&times;</span>
         </button>
         <h1>Create New Vendor</h1>
-        <form action="#" class="user__form">
+        <form action="#" class="user__form" (ngSubmit)="getVendor(f)" #f="ngForm">
           <div class="name__block">
             <label for="Vendor Name" style="width: 120px"><p>Vendor Name</p></label>
-            <input type="text" placeholder="" name="Vendor Name" class="input" required>
+            <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input" required>
           </div>
           <div class="name__block">
-            <label for="Contact Name" style="width: 120px"><p>Contact Name</p></label>
-            <input type="text" placeholder="" name="Contact Name" class="input" required>
+            <label for="Contact Name" style="width: 120px"><p>Contact Person</p></label>
+            <input type="text" id="person" [(ngModel)]="person" placeholder="" name="person" class="input" required>
           </div>
           <div class="name__block">
             <label for="Contact Phone" style="width: 120px"><p>Contact Phone</p></label>
-            <input type="text" placeholder="" name="Contact Phone" class="input" required>
+            <input type="text" id="phone" [(ngModel)]="phone" placeholder="" name="phone" class="input" required>
           </div>
           <div class="name__block">
             <label for="Email" style="width: 120px"><p>Email(Optional)</p></label>
-            <input type="text" placeholder="" name="Email" class="input" required>
+            <input type="text" id="email" [(ngModel)]="email" placeholder="" name="email" class="input" required>
+          </div>
+          <div class="save__button">
+            <button type="submit" class="button__item" (click)="addNewVendor(f)">Save</button>
           </div>
         </form>
-        <div class="save__button">
-          <button class="button__item">Save</button>
-        </div>
       </div>
     </div>
   </ng-template>

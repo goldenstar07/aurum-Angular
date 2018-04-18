@@ -24,7 +24,7 @@ hotelId: string;
               private db: AngularFireDatabase,
               public dataProcessingService: DataProcessingService,
               private authService: AuthService,
-              private formBuilder:FormBuilder,
+              private formBuilder: FormBuilder,
               private hotelSevice: HotelService) {}
 
 
