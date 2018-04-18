@@ -13,10 +13,10 @@
             12/4/17
             <i class="far fa-edit"></i>
           </th>
-          <th scope="col" class="col__items" colspan="2">
+          <!--<th scope="col" class="col__items" colspan="2">
             12/03/18
             <i class="far fa-edit"></i>
-          </th>
+          </th>-->
         </tr>
         </thead>
         <tbody>
@@ -30,17 +30,17 @@
             <p class="td-numb">Needed</p>
             <input type="text" class="td-input" placeholder="Needed">
           </td>
-          <td>
+          <!--<td>
             <p class="td-numb">Had</p>
             <input type="text" class="td-input" placeholder="Had">
           </td>
           <td>
             <p class="td-numb">Needed</p>
             <input type="text" class="td-input" placeholder="Needed">
-          </td>
+          </td>-->
         </tr>
         <tr>
-          <td scope="row" class="type">Butter</td>
+          <td scope="row" class="type">Bread</td>
           <td>
             <p class="td-numb">-</p>
             <input type="text" class="td-input" placeholder="1">
@@ -49,16 +49,16 @@
             <p class="td-numb">-</p>
             <input type="text" class="td-input" placeholder="1">
           </td>
-          <td>
+          <!--<td>
             <p class="td-numb">1</p>
             <input type="text" class="td-input" placeholder="1">
           </td>
           <td>
             <p class="td-numb">3</p>
             <input type="text" class="td-input" placeholder="1">
-          </td>
+          </td>-->
         </tr>
-        <tr>
+       <!-- <tr>
           <td scope="row" class="type">Cheese</td>
           <td>
             <p class="td-numb">-</p>
@@ -114,7 +114,7 @@
             <p class="td-numb">3</p>
             <input type="text" class="td-input" placeholder="1">
           </td>
-        </tr>
+        </tr>-->
         </tbody>
       </table>
       <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
@@ -133,7 +133,7 @@
     <!--POPUP ADD PROPERTY FORM-->
     <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
       <div class="modal-container" style="width: 800px; background: white;">
-      <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">
+      <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" (ngSubmit)="addNewRoom(f)" #f="ngForm">
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
           <span aria-hidden="true" class="cros">&times;</span>
         </button>
@@ -145,7 +145,7 @@
               </div>
               <div class="select__date d-flex justify-content-center align-items-center">
                 <div>Select Date:</div>
-                <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
+                <input type="date" class="search__date__item" formControlName="date" id="date" name="date" placeholder="">
               </div>
               <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true" class="cros">&times;</span>
@@ -154,9 +154,9 @@
             <hr>
             <form formArrayName="rooms" *ngFor="let room of form.get('rooms').controls; let i=index" class="user__form">
               <div class="name__block" [formGroupName]="i">
-                <input type="text" formControlName="item" id="item" placeholder="Item" class="input">
-                <input type="text" formControlName="have" id="have" placeholder="Have" class="input">
-                <input type="text" formControlName="need" id="need" placeholder="Need" class="input">
+                <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input">
+                <input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input">
+                <input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input">
               </div>
             </form>
             <div class="add__item__block" (click)="addFormInput()">
@@ -164,8 +164,9 @@
                 Add Item
               </button>
             </div>
-            <div class="save__btn" (click)="addNewRoom()">
-              <button class="add__btn" value="submit">Save</button>
+
+            <div class="save__btn">
+              <button class="add__btn" (click)="addNewRoom(f)">Save</button>
             </div>
             <!--<button type="button" class="add__btn" (click)="addNewRoom()">Save Changes</button>-->
           </div>

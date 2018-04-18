@@ -89,6 +89,7 @@ import {ChatService} from "./activity/chat.service";
 import { ChatComponent } from './activity/chat/chat.component';
 import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
 import {HouskeepingService} from "./housekeeping/services/houskeeping.service";
+import {RoomService} from "./inventory/services/room.service";
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -191,7 +192,8 @@ import {HouskeepingService} from "./housekeeping/services/houskeeping.service";
     TransactionService,
     HomeService,
     ChatService,
-    HouskeepingService
+    HouskeepingService,
+    RoomService
   ],
   bootstrap: [AppComponent]
 })
