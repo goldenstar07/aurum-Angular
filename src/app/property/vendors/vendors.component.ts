@@ -63,7 +63,7 @@ export class VendorsComponent implements OnInit {
     console.log(form.value);
   }*/
 
-  addNewVendor(form: NgForm) {
+  addNewVendor(form: NgForm) {  /*Save*/
     console.log(form.value);
     this.hotelId = localStorage.hotelId;
     form.value.htId = this.hotelId;

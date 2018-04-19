@@ -4,3 +4,4 @@ export interface Payroll {
   over: any;
   hotelId: string;
 }
+

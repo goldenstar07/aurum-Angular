@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Router} from '@angular/router';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import 'rxjs/add/operator/map';
+import {FormArray, FormBuilder, FormGroup, Validators, NgForm} from '@angular/forms';
+import {AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestore';
+import * as firebase from 'firebase/app';
 /*Interfaces */
-import { Payroll } from "./interface/payroll";
+import { Payroll } from './interface/payroll';
 // Services
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {AngularFirestore} from "angularfire2/firestore";
 import {DataProcessingService} from '../shared/services/data-processing.service';
 import {DataStorageService} from '../shared/services/data-storage.service';
-import * as firebase from "firebase/app";
-import {Inventory} from "../inventory/interface/inventory";
+import {AuthService} from '../auth/auth.service';
+import { PayrollService } from './services/payroll.service';
+import {Observable} from 'rxjs/Observable';
+import {Hotel} from '../hotels/interfaces/hotel';
 
 
 @Component({
@@ -21,19 +24,28 @@ import {Inventory} from "../inventory/interface/inventory";
 export class PayrollComponent implements OnInit {
   closeResult: string;
   form: FormGroup;
+  payrollls: Payroll;
+  hotel: Observable<Hotel>;
+
+  iterator: any;
 
   name: string;
   regular: any;
   over: any;
+  hotelId: any;
 
   constructor(private router: Router,
               private modalService: NgbModal,
               private formBuilder: FormBuilder,
               private afs: AngularFirestore,
               public dataProcessingService: DataProcessingService,
-              public dataStorageService: DataStorageService) { }
+              public dataStorageService: DataStorageService,
+              private authService: AuthService,
+              private payrollService: PayrollService) { }
 
   ngOnInit() {
+    this.payrollls = this.payrollService.getPayrolls();
+
     this.form = this.formBuilder.group({
       date: [''],
       payrolls: this.formBuilder.array([this.createFormInput()])
@@ -58,11 +70,12 @@ export class PayrollComponent implements OnInit {
   }
 
   saveFormInput() {
-    console.log(this.form.value);
+    console.log(this.form);
+    // return this.form.get('payrolls').value;
   }
 
-  addNewPayroll() {
-    let payroll: Payroll = {
+  setPayrolls() {
+    const payroll: Payroll = {
       name: this.name,
       regular: this.regular,
       over: this.over,
@@ -72,7 +85,17 @@ export class PayrollComponent implements OnInit {
     this.afs.collection('transactions').add(transaction);*/
   }
 
+  addNewPayroll(form: NgForm) {     /*Save*/
+    /*this.hotelId = localStorage.hotelId;
+    form.value.htId = this.hotelId;
+    console.log(form.value);
+    this.payrollService.addPayroll(form.value);*/
+    this.hotelId = this.afs.collection('payrolls').doc(localStorage.hotelId).ref.id;
+    this.payrollService.addPayroll(form.value, this.hotelId);
+    /*this.hotelId = this.afs.collection('vendors').doc(localStorage.hotelId).ref.id;*/
+  }
 
+// popup
   openNewProperty(contentNewProperty) {
     this.modalService.open(contentNewProperty).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

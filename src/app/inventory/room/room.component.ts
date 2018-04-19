@@ -41,6 +41,7 @@ export class RoomComponent implements OnInit {
 
   ngOnInit() {
     this.roooms = this.roomService.getRooms();
+
     this.form = this.formBuilder.group({
       date: [''],
       rooms: this.formBuilder.array([this.createFormInput()])

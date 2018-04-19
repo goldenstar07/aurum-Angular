@@ -36,8 +36,8 @@ hotelId: string;
           const data = a.payload.doc.data() as Inventory;
           const id = a.payload.doc.id;
           return {id, data};
-        })
-      })
+        });
+      });
       /*.subscribe(res => {
         this.roooms = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
       })*/
