@@ -78,9 +78,6 @@
                   <div>Select Date:</div>
                   <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
                 </div>
-                <button type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true" class="cros">&times;</span>
-                </button>
                 <hr>
                 <form formArrayName="payrolls" *ngFor="let payroll of form.get('payrolls').controls; let i=index" class="user__form">
                 <div class="name__block" [formGroupName]="i">
