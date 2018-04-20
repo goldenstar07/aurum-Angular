@@ -12,7 +12,7 @@
           <th scope="col" class="col__items">Over Time</th>
         </tr>
         </thead>
-        <tbody *ngFor="let payroll of payrollls | async" (click)="setPayrolls(payroll.id)">
+        <tbody *ngFor="let payroll of payrollls" (click)="setPayrolls(payroll.id)">
         <tr *ngFor="let item of payroll.data.payrolls">
             <td scope="row" class="type">{{ item.name }}</td>
             <td>
