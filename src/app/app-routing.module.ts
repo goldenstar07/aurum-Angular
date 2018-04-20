@@ -22,6 +22,8 @@ import {EmployeeComponent} from "./property/employee/employee.component";
 import {CredentialsComponent} from "./property/credentials/credentials.component";
 import {ActivityComponent} from "./activity/activity.component";
 import {ActivityChatComponent} from "./activity/activity-chat/activity-chat.component";
+import {BillsMiscComponent} from "./upload/bills-misc/bills-misc.component";
+import {FormsComponent} from "./upload/forms/forms.component";
 
 
 const appRoutes: Routes = [
@@ -44,6 +46,8 @@ const appRoutes: Routes = [
   { path: 'credentials', component: CredentialsComponent, canActivate: [AutGuard] },
   { path: 'activity', component: ActivityComponent, canActivate: [AutGuard] },
   { path: 'activity-chat', component: ActivityChatComponent, canActivate: [AutGuard] },
+  { path: 'bills-misc', component: BillsMiscComponent, canActivate: [AutGuard] },
+  { path: 'forms', component: FormsComponent, canActivate: [AutGuard] }
 ];
 
 @NgModule({

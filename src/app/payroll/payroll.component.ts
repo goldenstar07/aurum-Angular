@@ -24,7 +24,7 @@ export class PayrollComponent implements OnInit {
   closeResult: string;
   form: FormGroup;
   payrollls: any;
- // payrollls: Payroll;
+  // payrollls: Payroll;
   hotel: Observable<Hotel>;
 
   iterator: any;
@@ -44,12 +44,12 @@ export class PayrollComponent implements OnInit {
               private payrollService: PayrollService) { }
 
   ngOnInit() {
-  /*  this.payrollService.getPayrolls().subscribe(res => {
-      // this.payrollls  = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
-      console.log(res);
-      console.log(this.payrollls);
-      // this.payrollls.push(res);
-    });*/
+    /*  this.payrollService.getPayrolls().subscribe(res => {
+        // this.payrollls  = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
+        console.log(res);
+        console.log(this.payrollls);
+        // this.payrollls.push(res);
+      });*/
     // this.a = this.mas;
     // this.a = this.payrollService.getPayrolls();
 

@@ -2,38 +2,37 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
 import {AngularFireDatabase} from "angularfire2/database";
 // Interfaces
-import { Payroll } from '../interface/payroll';
-// Services
-import {HelperService} from "../../shared/services/helper.service";
+import {Bill} from "../interfaces/bill";
+// Service
+import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
-import {Hotel} from '../../hotels/interfaces/hotel';
-import {Vendor} from '../../property/interfaces/vendor';
+
 
 @Injectable()
-export class PayrollService {
-  payrollsCol: AngularFirestoreCollection<Payroll>;
-  payrolls: any;
+export class BillService {
+  billsCol: AngularFirestoreCollection<Bill>;
+  bills: any;
 
   constructor(private afs: AngularFirestore,
               private dataStorageService: DataStorageService,
-              private db: AngularFireDatabase) {
-  }
+              private db: AngularFireDatabase) { }
 
-  getPayrolls() {
-    this.payrollsCol = this.afs.collection('payrolls');
-    return this.payrollsCol.snapshotChanges()
+  getBills() {
+    this.billsCol = this.afs.collection('bills');
+    return this.billsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as Payroll;
+          const data = a.payload.doc.data() as Bill;
           const id = a.payload.doc.id;
           return {id, data};
         });
       });
   }
 
-  addPayroll(payroll, hotelId) {
-    this.afs.collection('payrolls').doc(hotelId).set(payroll);
-    /* this.afs.collection('payrolls').add(payroll);*/
+  addBill(bill, hotelId) {
+    /*this.afs.collection('vendors').doc(hotelId).set(vendor);*/
+    /*this.afs.collection('bills').add(bill);*/
+    this.afs.collection('bills').doc(hotelId).set(bill);
   }
   /*addVendor(vendor) {
     this.afs.collection('vendors').add(vendor);

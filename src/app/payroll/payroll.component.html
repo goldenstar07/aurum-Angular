@@ -14,17 +14,17 @@
         </thead>
         <tbody *ngFor="let payroll of payrollls" (click)="setPayrolls(payroll.id)">
         <tr *ngFor="let item of payroll.data.payrolls">
-            <td scope="row" class="type">{{ item.name }}</td>
-            <td>
-              <p class="td-numb">{{ item.regular }}</p>
-              <input type="text" class="td-input" placeholder="">
-            </td>
-            <td>
-              <p class="td-numb">{{ item.over }}</p>
-              <input type="text" class="td-input" placeholder="">
-            </td>
+          <td scope="row" class="type">{{ item.name }}</td>
+          <td>
+            <p class="td-numb">{{ item.regular }}</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
+          <td>
+            <p class="td-numb">{{ item.over }}</p>
+            <input type="text" class="td-input" placeholder="">
+          </td>
         </tr>
-    </tbody>
+        </tbody>
       </table>
       <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
@@ -56,11 +56,11 @@
                 </div>
                 <hr>
                 <form formArrayName="payrolls" *ngFor="let payroll of form.get('payrolls').controls; let i=index" class="user__form">
-                <div class="name__block" [formGroupName]="i">
-                  <input type="text"  formControlName="name" id="name" placeholder="Name" name="name" class="input__name">
-                  <input type="text"  formControlName="regular" id="regular" placeholder="Regular Time" name="regular" class="input">
-                  <input type="text"  formControlName="over" id="over" placeholder="Over Time" name="over" class="input">
-                </div>
+                  <div class="name__block" [formGroupName]="i">
+                    <input type="text"  formControlName="name" id="name" placeholder="Name" name="name" class="input__name">
+                    <input type="text"  formControlName="regular" id="regular" placeholder="Regular Time" name="regular" class="input">
+                    <input type="text"  formControlName="over" id="over" placeholder="Over Time" name="over" class="input">
+                  </div>
                 </form>
                 <div class="add__item__block" (click)="addFormInput()">
                   <button type="button" class="add__item__btn">
