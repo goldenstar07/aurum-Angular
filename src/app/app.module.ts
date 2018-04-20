@@ -80,20 +80,14 @@ import { HkGoalsHkComponent } from './housekeeping/hk-goals-hk/hk-goals-hk.compo
 import { HkHeaderComponent } from './housekeeping/hk-header/hk-header.component';
 import { InventoryHeaderComponent } from './inventory/inventory-header/inventory-header.component';
 import {ChangePropertyComponent} from './change-property/change-property.component';
-import {ChatFormComponent} from "./activity/chat-form/chat-form.component";
-import { FeedComponent } from './activity/feed/feed.component';
-import { MessageComponent } from './activity/message/message.component';
-import { UserListComponent } from './activity/user-list/user-list.component';
-import { UserItemComponent } from './activity/user-item/user-item.component';
-import {ChatService} from "./activity/chat.service";
-import { ChatComponent } from './activity/chat/chat.component';
 import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
 import {HouskeepingService} from "./housekeeping/services/houskeeping.service";
 import {RoomService} from "./inventory/services/room.service";
-import {VendorsService} from './property/services/vendors.service';
-import {CredentialsService} from './property/services/credentials.service';
-import {EmployeesService} from './property/services/employees.service';
-import {PayrollService} from './payroll/services/payroll.service';
+import {ActivityChatService} from "./activity/activity-chat/service/activity-chat.service";
+import {CredentialsService} from "./property/services/credentials.service";
+import {EmployeesService} from "./property/services/employees.service";
+import {VendorsService} from "./property/services/vendors.service";
+import {PayrollService} from "./payroll/services/payroll.service";
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -133,13 +127,11 @@ import {PayrollService} from './payroll/services/payroll.service';
     HkHeaderComponent,
     InventoryHeaderComponent,
     ChangePropertyComponent,
-    ChatFormComponent,
-    FeedComponent,
-    MessageComponent,
-    UserListComponent,
-    UserItemComponent,
-    ChatComponent,
-    ActivityChatComponent
+    ActivityChatComponent,
+    PayrollComponent,
+    CredentialsComponent,
+    EmployeeComponent,
+    VendorsComponent
   ],
   imports: [
     BrowserModule,
@@ -195,12 +187,12 @@ import {PayrollService} from './payroll/services/payroll.service';
     AdminGuard,
     TransactionService,
     HomeService,
-    ChatService,
     HouskeepingService,
     RoomService,
-    VendorsService,
+    ActivityChatService,
     CredentialsService,
     EmployeesService,
+    VendorsService,
     PayrollService
   ],
   bootstrap: [AppComponent]

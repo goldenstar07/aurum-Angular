@@ -15,7 +15,6 @@ import { PayrollService } from './services/payroll.service';
 import {Observable} from 'rxjs/Observable';
 import {Hotel} from '../hotels/interfaces/hotel';
 
-
 @Component({
   selector: 'app-payroll',
   templateUrl: './payroll.component.html',

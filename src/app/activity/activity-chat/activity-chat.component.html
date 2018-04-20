@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <section id="main">
-  <div class="main__block">
+  <div #scroller class="main__block">
     <!--<div id='left' class="message__block"><span class='first_m'><p class='center'>asdasd</p></span></div>
     <div id='right' class="message__block"><span class='time1'>12:40</span><span class='first_m'><p class='center'>asdasd</p></span></div>
     <div id='left' class="message__block"><span class='Raj1'>Raj</span><span class='first_l'><p class='center'>asdasd</p></span></div>
@@ -12,20 +12,29 @@
 -->
 
     <div class="w-90 m-auto">
-      <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203 </div></div>
+      <!--<div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203 </div></div>-->
     <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
-    <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
+    <div class="message__block__cover" *ngFor="let message of messages | async">
+        <p style="text-align: right">
+          {{message.data.author}}
+          {{message.data.date}}
+        </p>
+      <div class="message__block right">
+        {{message.data.text}}
+      </div>
+    </div>
+    <!--<div class="message__block__cover"><div class="message__block right">{{messages}}</div></div>-->
     </div>
 
-    <div class="message__block__write"><div class="m-auto w-90">
-      <input type="text" placeholder="Enter your messaage" name="message" class="input" required>
-    </div></div>
-
-
-
-
+    <div class="message__block__write">
+      <div class="m-auto w-90">
+        <form (keydown.enter)="onKey(form)" #form="ngForm">
+          <input type="text" placeholder="Enter your message" class="input" ngModel name="text" required>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
