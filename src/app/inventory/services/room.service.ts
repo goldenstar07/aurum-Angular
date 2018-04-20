@@ -24,7 +24,7 @@ hotelId: string;
               private db: AngularFireDatabase,
               public dataProcessingService: DataProcessingService,
               private authService: AuthService,
-              private formBuilder:FormBuilder,
+              private formBuilder: FormBuilder,
               private hotelSevice: HotelService) {}
 
 
@@ -36,8 +36,8 @@ hotelId: string;
           const data = a.payload.doc.data() as Inventory;
           const id = a.payload.doc.id;
           return {id, data};
-        })
-      })
+        });
+      });
       /*.subscribe(res => {
         this.roooms = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
       })*/

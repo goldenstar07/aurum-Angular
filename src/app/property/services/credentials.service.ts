@@ -1,0 +1,37 @@
+import {Injectable} from '@angular/core';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
+import {AngularFireDatabase} from "angularfire2/database";
+// Interfaces
+import { Credential } from '../interfaces/credential';
+// Services
+import {HelperService} from "../../shared/services/helper.service";
+import {DataStorageService} from "../../shared/services/data-storage.service";
+import {Hotel} from '../../hotels/interfaces/hotel';
+import {Vendor} from '../interfaces/vendor';
+
+@Injectable()
+export class CredentialsService {
+  credentialsCol: AngularFirestoreCollection<Credential>;
+  credentials: any;
+  constructor(private afs: AngularFirestore,
+              private dataStorageService: DataStorageService,
+              private db: AngularFireDatabase) {
+  }
+
+  getCredentials() {
+    this.credentialsCol = this.afs.collection('credentials');
+    return this.credentialsCol.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Credential;
+          const id = a.payload.doc.id;
+          return {id, data};
+        });
+      });
+  }
+
+  addCredential(credential) {
+    /*this.afs.collection('vendors').doc(hotelId).set(vendor);*/
+    this.afs.collection('credentials').add(credential);
+  }
+}

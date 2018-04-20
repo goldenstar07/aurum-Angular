@@ -8,47 +8,23 @@
         <thead>
         <tr>
           <th scope="col"></th>
-          <th scope="col" class="col__items">Regular Time
-          </th>
-          <th scope="col" class="col__items">Over Time
-          </th>
+          <th scope="col" class="col__items">Regular Time</th>
+          <th scope="col" class="col__items">Over Time</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-          <td scope="row" class="type">Bob</td>
-          <td>
-            <p class="td-numb">23</p>
-            <input type="text" class="td-input" placeholder="">
-          </td>
-          <td>
-            <p class="td-numb">3</p>
-            <input type="text" class="td-input" placeholder="">
-          </td>
+        <tbody *ngFor="let payroll of payrollls | async" (click)="setPayrolls(payroll.id)">
+        <tr *ngFor="let item of payroll.data.payrolls">
+            <td scope="row" class="type">{{ item.name }}</td>
+            <td>
+              <p class="td-numb">{{ item.regular }}</p>
+              <input type="text" class="td-input" placeholder="">
+            </td>
+            <td>
+              <p class="td-numb">{{ item.over }}</p>
+              <input type="text" class="td-input" placeholder="">
+            </td>
         </tr>
-        <tr>
-          <td scope="row" class="type">John</td>
-          <td>
-            <p class="td-numb">23</p>
-            <input type="text" class="td-input" placeholder="">
-          </td>
-          <td>
-            <p class="td-numb">2,4</p>
-            <input type="text" class="td-input" placeholder="">
-          </td>
-        </tr>
-        <tr>
-          <td scope="row" class="type">Wrx</td>
-          <td>
-            <p class="td-numb">23</p>
-            <input type="text" class="td-input" placeholder="">
-          </td>
-          <td>
-            <p class="td-numb">65</p>
-            <input type="text" class="td-input" placeholder="">
-          </td>
-        </tr>
-        </tbody>
+    </tbody>
       </table>
       <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
@@ -67,7 +43,7 @@
       <!--POPUP ADD PROPERTY FORM-->
       <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
         <div class="modal-container" style="width: 800px; background: white;">
-          <form class="main__block d-flex justify-content-center align-items-center" [formGroup]="form" (submit)="saveFormInput()">
+          <form class="main__block d-flex justify-content-center align-items-center" [formGroup]="form" (ngSubmit)="saveFormInput(f)" #f="ngForm">
             <div class="housekeeper__block d-flex flex-column align-items-center">
               <button type="button" class="close close-cross" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true" class="cros">&times;</span>
@@ -78,15 +54,12 @@
                   <div>Select Date:</div>
                   <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
                 </div>
-                <button type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true" class="cros">&times;</span>
-                </button>
                 <hr>
                 <form formArrayName="payrolls" *ngFor="let payroll of form.get('payrolls').controls; let i=index" class="user__form">
                 <div class="name__block" [formGroupName]="i">
-                  <input type="text"  formControlName="name" id="name" placeholder="Name" class="input__name">
-                  <input type="text"  formControlName="regular" id="regular" placeholder="Regular Time" class="input">
-                  <input type="text"  formControlName="over" id="over" placeholder="Over Time" class="input">
+                  <input type="text"  formControlName="name" id="name" placeholder="Name" name="name" class="input__name">
+                  <input type="text"  formControlName="regular" id="regular" placeholder="Regular Time" name="regular" class="input">
+                  <input type="text"  formControlName="over" id="over" placeholder="Over Time" name="over" class="input">
                 </div>
                 </form>
                 <div class="add__item__block" (click)="addFormInput()">
@@ -95,7 +68,7 @@
                   </button>
                 </div>
               </div>
-              <div class="save__btn" (click)="addNewPayroll()">
+              <div class="save__btn" (click)="addNewPayroll(f)">
                 <button class="button__item">Save</button>
               </div>
             </div>

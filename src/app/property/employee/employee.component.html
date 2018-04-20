@@ -3,18 +3,18 @@
 <section id="main">
   <div class="main__block">
     <div class="main__table">
-      <div class="table__block">
+      <div class="table__block" *ngFor="let employee of employees | async" (click)="setEmployees(employee.id)">
         <div class="text__block__btn">
-          <span><h3>TEXT</h3></span>
-          <button class="btn__item">Delete</button>
+          <span><h3>{{employee.data.name}}</h3></span>
+          <button class="btn__item" (click)="deleteEmployee(employee.id)">Delete</button>
         </div>
         <div class="email__block">
           <p class="text__block__email">Contact Phone:</p>
-          <span class="email__name"></span>
+          <span class="email__name">{{employee.data.phone}}</span>
         </div>
         <div class="email__block">
           <p class="text__block__email">Email:</p>
-          <span class="email__name"></span>
+          <span class="email__name">{{employee.data.email}}</span>
         </div>
       </div>
       <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
@@ -37,23 +37,23 @@
           <span aria-hidden="true" class="cros">&times;</span>
         </button>
         <h1>Add a Employee</h1>
-        <form action="#" class="user__form">
+        <form action="#" class="user__form" (ngSubmit)="getEmployee(f)" #f="ngForm">
           <div class="name__block">
             <label for="Employee Name" style="width: 120px"><p>Employee Name</p></label>
-            <input type="text" placeholder="" name="Employee Name" class="input" required>
+            <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input" required>
           </div>
           <div class="name__block">
             <label for="Employee Phone" style="width: 120px"><p>Employee Phone</p></label>
-            <input type="text" placeholder="" name="Employee Phone" class="input" required>
+            <input type="text" id="phone" [(ngModel)]="phone" placeholder="" name="phone" class="input" required>
           </div>
           <div class="name__block">
             <label for="Employee Email" style="width: 120px"><p>Employee Email</p></label>
-            <input type="text" placeholder="" name="Employee Email" class="input" required>
+            <input type="text" id="email" [(ngModel)]="email" placeholder="" name="email" class="input" required>
+          </div>
+          <div class="save__button">
+            <button type="submit" class="button__item" (click)="addNewEmployee(f)">Save</button>
           </div>
         </form>
-        <div class="save__button">
-          <button class="button__item">Save</button>
-        </div>
       </div>
     </div>
   </ng-template>

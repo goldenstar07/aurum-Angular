@@ -41,6 +41,7 @@ export class RoomComponent implements OnInit {
 
   ngOnInit() {
     this.roooms = this.roomService.getRooms();
+
     this.form = this.formBuilder.group({
       date: [''],
       rooms: this.formBuilder.array([this.createFormInput()])
@@ -89,10 +90,9 @@ export class RoomComponent implements OnInit {
     console.log(this.form.value);
   }
 
-  addNewRoom(mm: NgForm) {
-    console.log(mm.value);
+  addNewRoom(form: NgForm) {
     this.hotelId = this.afs.collection('inventories').doc(localStorage.hotelId).ref.id;
-    this.roomService.addRoom(mm.value, this.hotelId);
+    this.roomService.addRoom(form.value, this.hotelId);
     /*let room: Inventory = {
       item: this.item,
       have: this.have,
