@@ -2,41 +2,38 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
 import {AngularFireDatabase} from "angularfire2/database";
 // Interfaces
-import {Bill} from "../interfaces/bill";
+import { Form } from '../interfaces/form';
 // Service
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
-
+import {Bill} from '../interfaces/bill';
 
 @Injectable()
-export class BillService {
-  billsCol: AngularFirestoreCollection<Bill>;
-  bills: any;
+export class FormService {
+  formsCol: AngularFirestoreCollection<Form>;
+  forms: any;
 
   constructor(private afs: AngularFirestore,
               private dataStorageService: DataStorageService,
               private db: AngularFireDatabase) {
   }
 
-  getBills() {
-    this.billsCol = this.afs.collection('bills');
-    return this.billsCol.snapshotChanges()
+  getForms() {
+    this.formsCol = this.afs.collection('forms');
+    return this.formsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as Bill;
+          const data = a.payload.doc.data() as Form;
           const id = a.payload.doc.id;
           return {id, data};
         });
       });
   }
 
-  addBill(bill, hotelId) {
+  addForm(form, hotelId) {
     /*this.afs.collection('vendors').doc(hotelId).set(vendor);*/
     /*this.afs.collection('bills').add(bill);*/
-    this.afs.collection('bills').doc(hotelId).set(bill);
+    this.afs.collection('forms').doc(hotelId).set(form);
   }
-  /*addVendor(vendor) {
-    this.afs.collection('vendors').add(vendor);
-   /!* this.afs.collection('inventories').doc().set(vendor);*!/
-  }*/
+
 }
