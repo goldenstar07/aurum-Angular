@@ -38,13 +38,12 @@ hotelId: string;
           return {id, data};
         });
       });
-      /*.subscribe(res => {
-        this.roooms = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
-      })*/
   }
 
   addRoom(room, hotelId) {
-    this.afs.collection('inventories').doc(hotelId).set(room);
+    this.afs.collection('inventories').doc(hotelId).update({
+      "room" : room
+    });
   }
 }
 

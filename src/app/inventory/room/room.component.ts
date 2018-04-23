@@ -21,14 +21,10 @@ export class RoomComponent implements OnInit {
   closeResult: string;
   form: FormGroup;
 
-  rooomsCol: any;
-  roooms: any;
+  roomItems: any;
+  roomLabels: Array<any>;
+  roomDates: any;
   hotelId: string;
-
-  item: string;
-  have: any;
-  need: any;
-  date: any;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -40,34 +36,20 @@ export class RoomComponent implements OnInit {
 
 
   ngOnInit() {
-    this.roooms = this.roomService.getRooms();
+    this.roomService.getRooms().subscribe(res => {
+      this.roomItems = res[0].data;
+      this.roomLabels = [];
+      this.getDates(this.roomItems.room[Object.keys(this.roomItems.room)[0]])
+      for (let key in this.roomItems.room) {
+        this.roomLabels.push(key);
+      }
+    });
 
     this.form = this.formBuilder.group({
       date: [''],
       rooms: this.formBuilder.array([this.createFormInput()])
     });
     console.log(this.form);
-
-   /* this.roomsCol = this.afs.collection('inventories');
-    this.roomsCol.snapshotChanges()
-      .map(actions => {
-        return actions.map(a=> {
-          const data = a.payload.doc.data() as Inventory;
-          const id = a.payload.doc.id;
-          return { id, data };
-        })
-      })*/
-      /*.subscribe(res => {
-        this.rooms = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
-      })*/
-
-    /*firebase.auth().createUserWithEmailAndPassword(user.email, password)
-      .then(response => {
-        this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user))
-      })
-      .catch(
-        error => console.log(error)
-      );*/
   }
 
   createFormInput(): FormGroup {
@@ -86,23 +68,22 @@ export class RoomComponent implements OnInit {
     return this.form.get('rooms') as FormArray;
   }
 
+  findIndexOfDate(){
+    this.roomDates.findIndex(el => el.getTime);
+  }
+
   saveFormInput() {
-    console.log(this.form.value);
+    this.form.value.date;
+    this.form.value.rooms.forEach(item => {
+      if(!this.roomItems.room[item.item]) this.roomItems.room[item.item] = [];
+      this.roomItems.room[item.item].push({
+        date: this.form.value.date || new Date(),
+        have: item.have,
+        need: item.need
+      });
+    });
+    this.roomService.addRoom(this.roomItems.room, localStorage.hotelId);
   }
-
-  addNewRoom(form: NgForm) {
-    this.hotelId = this.afs.collection('inventories').doc(localStorage.hotelId).ref.id;
-    this.roomService.addRoom(form.value, this.hotelId);
-    /*let room: Inventory = {
-      item: this.item,
-      have: this.have,
-      need: this.need,
-      hotelId: localStorage.hotelId
-    };*/
-    /*this.afs.collection('inventories').add(room);*/
-    /*this.afs.collection('inventories' +hotelId).add(room);*/
-  }
-
 
   openNewProperty(contentNewProperty) {
     this.modalService.open(contentNewProperty).result.then((result) => {
@@ -120,6 +101,10 @@ export class RoomComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  getDates(dates) {
+    this.roomDates = dates.map(item => item.date);
   }
 
 
