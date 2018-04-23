@@ -364,14 +364,8 @@ hr {
   }
 }
 
-
-
-//==========media screen===========
 @media screen and (max-width:1199px){
-  .search__block .search__date__block {
-    width: 200px;
-  }
-  .search__block .search__date-range__block .custom-select {
-    width: 25%;
+  .main__title {
+    width: 705px;
   }
 }
