@@ -282,6 +282,9 @@ hr {
   .search__block .search__date-range__block .custom-select {
     width: 25%;
   }
+  .main__title {
+    width: 705px;
+  }
 }
 @media screen and (max-width: 425px) {
   .user__block {
@@ -311,6 +314,4 @@ hr {
   .pass__block input {
     margin-top: 10px;
   }
-
 }
-
