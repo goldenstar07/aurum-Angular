@@ -9,18 +9,37 @@
             <p class="text__block__name">{{bill.data.name}}</p>
           </div>
           <div class="date__block">
-            <p class="text__block__date">{{bill.data.date}}</p>
+            <p class="text__block__date">{{bill.data.date}} {{bill.data.url}}</p>
+          </div>
+          <!--<div class="date__block">
+          <img [src]="bill.data.image" alt="image">
+          </div>-->
+        </div>
+      <!--<img [src]="bill.data.image" alt="">-->
+      <!--POPUP VIEW IMAGE-->
+      <ng-template #contentViewImg let-c="close" let-d="dismiss" class="modal-lg">
+        <div class="main__block d-flex justify-content-center align-items-center">
+          <div class="housekeeper__block d-flex flex-column align-items-center">
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true" class="cros">&times;</span>
+            </button>
+            <div>
+              <img [src]="bill.data.image" [alt]="bill.data.name">
+            </div>
+            <!--<div> <img bind-src="bill.data.image"/> </div>-->
           </div>
         </div>
+      </ng-template>
+
         <div class="table__block_btn">
           <div class="text__block__btn">
-            <button class="btn__item default">View</button>
+            <button class="btn__item default" (click)="openViewImg(contentViewImg)">View</button>
           </div>
           <div class="text__block__btn">
-            <button class="btn__item default">Download</button>
+            <button class="btn__item default" (click)="downloadBill(bill)">Download</button>
           </div>
           <div class="text__block__btn">
-            <button class="btn__item danger">Delete</button>
+            <button class="btn__item danger" (click)="deleteBill(bill.id)">Delete</button>
           </div>
         </div>
 
@@ -38,6 +57,7 @@
   </div>
 
 
+
   <!--POPUP ADD PROPERTY FORM-->
   <ng-template #contentNewProperty let-c="close" let-d="dismiss">
     <div class="main__block d-flex justify-content-center align-items-center">
@@ -46,8 +66,6 @@
           <span aria-hidden="true" class="cros">&times;</span>
         </button>
         <h1>Upload a bill</h1>
-
-
         <form action="#" class="user__form" (ngSubmit)="getBill(f)" #f="ngForm">
           <div class="name__block">
             <label for="Select Date" style="width: 120px"><p>Select Date</p></label>
@@ -59,17 +77,17 @@
           </div>
           <div class="name__block">
             <label for="Attachment" style="width: 120px"><p>Attachment</p></label>
-            <input type="file" (change)="selectFile($event)" id="image" class="input" required>
+            <input type="file" (change)="selectFile($event)" id="image" class="input">
           </div>
           <div class="save__btn">
             <button class="button__item" (click)="addNewBill(f)">Save</button>
+            <h1 (click)="upload()">Click</h1>
           </div>
         </form>
-
-
       </div>
     </div>
   </ng-template>
+
 
 
 </section>
