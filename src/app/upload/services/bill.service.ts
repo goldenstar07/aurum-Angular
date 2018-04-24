@@ -37,13 +37,6 @@ export class BillService {
       });
   }
 
-  /*addBill(bill, hotelId) {
-    /!*this.afs.collection('vendors').doc(hotelId).set(vendor);*!/
-    /!*this.afs.collection('bills').add(bill);*!/
-    this.afs.collection('bills').doc(hotelId).set(bill);
-    console.log(this.afs.collection('bills').doc(hotelId).set(bill));
-
-  }*/
   addBill(bill) {
     this.afs.collection('bills').add(bill);
   }

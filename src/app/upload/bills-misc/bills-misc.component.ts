@@ -146,7 +146,4 @@ export class BillsMiscComponent implements OnInit {
     console.log();
   }
 
-  /*onView(bill){
-    return this.view = this.billService.malakama(bill);
-  }*/
 }

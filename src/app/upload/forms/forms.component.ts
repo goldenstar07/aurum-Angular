@@ -49,7 +49,7 @@ export class FormsComponent implements OnInit {
               private uploadService: UploadFileService) { }
 
   ngOnInit() {
-    this.forms = this.formService.getBills();
+    this.forms = this.formService.getForms();
   }
 
   addNewForm(form: NgForm) {  /*Save*/
