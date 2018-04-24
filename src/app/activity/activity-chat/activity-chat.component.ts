@@ -36,7 +36,7 @@ export class ActivityChatComponent implements OnInit, AfterViewChecked {
   onKey(form: NgForm): void {
     this.hotelId = localStorage.hotelId;
     form.value.htId = this.hotelId;
-    this.chatService.sendMessage(form.value); //AddVendors
+    this.chatService.sendMessage(form.value); // AddVendors
     form.resetForm();
   }
 

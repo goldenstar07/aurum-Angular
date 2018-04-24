@@ -89,6 +89,7 @@ import {EmployeesService} from "./property/services/employees.service";
 import {VendorsService} from "./property/services/vendors.service";
 import {PayrollService} from "./payroll/services/payroll.service";
 import {BillService} from "./upload/services/bill.service";
+import {FormService} from './upload/services/form.service';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -195,7 +196,8 @@ import {BillService} from "./upload/services/bill.service";
     EmployeesService,
     VendorsService,
     PayrollService,
-    BillService
+    BillService,
+    FormService
   ],
   bootstrap: [AppComponent]
 })
