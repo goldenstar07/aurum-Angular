@@ -9,7 +9,7 @@
             <p class="text__block__name">{{bill.data.name}}</p>
           </div>
           <div class="date__block">
-            <p class="text__block__date">{{bill.data.date}} {{bill.data.url}}</p>
+            <p class="text__block__date">{{bill.data.date}}</p>
           </div>
           <!--<div class="date__block">
           <img [src]="bill.data.image" alt="image">
@@ -36,15 +36,15 @@
             <button class="btn__item default" (click)="openViewImg(contentViewImg)">View</button>
           </div>
           <div class="text__block__btn">
-            <button class="btn__item default" (click)="downloadBill(bill)">Download</button>
-          </div>
-          <div class="text__block__btn">
             <button class="btn__item danger" (click)="deleteBill(bill.id)">Delete</button>
           </div>
+
+          <div class="text__block__btn">
+              <button class="btn__item default" (click)="downloadBill(bill)">Download</button>
+          </div>
+
+
         </div>
-
-
-
     </div>
       <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="70px" height="70px">

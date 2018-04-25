@@ -10,6 +10,18 @@ import {UploadFileService} from "../../shared/services/upload-file.service";
 import * as firebase from "firebase";
 import {Hotel} from "../../hotels/interfaces/hotel";
 
+/*import {default as storage} from "firebase/app";
+import {getFileNameFromResponseContentDisposition, saveFile} from "../bills-misc/file-download-helper";
+import {RequestOptions, ResponseContentType} from "@angular/http";
+import { InterceptorService } from 'ng2-interceptors';*/
+// import { ConfigService } from 'app/common/services/config.service';
+import { saveAs } from "file-saver";
+import * as FileSaver from "file-saver";
+import {Http, HttpModule} from "@angular/http";
+import * as url from "url";
+
+// import {  } from "file-saver";
+
 
 @Injectable()
 export class BillService {
@@ -22,7 +34,9 @@ export class BillService {
               private dataStorageService: DataStorageService,
               private db: AngularFireDatabase,
               private uploadFileService: UploadFileService,
-              private DataProcessingService: DataProcessingService) {
+              private DataProcessingService: DataProcessingService,
+              private http: Http,
+              /*private fileSaver: MSFileSaver*/) {
   }
 
   getBills() {
@@ -45,49 +59,58 @@ export class BillService {
     this.afs.doc('bills/' + billId).delete();
   }
 
-  /*downloadItem() {
-    // console.log(obj);
-    // const storageRef = firebase.storage().refFromURL("gs://aurum-249ae.appspot.com/uploads/" + obj.htId);
-    // console.log(storageRef)
-    // console.log(this.afs.collection("hotels").filter(value => value.id === obj.htId));
-    // console.log(this.afs.collection("hotels").get());
-    // console.log(this.afs.collection("hotels").doc(obj.htId));
-    this.hotelsCol = this.afs.collection('hotels');
-    return this.hotelsCol.snapshotChanges()
-      .map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Hotel;
-          const id = a.payload.doc.id;
-          return {id, data};
-        })
-      })
-    // firebase.storage().ref("uploads/").getDownloadURL().then(res => console.log(res));
-  }*/
-}
+  downloadItem(bill){
+      const mainSection = document.getElementById('main');
+      const urlOfFile = bill.data.image;
 
-  /*malakama(bill){
-    const blockHuy = document.getElementById("huy");
-    const image = document.getElementById("imag");
-    const dbRefObj = this.db.database.ref().child("uploads");
-    const url = dbRefObj.child("url");
-    dbRefObj.on('value', snap => {});
 
-    dbRefObj.on('child_added', snap => {
-      blockHuy.innerText = JSON.stringify(snap.val().url);
-    console.log(blockHuy.innerText);
-    image.setAttribute("src", blockHuy.innerText);
-    });
+      const img = document.createElement('img');
+      img.setAttribute('src', urlOfFile);
+      // img.setAttribute('id', 'img');
+
+      // console.log(img.src);
+    // const canvas = this.convertImageToCanvas(img);
+
+      const blob = new Blob([img],  {type: "image/png"});
+      FileSaver.saveAs(blob, bill.data.name + '.png');
+    // FileSaver.saveAs(blob, "myPDF_" + bill.data.name + ".jpg");
+
+    // canvas.setAttribute('class', 'fileCanvas');
+
+    // console.log(canvas);
+    //
+    // this.http.get(img.src)
+    //   .map((res) => {
+    //     console.log('Blob',res);
+    //
+    //     let obj: any = res[urlOfFile];
+    //     return new Blob([obj], {type: 'image/jpeg'});
+    //   })
+    //   .subscribe(blob => {
+    //     console.log('Blob',blob);
+    //     FileSaver.saveAs(blob,bill.data.name)
+    //   }, error => {
+    //     console.log(error);
+    //   })
   }
-}*/
 
-/*
-var storage = firebase.storage();
-var pathReference = storage.ref('images/stars.jpg');
 
-// Create a reference from a Google Cloud Storage URI
-var gsReference = storage.refFromURL('gs://bucket/images/stars.jpg')
 
-// Create a reference from an HTTPS URL
-// Note that in the URL, characters are URL escaped!
-var httpsReference = storage.refFromURL('https://firebasestorage.googleapis.com/b/bucket/o/images%20stars.jpg');
-*/
+
+    // });
+    // const dataURL = canvas.toDataURL('image/png');
+    // dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    // // console.log(canvas);
+    // canvas.toBlob(function(blob) {
+    //   console.log(blob);
+    //   saveAs(blob, bill.data.name);
+  }
+
+  // convertImageToCanvas(image) {
+  //   var canvas = document.createElement("canvas");
+  //   canvas.width = image.width;
+  //   canvas.height = image.height;
+  //   canvas.getContext("2d").drawImage(image, 0, 0);
+  //
+  //   return canvas;
+  // }

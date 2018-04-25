@@ -61,17 +61,12 @@ export class BillsMiscComponent implements OnInit {
     this.bills = this.billService.getBills();
   }
 
-  addNewBill(form: NgForm, bill) {  /*Save*/
+  addNewBill(form: NgForm) {  /*Save*/
 
-    console.log(form.value);
-    // this.uploadService.pushFileToStorage();
-    /*form.value.image = this.fileName.name;
-    this.hotelId = this.afs.collection('bills').doc(localStorage.hotelId).ref.id;
-    this.billService.addBill(form.value, this.hotelId);*/
-    /*this.hotelId = this.afs.collection('vendors').doc(localStorage.hotelId).ref.id;*/
     console.log(form.value);
     this.hotelId = localStorage.hotelId;
     form.value.htId = this.hotelId;
+    form.value.image = this.currentFileUpload.url;
     console.log(form.value);
     this.billService.addBill(form.value);
 
@@ -142,8 +137,7 @@ export class BillsMiscComponent implements OnInit {
   }
 
   downloadBill(bill) {
-    const htIdForBill = bill.data.htId;
-    console.log();
+    this.fileName = this.billService.downloadItem(bill);
   }
 
 }
