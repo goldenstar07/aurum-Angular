@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Message} from "../models/Message";
-import {User} from "../models/User";
-import {DataStorageService} from "../../../shared/services/data-storage.service";
-import {AngularFirestore, AngularFirestoreCollection} from "angularfire2/firestore";
-import {AngularFireDatabase} from "angularfire2/database";
+import {Message} from '../models/Message';
+import {User} from '../models/User';
+import {DataStorageService} from '../../../shared/services/data-storage.service';
+import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 @Injectable()
 export class ActivityChatService {
@@ -14,13 +14,11 @@ export class ActivityChatService {
 
   constructor(private afs: AngularFirestore,
               private dataStorageService: DataStorageService,
-              private db: AngularFireDatabase){}
+              private db: AngularFireDatabase) {}
 
   sendMessage(msg: Message): void {
     const timestamp = ActivityChatService.getTimeStamp();
-
-    this.user = new User("");
-
+    this.user = new User('');
     const userName = this.user.name;
 
     // timestamp is not verified for 3 hours
@@ -28,22 +26,25 @@ export class ActivityChatService {
     msg.date = timestamp;
     msg.author = userName;
 
+    // console.log(msg.name);
     this.afs.collection('messages').add(msg);
   }
 
-  static getTimeStamp(){
-    const now = new Date();
+  static getTimeStamp() {
+   const now = new Date();
+
     const date = now.getUTCFullYear() + '/' +
-                (now.getUTCMonth() + 1) + '/' +
-                  now.getUTCDate();
+      (now.getUTCMonth() + 1) + '/' +
+      now.getUTCDate();
     const time = now.getUTCHours() + ':' +
-                  now.getUTCMinutes() + ':' +
-                  now.getUTCSeconds();
+      now.getUTCMinutes() + ':' +
+      now.getUTCSeconds();
     return (date + ' ' + time);
   }
 
-  getMessages(){
+  getMessages() {
     this.messagesCol = this.afs.collection('messages');
+    /*this.messageCol = messageRef.orderBy('date').limit(5);*/
     return this.messagesCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -54,7 +55,6 @@ export class ActivityChatService {
       });
   }
 }
-
 // author
 // date
 // htId

@@ -13,12 +13,13 @@
 
     <div class="w-90 m-auto">
       <!--<div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203 </div></div>-->
-    <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
+   <!-- <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
-      <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
+      <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>-->
     <div class="message__block__cover" *ngFor="let message of messages | async">
         <p style="text-align: right">
+         <b> {{ message.data.managerId }} </b><br>
           {{message.data.author}}
           {{message.data.date}}
         </p>

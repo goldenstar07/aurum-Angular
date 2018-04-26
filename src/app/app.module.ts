@@ -90,6 +90,7 @@ import {VendorsService} from "./property/services/vendors.service";
 import {PayrollService} from "./payroll/services/payroll.service";
 import {BillService} from "./upload/services/bill.service";
 import {FormService} from './upload/services/form.service';
+import {AngularFireAuth} from 'angularfire2/auth';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -197,7 +198,8 @@ import {FormService} from './upload/services/form.service';
     VendorsService,
     PayrollService,
     BillService,
-    FormService
+    FormService,
+    AngularFireAuth
   ],
   bootstrap: [AppComponent]
 })
