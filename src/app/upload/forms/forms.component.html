@@ -4,13 +4,13 @@
 <section id="main">
   <div class="main__block">
    <!-- <div class="main__table" *ngFor="let form of forms | async" (click)="setForms(form.id)">-->
-      <div class="main__table">
+      <div class="main__table" *ngFor="let form of forms | async" (click)="setForms(form.id)">
       <div class="table__block" >
         <div class="name__block">
-          <p class="text__block__name">Name</p>
+          <p class="text__block__name">{{form.data.name}}</p>
         </div>
         <div class="date__block">
-          <p class="text__block__date">12/12/12</p>
+          <p class="text__block__date">{{form.data.date}}</p>
         </div>
       </div>
       <div class="table__block_btn">
@@ -18,7 +18,7 @@
           <button class="btn__item default">Download</button>
         </div>
         <div class="text__block__btn">
-          <button class="btn__item danger">Delete</button>
+          <button class="btn__item danger" (click)="deleteForm(form.id)">Delete</button>
         </div>
       </div>
 
@@ -43,7 +43,7 @@
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
           <span aria-hidden="true" class="cros">&times;</span>
         </button>
-        <h1>Upload a bill</h1>
+        <h1>Upload a form</h1>
 
 
         <form action="#" class="user__form" (ngSubmit)="getForm(f)" #f="ngForm">
@@ -61,6 +61,7 @@
           </div>
           <div class="save__btn">
             <button class="button__item" (click)="addNewForm(f)">Save</button>
+            <h1 (click)="upload()">Click</h1>
           </div>
         </form>
 

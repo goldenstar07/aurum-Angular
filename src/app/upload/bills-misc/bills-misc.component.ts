@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import {Http} from "@angular/http";
 // Interfaces
 import { Bill } from "../interfaces/bill";
 import {Hotel} from "../../hotels/interfaces/hotel";
@@ -30,6 +31,10 @@ export class BillsMiscComponent implements OnInit {
   currentFileUpload: FileUpload;
   progress: { percentage: number } = {percentage: 0};
 
+
+
+  @ViewChild('downloadZipLink') private downloadZipLink: ElementRef;
+
   closeResult: string;
   view: any;
 
@@ -45,6 +50,7 @@ export class BillsMiscComponent implements OnInit {
   hotelId: any;
   fileName: any;
   url: any;
+  title: any;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -55,7 +61,8 @@ export class BillsMiscComponent implements OnInit {
               public dataProcessingService: DataProcessingService,
               private billService: BillService,
               private uploadService: UploadFileService,
-              private dataStorageService: DataStorageService) { }
+              private dataStorageService: DataStorageService,
+              private http: Http) { }
 
   ngOnInit() {
     this.bills = this.billService.getBills();
@@ -136,8 +143,27 @@ export class BillsMiscComponent implements OnInit {
     this.deletedBill = this.billService.deleteBillService(billId);
   }
 
-  downloadBill(bill) {
-    this.fileName = this.billService.downloadItem(bill);
-  }
+  // downloadImage(downloadLink) {
+  //   // this.billService.getImage(downloadLink).subscribe(
+  //   // (res) => console.log(res)
+  //     // const a = document.createElement('a');
+  //     // a.href = URL.createObjectURL(res);
+  //     // a.download = title;
+  //     // document.body.appendChild(a);
+  //     // a.click();
+  //
+  // }
 
+  // downloadZip(): Promise<void> {
+  //   const blob = await this.billService.downloadResource(this.bills);
+  //   const url = window.URL.createObjectURL(blob);
+  //
+  //   const link = this.downloadZipLink.nativeElement;
+  //   link.href = url;
+  //   link.download = 'archive.zip';
+  //   link.click();
+  //
+  //   window.URL.revokeObjectURL(url);
+  //
+  // }
 }

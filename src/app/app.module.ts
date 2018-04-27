@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, Http, Response, RequestOptions, Headers} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireModule} from "angularfire2";
 import firestore = firebase.firestore;
