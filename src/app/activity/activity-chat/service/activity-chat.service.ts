@@ -10,6 +10,7 @@ export class ActivityChatService {
 
   messagesCol: AngularFirestoreCollection<Message>;
   messages: any;
+test: any;
   user: User; // User
 
   constructor(private afs: AngularFirestore,
@@ -51,4 +52,5 @@ export class ActivityChatService {
         });
       });
   }
+
 }
