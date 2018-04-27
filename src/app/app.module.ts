@@ -91,6 +91,8 @@ import {PayrollService} from "./payroll/services/payroll.service";
 import {BillService} from "./upload/services/bill.service";
 import {FormService} from './upload/services/form.service';
 import {AngularFireAuth} from 'angularfire2/auth';
+import { NewSuperAdmitPageComponent } from './new-super-admit-page/new-super-admit-page.component';
+import {SuperAdminService} from './new-super-admit-page/services/super-admin.service';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -134,7 +136,8 @@ import {AngularFireAuth} from 'angularfire2/auth';
     PayrollComponent,
     CredentialsComponent,
     EmployeeComponent,
-    VendorsComponent
+    VendorsComponent,
+    NewSuperAdmitPageComponent
   ],
   imports: [
     BrowserModule,
@@ -199,7 +202,8 @@ import {AngularFireAuth} from 'angularfire2/auth';
     PayrollService,
     BillService,
     FormService,
-    AngularFireAuth
+    AngularFireAuth,
+    SuperAdminService
   ],
   bootstrap: [AppComponent]
 })

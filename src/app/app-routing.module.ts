@@ -24,6 +24,7 @@ import {ActivityComponent} from "./activity/activity.component";
 import {ActivityChatComponent} from "./activity/activity-chat/activity-chat.component";
 import {BillsMiscComponent} from "./upload/bills-misc/bills-misc.component";
 import {FormsComponent} from "./upload/forms/forms.component";
+import {NewSuperAdmitPageComponent} from './new-super-admit-page/new-super-admit-page.component';
 
 
 const appRoutes: Routes = [
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
   { path: 'activity', component: ActivityComponent, canActivate: [AutGuard] },
   { path: 'activity-chat', component: ActivityChatComponent, canActivate: [AutGuard] },
   { path: 'bills-misc', component: BillsMiscComponent, canActivate: [AutGuard] },
-  { path: 'forms', component: FormsComponent, canActivate: [AutGuard] }
+  { path: 'forms', component: FormsComponent, canActivate: [AutGuard] },
+  { path: 'super-admin', component: NewSuperAdmitPageComponent, canActivate: [AutGuard] }
 ];
 
 @NgModule({
