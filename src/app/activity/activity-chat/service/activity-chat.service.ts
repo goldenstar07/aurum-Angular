@@ -42,7 +42,7 @@ test: any;
   }
 
   getMessages() {
-    this.messagesCol = this.afs.collection('messages', ref => ref.orderBy('date').limit(10));
+    this.messagesCol = this.afs.collection('messages', ref => ref.orderBy('date'));
     return this.messagesCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {

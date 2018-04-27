@@ -45,7 +45,6 @@ export class ActivityChatComponent implements OnInit, AfterViewChecked {
     form.resetForm();
   }
 
-
   ngOnInit() {
     this.messages = this.chatService.getMessages();
   }
