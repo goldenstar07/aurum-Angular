@@ -14,16 +14,13 @@ import {DataStorageService} from '../../shared/services/data-storage.service';
   templateUrl: './activity-chat.component.html',
   styleUrls: ['./activity-chat.component.scss']
 })
-export class ActivityChatComponent implements OnInit {
+export class ActivityChatComponent implements OnInit, AfterViewChecked {
 
-  // Messages are not always sent correctly
   // Bug with scrollDown
 
   @ViewChild('scroller') private feedContainer: ElementRef;
 
   messages: any;
-
-  // mid:string;
   text: string;
   author: string;
   date: string;
@@ -40,14 +37,8 @@ export class ActivityChatComponent implements OnInit {
   onKey(form: NgForm): void {
     this.hotelId = localStorage.hotelId;
     this.managerId = localStorage.user;
-
-    // console.log(form.value);
-
     this.objectOfMAnager = this.dataStorage.getUser();
     form.value.managerId = this.objectOfMAnager.name;
-    // console.log(form.value);
-    /*const managerObj = form.value.managerId;*/
-    // form.value.author = this.objectOfMAnager;
     form.value.htId = this.hotelId;
     // console.log(form.value);
     this.chatService.sendMessage(form.value); // AddVendors
@@ -59,12 +50,12 @@ export class ActivityChatComponent implements OnInit {
     this.messages = this.chatService.getMessages();
   }
 
-  /*ngAfterViewChecked(): void {
+  ngAfterViewChecked(): void {
     this.scrollToBottom();
-  }*/
+  }
 
-  /*scrollToBottom(): void {
+  scrollToBottom(): void {
     this.feedContainer.nativeElement.scrollTop =
       this.feedContainer.nativeElement.scrollHeight;
-  }*/
+  }
 }

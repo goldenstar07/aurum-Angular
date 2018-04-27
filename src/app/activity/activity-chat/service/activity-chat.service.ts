@@ -26,7 +26,6 @@ export class ActivityChatService {
     msg.date = timestamp;
     msg.author = userName;
 
-    // console.log(msg.name);
     this.afs.collection('messages').add(msg);
   }
 
@@ -43,8 +42,7 @@ export class ActivityChatService {
   }
 
   getMessages() {
-    this.messagesCol = this.afs.collection('messages');
-    /*this.messageCol = messageRef.orderBy('date').limit(5);*/
+    this.messagesCol = this.afs.collection('messages', ref => ref.orderBy('date').limit(10));
     return this.messagesCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -55,7 +53,3 @@ export class ActivityChatService {
       });
   }
 }
-// author
-// date
-// htId
-// text
