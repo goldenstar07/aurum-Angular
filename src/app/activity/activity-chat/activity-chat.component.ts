@@ -8,6 +8,8 @@ import {AngularFirestore} from 'angularfire2/firestore';
 import {DataProcessingService} from '../../shared/services/data-processing.service';
 import {Hotel} from '../../hotels/interfaces/hotel';
 import {DataStorageService} from '../../shared/services/data-storage.service';
+import {Bill} from "../../upload/interfaces/bill";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-activity-chat',
@@ -27,6 +29,7 @@ export class ActivityChatComponent implements OnInit, AfterViewChecked {
   hotelId: any;
   managerId: any;
   objectOfMAnager: any;
+  hotel: Observable<Hotel>;
 
   constructor(private chatService: ActivityChatService,
               public dataProcessingService: DataProcessingService,

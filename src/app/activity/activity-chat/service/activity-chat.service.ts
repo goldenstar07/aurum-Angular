@@ -2,29 +2,50 @@ import { Injectable } from '@angular/core';
 import {Message} from '../models/Message';
 import {User} from '../models/User';
 import {DataStorageService} from '../../../shared/services/data-storage.service';
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {AngularFireAuth} from "angularfire2/auth";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ActivityChatService {
 
   messagesCol: AngularFirestoreCollection<Message>;
   messages: any;
-test: any;
-  user: User; // User
+  user: firebase.User; // User
+  users: AngularFirestoreDocument<User>;
+  userName: Observable<string>;
 
   constructor(private afs: AngularFirestore,
               private dataStorageService: DataStorageService,
-              private db: AngularFireDatabase) {}
+              private db: AngularFireDatabase,
+              private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(auth => {
+      if (auth !== undefined && auth !== null) {
+        this.user = auth;
+      }
+
+      // this.getUser().subscribe(a => {
+      //   this.userName = a.displayName;
+      //   console.log(this.users);
+      // })
+    });
+  }
+
+  getUser(){
+    const userId = this.user.uid;
+    const path = `/messages/${userId}`;
+    return this.afs.doc(path);
+  }
 
   sendMessage(msg: Message): void {
     const timestamp = ActivityChatService.getTimeStamp();
-    this.user = new User('');
-    const userName = this.user.name;
+    // this.user = new User('');
+    // const userName = this.user.name;
 
 
     msg.date = timestamp;
-    msg.author = userName;
+    // msg.author = userName;
 
     this.afs.collection('messages').add(msg);
   }
