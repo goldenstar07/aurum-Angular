@@ -21,7 +21,6 @@ export class ActivityChatService {
     this.user = new User('');
     const userName = this.user.name;
 
-    // timestamp is not verified for 3 hours
 
     msg.date = timestamp;
     msg.author = userName;
