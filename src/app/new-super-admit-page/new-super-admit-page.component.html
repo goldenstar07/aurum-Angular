@@ -43,7 +43,7 @@
           </td>
           <td>
             <p class="td-numb"></p>
-            <div class="text__block__btn">
+            <div class="text__block__btn" (click)="deleteSuperAdmin(superAdmin.id)">
               <a href="#" class="btn__item">Delete</a>
             </div>
           </td>
@@ -87,10 +87,10 @@
             <p>No of property</p>
             <input type="text" class="td-input" placeholder="Something">
           </div>
-        </div>
       <div class="save__btn" (click)="addNewSuperAdmin()">
         <button class="button__item" value="submit">Save</button>
       </div>
+        </div>
     </form>
   </ng-template>
 </section>

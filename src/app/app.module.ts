@@ -93,6 +93,7 @@ import {FormService} from './upload/services/form.service';
 import {AngularFireAuth} from 'angularfire2/auth';
 import { NewSuperAdmitPageComponent } from './new-super-admit-page/new-super-admit-page.component';
 import {SuperAdminService} from './new-super-admit-page/services/super-admin.service';
+import { RatePageComponent } from './rate-page/rate-page.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -137,7 +138,8 @@ import {SuperAdminService} from './new-super-admit-page/services/super-admin.ser
     CredentialsComponent,
     EmployeeComponent,
     VendorsComponent,
-    NewSuperAdmitPageComponent
+    NewSuperAdmitPageComponent,
+    RatePageComponent
   ],
   imports: [
     BrowserModule,

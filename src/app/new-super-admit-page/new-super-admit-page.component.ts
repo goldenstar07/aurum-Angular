@@ -29,6 +29,10 @@ export class NewSuperAdmitPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteSuperAdmin(superAdminId) {
+    this.afs.doc('superadmins/'+superAdminId).delete();
+  }
+
   /*Popup*/
   openNewProperty(contentNewProperty) {
     this.modalService.open(contentNewProperty).result.then((result) => {
