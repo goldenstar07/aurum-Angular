@@ -16,7 +16,7 @@ import {Observable} from "rxjs/Observable";
   templateUrl: './activity-chat.component.html',
   styleUrls: ['./activity-chat.component.scss']
 })
-export class ActivityChatComponent implements OnInit, AfterViewChecked {
+export class ActivityChatComponent implements OnInit {
 
   // Bug with scrollDown
 

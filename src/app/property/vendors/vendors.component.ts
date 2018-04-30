@@ -4,6 +4,7 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
 import { Observable} from "rxjs/Observable";
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 /*Interfaces*/
 import { Vendor } from '../interfaces/vendor';
 /*Services*/
@@ -12,7 +13,6 @@ import {AuthService} from '../../auth/auth.service';
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import {HelperService} from "../../shared/services/helper.service";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import {Hotel} from '../../hotels/interfaces/hotel';
 
 @Component({

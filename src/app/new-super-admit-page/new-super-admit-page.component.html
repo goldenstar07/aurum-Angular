@@ -7,7 +7,7 @@
 
     <div class="main__title d-flex align-items-center">
       <table class="table table-bordered">
-        <thead>
+      <thead>
         <tr>
           <th scope="col">Admin Name</th>
           <th scope="col" class="col__items">Admin Login Email</th>
@@ -18,28 +18,31 @@
           <th scope="col" class="col__items">Delete ?</th>
         </tr>
         </thead>
-        <tbody>
+<!--<tbody *ngFor="let admin of admins | async" (click)="setAdmins(superAdmin.id)">-->
+        <tbody *ngFor="let admin of admins" (click)="setAdmins(superAdmin.id)">
+        <!--{{admin.data.name}}-->
+        <!--<tr *ngFor="let item of admin.data.admins">-->
         <tr>
-          <td scope="row" class="type">John Doe</td>
+          <td scope="row" class="type">{{admin.data.name}}</td>
           <td>
-            <p class="td-numb">haha@hotmail.com</p>
-            <input type="text" class="td-input" placeholder="haha@hotmail.com">
+            <p class="td-numb">{{admin.data.email}}</p>
           </td>
           <td>
-            <p class="td-numb">San Diego, CA</p>
-            <input type="text" class="td-input" placeholder="San Diego, CA">
+            <p class="td-numb">{{admin.data.city}}</p>
           </td>
           <td>
-            <p class="td-numb">6193353246</p>
-            <input type="text" class="td-input" placeholder="6193353246">
+            <p class="td-numb">{{admin.data.phone}}</p>
           </td>
           <td>
-            <p class="td-numb">3</p>
-            <input type="text" class="td-input" placeholder="3">
+            <p class="td-numb">{{admin.data.number}}</p>
           </td>
           <td>
-            <p class="td-numb">Drop down to choose between the two</p>
-            <input type="text" class="td-input" placeholder="Drop down to choose between the two">
+            <select>
+              <option value="volvo">Active</option>
+              <option value="saab">Inactive</option>
+            </select>
+           <!-- <p class="td-numb">Drop down to choose between the two</p>
+            <input type="text" class="td-input" placeholder="Drop down to choose between the two">-->
           </td>
           <td>
             <p class="td-numb"></p>
@@ -64,31 +67,32 @@
 
   <!--POPUP ADD PROPERTY FORM-->
   <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
-    <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">
+   <!-- <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">-->
+    <form action="#" class="main__block" (ngSubmit)="getAdmin(f)" #f="ngForm">
         <div class="transaction__block d-flex flex-column align-items-center">
           <h1>Create an Admin</h1>
           <div class="select__date">
             <p>Admin Name</p>
-            <input type="text" class="td-input" placeholder="Something">
+            <input type="text" id="name" [(ngModel)]="name" class="td-input" placeholder="">
           </div>
           <div class="select__date">
             <p>Admin Login Email</p>
-            <input type="text" class="td-input" placeholder="Something">
+            <input type="text" id="email" [(ngModel)]="email" class="td-input" placeholder="">
           </div>
           <div class="select__date">
             <p>City/State</p>
-            <input type="text" class="td-input" placeholder="Something">
+            <input type="text" id="city" [(ngModel)]="city" class="td-input" placeholder="">
           </div>
           <div class="select__date">
-            <p>Phone #.</p>
-            <input type="text" class="td-input" placeholder="Something">
+            <p>Phone #</p>
+            <input type="text" id="phone" [(ngModel)]="phone" class="td-input" placeholder="">
           </div>
           <div class="select__date">
             <p>No of property</p>
-            <input type="text" class="td-input" placeholder="Something">
+            <input type="text" id="number" [(ngModel)]="number" class="td-input" placeholder="">
           </div>
-      <div class="save__btn" (click)="addNewSuperAdmin()">
-        <button class="button__item" value="submit">Save</button>
+      <div class="save__btn">
+        <button class="button__item" type="submit" (click)="addNewSuperAdmin(f)">Save</button>
       </div>
         </div>
     </form>
