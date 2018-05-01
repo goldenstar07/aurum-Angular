@@ -11,40 +11,35 @@
         <tr>
           <th scope="col">Items</th>
           <th scope="col" class="col__items" colspan="2" *ngFor="let date of roomDates">
-            {{date}}
+            {{date | date:'yyyy/dd/MM'}}
             <i class="far fa-edit"></i>
           </th>
-          <!--<th scope="col" class="col__items" colspan="2">
-            12/03/18
-            <i class="far fa-edit"></i>
-          </th>-->
         </tr>
         </thead>
+        <thead>
         <tr>
           <td scope="row" class="type"></td>
-          <td>
-            <p class="td-numb">Had</p>
-            <input type="text" class="td-input" placeholder="Had">
-          </td>
-          <td>
-            <p class="td-numb">Needed</p>
-            <input type="text" class="td-input" placeholder="Needed">
-          </td>
+          <ng-container *ngFor="let date of roomDates">
+            <td>
+              <p class="td-numb">Had</p>
+            </td>
+            <td>
+              <p class="td-numb">Needed</p>
+            </td>
+          </ng-container>
         </tr>
+        </thead>
         <tr *ngFor="let label of roomLabels">
           <td scope="row" class="type">{{label}}</td>
-          <span *ngFor="let item of roomItems.room[label]">
+          <ng-container *ngFor="let item of roomItems.room[label]">
             <td>
-              <p class="td-numb">{{item.have}}</p>
-              <input type="text" class="td-input" placeholder="1">
+              <input class="td-numb" [(ngModel)]="item.have" (change)="updateRooms()">
             </td>
             <td>
-              <p class="td-numb">{{item.need}}</p>
-              <input type="text" class="td-input" placeholder="1">
+              <input class="td-numb" [(ngModel)]="item.need" (change)="updateRooms()">
             </td>
-          </span>
+          </ng-container>
         </tr>
-        </tbody>
       </table>
       <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">

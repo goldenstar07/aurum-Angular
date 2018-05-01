@@ -12,7 +12,7 @@ export class ActivityChatService {
 
   messagesCol: AngularFirestoreCollection<Message>;
   messages: any;
-  user: firebase.User; // User
+  user: any; // User
   users: AngularFirestoreDocument<User>;
   userName: Observable<string>;
 
