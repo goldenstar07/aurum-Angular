@@ -26,6 +26,7 @@ import {BillsMiscComponent} from "./upload/bills-misc/bills-misc.component";
 import {FormsComponent} from "./upload/forms/forms.component";
 import {NewSuperAdmitPageComponent} from './new-super-admit-page/new-super-admit-page.component';
 import {RatePageComponent} from './rate-page/rate-page.component';
+import {InventoryTypeComponent} from "./inventory/inventory-type/inventory-type.component";
 
 
 const appRoutes: Routes = [
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
   { path: 'maintenance', component: MaintenanceComponent, canActivate: [AutGuard] },
   { path: 'fb', component: FbComponent, canActivate: [AutGuard] },
   { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] },
+  { path: 'inventory-type', component: InventoryTypeComponent, canActivate: [AutGuard] },
   { path: 'payroll', component: PayrollComponent, canActivate: [AutGuard] },
   { path: 'vendors', component: VendorsComponent, canActivate: [AutGuard] },
   { path: 'employee', component: EmployeeComponent, canActivate: [AutGuard] },

@@ -95,6 +95,7 @@ import { NewSuperAdmitPageComponent } from './new-super-admit-page/new-super-adm
 import {SuperAdminService} from './new-super-admit-page/services/super-admin.service';
 import { RatePageComponent } from './rate-page/rate-page.component';
 import { DatePipe } from '@angular/common';
+import { InventoryTypeComponent } from './inventory/inventory-type/inventory-type.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -140,7 +141,8 @@ import { DatePipe } from '@angular/common';
     EmployeeComponent,
     VendorsComponent,
     NewSuperAdmitPageComponent,
-    RatePageComponent
+    RatePageComponent,
+    InventoryTypeComponent
   ],
   imports: [
     BrowserModule,
