@@ -4,10 +4,6 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
 import {FormArray, FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import {AngularFirestore} from "angularfire2/firestore";
-import * as firebase from "firebase/app";
-// Interfaces
-import {Inventory} from "../interface/inventory";
-// Services
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import {RoomService} from "../services/room.service";
@@ -25,7 +21,17 @@ export class RoomComponent implements OnInit {
   roomItems: any;
   roomLabels: Array<any>;
   roomDates: any;
+
   hotelId: string;
+
+  dateOfItem: any;
+  dateIndex: any;
+  nameOfItem: any;
+  dateFrom: any;
+  dateTo: any;
+
+  byDate: boolean;
+  byType: boolean;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -39,6 +45,9 @@ export class RoomComponent implements OnInit {
 
 
   ngOnInit() {
+    this.byDate = false;
+    this.byType = false;
+
     this.roomService.getRooms().subscribe(res => {
       this.roomItems = res[0].data;
       this.roomLabels = [];
@@ -70,10 +79,6 @@ export class RoomComponent implements OnInit {
     return this.form.get('rooms') as FormArray;
   }
 
-  // findIndexOfDate(){
-  //   this.roomDates.findIndex(el => el.getTime);
-  // }
-
   saveFormInput() {
 
     this.form.value.rooms.forEach(item => {
@@ -85,7 +90,7 @@ export class RoomComponent implements OnInit {
     let indexOfItem = this.checkIfDateExist(date);
 
 
-    if(indexOfItem == -1) {
+    if (indexOfItem == -1) {
       this.addNewDate(date);
       indexOfItem = this.roomDates.length - 1;
     }
@@ -97,6 +102,7 @@ export class RoomComponent implements OnInit {
 
     this.roomDates.sort((a, b) => +new Date(b) - +new Date(a));
 
+    this.sortByDate();
     this.roomService.addRoom(this.roomItems.room, localStorage.hotelId);
   }
 
@@ -122,8 +128,7 @@ export class RoomComponent implements OnInit {
     this.roomDates = [];
     dates.forEach(item => {
       this.roomDates.push(item.date);
-    })
-    // this.roomDates.sort((a, b) => new Date(b) - new Date(a));
+    });
   }
 
 
@@ -139,34 +144,51 @@ export class RoomComponent implements OnInit {
 
   addNewItem(name) {
     this.roomItems.room[name] = [];
-    this.roomDates.forEach( date => {
+    this.roomDates.forEach(date => {
       this.roomItems.room[name].push({
-          date: date,
-          have: "",
-          need: ""
+        date: date,
+        have: "",
+        need: ""
       })
     })
   }
 
-  addNewDate(date){
+  addNewDate(date) {
     this.roomDates.push(date)
-   for(let key in this.roomItems.room) {
-     this.roomItems.room[key].push({
-       date: date,
-       have: "",
-       need: ""
-     })
-   }
+    for (let key in this.roomItems.room) {
+      this.roomItems.room[key].push({
+        date: date,
+        have: "",
+        need: ""
+      })
+    }
   }
 
-  updateRooms(){
+  updateRooms() {
     this.roomService.addRoom(this.roomItems.room, localStorage.hotelId);
   }
 
-  sortByDate(){
-    for(let key in this.roomItems.room) {
+  sortByDate() {
+    for (let key in this.roomItems.room) {
       this.roomItems.room[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
     }
     this.getDates(this.roomItems.room[Object.keys(this.roomItems.room)[0]]);
   }
+
+// FILTER
+  updateItemsByDate() {
+  this.dateIndex = this.roomDates.indexOf(this.dateOfItem);
+  }
+
+  updateItemsByType() {
+    this.dateFrom;
+    this.dateTo;
+    debugger
+  }
+
+  changeTable() {
+    this.byDate = !this.byDate;
+    this.byType = !this.byType;
+  }
+
 }
