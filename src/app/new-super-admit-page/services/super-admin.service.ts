@@ -24,7 +24,7 @@ export class SuperAdminService {
     return this.adminsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as Vendor;
+          const data = a.payload.doc.data() as Admin;
           const id = a.payload.doc.id;
           return {id, data};
         });

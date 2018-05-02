@@ -44,7 +44,9 @@ export class ActivityChatComponent implements OnInit {
     form.value.managerId = this.objectOfMAnager.name;
     form.value.htId = this.hotelId;
     // console.log(form.value);
-    this.chatService.sendMessage(form.value); // AddVendors
+    this.chatService.sendMessage(form.value);
+    console.log(form.value);
+    // AddVendors
     form.resetForm();
   }
 

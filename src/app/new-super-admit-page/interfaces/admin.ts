@@ -1,4 +1,4 @@
-export class Admin {
+export interface Admin {
   city?: string;
   name?: string;
   phone?: any;

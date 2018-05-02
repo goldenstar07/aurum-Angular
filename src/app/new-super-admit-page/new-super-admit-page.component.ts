@@ -65,7 +65,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
   }
 
   setAdmins() {
-    const admin: Admin = {
+    let admin: Admin = {
       name: this.name,
       city: this.city,
       phone: this.phone,
@@ -76,8 +76,9 @@ export class NewSuperAdmitPageComponent implements OnInit {
     };
   }
 
-    deleteSuperAdmin(superAdminId) {
-      this.afs.doc('admins/' + superAdminId).delete();
+    deleteSuperAdmin(adminId) {
+    console.log(adminId);
+      this.afs.doc('admins/' +adminId).delete();
     }
 
     /*Popup*/

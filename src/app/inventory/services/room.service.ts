@@ -17,7 +17,7 @@ export class RoomService {
 
   rooomsCol: AngularFirestoreCollection<Inventory>;
   roooms: string;
-hotelId: string;
+  hotelId: string;
 
   constructor(private afs: AngularFirestore,
               private dataStorageService: DataStorageService,

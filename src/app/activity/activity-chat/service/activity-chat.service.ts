@@ -24,7 +24,6 @@ export class ActivityChatService {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
       }
-
       // this.getUser().subscribe(a => {
       //   this.userName = a.displayName;
       //   console.log(this.users);

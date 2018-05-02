@@ -19,7 +19,7 @@
         </tr>
         </thead>
 <!--<tbody *ngFor="let admin of admins | async" (click)="setAdmins(superAdmin.id)">-->
-        <tbody *ngFor="let admin of admins" (click)="setAdmins(superAdmin.id)">
+        <tbody *ngFor="let admin of admins" (click)="setAdmins(admin.id)">
         <!--{{admin.data.name}}-->
         <!--<tr *ngFor="let item of admin.data.admins">-->
         <tr>
@@ -46,8 +46,8 @@
           </td>
           <td>
             <p class="td-numb"></p>
-            <div class="text__block__btn" (click)="deleteSuperAdmin(superAdmin.id)">
-              <a href="#" class="btn__item">Delete</a>
+            <div class="text__block__btn" (click)="deleteSuperAdmin(admin.id)">
+              <button class="btn__item">Delete</button>
             </div>
           </td>
         </tr>
@@ -68,28 +68,28 @@
   <!--POPUP ADD PROPERTY FORM-->
   <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
    <!-- <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">-->
-    <form action="#" class="main__block" (ngSubmit)="getAdmin(f)" #f="ngForm">
+    <form action="#" class="main__block" (ngSubmit)="getAdmins(f)" #f="ngForm">
         <div class="transaction__block d-flex flex-column align-items-center">
           <h1>Create an Admin</h1>
           <div class="select__date">
             <p>Admin Name</p>
-            <input type="text" id="name" [(ngModel)]="name" class="td-input" placeholder="">
+            <input type="text" id="name" [(ngModel)]="name"  name="name" class="td-input" placeholder="">
           </div>
           <div class="select__date">
             <p>Admin Login Email</p>
-            <input type="text" id="email" [(ngModel)]="email" class="td-input" placeholder="">
+            <input type="text" id="email" [(ngModel)]="email"  name="email" class="td-input" placeholder="">
           </div>
           <div class="select__date">
             <p>City/State</p>
-            <input type="text" id="city" [(ngModel)]="city" class="td-input" placeholder="">
+            <input type="text" id="city" [(ngModel)]="city"  name="city" class="td-input" placeholder="">
           </div>
           <div class="select__date">
             <p>Phone #</p>
-            <input type="text" id="phone" [(ngModel)]="phone" class="td-input" placeholder="">
+            <input type="text" id="phone" [(ngModel)]="phone"  name="phone" class="td-input" placeholder="">
           </div>
           <div class="select__date">
             <p>No of property</p>
-            <input type="text" id="number" [(ngModel)]="number" class="td-input" placeholder="">
+            <input type="text" id="number" [(ngModel)]="number"  name="number" class="td-input" placeholder="">
           </div>
       <div class="save__btn">
         <button class="button__item" type="submit" (click)="addNewSuperAdmin(f)">Save</button>
