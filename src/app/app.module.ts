@@ -94,6 +94,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import { NewSuperAdmitPageComponent } from './new-super-admit-page/new-super-admit-page.component';
 import {SuperAdminService} from './new-super-admit-page/services/super-admin.service';
 import { RatePageComponent } from './rate-page/rate-page.component';
+import { DatePipe } from '@angular/common';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -205,7 +206,8 @@ import { RatePageComponent } from './rate-page/rate-page.component';
     BillService,
     FormService,
     AngularFireAuth,
-    SuperAdminService
+    SuperAdminService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
