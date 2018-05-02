@@ -8,7 +8,7 @@ import { NgForm, FormBuilder, Validators } from '@angular/forms';
 // services
 import {AuthService} from '../auth/auth.service';
 import {HotelService} from "../hotels/services/hotel.service";
-// interfaces
+// models
 import {Manager} from './interfaces/manager';
 import {DataStorageService} from "../shared/services/data-storage.service";
 import {HelperService} from "../shared/services/helper.service";
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
               private modalService: NgbModal,
               private afs: AngularFirestore,
               private authService: AuthService,
-              private formBuilder:FormBuilder,
+              private formBuilder: FormBuilder,
               private hotelSevice: HotelService,
               public dataProcessingService: DataProcessingService
   ) {}

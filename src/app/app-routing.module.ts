@@ -16,6 +16,16 @@ import {RoomComponent} from "./inventory/room/room.component";
 import {MaintenanceComponent} from "./inventory/maintenance/maintenance.component";
 import {FbComponent} from "./inventory/fb/fb.component";
 import {FdMiscComponent} from "./inventory/fd-misc/fd-misc.component";
+import {PayrollComponent} from "./payroll/payroll.component";
+import {VendorsComponent} from "./property/vendors/vendors.component";
+import {EmployeeComponent} from "./property/employee/employee.component";
+import {CredentialsComponent} from "./property/credentials/credentials.component";
+import {ActivityComponent} from "./activity/activity.component";
+import {ActivityChatComponent} from "./activity/activity-chat/activity-chat.component";
+import {BillsMiscComponent} from "./upload/bills-misc/bills-misc.component";
+import {FormsComponent} from "./upload/forms/forms.component";
+import {NewSuperAdmitPageComponent} from './new-super-admit-page/new-super-admit-page.component';
+import {RatePageComponent} from './rate-page/rate-page.component';
 
 
 const appRoutes: Routes = [
@@ -31,7 +41,17 @@ const appRoutes: Routes = [
   { path: 'room', component: RoomComponent, canActivate: [AutGuard] },
   { path: 'maintenance', component: MaintenanceComponent, canActivate: [AutGuard] },
   { path: 'fb', component: FbComponent, canActivate: [AutGuard] },
-  { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] }
+  { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] },
+  { path: 'payroll', component: PayrollComponent, canActivate: [AutGuard] },
+  { path: 'vendors', component: VendorsComponent, canActivate: [AutGuard] },
+  { path: 'employee', component: EmployeeComponent, canActivate: [AutGuard] },
+  { path: 'credentials', component: CredentialsComponent, canActivate: [AutGuard] },
+  { path: 'activity', component: ActivityComponent, canActivate: [AutGuard] },
+  { path: 'activity-chat', component: ActivityChatComponent, canActivate: [AutGuard] },
+  { path: 'bills-misc', component: BillsMiscComponent, canActivate: [AutGuard] },
+  { path: 'forms', component: FormsComponent, canActivate: [AutGuard] },
+  { path: 'super-admin', component: NewSuperAdmitPageComponent, canActivate: [AutGuard] },
+  { path: 'rate-page', component: RatePageComponent, canActivate: [AutGuard] }
 ];
 
 @NgModule({

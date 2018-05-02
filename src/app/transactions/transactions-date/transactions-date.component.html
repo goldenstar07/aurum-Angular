@@ -163,7 +163,7 @@
 
   <!--POPUP ADD PROPERTY FORM-->
   <ng-template #contentNewProperty let-c="close" let-d="dismiss">
-    <div class="main__block">
+    <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true" class="cros">&times;</span>
       </button>
@@ -171,30 +171,30 @@
         <h1>Create New Transaction</h1>
         <div class="select__date d-flex justify-content-center align-items-center">
           <p>Select Date:</p>
-          <div class="search__date__item">
-            <mat-form-field class="datepicker-form">
-              <input matInput [matDatepicker]="picker1" placeholder="" [formControl]="date" name="data" id="data" [(ngModel)]="data">
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1 class="datepicker-calendar"></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <!--<input type="text" class="search__date__item" placeholder="">-->
+          <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
         </div>
-        <div class="input__transaction">
-          <input type="text" class="td-input" placeholder="" name="type" id="type" [(ngModel)]="type">
-          <!--<select class="custom-select td-input">
+        <!--<div class="input__transaction">
+          <input type="text" class="td-input" formControlName="inputType" id="inputType" placeholder="">
+          <input type="text" class="td-input" formControlName="inputPrice" id="inputPrice" placeholder="">
+          &lt;!&ndash;<select class="custom-select td-input">
             <option selected>Select Type</option>
             <option value="1">Visa</option>
             <option value="2">Amex</option>
             <option value="3">Checks</option>
-          </select>-->
-          <input type="text" class="td-input" placeholder="" name="value" id="value" [(ngModel)]="value">
-        </div>
+          </select>&ndash;&gt;
+        </div>-->
+        <form formArrayName="transactions" *ngFor="let transaction of form.get('transactions').controls; let i=index">
+          <div class="input__transaction" [formGroupName]="i">
+            <input type="text" class="td-input" formControlName="type" id="type" placeholder="">
+            <input type="text" class="td-input" formControlName="price" id="price" placeholder="">
+          </div>
+        </form>
+
         <!--<div class="input__transaction">
           <input type="text" class="td-input" placeholder="Amex">
           <input type="text" class="td-input" placeholder="$24.64">
         </div>-->
-        <div class="plus__circle">
+        <div class="plus__circle" (click)="addFormInput()">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
                     <g>
                         <path d="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M26,50C12.767,50,2,39.233,2,26   S12.767,2,26,2s24,10.767,24,24S39.233,50,26,50z" fill="#707070"/>
@@ -202,10 +202,10 @@
                     </g>
                 </svg>
         </div>
-        <div class="save__btn">
-          <button class="button__item" (click)="addNewProperty()" value="submit">Save</button>
+        <div class="save__btn" (click)="addNewTransaction()">
+          <button class="button__item" value="submit">Save</button>
         </div>
       </div>
-    </div>
+    </form>
   </ng-template>
 </section>

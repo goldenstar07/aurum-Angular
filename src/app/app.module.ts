@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, Http, Response, RequestOptions, Headers} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireModule} from "angularfire2";
 import firestore = firebase.firestore;
@@ -79,6 +79,21 @@ import { HkGoalsDataComponent } from './housekeeping/hk-goals-data/hk-goals-data
 import { HkGoalsHkComponent } from './housekeeping/hk-goals-hk/hk-goals-hk.component';
 import { HkHeaderComponent } from './housekeeping/hk-header/hk-header.component';
 import { InventoryHeaderComponent } from './inventory/inventory-header/inventory-header.component';
+import {ChangePropertyComponent} from './change-property/change-property.component';
+import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
+import {HouskeepingService} from "./housekeeping/services/houskeeping.service";
+import {RoomService} from "./inventory/services/room.service";
+import {ActivityChatService} from "./activity/activity-chat/service/activity-chat.service";
+import {CredentialsService} from "./property/services/credentials.service";
+import {EmployeesService} from "./property/services/employees.service";
+import {VendorsService} from "./property/services/vendors.service";
+import {PayrollService} from "./payroll/services/payroll.service";
+import {BillService} from "./upload/services/bill.service";
+import {FormService} from './upload/services/form.service';
+import {AngularFireAuth} from 'angularfire2/auth';
+import { NewSuperAdmitPageComponent } from './new-super-admit-page/new-super-admit-page.component';
+import {SuperAdminService} from './new-super-admit-page/services/super-admin.service';
+import { RatePageComponent } from './rate-page/rate-page.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -116,7 +131,15 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
     HkGoalsDataComponent,
     HkGoalsHkComponent,
     HkHeaderComponent,
-    InventoryHeaderComponent
+    InventoryHeaderComponent,
+    ChangePropertyComponent,
+    ActivityChatComponent,
+    PayrollComponent,
+    CredentialsComponent,
+    EmployeeComponent,
+    VendorsComponent,
+    NewSuperAdmitPageComponent,
+    RatePageComponent
   ],
   imports: [
     BrowserModule,
@@ -171,7 +194,18 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
     AutGuard,
     AdminGuard,
     TransactionService,
-    HomeService
+    HomeService,
+    HouskeepingService,
+    RoomService,
+    ActivityChatService,
+    CredentialsService,
+    EmployeesService,
+    VendorsService,
+    PayrollService,
+    BillService,
+    FormService,
+    AngularFireAuth,
+    SuperAdminService
   ],
   bootstrap: [AppComponent]
 })

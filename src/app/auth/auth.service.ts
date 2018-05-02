@@ -5,13 +5,21 @@ import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firesto
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {DataStorageService} from "../shared/services/data-storage.service";
+import {AngularFireAuth} from "angularfire2/auth";
 
 @Injectable()
 export class AuthService {
 
+  private authState: any;
+
   constructor(private router: Router,
               private afs: AngularFirestore,
-              private dataStoreService: DataStorageService) {
+              private dataStoreService: DataStorageService,
+              private afAuth: AngularFireAuth) {
+  }
+
+  get currentUserID(): string {
+    return this.authState !== null ? this.authState.uid : '';
   }
 
 

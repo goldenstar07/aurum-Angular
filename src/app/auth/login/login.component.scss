@@ -62,6 +62,26 @@ body {
   }
 }
 
+//MEDIA SCREEN===================================!
+
+@media screen and (max-width: 1029px){
+  .media__row {
+    justify-content: center;
+    overflow-x: hidden;
+  }
+  .image {
+    order: -1;
+  }
+  .login-container {
+    margin-top: 0!important;
+  }
+  .auth-container {
+    background-color: #0d0d0d;
+    padding-bottom: 40px;
+    height: auto;
+  }
+}
+
 /*
 .login-content {
   background: #120D0C;

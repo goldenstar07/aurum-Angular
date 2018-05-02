@@ -65,8 +65,9 @@
     </div>
 
     <!--POPUP ADD PROPERTY FORM-->
-    <ng-template #contentNewProperty let-c="close" let-d="dismiss">
-      <div class="main__block">
+    <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
+      <div class="modal-container" style="width: 800px; background: white;">
+      <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
           <span aria-hidden="true" class="cros">&times;</span>
         </button>
@@ -77,39 +78,32 @@
                 <p>Add Property</p>
               </div>
               <div class="select__date d-flex justify-content-center align-items-center">
-                <div>Select Date.</div>
-                <div class="search__date__item">12/4/17</div>
+                <div>Select Date:</div>
+                <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
               </div>
               <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true" class="cros">&times;</span>
               </button>
             </div>
             <hr>
-            <form action="#" class="user__form">
-              <div class="name__block">
-                <label for="Butter" style="width: 60px"><p>Butter:</p></label>
-                <input type="text" placeholder="Have" name="name" class="input" required>
-                <input type="text" placeholder="Need" name="name" class="input" required>
+            <form formArrayName="fbs" *ngFor="let fb of form.get('fbs').controls; let i=index" class="user__form" class="user__form">
+              <div class="name__block" [formGroupName]="i">
+                <input type="text" formControlName="item" id="item" placeholder="Have" class="input">
+                <input type="text" formControlName="have" id="have" placeholder="Have" class="input">
+                <input type="text" formControlName="need" id="need" placeholder="Need" class="input">
               </div>
-              <div class="name__block">
-                <label for="Milk" style="width: 60px"><p>Milk:</p></label>
-                <input type="text" placeholder="Have" name="address" class="input" required>
-                <input type="text" placeholder="Need" name="address" class="input" required>
-              </div>
-              <div class="name__block">
-                <label for="Eggs" style="width: 60px"><p>Eggs:</p></label>
-                <input type="text" placeholder="Have" name="city" class="input" required>
-                <input type="text" placeholder="Need" name="city" class="input" required>
-              </div>
-              <div class="add__item__block">
-                <button type="button" class="add__item__btn">
-                  Add Item
-                </button>
-              </div>
-              <button type="button" class="add__btn">Save Changes</button>
             </form>
+            <div class="add__item__block" (click)="addFormInput()">
+              <button type="button" class="add__item__btn">
+                Add Item
+              </button>
+            </div>
+            <div class="save__btn" (click)="addNewFb()">
+              <button class="add__btn" value="submit">Save</button>
+            </div>
           </div>
         </div>
+      </form>
       </div>
     </ng-template>
 

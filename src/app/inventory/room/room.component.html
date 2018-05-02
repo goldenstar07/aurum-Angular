@@ -2,24 +2,24 @@
 
 <section id="main">
   <div class="main__block">
-<app-inventory-header></app-inventory-header>
+    <app-inventory-header></app-inventory-header>
 
-    <div class="main__title d-flex align-items-center">
+    <div class="main__title d-flex align-
+        <tbody>items-center">
       <table class="table table-bordered">
         <thead>
         <tr>
           <th scope="col">Items</th>
-          <th scope="col" class="col__items" colspan="2">
-            12/4/17
+          <th scope="col" class="col__items" colspan="2" *ngFor="let date of roomDates">
+            {{date}}
             <i class="far fa-edit"></i>
           </th>
-          <th scope="col" class="col__items" colspan="2">
+          <!--<th scope="col" class="col__items" colspan="2">
             12/03/18
             <i class="far fa-edit"></i>
-          </th>
+          </th>-->
         </tr>
         </thead>
-        <tbody>
         <tr>
           <td scope="row" class="type"></td>
           <td>
@@ -30,90 +30,19 @@
             <p class="td-numb">Needed</p>
             <input type="text" class="td-input" placeholder="Needed">
           </td>
-          <td>
-            <p class="td-numb">Had</p>
-            <input type="text" class="td-input" placeholder="Had">
-          </td>
-          <td>
-            <p class="td-numb">Needed</p>
-            <input type="text" class="td-input" placeholder="Needed">
-          </td>
         </tr>
-        <tr>
-          <td scope="row" class="type">Butter</td>
-          <td>
-            <p class="td-numb">-</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">-</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">1</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">3</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-        </tr>
-        <tr>
-          <td scope="row" class="type">Cheese</td>
-          <td>
-            <p class="td-numb">-</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">-</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">0</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">0</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-        </tr>
-        <tr>
-          <td scope="row" class="type">Eggs</td>
-          <td>
-            <p class="td-numb">-</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">-</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">2</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">3</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-        </tr>
-        <tr>
-          <td scope="row" class="type">Milk</td>
-          <td>
-            <p class="td-numb">-</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">4</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">3</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
-          <td>
-            <p class="td-numb">3</p>
-            <input type="text" class="td-input" placeholder="1">
-          </td>
+        <tr *ngFor="let label of roomLabels">
+          <td scope="row" class="type">{{label}}</td>
+          <span *ngFor="let item of roomItems.room[label]">
+            <td>
+              <p class="td-numb">{{item.have}}</p>
+              <input type="text" class="td-input" placeholder="1">
+            </td>
+            <td>
+              <p class="td-numb">{{item.need}}</p>
+              <input type="text" class="td-input" placeholder="1">
+            </td>
+          </span>
         </tr>
         </tbody>
       </table>
@@ -131,51 +60,49 @@
     </div>
 
     <!--POPUP ADD PROPERTY FORM-->
-    <ng-template #contentNewProperty let-c="close" let-d="dismiss">
-      <div class="main__block">
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true" class="cros">&times;</span>
-        </button>
-        <div class="user__component d-flex flex-column">
-          <div class="user__block">
-            <div class="user__block__header d-flex justify-content-between align-items-center">
-              <div class="user__text">
-                <p>Add Property</p>
+    <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
+      <div class="modal-container" style="width: 800px; background: white;">
+        <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true" class="cros">&times;</span>
+          </button>
+          <div class="user__component d-flex flex-column">
+            <div class="user__block">
+              <div class="user__block__header d-flex justify-content-between align-items-center">
+                <div class="user__text">
+                  <p>Add Property</p>
+                </div>
+                <div class="select__date d-flex justify-content-center align-items-center">
+                  <div>Select Date:</div>
+                  <input type="date" class="search__date__item" formControlName="date" id="date" name="date"
+                         placeholder="">
+                </div>
+                <button type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true" class="cros">&times;</span>
+                </button>
               </div>
-              <div class="select__date d-flex justify-content-center align-items-center">
-                <div>Select Date.</div>
-                <div class="search__date__item">12/4/17</div>
-              </div>
-              <button type="button" class="close" aria-label="Close">
-                <span aria-hidden="true" class="cros">&times;</span>
-              </button>
-            </div>
-            <hr>
-            <form action="#" class="user__form">
-              <div class="name__block">
-                <label for="Butter" style="width: 60px"><p>Butter:</p></label>
-                <input type="text" placeholder="Have" name="name" class="input" required>
-                <input type="text" placeholder="Need" name="name" class="input" required>
-              </div>
-              <div class="name__block">
-                <label for="Milk" style="width: 60px"><p>Milk:</p></label>
-                <input type="text" placeholder="Have" name="address" class="input" required>
-                <input type="text" placeholder="Need" name="address" class="input" required>
-              </div>
-              <div class="name__block">
-                <label for="Eggs" style="width: 60px"><p>Eggs:</p></label>
-                <input type="text" placeholder="Have" name="city" class="input" required>
-                <input type="text" placeholder="Need" name="city" class="input" required>
-              </div>
-              <div class="add__item__block">
+              <hr>
+              <form formArrayName="rooms" *ngFor="let room of form.get('rooms').controls; let i=index"
+                    class="user__form">
+                <div class="name__block" [formGroupName]="i">
+                  <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input">
+                  <input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input">
+                  <input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input">
+                </div>
+              </form>
+              <div class="add__item__block" (click)="addFormInput()">
                 <button type="button" class="add__item__btn">
                   Add Item
                 </button>
               </div>
-              <button type="button" class="add__btn">Save Changes</button>
-            </form>
+
+              <div class="save__btn">
+                <button class="add__btn">Save</button>
+              </div>
+              <!--<button type="button" class="add__btn" (click)="addNewRoom()">Save Changes</button>-->
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </ng-template>
 

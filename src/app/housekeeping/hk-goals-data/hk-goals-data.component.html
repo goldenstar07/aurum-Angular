@@ -224,25 +224,27 @@
 <!--POPUP ADD PROPERTY FORM-->
   <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
     <div class="modal-container" style="width: 800px; background: white;">
-    <div class="main__block">
+    <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true" class="cros">&times;</span>
       </button>
       <div class="housekeeper__block d-flex flex-column align-items-center">
         <h1>Create New Housekeeper</h1>
         <div class="select__date d-flex justify-content-center align-items-center">
-          <p>Select Date.</p>
-          <div class="search__date__item">12/4/17</div>
+          <p>Select Date:</p>
+          <input type="date" class="search__date__item" formControlName="date" id="date" placeholder="">
           <input type="text" class="date__item__input" placeholder="Min S/O Cal">
           <input type="text" class="date__item__input" placeholder="Min C/O Cal">
         </div>
-        <div class="input__housekeeper">
-          <input type="text" class="td-input" placeholder="Name">
-          <input type="text" class="td-input" placeholder="DND">
-          <input type="text" class="td-input" placeholder="S/O">
-          <input type="text" class="td-input" placeholder="min">
+        <form formArrayName="goals" *ngFor="let goal of form.get('goals').controls; let i=index">
+        <div class="input__housekeeper" [formGroupName]="i">
+          <input type="text" class="td-input" formControlName="name" id="name"  placeholder="Name">
+          <input type="text" class="td-input"  formControlName="dnd" id="dnd" placeholder="DND">
+          <input type="text" class="td-input"  formControlName="so" id="so" placeholder="S/O">
+          <input type="text" class="td-input"  formControlName="min" id="min" placeholder="min">
         </div>
-        <div class="plus__circle">
+        </form>
+        <div class="plus__circle" (click)="addFormInput()">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
                     <g>
                         <path d="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M26,50C12.767,50,2,39.233,2,26   S12.767,2,26,2s24,10.767,24,24S39.233,50,26,50z" fill="#707070"/>
@@ -250,11 +252,11 @@
                     </g>
                 </svg>
         </div>
-        <div class="save__button">
+        <div class="save__btn" (click)="addNewGoal()">
           <button class="button__item">Save</button>
         </div>
       </div>
-    </div>
+    </form>
     </div>
   </ng-template>
 

@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
 import {AuthService} from '../auth/auth.service';
 import {UploadFileService} from '../shared/services/upload-file.service';
 import {HotelService} from "./services/hotel.service";
+import {DataStorageService} from "../shared/services/data-storage.service";
 // Classes
 import {FileUpload} from '../shared/classes/file-upload';
-import {DataStorageService} from "../shared/services/data-storage.service";
 
 
 @Component({

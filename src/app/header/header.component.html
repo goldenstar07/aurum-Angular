@@ -32,8 +32,8 @@
             <a routerLink="/fd-misc">FD/Misc</a>
           </div>
         </div>
-        <a href="#" class="select__item">Activity Log</a>
-        <a href="#" class="select__item">Payroll</a>
+        <a routerLink="/activity-chat" class="select__item">Activity Log</a>
+        <a routerLink="/payroll" class="select__item">Payroll</a>
         <div class="dropdown">
           <button class="dropbtn d-flex align-items-center justify-content-between">
             Property Info
@@ -50,9 +50,9 @@
             </div>
           </button>
           <div class="dropdown-content">
-            <a href="#">Vendors</a>
-            <a href="#">Credentials</a>
-            <a href="#">Employees</a>
+            <a routerLink="/vendors">Vendors</a>
+            <a routerLink="/credentials">Credentials</a>
+            <a routerLink="/employee">Employees</a>
           </div>
         </div>
         <div class="dropdown">
@@ -71,11 +71,13 @@
             </div>
           </button>
           <div class="dropdown-content">
-            <a href="#">Bills/Misc</a>
-            <a href="#">Forms</a>
+            <a routerLink="/bills-misc">Bills/Misc</a>
+            <a routerLink="/forms">Forms</a>
           </div>
         </div>
         <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/hotels">Properties</a>
+        <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/super-admin">Super Admin</a>
+        <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/rate-page">Rate Page</a>
         <a (click)="onLogout()"
            class="select__item">Logout</a>
       </div>

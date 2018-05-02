@@ -6,20 +6,20 @@ export class DataStorageService {
   constructor() {
   }
 
-  static get isAuthorization() : boolean {
+  static get isAuthorization(): boolean {
     return !!localStorage.user;
   }
 
-  static get isAdmin() : boolean {
-    if(localStorage.user) return JSON.parse(localStorage.user).role === 'admin';
+  static get isAdmin(): boolean {
+    if (localStorage.user) { return JSON.parse(localStorage.user).role === 'admin'; }
     return false;
   }
 
-  setHotelId(id){
+  setHotelId(id) {
     localStorage.hotelId = id;
   }
 
-  setUser(user) : void{
+  setUser(user): void {
     localStorage.user = JSON.stringify(user);
   }
 
