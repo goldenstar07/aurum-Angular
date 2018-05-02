@@ -84,6 +84,7 @@ label {
       border-radius: 6px;
       background-color: $color-ff;
       cursor: pointer;
+      height: 33px;
     }
   }
   .text__block__name {
@@ -352,6 +353,7 @@ input:active, :hover, :focus {
   .main__block .table__block {
     border: 1px solid #000;
     width: 220px;
+    padding: 15px;
   }
   .btn__item {
     padding: 6px 8px;
@@ -360,7 +362,7 @@ input:active, :hover, :focus {
 @media screen and (max-width: 465px) {
 
   .plus__circle {
-    margin-top: 50px;
+    margin: 50px auto 0 auto;
   }
   .main__table {
     display: block;
@@ -372,6 +374,10 @@ input:active, :hover, :focus {
   }
   .table__block {
     padding: 20px 10px 20px 25px;
+    margin: 25px auto!important;
+  }
+  .main__text {
+    text-align: center;
   }
 }
 @media screen and (max-width: 375px) {
