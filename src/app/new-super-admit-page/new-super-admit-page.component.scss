@@ -29,6 +29,12 @@ hr {
   height: 1px;
   opacity: 0.5;
 }
+td {
+  text-align: center;
+}
+select {
+  height: 33px;
+}
 
 #main {
   padding: 55px 0 0 72px;
@@ -155,7 +161,7 @@ hr {
   }
   .td-numb {
     text-align: center;
-    margin: 5px;
+    margin: 2px;
     display: block;
     font-size: 14px;
   }
@@ -185,6 +191,8 @@ hr {
 }
 .text__block__btn {
   text-align: center;
+  display: flex;
+  justify-content: center;
   .btn__item {
     font-size: 10px;
     border: 1px solid $color-ff;
@@ -224,7 +232,8 @@ hr {
   }
 }
 
-.transaction__block {
+// popup
+.super__admin__block {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -232,8 +241,9 @@ hr {
   .select__date {
     margin-top: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 360px;
   }
   .search__date__item {
     border: 1px solid $font-gray;
@@ -253,7 +263,7 @@ hr {
     margin-top: 20px;
   }
   .td-input {
-    width: 300px;
+    width: 200px;
     height: 35px;
     padding-left: 8px;
     color: $primary-color;
@@ -292,6 +302,7 @@ hr {
       color: $color-fff;
       font-weight: $font-bold;
       cursor: pointer;
+      margin-top: 30px;
     }
   }
 }
@@ -304,4 +315,25 @@ hr {
     width: 25%;
   }
 }
+@media screen and (max-width: 1120px){
+  .main__title {
+    overflow: scroll;
+  }
+}
+@media screen and (max-width:767px){
+   h1 {
+    font-size: 1.5rem;
+  }
+  input {
+    width: 30% !important;
+  }
+  .select__date p {
+    font-size: 14px;
+
+  }
+  .select__date {
+    width: 80%!important;
+  }
+}
+
 
