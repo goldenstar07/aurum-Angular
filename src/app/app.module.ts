@@ -96,6 +96,7 @@ import {SuperAdminService} from './new-super-admit-page/services/super-admin.ser
 import { RatePageComponent } from './rate-page/rate-page.component';
 import { DatePipe } from '@angular/common';
 import { InventoryTypeComponent } from './inventory/inventory-type/inventory-type.component';
+import {NgxAutoScrollModule} from "ngx-auto-scroll";
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -142,7 +143,7 @@ import { InventoryTypeComponent } from './inventory/inventory-type/inventory-typ
     VendorsComponent,
     NewSuperAdmitPageComponent,
     RatePageComponent,
-    InventoryTypeComponent
+    InventoryTypeComponent,
   ],
   imports: [
     BrowserModule,
@@ -185,7 +186,8 @@ import { InventoryTypeComponent } from './inventory/inventory-type/inventory-typ
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxAutoScrollModule
   ],
   providers: [
     DataStorageService,

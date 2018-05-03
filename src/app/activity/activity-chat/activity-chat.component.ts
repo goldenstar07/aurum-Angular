@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
-
+import { NgStyle, CommonModule } from '@angular/common';
 // Service
 import {ActivityChatService} from './service/activity-chat.service';
 import {Message} from './models/Message';
@@ -10,17 +10,21 @@ import {Hotel} from '../../hotels/interfaces/hotel';
 import {DataStorageService} from '../../shared/services/data-storage.service';
 import {Bill} from "../../upload/interfaces/bill";
 import {Observable} from "rxjs/Observable";
+import ng_chat_scroller from "ng-chat-scroller";
+import {NgxAutoScroll} from "ngx-auto-scroll";
+import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 
 @Component({
   selector: 'app-activity-chat',
   templateUrl: './activity-chat.component.html',
   styleUrls: ['./activity-chat.component.scss']
 })
-export class ActivityChatComponent implements OnInit {
+export class ActivityChatComponent implements OnInit{
 
   // Bug with scrollDown
 
-  @ViewChild('scroller') private feedContainer: ElementRef;
+  // @ViewChild('scroller') private feedContainer: ElementRef;
+  @ViewChild(NgxAutoScroll) ngxAutoScroll: NgxAutoScroll;
 
   messages: any;
   text: string;
@@ -35,7 +39,11 @@ export class ActivityChatComponent implements OnInit {
               public dataProcessingService: DataProcessingService,
               public dataStorage: DataStorageService,
               private afs: AngularFirestore,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder) {
+    IntervalObservable.create(200).subscribe(() => {
+
+    });
+  }
 
   onKey(form: NgForm): void {
     this.hotelId = localStorage.hotelId;
@@ -54,12 +62,12 @@ export class ActivityChatComponent implements OnInit {
     this.messages = this.chatService.getMessages();
   }
 
-  ngAfterViewChecked(): void {
-    this.scrollToBottom();
+  public forceScrollDown(): void {
+    this.ngxAutoScroll.forceScrollDown();
   }
 
-  scrollToBottom(): void {
-    this.feedContainer.nativeElement.scrollTop =
-      this.feedContainer.nativeElement.scrollHeight;
-  }
+  // ngAfterViewChecked():void{
+  //   this.feedContainer.nativeElement.scrollTop =
+  //     this.feedContainer.nativeElement.scrollHeight;
+  // }
 }

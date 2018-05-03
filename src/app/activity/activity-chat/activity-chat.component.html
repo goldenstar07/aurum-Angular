@@ -8,16 +8,29 @@
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
       <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>-->
-    <div class="message__block__cover" *ngFor="let message of messages | async">
-        <p style="text-align: right">
+    <div class="message__block__cover" *ngFor="let message of messages | async" ngx-auto-scroll>
+     <!-- <div [ngStyle]="{background: message.data.managerId === current.managerId ? 'green': 'red'}">-->
+    <div [ngClass]="{'right' : managerId === currentUser,
+      'left': managerId !== currentUser}">
+    </div>
+       <!--<p style="text-align: right">-->
+        <p class="right">
          <b> {{ message.data.managerId }} </b><br>
           {{message.data.author}}
           {{message.data.date}}
         </p>
-      <div class="message__block right">
+        <div class="message__block right">
+          {{message.data.text}}
+        </div>
+     <!-- // other user
+      <p style="text-align: left">
+        <b> {{ message.data.managerId }} </b><br>
+        {{message.data.author}}
+        {{message.data.date}}
+      </p>
+      <div class="message__block left">
         {{message.data.text}}
-      </div>
-    </div>
+      </div>-->
     <!--<div class="message__block__cover"><div class="message__block right">{{messages}}</div></div>-->
     </div>
     <div class="message__block__write">
@@ -27,5 +40,6 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
 </section>
