@@ -103,8 +103,7 @@ hr {
   }
 }
 .plus__circle {
-  margin-left: 40px;
-  margin-bottom: 112px;
+  margin-left: 20px;
   cursor: pointer;
 }
 .save__button {
@@ -221,5 +220,16 @@ hr {
     font-weight: $font-bold;
     cursor: pointer;
     margin-top: 20px;
+  }
+}
+
+//MEDIA SCREEN===========================
+
+@media screen and (max-width: 425px){
+  h1 {
+    font-size: 1.5rem;
+  }
+  .plus__circle {
+    margin-right: 20px;
   }
 }

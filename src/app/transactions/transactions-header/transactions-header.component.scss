@@ -38,6 +38,9 @@ hr {
   height: 1px;
   opacity: 0.5;
 }
+input {
+  text-align: center;
+}
 
 /*#main {
   padding: 55px 0 0 72px;
@@ -80,7 +83,7 @@ hr {
     box-shadow: 0 4px 5px -2px #000;
     .search__date__item {
       border: 1px solid $font-gray;
-      width: 110px;
+      width: 120px;
       height: 35px;
       display: flex;
       justify-content: center;
@@ -89,6 +92,7 @@ hr {
       font-size: 14px;
       font-weight: $font-bold;
       background-color: $font-gray4;
+      text-align: center;
     }
     p {
       text-align: center;
@@ -106,7 +110,7 @@ hr {
     border: 1px solid $font-gray;
     box-shadow: 0 4px 5px -2px #000;
     .custom-select {
-      width: 30%;
+      width: 26%;
       background: gray;
       color: $primary-color;
     }
@@ -119,7 +123,7 @@ hr {
   .date-range__item {
     .search__date__item {
       border: 1px solid $font-gray;
-      width: 120px;
+      width: 100px;
       height: 35px;
       font-size: 12px;
       font-weight: $font-bold;
@@ -132,6 +136,8 @@ hr {
       margin-bottom: 4rem;
       opacity: 0.5;
       font-weight: $font-bold;
+      text-align: center;
+      width: 100px;
     }
   }
   .datepicker-form {
@@ -182,6 +188,13 @@ hr {
     width: 41% !important;
     margin: 15px 0;
   }
+  .date-range__title {
+    text-align: center;
+    width: 100px;
+  }
+  .search__date__item {
+    width: 90px!important;
+  }
 }
 @media screen and (max-width:425px){
   .search__block .search__text__block p {
@@ -205,5 +218,8 @@ hr {
   }
   .custom-select {
     width: 71% !important;
+  }
+  .search__date__item {
+    margin:10px 0;
   }
 }

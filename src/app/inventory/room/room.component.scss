@@ -73,7 +73,7 @@ input{
     box-shadow: 0 4px 5px -2px #000;
     .search__date__item {
       border: 1px solid $font-gray;
-      width: 110px;
+      width: 100px;
       height: 35px;
       display: flex;
       justify-content: center;
@@ -99,7 +99,7 @@ input{
     border: 1px solid $font-gray;
     box-shadow: 0 4px 5px -2px #000;
     .custom-select {
-      width: 30%;
+      width: 25%;
       background: gray;
       color: $primary-color;
     }
