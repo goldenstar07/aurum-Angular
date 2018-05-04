@@ -97,6 +97,7 @@ import { RatePageComponent } from './rate-page/rate-page.component';
 import { DatePipe } from '@angular/common';
 import { InventoryTypeComponent } from './inventory/inventory-type/inventory-type.component';
 import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
+import {HkGoalsDateComponent} from "./housekeeping/hk-goals-date/hk-goals-date.component";
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -144,7 +145,8 @@ import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
     NewSuperAdmitPageComponent,
     RatePageComponent,
     InventoryTypeComponent,
-    FilterByDatePipe
+    FilterByDatePipe,
+    HkGoalsDateComponent
   ],
   imports: [
     BrowserModule,

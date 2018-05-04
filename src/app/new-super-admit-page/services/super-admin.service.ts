@@ -9,6 +9,7 @@ import {HelperService} from "../../shared/services/helper.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import {Hotel} from '../../hotels/interfaces/hotel';
 import {Vendor} from '../../property/interfaces/vendor';
+import {DataProcessingService} from "../../shared/services/data-processing.service";
 
 @Injectable()
 export class SuperAdminService {
@@ -17,7 +18,8 @@ export class SuperAdminService {
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase,
-              private dataStorageService: DataStorageService) {}
+              private dataStorageService: DataStorageService,
+              public dataProcessingService: DataProcessingService) {}
 
   getAdmins() {
     this.adminsCol = this.afs.collection('admins');
@@ -27,8 +29,8 @@ export class SuperAdminService {
           const data = a.payload.doc.data() as Admin;
           const id = a.payload.doc.id;
           return {id, data};
-        });
-      });
+        })
+      })
   }
 
   addAdmin(admin) {

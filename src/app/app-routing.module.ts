@@ -1,3 +1,4 @@
+///<reference path="../../node_modules/@angular/core/src/metadata/ng_module.d.ts"/>
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes, PreloadAllModules} from '@angular/router';
 
@@ -50,13 +51,10 @@ const appRoutes: Routes = [
   { path: 'credentials', component: CredentialsComponent, canActivate: [AutGuard] },
   { path: 'activity', component: ActivityComponent, canActivate: [AutGuard] },
   { path: 'activity-chat', component: ActivityChatComponent, canActivate: [AutGuard] },
-  { path: 'bills-misc', component: BillsMiscComponent, canActivate: [AutGuard] },
-  { path: 'forms', comphbonent: FormsComponent, canActivate: [AutGuard] },
+  { path: 'bills-misc', component: BillsMiscComponent, canActivate: [AutGuard]},
   { path: 'super-admin', component: NewSuperAdmitPageComponent, canActivate: [AutGuard] },
   { path: 'rate-page', component: RatePageComponent, canActivate: [AutGuard] },
-
-
-];
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})],

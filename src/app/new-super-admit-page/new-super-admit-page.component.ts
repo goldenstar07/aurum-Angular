@@ -25,6 +25,7 @@ import {Vendor} from '../property/interfaces/vendor';
 export class NewSuperAdmitPageComponent implements OnInit {
   closeResult: string;
   form: FormGroup;
+  password: string;
 
   admins: any;
   admin: Observable<Admin>;
@@ -44,7 +45,8 @@ export class NewSuperAdmitPageComponent implements OnInit {
               private afs: AngularFirestore,
               public dataProcessingService: DataProcessingService,
               public dataStorageService: DataStorageService,
-              private superAdminService: SuperAdminService) {
+              private superAdminService: SuperAdminService,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -73,7 +75,8 @@ export class NewSuperAdmitPageComponent implements OnInit {
       number: this.number,
       status: this.status,
       hotelId: localStorage.hotelId
-    };
+    }
+    this.authService.signUpUser(admin, this.password);
   }
 
     deleteSuperAdmin(adminId) {
