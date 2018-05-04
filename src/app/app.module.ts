@@ -82,7 +82,7 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
 import {ChangePropertyComponent} from './change-property/change-property.component';
 import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
 import {HouskeepingService} from "./housekeeping/services/houskeeping.service";
-import {RoomService} from "./inventory/services/room.service";
+import {InventoryService} from "./inventory/services/inventory.service";
 import {ActivityChatService} from "./activity/activity-chat/service/activity-chat.service";
 import {CredentialsService} from "./property/services/credentials.service";
 import {EmployeesService} from "./property/services/employees.service";
@@ -96,6 +96,7 @@ import {SuperAdminService} from './new-super-admit-page/services/super-admin.ser
 import { RatePageComponent } from './rate-page/rate-page.component';
 import { DatePipe } from '@angular/common';
 import { InventoryTypeComponent } from './inventory/inventory-type/inventory-type.component';
+import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -142,7 +143,8 @@ import { InventoryTypeComponent } from './inventory/inventory-type/inventory-typ
     VendorsComponent,
     NewSuperAdmitPageComponent,
     RatePageComponent,
-    InventoryTypeComponent
+    InventoryTypeComponent,
+    FilterByDatePipe
   ],
   imports: [
     BrowserModule,
@@ -199,7 +201,7 @@ import { InventoryTypeComponent } from './inventory/inventory-type/inventory-typ
     TransactionService,
     HomeService,
     HouskeepingService,
-    RoomService,
+    InventoryService,
     ActivityChatService,
     CredentialsService,
     EmployeesService,
