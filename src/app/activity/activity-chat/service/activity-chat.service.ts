@@ -62,7 +62,7 @@ export class ActivityChatService {
   }
 
   getMessages() {
-    this.messagesCol = this.afs.collection('messages', ref => ref.orderBy('date'));
+    this.messagesCol = this.afs.collection('messages', ref => ref.orderBy('date', "desc"));
     return this.messagesCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {

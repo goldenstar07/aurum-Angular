@@ -51,9 +51,11 @@ const appRoutes: Routes = [
   { path: 'activity', component: ActivityComponent, canActivate: [AutGuard] },
   { path: 'activity-chat', component: ActivityChatComponent, canActivate: [AutGuard] },
   { path: 'bills-misc', component: BillsMiscComponent, canActivate: [AutGuard] },
-  { path: 'forms', component: FormsComponent, canActivate: [AutGuard] },
+  { path: 'forms', comphbonent: FormsComponent, canActivate: [AutGuard] },
   { path: 'super-admin', component: NewSuperAdmitPageComponent, canActivate: [AutGuard] },
-  { path: 'rate-page', component: RatePageComponent, canActivate: [AutGuard] }
+  { path: 'rate-page', component: RatePageComponent, canActivate: [AutGuard] },
+
+
 ];
 
 @NgModule({
