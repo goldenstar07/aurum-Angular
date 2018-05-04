@@ -1,94 +1,114 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
-/*Interfaces */
-import { Inventory } from "../interface/inventory";
-// Services
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import {AngularFirestore} from "angularfire2/firestore";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
-import * as firebase from "firebase/app";
+import {InventoryService} from "../services/inventory.service";
+import {DatePipe} from "@angular/common";
+import {InventoryManeger} from "../../shared/classes/InventoryMenager"
 
 @Component({
   selector: 'app-fb',
   templateUrl: './fb.component.html',
   styleUrls: ['./fb.component.scss']
 })
-export class FbComponent implements OnInit {
-  closeResult: string;
-  form: FormGroup;
-
-  item: string;
-  have: any;
-  need: any;
-
-  constructor(private router: Router,
-              private modalService: NgbModal,
-              private formBuilder: FormBuilder,
-              private afs: AngularFirestore,
+export class FbComponent extends InventoryManeger implements OnInit {
+  constructor(public modalService: NgbModal,
+              public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
-              public dataStorageService: DataStorageService) { }
+              public dataStorageService: DataStorageService,
+              public inventoryService: InventoryService,
+              public datePipe: DatePipe) {
+    super(modalService, formBuilder, dataProcessingService, dataStorageService, datePipe);
+  }
+
 
   ngOnInit() {
+    this.inventoryService.getInventories().subscribe(res => {
+      this.inventoryItems = res[0].data;
+      this.inventoryLabels = [];
+      this.getDates(this.inventoryItems.fb[Object.keys(this.inventoryItems.fb)[0]]);
+      this.getLabels(this.inventoryItems.fb);
+    });
+
     this.form = this.formBuilder.group({
       date: [''],
-      fbs: this.formBuilder.array([this.createFormInput()])
+      inventories: this.formBuilder.array([this.createFormInput()])
     });
     console.log(this.form);
   }
 
-  createFormInput(): FormGroup {
-    return this.formBuilder.group({
-      item: '',
-      have: '',
-      need: ''
-    });
-  }
-
-  addFormInput() {
-    const fb = this.createFormInput();
-    this.fbs.push(fb);
-  }
-  get fbs(): FormArray {
-    return this.form.get('fbs') as FormArray;
+  addItem(item,hotelId){
+    this.inventoryService.addFb(item, hotelId);
   }
 
   saveFormInput() {
-    console.log(this.form.value);
-  }
 
-  addNewFb() {
-    let fb: Inventory = {
-      item: this.item,
-      have: this.have,
-      need: this.need,
-      hotelId: localStorage.hotelId
-    };
-    /*console.log(transaction);
-    this.afs.collection('transactions').add(transaction);*/
-  }
-
-
-
-
-  openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    this.form.value.inventories.forEach(item => {
+      if (!this.inventoryItems.fb[item.item]) this.addNewItem(item.item);
     });
+
+
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let indexOfItem = this.checkIfDateExist(date);
+
+
+
+    if (indexOfItem == -1) {
+      this.addNewDate(date);
+      indexOfItem = this.inventoryDates.length - 1;
+    }
+
+    this.form.value.inventories.forEach(item => {
+      this.inventoryItems.fb[item.item][indexOfItem].need = item.need;
+      this.inventoryItems.fb[item.item][indexOfItem].have = item.have;
+    });
+
+    this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
+
+    this.sortByDate();
+    this.addItem(this.inventoryItems.fb, localStorage.hotelId);
+  }
+  addNewItem(name) {
+    this.inventoryItems.fb[name] = [];
+    this.inventoryDates.forEach(date => {
+      this.inventoryItems.fb[name].push({
+        date: date,
+        have: "",
+        need: ""
+      })
+    })
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+  addNewDate(date) {
+    this.inventoryDates.push(date)
+    for (let key in this.inventoryItems.fb) {
+      this.inventoryItems.fb[key].push({
+        date: date,
+        have: "",
+        need: ""
+      })
     }
+  }
+  updateRooms() {
+    this.addItem(this.inventoryItems.fb, localStorage.hotelId);
+  }
+
+  sortByDate() {
+    for (let key in this.inventoryItems.fb) {
+      this.inventoryItems.fb[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+    }
+    this.getDates(this.inventoryItems.fb[Object.keys(this.inventoryItems.fb)[0]]);
+  }
+
+  updateItemsByType() {
+    this.currentItem = this.inventoryItems.fb[this.nameOfItem];
   }
 
 }
+
+
+

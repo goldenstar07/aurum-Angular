@@ -13,10 +13,10 @@ import {FormBuilder} from "@angular/forms";
 import {HotelService} from "../../hotels/services/hotel.service";
 
 @Injectable()
-export class RoomService {
+export class InventoryService {
 
-  rooomsCol: AngularFirestoreCollection<Inventory>;
-  roooms: string;
+  inventoriesCol: AngularFirestoreCollection<Inventory>;
+
   hotelId: string;
 
   constructor(private afs: AngularFirestore,
@@ -28,9 +28,9 @@ export class RoomService {
               private hotelSevice: HotelService) {}
 
 
-  getRooms() {
-    this.rooomsCol = this.afs.collection('inventories');
-    return this.rooomsCol.snapshotChanges()
+  getInventories() {
+    this.inventoriesCol = this.afs.collection('inventories');
+    return this.inventoriesCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data() as Inventory;
@@ -45,11 +45,20 @@ export class RoomService {
       "room" : room
     });
   }
+  addMaintenance(item, hotelId) {
+    this.afs.collection('inventories').doc(hotelId).update({
+      "maintenance" : item
+    });
+  }
+  addFb(item, hotelId) {
+    this.afs.collection('inventories').doc(hotelId).update({
+      "fb" : item
+    });
+  }
+
+  addMisc(item, hotelId) {
+    this.afs.collection('inventories').doc(hotelId).update({
+      "misc" : item
+    });
+  }
 }
-
-/*
-this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user))
-this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user))
-
-doc(response.uid)
-this.afs.collection(інвентарі').doc(ІД ГОТЕЛЯ)*/

@@ -1,89 +1,114 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
-/*Interfaces */
-import { Inventory } from "../interface/inventory";
-// Services
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import {AngularFirestore} from "angularfire2/firestore";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
-import * as firebase from "firebase/app";
+import {InventoryService} from "../services/inventory.service";
+import {DatePipe} from "@angular/common";
+import {InventoryManeger} from "../../shared/classes/InventoryMenager"
 
 @Component({
   selector: 'app-maintenance',
   templateUrl: './maintenance.component.html',
   styleUrls: ['./maintenance.component.scss']
 })
-export class MaintenanceComponent implements OnInit {
-  closeResult: string;
-  form: FormGroup;
-
-  item: string;
-  have: any;
-  need: any;
-
-  constructor(private router: Router,
-              private modalService: NgbModal,
-              private formBuilder: FormBuilder,
-              private afs: AngularFirestore,
+export class MaintenanceComponent extends InventoryManeger implements OnInit {
+  constructor(public modalService: NgbModal,
+              public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
-              public dataStorageService: DataStorageService) { }
+              public dataStorageService: DataStorageService,
+              public inventoryService: InventoryService,
+              public datePipe: DatePipe) {
+    super(modalService, formBuilder, dataProcessingService, dataStorageService, datePipe);
+  }
+
 
   ngOnInit() {
+    this.inventoryService.getInventories().subscribe(res => {
+      this.inventoryItems = res[0].data;
+      this.inventoryLabels = [];
+      this.getDates(this.inventoryItems.maintenance[Object.keys(this.inventoryItems.maintenance)[0]]);
+      this.getLabels(this.inventoryItems.maintenance);
+    });
+
     this.form = this.formBuilder.group({
       date: [''],
-      maintenances: this.formBuilder.array([this.createFormInput()])
+      inventories: this.formBuilder.array([this.createFormInput()])
     });
     console.log(this.form);
   }
-  createFormInput(): FormGroup {
-    return this.formBuilder.group({
-      item: '',
-      have: '',
-      need: ''
-    });
-  }
-  addFormInput() {
-    const maintenance = this.createFormInput();
-    this.maintenances.push(maintenance);
-  }
-  get maintenances(): FormArray {
-    return this.form.get('maintenances') as FormArray;
+
+  addItem(item,hotelId){
+    this.inventoryService.addMaintenance(item, hotelId);
   }
 
   saveFormInput() {
-    console.log(this.form.value);
-  }
 
-  addNewMaintenance() {
-    let maintenance: Inventory = {
-      item: this.item,
-      have: this.have,
-      need: this.need,
-      hotelId: localStorage.hotelId
-    };
-    /*console.log(transaction);
-    this.afs.collection('transactions').add(transaction);*/
-  }
-
-  openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    this.form.value.inventories.forEach(item => {
+      if (!this.inventoryItems.maintenance[item.item]) this.addNewItem(item.item);
     });
+
+
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let indexOfItem = this.checkIfDateExist(date);
+
+
+
+    if (indexOfItem == -1) {
+      this.addNewDate(date);
+      indexOfItem = this.inventoryDates.length - 1;
+    }
+
+    this.form.value.inventories.forEach(item => {
+      this.inventoryItems.maintenance[item.item][indexOfItem].need = item.need;
+      this.inventoryItems.maintenance[item.item][indexOfItem].have = item.have;
+    });
+
+    this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
+
+    this.sortByDate();
+    this.addItem(this.inventoryItems.maintenance, localStorage.hotelId);
+  }
+  addNewItem(name) {
+    this.inventoryItems.maintenance[name] = [];
+    this.inventoryDates.forEach(date => {
+      this.inventoryItems.maintenance[name].push({
+        date: date,
+        have: "",
+        need: ""
+      })
+    })
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+  addNewDate(date) {
+    this.inventoryDates.push(date)
+    for (let key in this.inventoryItems.maintenance) {
+      this.inventoryItems.maintenance[key].push({
+        date: date,
+        have: "",
+        need: ""
+      })
     }
+  }
+  updateRooms() {
+    this.addItem(this.inventoryItems.maintenance, localStorage.hotelId);
+  }
+
+  sortByDate() {
+    for (let key in this.inventoryItems.maintenance) {
+      this.inventoryItems.maintenance[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+    }
+    this.getDates(this.inventoryItems.maintenance[Object.keys(this.inventoryItems.maintenance)[0]]);
+  }
+
+  updateItemsByType() {
+    this.currentItem = this.inventoryItems.maintenance[this.nameOfItem];
   }
 
 }
+
+
+

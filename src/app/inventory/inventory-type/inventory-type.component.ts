@@ -10,7 +10,6 @@ import {Inventory} from "../interface/inventory";
 // Services
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
-import {RoomService} from "../services/room.service";
 import {DatePipe} from "@angular/common";
 
 @Component({
@@ -21,9 +20,9 @@ import {DatePipe} from "@angular/common";
 export class InventoryTypeComponent implements OnInit {
   form: FormGroup;
 
-  roomItems: any;
-  roomLabels: Array<any>;
-  roomDates: any;
+  inventoryItems: any;
+  inventoryLabels: Array<any>;
+  inventoryDates: any;
   hotelId: string;
 
   constructor(private router: Router,
@@ -32,7 +31,6 @@ export class InventoryTypeComponent implements OnInit {
               private afs: AngularFirestore,
               public dataProcessingService: DataProcessingService,
               public dataStorageService: DataStorageService,
-              private roomService: RoomService,
               private datePipe: DatePipe) { }
 
   ngOnInit() {

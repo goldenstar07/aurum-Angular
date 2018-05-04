@@ -82,7 +82,7 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
 import {ChangePropertyComponent} from './change-property/change-property.component';
 import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
 import {HouskeepingService} from "./housekeeping/services/houskeeping.service";
-import {RoomService} from "./inventory/services/room.service";
+import {InventoryService} from "./inventory/services/inventory.service";
 import {ActivityChatService} from "./activity/activity-chat/service/activity-chat.service";
 import {CredentialsService} from "./property/services/credentials.service";
 import {EmployeesService} from "./property/services/employees.service";
@@ -96,7 +96,7 @@ import {SuperAdminService} from './new-super-admit-page/services/super-admin.ser
 import { RatePageComponent } from './rate-page/rate-page.component';
 import { DatePipe } from '@angular/common';
 import { InventoryTypeComponent } from './inventory/inventory-type/inventory-type.component';
-import {NgxAutoScrollModule} from "ngx-auto-scroll";
+import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -144,6 +144,7 @@ import {NgxAutoScrollModule} from "ngx-auto-scroll";
     NewSuperAdmitPageComponent,
     RatePageComponent,
     InventoryTypeComponent,
+    FilterByDatePipe
   ],
   imports: [
     BrowserModule,
@@ -186,8 +187,7 @@ import {NgxAutoScrollModule} from "ngx-auto-scroll";
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
-    NgxAutoScrollModule
+    MatTooltipModule
   ],
   providers: [
     DataStorageService,
@@ -201,7 +201,7 @@ import {NgxAutoScrollModule} from "ngx-auto-scroll";
     TransactionService,
     HomeService,
     HouskeepingService,
-    RoomService,
+    InventoryService,
     ActivityChatService,
     CredentialsService,
     EmployeesService,
