@@ -6,4 +6,5 @@ export interface Admin {
   number?: any;
   status?: any;
   hotelId?: string;
+  role?: any;
 }

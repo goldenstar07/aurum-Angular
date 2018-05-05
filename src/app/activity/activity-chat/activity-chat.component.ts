@@ -10,7 +10,6 @@ import {Hotel} from '../../hotels/interfaces/hotel';
 import {DataStorageService} from '../../shared/services/data-storage.service';
 import {Bill} from "../../upload/interfaces/bill";
 import {Observable} from "rxjs/Observable";
-import ng_chat_scroller from "ng-chat-scroller";
 import {NgxAutoScroll} from "ngx-auto-scroll";
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 

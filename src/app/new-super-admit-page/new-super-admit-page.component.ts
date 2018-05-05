@@ -30,6 +30,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
   admins: any;
   admin: Observable<Admin>;
   hotel: Observable<Hotel>;
+  deletedAdmin: any;
 
   city: string;
   name: string;
@@ -38,6 +39,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
   number: any;
   status: any;
   hotelId: string;
+  role: any;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -74,15 +76,19 @@ export class NewSuperAdmitPageComponent implements OnInit {
       email: this.email,
       number: this.number,
       status: this.status,
+      role: "admin",
       hotelId: localStorage.hotelId
     }
-    this.authService.signUpUser(admin, this.password);
+    this.authService.signUpAdmin(admin, this.password);
   }
 
-    deleteSuperAdmin(adminId) {
+   /* deleteSuperAdmin(adminId) {
     console.log(adminId);
-      this.afs.doc('admins/' +adminId).delete();
-    }
+      this.afs.doc('admins/' + adminId).delete();
+    }*/
+  deleteSuperAdmin(adminId) {
+    this.deletedAdmin = this.superAdminService.deleteAdminService(adminId);
+  }
 
     /*Popup*/
     openNewProperty(contentNewProperty) {

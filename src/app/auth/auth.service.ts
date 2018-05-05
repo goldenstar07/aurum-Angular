@@ -33,6 +33,16 @@ export class AuthService {
       );
   }
 
+  signUpAdmin(admin, password) {
+    firebase.auth().createUserWithEmailAndPassword(admin.email, password)
+      .then(response => {
+        this.afs.collection('admins').doc(response.uid).set(Object.assign({}, admin))
+      })
+      .catch(
+        error => console.log(error)
+      );
+  }
+
   signInUser(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
@@ -47,7 +57,7 @@ export class AuthService {
                 break;
               case "admin":
                 this.router.navigate(['hotels']);
-                break
+                break;
               default:  this.router.navigate(['login']);
             }
           });
@@ -58,6 +68,20 @@ export class AuthService {
       );
   }
 
+  signInAdmin(email: string, password: string) {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(
+        response => {
+          this.afs.doc('admins/' + response.uid).valueChanges().subscribe(res => {
+            this.dataStoreService.setUser(res);
+            const currentAdmin = this.dataStoreService.getUser();
+            });
+        }
+      )
+      .catch(
+        error => console.log(error)
+      );
+  }
   logout() {
     firebase.auth().signOut();
     this.router.navigate(['/login']);

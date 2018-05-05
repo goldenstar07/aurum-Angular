@@ -95,9 +95,10 @@ import { NewSuperAdmitPageComponent } from './new-super-admit-page/new-super-adm
 import {SuperAdminService} from './new-super-admit-page/services/super-admin.service';
 import { RatePageComponent } from './rate-page/rate-page.component';
 import { DatePipe } from '@angular/common';
-import { InventoryTypeComponent } from './inventory/inventory-type/inventory-type.component';
+/*import { InventoryTypeComponent } from './inventory/inventory-type/inventory-type.component';*/
 import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
 import {HkGoalsDateComponent} from "./housekeeping/hk-goals-date/hk-goals-date.component";
+import {NgxAutoScroll} from 'ngx-auto-scroll';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -144,7 +145,7 @@ import {HkGoalsDateComponent} from "./housekeeping/hk-goals-date/hk-goals-date.c
     VendorsComponent,
     NewSuperAdmitPageComponent,
     RatePageComponent,
-    InventoryTypeComponent,
+    /*InventoryTypeComponent,*/
     FilterByDatePipe,
     HkGoalsDateComponent
   ],

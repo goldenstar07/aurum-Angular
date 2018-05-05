@@ -37,4 +37,8 @@ export class SuperAdminService {
     /*this.afs.collection('admins').doc(hotelId).set(vendor);*/
     this.afs.collection('admins').add(admin);
   }
+
+  deleteAdminService(adminId) {
+    this.afs.doc('admin/' + adminId).delete();
+  }
 }

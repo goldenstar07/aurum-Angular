@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   addNewManager() {
-    let manager : Manager = {
+    let manager: Manager = {
       name: this.name,
       email: this.email,
       role: "manager",
