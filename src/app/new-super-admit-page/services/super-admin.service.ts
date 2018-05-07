@@ -10,16 +10,21 @@ import {DataStorageService} from "../../shared/services/data-storage.service";
 import {Hotel} from '../../hotels/interfaces/hotel';
 import {Vendor} from '../../property/interfaces/vendor';
 import {DataProcessingService} from "../../shared/services/data-processing.service";
+import {AuthService} from "../../auth/auth.service";
+import {Manager} from "../../home/interfaces/manager";
 
 @Injectable()
 export class SuperAdminService {
   adminsCol: AngularFirestoreCollection<Admin>;
   admins: any;
 
+  password: any;
+
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase,
               private dataStorageService: DataStorageService,
-              public dataProcessingService: DataProcessingService) {}
+              public dataProcessingService: DataProcessingService,
+              private authService: AuthService) {}
 
   getAdmins() {
     this.adminsCol = this.afs.collection('admins');
@@ -35,7 +40,8 @@ export class SuperAdminService {
 
   addAdmin(admin) {
     /*this.afs.collection('admins').doc(hotelId).set(vendor);*/
-    this.afs.collection('admins').add(admin);
+    this.afs.collection('admins').add(admin);/*
+    this.authService.signUpAdmin(admin, this.password);*/
   }
 
   deleteAdminService(adminId) {

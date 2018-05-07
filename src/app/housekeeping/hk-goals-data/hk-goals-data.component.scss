@@ -36,29 +36,8 @@ hr {
   height: 1px;
   opacity: 0.5;
 }
-#logo {
-  background: #0d0d0d;
-  position: fixed;
-  height: 100vh;
-  top: 0;
-  left: 0;
-}
-#header {
-  width: 100%;
-  background: $primary-color;
-  height: 55px;
-  margin-left: 72px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  font-weight: $font-bold;
-  .header__text {
-    color: $title-color;
-    font-size: 28px;
-    padding: 8px 8px 8px 25px;
-    text-transform: uppercase;
-  }
+input{
+  border: none;
 }
 #main {
   padding: 55px 0 0 72px;
@@ -101,7 +80,7 @@ hr {
     box-shadow: 0 4px 5px -2px #000;
     .search__date__item {
       border: 1px solid $font-gray;
-      width: 110px;
+      width: 100px;
       height: 35px;
       display: flex;
       justify-content: center;
@@ -127,7 +106,7 @@ hr {
     border: 1px solid $font-gray;
     box-shadow: 0 4px 5px -2px #000;
     .custom-select {
-      width: 30%;
+      width: 25%;
       background: gray;
       color: $primary-color;
     }
@@ -158,44 +137,17 @@ hr {
 }
 .table {
   width: 600px;
-  margin-top: 50px;
+  margin-top: 70px;
   margin-left: 30px;
   th {
     background-color: $font-gray4;
     text-align: center;
-    font-size: 20px;
-    vertical-align: middle;
   }
-  p {
-    padding: 0;
-    margin: -8px;
-  }
-  .font-gray {
-    background-color: $font-gray4;
-  }
-  .min__so {
-    font-weight: 100;
-    display: inline-block;
-    margin-left: 125px;
-    font-size: 15px;
-    color: $font-gray;
-    position: relative;
-    bottom: 18px;
-  }
-  .min__co {
-    display: block;
-    font-weight: 100;
-    margin-left: 125px;
-    font-size: 15px;
-    color: $font-gray;
-    position: relative;
-    bottom: 18px;
-  }
-  .big__td {
-    width: 110px;
+  td {
+    padding: 5px;
   }
   .type {
-    width: 25%;
+    width: 15%;
     text-align: center;
     vertical-align: middle;
   }
@@ -204,35 +156,21 @@ hr {
     text-align: center;
     vertical-align: middle;
     padding: 0;
-  }
-  .th__title {
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 32px;
-    left: 20px;
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-  .th__title__last {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: 7px;
+    font-size: 14px;
   }
   .fa-edit {
     color: gray;
     font-size: 20px;
     cursor: pointer;
     position: relative;
-    top: -2px;
-    left: 8px;
+    top: 2px;
   }
   .td-numb {
     text-align: center;
     margin: 5px;
     display: block;
+    border: none;
+    width: 50px;
   }
   .td-input {
     width: 80px;
@@ -251,10 +189,9 @@ hr {
   }
 }
 .plus__circle {
+  margin-left: 25px;
+  margin-bottom: 170px;
   cursor: pointer;
-  position: relative;
-  left: 20px;
-  bottom: 100px;
 }
 .save__button {
   position: relative;
@@ -360,6 +297,16 @@ hr {
       color: $color-fff;
       font-weight: $font-bold;
       cursor: pointer;
+    }
+  }
+  .add__item__block {
+    .add__item__btn {
+      border: 1px solid $primary-color;
+      background-color: $primary-color;
+      color: $title-color;
+      border-radius: 3px;
+      padding: 5px 10px;
+      margin-top: 25px;
     }
   }
 }

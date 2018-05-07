@@ -207,7 +207,7 @@
             <input type="text" class="td-input" formControlName="inputValue3" id="inputValue3" placeholder="">
           </div>
           <form formArrayName="values" *ngFor="let housekeeping of form.get('housekeepings').controls; let i=index">
-          <div class="input__housekeeper" [formGroupName]="i">
+            <div class="input__housekeeper" [formGroupName]="i">
               <input type="text" class="td-input" formControlName="name" id="name" placeholder="">
               <input type="text" class="td-input" formControlName="value1" id="value1" placeholder="">
               <input type="text" class="td-input" formControlName="value2" id="value2" placeholder="">
