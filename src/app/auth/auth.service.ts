@@ -74,7 +74,6 @@ export class AuthService {
         response => {
           this.afs.doc('admins/' + response.uid).valueChanges().subscribe(res => {
             this.dataStoreService.setUser(res);
-            const currentAdmin = this.dataStoreService.getUser();
             });
         }
       )

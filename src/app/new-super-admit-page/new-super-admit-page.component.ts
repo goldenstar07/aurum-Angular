@@ -27,10 +27,12 @@ export class NewSuperAdmitPageComponent implements OnInit {
   form: FormGroup;
   password: string;
 
+  adminsCol: AngularFirestoreCollection<Admin>;
   admins: any;
   admin: Observable<Admin>;
   hotel: Observable<Hotel>;
   deletedAdmin: any;
+  adminn: Array<Admin>;
 
   city: string;
   name: string;
@@ -52,7 +54,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*this.admins = this.superAdminService.getAdmins();
+   /* this.admins = this.superAdminService.getAdmins();
     console.log(this.admins);*/
     this.superAdminService.getAdmins().subscribe(res => {
       this.admins  = res;
@@ -79,7 +81,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
       role: "admin",
       hotelId: localStorage.hotelId
     };
-    /*this.authService.signUpAdmin(admin, this.password);*/
+    this.authService.signUpAdmin(admin, this.password);
   }
 
    /* deleteSuperAdmin(adminId) {

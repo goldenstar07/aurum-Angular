@@ -18,7 +18,17 @@ export class SuperAdminService {
   adminsCol: AngularFirestoreCollection<Admin>;
   admins: any;
 
-  password: any;
+  password: string;
+  admin: Array<Admin>;
+
+  city: string;
+  name: string;
+  phone: any;
+  email: string;
+  number: any;
+  status: any;
+  hotelId: string;
+  role: any;
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase,
@@ -36,11 +46,22 @@ export class SuperAdminService {
           return {id, data};
         })
       })
-  }
+      }
+
 
   addAdmin(admin) {
-    /*this.afs.collection('admins').doc(hotelId).set(vendor);*/
-    this.afs.collection('admins').add(admin);/*
+    this.afs.collection('admins').add(admin);
+    this.authService.signUpAdmin(admin, this.password);
+   /* let admin: Admin = {
+      name: this.name,
+      city: this.city,
+      phone: this.phone,
+      email: this.email,
+      number: this.number,
+      status: this.status,
+      role: "admin",
+      hotelId: localStorage.hotelId
+    };
     this.authService.signUpAdmin(admin, this.password);*/
   }
 
