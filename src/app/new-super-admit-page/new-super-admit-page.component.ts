@@ -81,7 +81,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
       role: "admin",
       hotelId: localStorage.hotelId
     };
-    this.authService.signUpAdmin(admin, this.password);
+    this.authService.signUpAdmin(admin, admin.password);
   }
 
   /* deleteSuperAdmin(adminId) {
