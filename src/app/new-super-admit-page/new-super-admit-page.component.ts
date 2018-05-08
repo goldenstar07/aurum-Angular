@@ -54,8 +54,8 @@ export class NewSuperAdmitPageComponent implements OnInit {
   }
 
   ngOnInit() {
-   /* this.admins = this.superAdminService.getAdmins();
-    console.log(this.admins);*/
+    /* this.admins = this.superAdminService.getAdmins();
+     console.log(this.admins);*/
     this.superAdminService.getAdmins().subscribe(res => {
       this.admins  = res;
       console.log(this.admins);
@@ -84,30 +84,30 @@ export class NewSuperAdmitPageComponent implements OnInit {
     this.authService.signUpAdmin(admin, this.password);
   }
 
-   /* deleteSuperAdmin(adminId) {
-    console.log(adminId);
-      this.afs.doc('admins/' + adminId).delete();
-    }*/
+  /* deleteSuperAdmin(adminId) {
+   console.log(adminId);
+     this.afs.doc('admins/' + adminId).delete();
+   }*/
   deleteSuperAdmin(adminId) {
     this.deletedAdmin = this.superAdminService.deleteAdminService(adminId);
   }
 
-    /*Popup*/
-    openNewProperty(contentNewProperty) {
-      this.modalService.open(contentNewProperty).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-    }
+  /*Popup*/
+  openNewProperty(contentNewProperty) {
+    this.modalService.open(contentNewProperty).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
   private getDismissReason(reason: any): string {
-      if (reason === ModalDismissReasons.ESC) {
-        return 'by pressing ESC';
-      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-        return 'by clicking on a backdrop';
-      } else {
-        return `with: ${reason}`;
-      }
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
     }
   }
+}

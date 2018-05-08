@@ -34,6 +34,8 @@ export class AuthService {
   }
 
   signUpAdmin(admin, password) {
+    console.log(admin);
+    console.log(password);
     firebase.auth().createUserWithEmailAndPassword(admin.email, password)
       .then(response => {
         this.afs.collection('admins').doc(response.uid).set(Object.assign({}, admin))
@@ -74,7 +76,7 @@ export class AuthService {
         response => {
           this.afs.doc('admins/' + response.uid).valueChanges().subscribe(res => {
             this.dataStoreService.setUser(res);
-            });
+          });
         }
       )
       .catch(

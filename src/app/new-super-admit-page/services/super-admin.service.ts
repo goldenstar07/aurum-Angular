@@ -46,23 +46,23 @@ export class SuperAdminService {
           return {id, data};
         })
       })
-      }
+  }
 
 
   addAdmin(admin) {
     this.afs.collection('admins').add(admin);
-    this.authService.signUpAdmin(admin, this.password);
-   /* let admin: Admin = {
-      name: this.name,
-      city: this.city,
-      phone: this.phone,
-      email: this.email,
-      number: this.number,
-      status: this.status,
-      role: "admin",
-      hotelId: localStorage.hotelId
-    };
-    this.authService.signUpAdmin(admin, this.password);*/
+    this.authService.signUpAdmin(admin, admin.password);
+    /* let admin: Admin = {
+       name: this.name,
+       city: this.city,
+       phone: this.phone,
+       email: this.email,
+       number: this.number,
+       status: this.status,
+       role: "admin",
+       hotelId: localStorage.hotelId
+     };
+     this.authService.signUpAdmin(admin, this.password);*/
   }
 
   deleteAdminService(adminId) {
