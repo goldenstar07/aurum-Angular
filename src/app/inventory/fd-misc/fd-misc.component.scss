@@ -157,8 +157,6 @@ hr {
     text-align: center;
     margin: 5px;
     display: block;
-    border: none;
-    width: 50px;
   }
   .td-input {
     width: 80px;
@@ -177,9 +175,10 @@ hr {
   }
 }
 .plus__circle {
-  margin-left: 25px;
-  margin-bottom: 170px;
+  position: relative;
   cursor: pointer;
+  top: -85px;
+  left: 20px;
 }
 .save__button {
   position: relative;
@@ -311,6 +310,15 @@ hr {
   .pass__block input {
     margin-top: 10px;
   }
-
+}
+@media screen and (max-width: 465px){
+  .main__block {
+    border: 10px solid #707070;
+  }
+}
+@media screen and (max-width: 375px){
+  .main__block {
+    border: 5px solid #707070;
+  }
 }
 

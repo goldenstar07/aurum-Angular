@@ -181,13 +181,12 @@ select {
     outline: none;
   }
 }
-
-
-
 .plus__circle {
-  margin-left: 20px;
-  margin-bottom: 70px;
   cursor: pointer;
+  position: relative;
+  left: 20px;
+  top: -235px;
+
 }
 .text__block__btn {
   text-align: center;
@@ -205,10 +204,8 @@ select {
 }
 .table td, .table th {
   padding: 0.25rem!important;
+  vertical-align: middle;
 }
-
-
-
 
 .save__button {
   position: relative;
@@ -284,12 +281,6 @@ select {
   input:focus {
     outline: none;
   }
-  .plus__circle {
-    cursor: pointer;
-    position: relative;
-    left: 150px;
-    bottom: 38px;
-  }
   .save__btn {
     .button__item {
       font-size: 26px;
@@ -333,6 +324,16 @@ select {
   }
   .select__date {
     width: 80%!important;
+  }
+}
+@media screen and (max-width: 465px){
+  .main__block {
+    border: 10px solid #707070;
+  }
+}
+@media screen and (max-width: 375px){
+  .main__block {
+    border: 5px solid #707070;
   }
 }
 
