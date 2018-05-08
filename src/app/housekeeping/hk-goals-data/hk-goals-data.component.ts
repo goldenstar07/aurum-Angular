@@ -55,7 +55,7 @@ export class HkGoalsDataComponent extends HkManager implements OnInit {
     console.log(this.form);
   }
 
-  createFormInput(): FormGroup {
+  /*createFormInput(): FormGroup {
     return this.formBuilder.group({
       name: '',
       dnd: '',
@@ -63,7 +63,7 @@ export class HkGoalsDataComponent extends HkManager implements OnInit {
       min: ''
     });
 
-  }
+  }*/
 
   /* addFormInput() {
      const goal = this.createFormInput();
@@ -110,6 +110,7 @@ export class HkGoalsDataComponent extends HkManager implements OnInit {
   }
 
   addNewItem(name) {
+    console.log(name);
     this.housekeepingItems.housekeeping[name] = [];
     this.housekeepingDates.forEach(date => {
       this.housekeepingItems.housekeeping[name].push({

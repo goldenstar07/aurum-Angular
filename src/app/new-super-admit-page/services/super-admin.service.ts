@@ -51,6 +51,7 @@ export class SuperAdminService {
 
   addAdmin(admin) {
     this.afs.collection('admins').add(admin);
+
     this.authService.signUpAdmin(admin, admin.password);
     /* let admin: Admin = {
        name: this.name,

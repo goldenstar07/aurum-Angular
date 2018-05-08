@@ -15,12 +15,14 @@ import {HotelService} from "../../hotels/services/hotel.service";
 
 @Injectable()
 export class HouskeepingService {
+
   housekeepingsCol: AngularFirestoreCollection<Housekeeping>;
 
   hotelId: string;
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase,
+              private dataStorageService: DataStorageService,
               public dataProcessingService: DataProcessingService,
               private authService: AuthService,
               private formBuilder: FormBuilder,

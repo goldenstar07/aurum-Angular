@@ -38,7 +38,7 @@ const appRoutes: Routes = [
   { path: 'hotels', component:  HotelsComponent , canActivate: [AutGuard, AdminGuard] },
   { path: 'transactions-date', component: TransactionsDateComponent, canActivate: [AutGuard] },
   { path: 'transactions-type', component: TransactionsTypeComponent, canActivate: [AutGuard] },
-  { path: 'houskeeping-date', component: HkGoalsDataComponent, canActivate: [AutGuard] },
+  { path: 'houskeeping-data', component: HkGoalsDataComponent, canActivate: [AutGuard] },
   { path: 'houskeeping-hk', component: HkGoalsHkComponent, canActivate: [AutGuard] },
   { path: 'room', component: RoomComponent, canActivate: [AutGuard] },
   { path: 'maintenance', component: MaintenanceComponent, canActivate: [AutGuard] },
