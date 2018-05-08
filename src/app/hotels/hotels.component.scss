@@ -29,6 +29,41 @@ a , a:hover {
 a:hover {
   text-shadow: 1px 0 10px #0d0d0d, 1px 1px 3px yellow;;
 }
+
+#logo {
+  background: #0d0d0d;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  .logo__item {
+    background: url("../images/logo__image.png");
+    height: 72px;
+    width: 72px;
+  }
+}
+
+#header {
+  width: auto;
+  background: $primary-color;
+  height: 55px;
+  margin-left: 72px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  .header__text {
+    color: $title-color;
+    font-size: 28px;
+    padding: 8px 8px 8px 25px;
+    text-transform: uppercase;
+  }
+}
+#header:hover {
+  z-index: 999;
+}
+
 img {
   width: 100%;
   height: 200px;
@@ -211,7 +246,7 @@ input:focus {
 @media screen and (max-width: 535px){
   .table__block {
     max-width: 90%;
-    }
+  }
   .main__title h2 {
     font-size: 25px;
   }

@@ -1,4 +1,5 @@
-/*Specification*/
+/*
+!*Specification*!
 
 $primary-color:        #0d0d0d;
 $title-color:          #E8E721;
@@ -12,14 +13,14 @@ $font-sz-12:           12px;
 $font-gray2:           #575652;
 $font-gray3:           #E6E5E2;
 
-/*@font-face {
+!*@font-face {
   font-family: HelveticaNeue Thin;
   src: url("../../fonts/HelveticaNeue Thin.ttf") format("opentype");
 }
 @font-face {
   font-family: Helvetica Neu Bold;
   src: url("../../fonts/Helvetica Neu Bold.ttf") format("opentype");
-}*/
+}*!
 
 body {
   font-family: $font-main, Helvetica,  Arial,sans-serif;
@@ -38,31 +39,7 @@ hr {
   height: 1px;
   opacity: 0.5;
 }
-#logo {
-  background: #0d0d0d;
-  position: fixed;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  flex-direction: column-reverse;
-}
-#header {
-  width: 100%;
-  background: $primary-color;
-  height: 55px;
-  margin-left: 72px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  font-weight: $font-bold;
-  .header__text {
-    color: $title-color;
-    font-size: 28px;
-    padding: 8px 8px 8px 25px;
-    text-transform: uppercase;
-  }
-}
+
 #main {
   padding: 55px 0 0 72px;
 }
@@ -72,93 +49,7 @@ hr {
   height: calc(100vh - 55px);
   overflow-y: auto;
 }
-.search__block {
-  padding: 20px;
-  .search__text__block {
-    p {
-      font-size: 15px;
-    }
-  }
-  .type_button {
-    margin-left: 15px;
-  }
-  .button__item {
-    font-size: 16px;
-    border:  1px solid $font-gray;
-    padding: 6px 15px;
-    width: 20%;
-    text-align: center;
-    border-radius: 50px;
-    background-color: $color-fff;
-    box-shadow: 0 4px 5px -2px #000;;
-  }
-  .button__item:hover {
-    background-color: $font-gray;
-    color: $color-fff;
-  }
-  .search__date__block {
-    border-radius: 60px;
-    width: 300px;
-    height: 120px;
-    border: 1px solid $font-gray;
-    box-shadow: 0 4px 5px -2px #000;
-    .search__date__item {
-      border: 1px solid $font-gray;
-      width: 110px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      font-size: 14px;
-      font-weight: $font-bold;
-      background-color: $font-gray4;
-    }
-    p {
-      text-align: center;
-      margin: 10px 0 0 0;
-      font-size: 10px;
-      font-style: italic;
-      line-height: 5px;
-    }
-  }
-  .search__date-range__block {
-    background-color: $font-gray4;
-    border-radius: 60px;
-    width: 40%;
-    height: 120px;
-    border: 1px solid $font-gray;
-    box-shadow: 0 4px 5px -2px #000;
-    .custom-select {
-      width: 30%;
-      background: gray;
-      color: $primary-color;
-    }
-    .custom-select:focus {
-      text-decoration: none;
-      outline: none;
-      border: none;
-    }
-  }
-  .date-range__item {
-    .search__date__item {
-      border: 1px solid $font-gray;
-      width: 80px;
-      height: 35px;
-      font-size: 12px;
-      font-weight: $font-bold;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .date-range__title {
-      color: $font-gray;
-      margin-bottom: 4rem;
-      opacity: 0.5;
-      font-weight: $font-bold;
-    }
-  }
-}
+
 .table {
   width: 600px;
   margin-top: 70px;
@@ -234,7 +125,7 @@ hr {
   }
 }
 
-/*POPUP ADD PROPERTY FORM*/
+!*POPUP ADD PROPERTY FORM*!
 .main__block {
   border: 20px solid $font-gray;
   position: relative;
@@ -311,15 +202,4 @@ hr {
 }
 
 
-
-
-//==========media screen===========
-@media screen and (max-width:1199px){
-  .search__block .search__date__block {
-    width: 200px;
-  }
-  .search__block .search__date-range__block .custom-select {
-    width: 25%;
-  }
-}
-
+*/
