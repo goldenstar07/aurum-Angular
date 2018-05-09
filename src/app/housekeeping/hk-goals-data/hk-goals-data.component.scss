@@ -52,7 +52,8 @@ input{
   padding: 20px;
   .search__text__block {
     p {
-      font-size: 15px;
+      font-size: 23px;
+      text-align: center;
     }
   }
   .type_button {
@@ -311,8 +312,81 @@ input{
   }
 }
 
+//==========media screen===========
 @media screen and (max-width:1199px){
-  .main__title {
-    width: 705px;
+  .search__block .search__date__block {
+    width: 200px;
+  }
+  .search__block .search__date-range__block .custom-select {
+    width: 25%;
+  }
+  .search__date-range__block {
+    width: 50%!important;
+  }
+}
+@media screen and (max-width:1024px){
+  .search__block {
+    flex-direction: column;
+    padding: 30px;
+  }
+  .search__text__block {
+    margin-bottom: 30px;
+  }
+  .search__block .search__date__block {
+    width: 300px;
+    margin-bottom: 30px;
+  }
+  .search__date-range__block {
+    width: 500px!important;
+  }
+}
+@media screen and (max-width:768px){
+  .search__date-range__block {
+    width: 315px !important;
+    height: auto!important;
+    padding: 0 6px;
+    margin-left: 20px;
+    flex-direction: column;
+  }
+  .search__block .search__date__block {
+    width: 230px;
+  }
+  .custom-select {
+    width: 41% !important;
+    margin: 15px 0;
+  }
+  .date-range__title {
+    text-align: center;
+    width: 100px;
+  }
+  .search__date__item {
+    width: 90px!important;
+  }
+}
+@media screen and (max-width:425px){
+  .search__block .search__text__block p {
+    font-size: 18px;
+  }
+  .button__item {
+    font-size: 10px!important;
+  }
+  .search__block .search__date__block {
+    width: 200px;
+  }
+  .date-range__item {
+    flex-direction: column;
+  }
+  .date-range__title {
+    margin-bottom: 0!important;
+  }
+  .search__date-range__block {
+    width: 185px !important;
+    margin-left: 0!important;
+  }
+  .custom-select {
+    width: 71% !important;
+  }
+  .search__date__item {
+    margin:10px 0;
   }
 }

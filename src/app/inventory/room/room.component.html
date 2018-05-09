@@ -21,8 +21,6 @@
           <option selected>Select Date</option>
           <option *ngFor="let date of inventoryDates" value="{{date}}">{{date}}</option>
         </select>
-        <p>Previous date entries from</p>
-        <p>date selected will also show</p>
       </div>
 
 
@@ -154,9 +152,9 @@
                   <input type="date" class="search__date__item" formControlName="date" id="date" name="date"
                          placeholder="">
                 </div>
-                <button type="button" class="close" aria-label="Close">
+                <!--<button type="button" class="close" aria-label="Close">
                   <span aria-hidden="true" class="cros">&times;</span>
-                </button>
+                </button>-->
               </div>
               <hr>
               <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index"

@@ -40,7 +40,8 @@ hr {
   padding: 20px;
   .search__text__block {
     p {
-      font-size: 15px;
+      font-size: 23px;
+      text-align: center;
     }
   }
   .type_button {
@@ -81,7 +82,7 @@ hr {
     p {
       text-align: center;
       margin: 10px 0 0 0;
-      font-size: 10px;
+      font-size: 13px;
       font-style: italic;
       line-height: 5px;
     }
@@ -281,44 +282,73 @@ hr {
   .search__block .search__date-range__block .custom-select {
     width: 25%;
   }
-}
-@media screen and (max-width: 425px) {
-  .user__block {
-    width: 90%;
-    padding:20px;
-    height: 400px;
-  }
-  .input {
-    width: 44%;
-  }
-  .confirm__user {
-    padding: 12px 20px;
+  .search__date-range__block {
+    width: 50%!important;
   }
 }
-
-@media screen and (max-width: 392px) {
-  .user__block {
-    width: 90%;
-    padding:20px;
+@media screen and (max-width:1024px){
+  .search__block {
+    flex-direction: column;
+    padding: 30px;
   }
-  .input {
-    margin: 10px 0 0 32px;
+  .search__text__block {
+    margin-bottom: 30px;
   }
-  .confirm__user {
-    padding: 12px 20px;
+  .search__block .search__date__block {
+    width: 300px;
+    margin-bottom: 30px;
   }
-  .pass__block input {
-    margin-top: 10px;
-  }
-}
-@media screen and (max-width: 465px){
-  .main__block {
-    border: 10px solid #707070;
+  .search__date-range__block {
+    width: 500px!important;
   }
 }
-@media screen and (max-width: 375px){
-  .main__block {
-    border: 5px solid #707070;
+@media screen and (max-width:768px){
+  .search__date-range__block {
+    width: 315px !important;
+    height: auto!important;
+    padding: 0 6px;
+    margin-left: 20px;
+    flex-direction: column;
+  }
+  .search__block .search__date__block {
+    width: 230px;
+  }
+  .custom-select {
+    width: 41% !important;
+    margin: 15px 0;
+  }
+  .date-range__title {
+    text-align: center;
+    width: 100px;
+  }
+  .search__date__item {
+    width: 90px!important;
   }
 }
-
+@media screen and (max-width:425px){
+  .search__block .search__text__block p {
+    font-size: 18px;
+  }
+  .button__item {
+    font-size: 10px!important;
+  }
+  .search__block .search__date__block {
+    width: 200px;
+  }
+  .date-range__item {
+    flex-direction: column;
+  }
+  .date-range__title {
+    margin-bottom: 0!important;
+  }
+  .search__date-range__block {
+    width: 185px !important;
+    margin-left: 0!important;
+  }
+  .custom-select {
+    width: 71% !important;
+  }
+  .search__date__item {
+    margin:10px 0;
+  }
+}
