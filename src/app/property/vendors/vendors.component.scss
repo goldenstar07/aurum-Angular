@@ -81,7 +81,7 @@ label {
     display: flex;
     justify-content: space-between;
     .btn__item {
-      font-size: 10px;
+      font-size: 11px;
       border: 1px solid $color-ff;
       padding: 8px 10px;
       text-align: center;
@@ -102,7 +102,7 @@ label {
   }
   .text__block__email {
     color: $font-gray5;
-    font-size: $font-sz-12;
+    font-size: 15px;
   }
   .prof__name{
     margin-left: 25px;
@@ -110,7 +110,7 @@ label {
     color: $font-gray5;
   }
   .email__name {
-    font-size: $font-sz-12;
+    font-size: 15px;
     margin-left: 20px;
   }
 }
@@ -186,6 +186,15 @@ label {
   }
   .btn__item {
     padding: 6px 8px;
+  }
+  .email__name {
+    font-size: 12px!important;
+  }
+  .text__block__email {
+    font-size: 13px!important;
+  }
+  .prof__name {
+    font-size: 13px!important;
   }
 }
 @media screen and (max-width: 465px) {
