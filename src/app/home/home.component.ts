@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
@@ -43,15 +43,15 @@ export class HomeComponent implements OnInit {
     this.managersCol = this.afs.collection('managers');
     this.managersCol.snapshotChanges()
       .map(actions => {
-        return actions.map(a=> {
+        return actions.map(a => {
           const data = a.payload.doc.data() as Manager;
           const id = a.payload.doc.id;
-          return { id, data };
+          return {id, data};
         })
       })
       .subscribe(res => {
         this.managers = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
-      })
+      });
   }
 
   addNewManager() {
