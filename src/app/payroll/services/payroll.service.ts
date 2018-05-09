@@ -32,8 +32,12 @@ export class PayrollService {
   }
 
   addPayroll(payroll, hotelId) {
-    this.afs.collection('payrolls').doc(hotelId).set(payroll);
+      /*this.afs.collection('payrolls').doc(hotelId).set(payroll);*/
      /*this.afs.collection('payrolls').add(payroll);*/
+      console.log(payroll, hotelId);
+    this.afs.collection('payrolls').doc(hotelId).update({
+      "payroll" : payroll
+    });
 
   }
 

@@ -54,8 +54,9 @@ export class PayrollComponent implements OnInit {
     // this.a = this.payrollService.getPayrolls();
 
     this.payrollService.getPayrolls().subscribe(res => {
+      /*console.log(res);*/
       this.payrollls  = res;
-      console.log(this.payrollls);
+      /*console.log(this.payrollls);*/
     });
     // this.payrollService.getPayrolls();
 
@@ -67,7 +68,7 @@ export class PayrollComponent implements OnInit {
       date: [''],
       payrolls: this.formBuilder.array([this.createFormInput()])
     });
-    console.log(this.form);
+    /*console.log(this.form);*/
   }
 
   createFormInput(): FormGroup {
@@ -87,8 +88,7 @@ export class PayrollComponent implements OnInit {
   }
 
   saveFormInput() {
-    console.log(this.form);
-    // return this.form.get('payrolls').value;
+    /*return this.form.get('payrolls').value;*/
   }
 
   setPayrolls() {
@@ -106,9 +106,10 @@ export class PayrollComponent implements OnInit {
     console.log(form.value);
     this.payrollService.addPayroll(form.value);*/
     this.hotelId = this.afs.collection('payrolls').doc(localStorage.hotelId).ref.id;
-    this.payrollService.addPayroll(form.value, this.hotelId);
-    /*this.hotelId = this.afs.collection('vendors').doc(localStorage.hotelId).ref.id;*/
+    /*this.payrollService.addPayroll(form.value, this.hotelId);*/
+    this.payrollService.addPayroll(form.value, localStorage.hotelId);
   }
+
 
 // popup
   openNewProperty(contentNewProperty) {

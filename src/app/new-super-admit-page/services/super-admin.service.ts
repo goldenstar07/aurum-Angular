@@ -67,6 +67,6 @@ export class SuperAdminService {
   }
 
   deleteAdminService(adminId) {
-    this.afs.doc('admins/' + adminId).delete();
+    this.afs.doc('admins/' +adminId).delete();
   }
 }
