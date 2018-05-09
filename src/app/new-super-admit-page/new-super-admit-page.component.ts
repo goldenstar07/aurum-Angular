@@ -5,17 +5,14 @@ import 'rxjs/add/operator/map';
 import { Observable} from "rxjs/Observable";
 import { NgForm, Validators, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
-
 // Interfaces
 import { Admin } from './interfaces/admin';
-
+import {Hotel} from '../hotels/interfaces/hotel';
 // Services
 import { SuperAdminService } from './services/super-admin.service';
 import {DataProcessingService} from '../shared/services/data-processing.service';
 import {DataStorageService} from '../shared/services/data-storage.service';
 import {AuthService} from '../auth/auth.service';
-import {Hotel} from '../hotels/interfaces/hotel';
-import {Vendor} from '../property/interfaces/vendor';
 
 @Component({
   selector: 'app-new-super-admit-page',

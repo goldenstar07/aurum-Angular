@@ -3,6 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {AngularFireDatabase} from "angularfire2/database";
 // Interfaces
 import {Hotel} from '../interfaces/hotel';
+// Service
 import {HelperService} from "../../shared/services/helper.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
 

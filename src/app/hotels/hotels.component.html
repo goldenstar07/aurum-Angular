@@ -66,15 +66,6 @@
         <label for="city"><p>City:</p></label>
         <input type="text"  id="city" [(ngModel)]="city" placeholder="" name="city" class="input" required>
       </div>
-      <!--<div class="image__block">
-        <label for="image"><p>Image</p></label>
-        <button type="button" class="image__btn">
-          <button type="button" class="image__btn">
-          <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-          Upload
-        </button>
-        </button>
-      </div>-->
 
       <div class="image__block">
         <label for="image"><p>Image</p></label>
@@ -85,20 +76,9 @@
         </button>
       </div>
 
-      <!--<div [ngClass]="{'placeholder': !storeLogo}" class="image__block">
-        <label for="image"><p>Image</p></label>
-        <button *ngIf="!storeLogo" (click)="file.click()" type="button" class="image__btn">
-          <input (change)="uploadImg($event)" type="file" accept="image/*" #file type="file" class="image__btn">
-          <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-          Upload
-        </button>
-      </div>-->
-
       <button type="submit" class="add__btn" (click)="addNewHotel()" value="submit">Add Property</button>
       <h1 (click)="upload()">CLICK</h1>
     </form>
-    <!--</div>
-  </div>-->
   </ng-template>
 
 </section>

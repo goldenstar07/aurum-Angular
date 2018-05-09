@@ -1,17 +1,18 @@
 import {Component, OnInit, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
 import { NgStyle, CommonModule } from '@angular/common';
-// Service
-import {ActivityChatService} from './service/activity-chat.service';
-import {Message} from './models/Message';
-import {FormBuilder, NgForm} from '@angular/forms';
-import {AngularFirestore} from 'angularfire2/firestore';
-import {DataProcessingService} from '../../shared/services/data-processing.service';
-import {Hotel} from '../../hotels/interfaces/hotel';
-import {DataStorageService} from '../../shared/services/data-storage.service';
-import {Bill} from "../../upload/interfaces/bill";
 import {Observable} from "rxjs/Observable";
 import {NgxAutoScroll} from "ngx-auto-scroll";
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
+import {FormBuilder, NgForm} from '@angular/forms';
+import {AngularFirestore} from 'angularfire2/firestore';
+// Interfaces
+import {Bill} from "../../upload/interfaces/bill";
+import {Hotel} from '../../hotels/interfaces/hotel';
+// Service
+import {ActivityChatService} from './service/activity-chat.service';
+import {Message} from './models/Message';
+import {DataProcessingService} from '../../shared/services/data-processing.service';
+import {DataStorageService} from '../../shared/services/data-storage.service';
 
 @Component({
   selector: 'app-activity-chat',

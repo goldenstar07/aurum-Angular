@@ -3,11 +3,10 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {AngularFireDatabase} from "angularfire2/database";
 // Interfaces
 import { Employee } from '../interfaces/employee';
+import {Hotel} from '../../hotels/interfaces/hotel';
 // Services
 import {HelperService} from "../../shared/services/helper.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
-import {Hotel} from '../../hotels/interfaces/hotel';
-import {Vendor} from '../interfaces/vendor';
 
 @Injectable()
 export class EmployeesService {
@@ -34,8 +33,4 @@ export class EmployeesService {
     /*this.afs.collection('vendors').doc(hotelId).set(vendor);*/
     this.afs.collection('employees').add(employee);
   }
-  /*addVendor(vendor) {
-    this.afs.collection('vendors').add(vendor);
-   /!* this.afs.collection('inventories').doc().set(vendor);*!/
-  }*/
 }

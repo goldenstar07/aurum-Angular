@@ -1,15 +1,16 @@
 import {Injectable} from "@angular/core";
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
 import {AngularFireDatabase} from "angularfire2/database";
+import * as firebase from "firebase";
+import {FormBuilder} from "@angular/forms";
 // Interfaces
 import { Inventory } from "../interface/inventory";
-import { DataStorageService } from "../../shared/services/data-storage.service";
-import {Hotel} from "../../hotels/interfaces/hotel";
-import * as firebase from "firebase";
 import {Manager} from "../../home/interfaces/manager";
+import {Hotel} from "../../hotels/interfaces/hotel";
+// Services
+import { DataStorageService } from "../../shared/services/data-storage.service";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {AuthService} from "../../auth/auth.service";
-import {FormBuilder} from "@angular/forms";
 import {HotelService} from "../../hotels/services/hotel.service";
 
 @Injectable()

@@ -8,10 +8,10 @@ import { NgForm, FormBuilder, Validators } from '@angular/forms';
 // services
 import {AuthService} from '../auth/auth.service';
 import {HotelService} from "../hotels/services/hotel.service";
-// models
-import {Manager} from './interfaces/manager';
 import {DataStorageService} from "../shared/services/data-storage.service";
 import {HelperService} from "../shared/services/helper.service";
+// models
+import {Manager} from './interfaces/manager';
 import {DataProcessingService} from "../shared/services/data-processing.service";
 
 @Component({

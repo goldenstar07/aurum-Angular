@@ -3,11 +3,10 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {AngularFireDatabase} from "angularfire2/database";
 // Interfaces
 import { Credential } from '../interfaces/credential';
+import {Hotel} from '../../hotels/interfaces/hotel';
 // Services
 import {HelperService} from "../../shared/services/helper.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
-import {Hotel} from '../../hotels/interfaces/hotel';
-import {Vendor} from '../interfaces/vendor';
 
 @Injectable()
 export class CredentialsService {

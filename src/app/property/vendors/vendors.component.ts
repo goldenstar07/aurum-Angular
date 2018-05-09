@@ -7,13 +7,13 @@ import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 /*Interfaces*/
 import { Vendor } from '../interfaces/vendor';
+import {Hotel} from '../../hotels/interfaces/hotel';
 /*Services*/
 import { VendorsService } from '../services/vendors.service';
 import {AuthService} from '../../auth/auth.service';
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import {HelperService} from "../../shared/services/helper.service";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
-import {Hotel} from '../../hotels/interfaces/hotel';
 
 @Component({
   selector: 'app-vendors',

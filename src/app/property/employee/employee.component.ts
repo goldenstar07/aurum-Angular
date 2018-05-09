@@ -3,17 +3,17 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
 import { Observable} from "rxjs/Observable";
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 /*Interfaces*/
 import { Employee } from '../interfaces/employee';
+import {Hotel} from '../../hotels/interfaces/hotel';
 /*Services*/
 import { EmployeesService } from '../services/employees.service';
 import {AuthService} from '../../auth/auth.service';
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import {HelperService} from "../../shared/services/helper.service";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
-import {Hotel} from '../../hotels/interfaces/hotel';
-import {Vendor} from '../interfaces/vendor';
+
 
 @Component({
   selector: 'app-employee',

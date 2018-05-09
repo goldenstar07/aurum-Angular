@@ -5,15 +5,15 @@ import 'rxjs/add/operator/map';
 import {FormArray, FormBuilder, FormGroup, Validators, NgForm} from '@angular/forms';
 import {AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
+import {Observable} from 'rxjs/Observable';
 /*Interfaces */
 import { Payroll } from './interface/payroll';
+import {Hotel} from '../hotels/interfaces/hotel';
 // Services
 import {DataProcessingService} from '../shared/services/data-processing.service';
 import {DataStorageService} from '../shared/services/data-storage.service';
 import {AuthService} from '../auth/auth.service';
 import { PayrollService } from './services/payroll.service';
-import {Observable} from 'rxjs/Observable';
-import {Hotel} from '../hotels/interfaces/hotel';
 
 @Component({
   selector: 'app-payroll',
@@ -27,7 +27,7 @@ export class PayrollComponent implements OnInit {
   // payrollls: Payroll;
   hotel: Observable<Hotel>;
 
-  iterator: any;
+  payrollItems: any;
 
   name: string;
   regular: any;
@@ -98,8 +98,6 @@ export class PayrollComponent implements OnInit {
       over: this.over,
       hotelId: localStorage.hotelId
     };
-    /*console.log(transaction);
-    this.afs.collection('transactions').add(transaction);*/
   }
 
   addNewPayroll(form: NgForm) {     /*Save*/

@@ -7,7 +7,7 @@ import { Payroll } from '../interface/payroll';
 import {HelperService} from "../../shared/services/helper.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import {Hotel} from '../../hotels/interfaces/hotel';
-import {Vendor} from '../../property/interfaces/vendor';
+
 
 @Injectable()
 export class PayrollService {
@@ -32,11 +32,9 @@ export class PayrollService {
   }
 
   addPayroll(payroll, hotelId) {
-    this.afs.collection('payrolls').doc(hotelId).set(payroll);
-    /* this.afs.collection('payrolls').add(payroll);*/
+    this.afs.collection('payrolls').doc(hotelId).update(payroll);
+     /*this.afs.collection('payrolls').add(payroll);*/
+
   }
-  /*addVendor(vendor) {
-    this.afs.collection('vendors').add(vendor);
-   /!* this.afs.collection('inventories').doc().set(vendor);*!/
-  }*/
+
 }
