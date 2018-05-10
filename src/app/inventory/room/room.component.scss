@@ -95,7 +95,7 @@ input{
   .search__date-range__block {
     background-color: $font-gray4;
     border-radius: 60px;
-    width: 40%;
+    width: 42%;
     height: 120px;
     border: 1px solid $font-gray;
     box-shadow: 0 4px 5px -2px #000;
@@ -113,7 +113,7 @@ input{
   .date-range__item {
     .search__date__item {
       border: 1px solid $font-gray;
-      width: 80px;
+      width: 105px;
       height: 35px;
       font-size: 12px;
       font-weight: $font-bold;
@@ -133,6 +133,7 @@ input{
   width: 600px;
   margin-top: 70px;
   margin-left: 30px;
+  margin-bottom: 70px;
   th {
     background-color: $font-gray4;
     text-align: center;
@@ -183,9 +184,7 @@ input{
   }
 }
 .plus__circle {
-  position: relative;
-  left: 20px;
-  top: 75px;
+  margin-left: 20px;
   cursor: pointer;
 }
 .save__button {
@@ -313,7 +312,7 @@ input{
 }
 @media screen and (max-width:768px){
   .search__date-range__block {
-    width: 315px !important;
+    width: 335px !important;
     height: auto!important;
     padding: 0 6px;
     margin-left: 20px;
@@ -359,5 +358,15 @@ input{
   }
   .search__date__item {
     margin:10px 0;
+  }
+}
+@media screen and (max-width: 465px){
+  .main__block {
+    border: 10px solid #707070;
+  }
+}
+@media screen and (max-width: 375px) {
+  .main__block {
+    border: 5px solid #707070;
   }
 }

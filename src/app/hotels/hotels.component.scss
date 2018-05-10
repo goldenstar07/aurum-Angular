@@ -122,6 +122,10 @@ input:focus {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  .table__link__item {
+    font-size: 20px;
+    font-weight: 600;
+  }
 }
 .main__block {
   border: 20px solid $font-gray;

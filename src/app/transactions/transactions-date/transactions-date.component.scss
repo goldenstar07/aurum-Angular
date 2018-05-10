@@ -53,6 +53,7 @@ hr {
   width: 600px;
   margin-top: 70px;
   margin-left: 30px;
+  margin-bottom: 70px;
   th {
     background-color: $font-gray4;
     text-align: center;
@@ -99,9 +100,7 @@ hr {
 }
 .plus__circle {
   cursor: pointer;
-  position: relative;
-  left: 20px;
-  bottom: 90px;
+  margin-left: 20px;
 }
 .save__button {
   position: relative;

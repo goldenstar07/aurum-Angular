@@ -136,6 +136,7 @@ select {
   width: 900px;
   margin-top: 70px;
   margin-left: 30px;
+  margin-bottom: 70px;
   th {
     background-color: $font-gray4;
     text-align: center;
@@ -183,8 +184,7 @@ select {
 }
 .plus__circle {
   cursor: pointer;
-  position: relative;
-  left: 20px;
+  margin-left: 20px;
 }
 .text__block__btn {
   text-align: center;
