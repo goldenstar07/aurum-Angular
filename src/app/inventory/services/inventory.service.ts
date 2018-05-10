@@ -12,6 +12,7 @@ import { DataStorageService } from "../../shared/services/data-storage.service";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {AuthService} from "../../auth/auth.service";
 import {HotelService} from "../../hotels/services/hotel.service";
+import {HelperService} from "../../shared/services/helper.service";
 
 @Injectable()
 export class InventoryService {
@@ -60,6 +61,15 @@ export class InventoryService {
   addMisc(item, hotelId) {
     this.afs.collection('inventories').doc(hotelId).update({
       "misc" : item
+    });
+  }
+
+  addNewField(){
+    this.afs.collection('inventories').doc(localStorage.hotelId).set({
+      "room" : {} ,
+      "maintenance" : {},
+      "fb" : {},
+      "misc" : {},
     });
   }
 }

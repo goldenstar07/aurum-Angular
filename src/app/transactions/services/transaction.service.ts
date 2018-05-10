@@ -7,25 +7,36 @@ import {Transaction} from '../interfaces/transaction';
 
 @Injectable()
 export class TransactionService {
-/*  transactionsCol: AngularFirestoreCollection<Transaction>;
-  transactions: any;*/
+
+  transactionsCol: AngularFirestoreCollection<Transaction>;
+
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase) {}
 
-  /*getTransactions() {
+  getTransactions() {
     this.transactionsCol = this.afs.collection('transactions');
     return this.transactionsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as Transaction;
+          const data = a.payload.doc.data();
           const id = a.payload.doc.id;
           return {id, data};
-        })
-      })
+        });
+      });
   }
 
-  addTransaction(transaction) {
-    this.afs.collection('transactions').add(transaction);
-  }*/
+  addTransaction(item, hotelId) {
+    this.afs.collection('transactions').doc(hotelId).set(item);
+  }
+
+  // addNewField(){
+  //   this.afs.collection('inventories').doc(localStorage.hotelId).set({
+  //     "room" : {} ,
+  //     "maintenance" : {},
+  //     "fb" : {},
+  //     "misc" : {},
+  //   });
+  // }
+
 }

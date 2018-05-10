@@ -9,6 +9,7 @@ import {DataStorageService} from "../../shared/services/data-storage.service";
 import {InventoryService} from "../services/inventory.service";
 import {DatePipe} from "@angular/common";
 import {InventoryManeger} from "../../shared/classes/InventoryMenager"
+import {HelperService} from "../../shared/services/helper.service";
 
 @Component({
   selector: 'app-fd-misc',
@@ -28,7 +29,11 @@ export class FdMiscComponent extends InventoryManeger implements OnInit {
 
   ngOnInit() {
     this.inventoryService.getInventories().subscribe(res => {
-      this.inventoryItems = res[0].data;
+      this.inventoryItems = HelperService.getItemsByHotelId(res);
+      if(!this.inventoryItems) {
+        return;
+      }
+      this.inventoryItems = this.inventoryItems.data;
       this.inventoryLabels = [];
       this.getDates(this.inventoryItems.misc[Object.keys(this.inventoryItems.misc)[0]]);
       this.getLabels(this.inventoryItems.misc);
@@ -46,6 +51,19 @@ export class FdMiscComponent extends InventoryManeger implements OnInit {
   }
 
   saveFormInput() {
+
+    if(!this.inventoryItems) {
+      this.inventoryItems = {
+        misc: {}
+      };
+      this.inventoryDates = [];
+      this.inventoryService.addNewField();
+    }
+
+    if(!this.inventoryItems.misc[Object.keys(this.inventoryItems.misc)[0]]) {
+      this.inventoryDates = [];
+    }
+
 
     this.form.value.inventories.forEach(item => {
       if (!this.inventoryItems.misc[item.item]) this.addNewItem(item.item);

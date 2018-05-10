@@ -81,12 +81,12 @@ export class BillsMiscComponent implements OnInit {
 
 
   setBills() {
-    let bill: Bill = {
-      name: this.name,
-      date: this.date,
-      image: this.currentFileUpload.url,
-      hotelId: localStorage.hotelId
-    };
+    // let bill: Bill = {
+    //   name: this.name,
+    //   date: this.date,
+    //   image: this.currentFileUpload.url,
+    //   hotelId: localStorage.hotelId
+    // };
   }
 
   upload() {
@@ -143,16 +143,10 @@ export class BillsMiscComponent implements OnInit {
     this.deletedBill = this.billService.deleteBillService(billId);
   }
 
-  // downloadImage(downloadLink) {
-  //   // this.billService.getImage(downloadLink).subscribe(
-  //   // (res) => console.log(res)
-  //     // const a = document.createElement('a');
-  //     // a.href = URL.createObjectURL(res);
-  //     // a.download = title;
-  //     // document.body.appendChild(a);
-  //     // a.click();
-  //
-  // }
+  downloadImage(downloadLink) {
+    this.billService.downloadImage(downloadLink).subscribe(res => {
+    })
+  }
 
   // downloadZip(): Promise<void> {
   //   const blob = await this.billService.downloadResource(this.bills);

@@ -9,6 +9,7 @@ import {DataStorageService} from "../../shared/services/data-storage.service";
 import {InventoryService} from "../services/inventory.service";
 import {DatePipe} from "@angular/common";
 import {InventoryManeger} from "../../shared/classes/InventoryMenager"
+import {HelperService} from "../../shared/services/helper.service";
 
 @Component({
   selector: 'app-maintenance',
@@ -28,7 +29,11 @@ export class MaintenanceComponent extends InventoryManeger implements OnInit {
 
   ngOnInit() {
     this.inventoryService.getInventories().subscribe(res => {
-      this.inventoryItems = res[0].data;
+      this.inventoryItems = HelperService.getItemsByHotelId(res);
+      if(!this.inventoryItems) {
+        return;
+      }
+      this.inventoryItems = this.inventoryItems.data;
       this.inventoryLabels = [];
       this.getDates(this.inventoryItems.maintenance[Object.keys(this.inventoryItems.maintenance)[0]]);
       this.getLabels(this.inventoryItems.maintenance);
@@ -46,7 +51,17 @@ export class MaintenanceComponent extends InventoryManeger implements OnInit {
   }
 
   saveFormInput() {
+    if(!this.inventoryItems) {
+      this.inventoryItems = {
+        maintenance: {}
+      };
+      this.inventoryDates = [];
+      this.inventoryService.addNewField();
+    }
 
+    if(!this.inventoryItems.maintenance[Object.keys(this.inventoryItems.maintenance)[0]]) {
+      this.inventoryDates = [];
+    }
     this.form.value.inventories.forEach(item => {
       if (!this.inventoryItems.maintenance[item.item]) this.addNewItem(item.item);
     });

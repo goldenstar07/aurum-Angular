@@ -40,7 +40,9 @@ export class EmployeeComponent implements OnInit {
               public dataProcessingService: DataProcessingService) { }
 
   ngOnInit() {
-    this.employees = this.employeeService.getEmployees();
+    this.employeeService.getEmployees().subscribe(res => {
+      this.employees = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
+    });
   }
 
   addNewEmployee(form: NgForm) {

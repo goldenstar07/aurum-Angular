@@ -3,7 +3,7 @@
 <section id="main">
   <div class="main__block">
     <div class="main__table">
-      <div class="table__block" *ngFor="let vendor of vendors | async" (click)="setVendors(vendor.id)">
+      <div class="table__block" *ngFor="let vendor of vendors" (click)="setVendors(vendor.id)">
         <div class="text__block__btn">
           <span><h3>{{vendor.data.name}}</h3></span>
           <button class="btn__item" (click)="deleteVendor(vendor.id)">Delete</button>

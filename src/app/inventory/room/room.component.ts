@@ -9,6 +9,7 @@ import {DataStorageService} from "../../shared/services/data-storage.service";
 import {InventoryService} from "../services/inventory.service";
 import {DatePipe} from "@angular/common";
 import {InventoryManeger} from "../../shared/classes/InventoryMenager"
+import {HelperService} from "../../shared/services/helper.service";
 
 @Component({
   selector: 'app-room',
@@ -29,7 +30,11 @@ export class RoomComponent extends InventoryManeger implements OnInit {
 
   ngOnInit() {
     this.inventoryService.getInventories().subscribe(res => {
-      this.inventoryItems = res[0].data;
+      this.inventoryItems = HelperService.getItemsByHotelId(res);
+      if(!this.inventoryItems) {
+        return;
+      }
+      this.inventoryItems = this.inventoryItems.data;
       this.inventoryLabels = [];
       this.getDates(this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]);
       this.getLabels(this.inventoryItems.room);
@@ -47,6 +52,17 @@ export class RoomComponent extends InventoryManeger implements OnInit {
   }
 
   saveFormInput() {
+    if(!this.inventoryItems) {
+      this.inventoryItems = {
+        room: {}
+      };
+      this.inventoryDates = [];
+      this.inventoryService.addNewField();
+    }
+
+    if(!this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]) {
+      this.inventoryDates = [];
+    }
 
     this.form.value.inventories.forEach(item => {
       if (!this.inventoryItems.room[item.item]) this.addNewItem(item.item);

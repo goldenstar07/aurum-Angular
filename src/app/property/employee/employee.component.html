@@ -3,7 +3,7 @@
 <section id="main">
   <div class="main__block">
     <div class="main__table">
-      <div class="table__block" *ngFor="let employee of employees | async" (click)="setEmployees(employee.id)">
+      <div class="table__block" *ngFor="let employee of employees" (click)="setEmployees(employee.id)">
         <div class="text__block__btn">
           <span><h3>{{employee.data.name}}</h3></span>
           <button class="btn__item" (click)="deleteEmployee(employee.id)">Delete</button>

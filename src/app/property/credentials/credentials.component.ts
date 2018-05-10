@@ -42,7 +42,9 @@ export class CredentialsComponent implements OnInit {
               public dataProcessingService: DataProcessingService) { }
 
   ngOnInit() {
-    this.credentials = this.credentialsService.getCredentials();
+      this.credentialsService.getCredentials().subscribe(res => {
+        this.credentials = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
+    });
   }
 
   addNewCredentials (form: NgForm) {

@@ -47,7 +47,9 @@ export class VendorsComponent implements OnInit {
               public dataProcessingService: DataProcessingService) { }
 
   ngOnInit() {
-    this.vendors = this.vendorService.getVendors();
+    this.vendorService.getVendors().subscribe(res => {
+      this.vendors = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
+    });
     /*this.vendorsCol = this.afs.collection('vendors');
     return this.vendorsCol.snapshotChanges()
       .map(actions => {

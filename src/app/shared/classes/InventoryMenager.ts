@@ -78,6 +78,7 @@ export class InventoryManeger {
   }
 
   getDates(dates) {
+    if(!dates) return;
     this.dateFrom = dates[dates.length -1].date;
     this.dateTo = dates[0].date;
     this.inventoryDates = [];
