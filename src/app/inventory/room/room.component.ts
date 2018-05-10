@@ -68,11 +68,8 @@ export class RoomComponent extends InventoryManeger implements OnInit {
       if (!this.inventoryItems.room[item.item]) this.addNewItem(item.item);
     });
 
-
     let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     let indexOfItem = this.checkIfDateExist(date);
-
-
 
     if (indexOfItem == -1) {
       this.addNewDate(date);
@@ -89,6 +86,7 @@ export class RoomComponent extends InventoryManeger implements OnInit {
     this.sortByDate();
     this.addItem(this.inventoryItems.room, localStorage.hotelId);
   }
+
   addNewItem(name) {
     this.inventoryItems.room[name] = [];
     this.inventoryDates.forEach(date => {
@@ -101,7 +99,7 @@ export class RoomComponent extends InventoryManeger implements OnInit {
   }
 
   addNewDate(date) {
-    this.inventoryDates.push(date)
+    this.inventoryDates.push(date);
     for (let key in this.inventoryItems.room) {
       this.inventoryItems.room[key].push({
         date: date,

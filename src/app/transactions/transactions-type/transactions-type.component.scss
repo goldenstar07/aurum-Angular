@@ -156,3 +156,15 @@ hr {
   }
 }
 
+//MEDIA SCREEN
+
+@media screen and (max-width: 465px){
+  .main__block {
+    border: 10px solid #707070;
+  }
+}
+@media screen and (max-width: 375px) {
+  .main__block {
+    border: 5px solid #707070;
+  }
+}

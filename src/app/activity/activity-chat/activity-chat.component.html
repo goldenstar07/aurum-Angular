@@ -14,15 +14,15 @@
       <div [ngClass]="{'right' : managerId === currentUser,
       'left': managerId !== currentUser}">
     </div>
+        <div class="message__block right">
+          {{message.data.text}}
+        </div>
        <!--<p style="text-align: right">-->
         <p class="right">
          <b> {{ message.data.managerId }} </b><br>
           {{message.data.author}}
           {{message.data.date}}
         </p>
-        <div class="message__block right">
-          {{message.data.text}}
-        </div>
 
      <!-- // other user
       <p style="text-align: left">

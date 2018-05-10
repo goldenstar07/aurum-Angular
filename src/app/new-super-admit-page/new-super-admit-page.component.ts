@@ -81,7 +81,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
     this.authService.signUpAdmin(admin, admin.password);
   }
 
-  /* deleteSuperAdmin(adminId) {
+   /*deleteSuperAdmin(adminId) {
    console.log(adminId);
      this.afs.doc('admins/' + adminId).delete();
    }*/

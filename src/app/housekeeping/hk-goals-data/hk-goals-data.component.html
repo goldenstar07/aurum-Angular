@@ -250,12 +250,10 @@
       </div>
 
       <div class="search__date__block d-flex flex-column justify-content-center">
-        <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [disabled]="!byDate">
+        <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [disabled]="!byDate" style="width:50%; margin: 0 auto">
           <option selected>Select Date</option>
           <option *ngFor="let date of housekeepingDates" value="{{date}}">{{date}}</option>
         </select>
-        <p>Previous date entries from</p>
-        <p>date selected will also show</p>
       </div>
 
 

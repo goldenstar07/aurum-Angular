@@ -100,6 +100,13 @@ hr {
 .message__block.right{
   display: block;
 }
+
+//MEDIA SCREEN
+@media screen and (max-width: 767px){
+  .message__block {
+    width: 100%;
+  }
+}
 @media screen and (max-width: 465px){
   .main__block {
     border: 10px solid #707070;

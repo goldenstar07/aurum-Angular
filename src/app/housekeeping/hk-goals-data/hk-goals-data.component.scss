@@ -52,7 +52,8 @@ input{
   padding: 20px;
   .search__text__block {
     p {
-      font-size: 15px;
+      font-size: 23px;
+      text-align: center;
     }
   }
   .type_button {
@@ -101,7 +102,7 @@ input{
   .search__date-range__block {
     background-color: $font-gray4;
     border-radius: 60px;
-    width: 40%;
+    width: 42%;
     height: 120px;
     border: 1px solid $font-gray;
     box-shadow: 0 4px 5px -2px #000;
@@ -139,6 +140,7 @@ input{
   width: 600px;
   margin-top: 70px;
   margin-left: 30px;
+  margin-bottom: 70px;
   th {
     background-color: $font-gray4;
     text-align: center;
@@ -189,8 +191,7 @@ input{
   }
 }
 .plus__circle {
-  margin-left: 25px;
-  margin-bottom: 170px;
+  margin-left: 20px;
   cursor: pointer;
 }
 .save__button {
@@ -311,8 +312,91 @@ input{
   }
 }
 
+//==========media screen===========
 @media screen and (max-width:1199px){
-  .main__title {
-    width: 705px;
+  .search__block .search__date__block {
+    width: 200px;
+  }
+  .search__block .search__date-range__block .custom-select {
+    width: 25%;
+  }
+  .search__date-range__block {
+    width: 50%!important;
+  }
+}
+@media screen and (max-width:1024px){
+  .search__block {
+    flex-direction: column;
+    padding: 30px;
+  }
+  .search__text__block {
+    margin-bottom: 30px;
+  }
+  .search__block .search__date__block {
+    width: 300px;
+    margin-bottom: 30px;
+  }
+  .search__date-range__block {
+    width: 500px!important;
+  }
+}
+@media screen and (max-width:768px){
+  .search__date-range__block {
+    width: 335px !important;
+    height: auto!important;
+    padding: 0 6px;
+    margin-left: 20px;
+    flex-direction: column;
+  }
+  .search__block .search__date__block {
+    width: 230px;
+  }
+  .custom-select {
+    width: 41% !important;
+    margin: 15px 0;
+  }
+  .date-range__title {
+    text-align: center;
+    width: 100px;
+  }
+  .search__date__item {
+    width: 90px!important;
+  }
+}
+@media screen and (max-width:425px){
+  .search__block .search__text__block p {
+    font-size: 18px;
+  }
+  .button__item {
+    font-size: 10px!important;
+  }
+  .search__block .search__date__block {
+    width: 200px;
+  }
+  .date-range__item {
+    flex-direction: column;
+  }
+  .date-range__title {
+    margin-bottom: 0!important;
+  }
+  .search__date-range__block {
+    width: 185px !important;
+    margin-left: 0!important;
+  }
+  .custom-select {
+    width: 71% !important;
+  }
+  .search__date__item {
+    margin:10px 0;
+  }
+}
+@media screen and (max-width: 465px){
+  .main__block {
+    border: 10px solid #707070;
+  }
+}
+@media screen and (max-width: 375px) {
+  .main__block {
+    border: 5px solid #707070;
   }
 }

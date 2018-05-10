@@ -99,7 +99,7 @@ input:focus {
   left: 0;
 }
 #header {
-  width: 100%;
+
   background: $primary-color;
   height: 55px;
   margin-left: 72px;
@@ -122,6 +122,10 @@ input:focus {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  .table__link__item {
+    font-size: 20px;
+    font-weight: 600;
+  }
 }
 .main__block {
   border: 20px solid $font-gray;
@@ -143,8 +147,7 @@ input:focus {
   }
 }
 .plus__circle {
-  margin-left: 40px;
-  margin-bottom: 3px;
+  margin: 20px 0 3px 40px;
   cursor: pointer;
 }
 

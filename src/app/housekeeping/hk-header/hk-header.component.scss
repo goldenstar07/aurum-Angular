@@ -184,13 +184,17 @@ hr {
     width: 41% !important;
     margin: 15px 0;
   }
+  .date-range__title {
+    text-align: center;
+    width: 100px;
+  }
   .search__date__item {
     width: 90px!important;
   }
 }
 @media screen and (max-width:425px){
   .search__block .search__text__block p {
-    font-size: 12px;
+    font-size: 18px;
   }
   .button__item {
     font-size: 10px!important;
