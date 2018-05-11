@@ -51,7 +51,7 @@ export class ActivityChatComponent implements OnInit{
     this.objectOfMAnager = this.dataStorage.getUser();
     form.value.managerId = this.objectOfMAnager.name;
     form.value.htId = this.hotelId;
-    // console.log(form.value);
+    console.log(form.value);
     this.chatService.sendMessage(form.value);
     console.log(form.value);
     // AddVendors
@@ -59,7 +59,9 @@ export class ActivityChatComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.messages = this.chatService.getMessages();
+   this.chatService.getMessages().subscribe(res => {
+      this.messages = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
+    });
   }
 
   public forceScrollDown(): void {

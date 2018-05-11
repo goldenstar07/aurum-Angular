@@ -31,14 +31,11 @@ export class PayrollService {
       });
   }
 
-  addPayroll(payroll, hotelId) {
+  addPayroll(payroll) {
       /*this.afs.collection('payrolls').doc(hotelId).set(payroll);*/
      /*this.afs.collection('payrolls').add(payroll);*/
-      console.log(payroll, hotelId);
-    this.afs.collection('payrolls').doc(hotelId).update({
-      "payroll" : payroll
-    });
-
+      console.log(payroll);
+    this.afs.collection('payrolls').add(payroll);
   }
 
 }

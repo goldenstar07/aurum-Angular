@@ -24,7 +24,7 @@ export class PayrollComponent implements OnInit {
   closeResult: string;
   form: FormGroup;
   payrollls: any;
-  // payrollls: Payroll;
+  payrol: Array<Payroll>;
   hotel: Observable<Hotel>;
 
   payrollItems: any;
@@ -54,9 +54,7 @@ export class PayrollComponent implements OnInit {
     // this.a = this.payrollService.getPayrolls();
 
     this.payrollService.getPayrolls().subscribe(res => {
-      /*console.log(res);*/
-      this.payrollls  = res;
-      /*console.log(this.payrollls);*/
+      this.payrollls = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
     });
     // this.payrollService.getPayrolls();
 
@@ -105,9 +103,14 @@ export class PayrollComponent implements OnInit {
     form.value.htId = this.hotelId;
     console.log(form.value);
     this.payrollService.addPayroll(form.value);*/
-    this.hotelId = this.afs.collection('payrolls').doc(localStorage.hotelId).ref.id;
+    console.log(form.value);
+    this.hotelId = localStorage.hotelId;
+    form.value.htId = this.hotelId;
+    console.log(form.value);
+    /*this.hotelId = this.afs.collection('payrolls').doc(localStorage.hotelId).ref.id;*/
     /*this.payrollService.addPayroll(form.value, this.hotelId);*/
-    this.payrollService.addPayroll(form.value, localStorage.hotelId);
+    this.payrollService.addPayroll(form.value);
+    console.log(form.value, this.hotelId);
   }
 
 

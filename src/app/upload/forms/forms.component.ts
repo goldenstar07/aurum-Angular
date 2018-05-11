@@ -57,7 +57,9 @@ export class FormsComponent implements OnInit {
               private http: Http) { }
 
   ngOnInit() {
-    this.forms = this.formService.getForms();
+    this.formService.getForms().subscribe(res => {
+      this.forms = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
+    });
   }
 
   addNewForm(form: NgForm) {  /*Save*/

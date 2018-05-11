@@ -18,7 +18,7 @@ import {HelperService} from "../../shared/services/helper.service";
 export class InventoryService {
 
   inventoriesCol: AngularFirestoreCollection<Inventory>;
-
+  inventories: Array<Inventory>;
   hotelId: string;
 
   constructor(private afs: AngularFirestore,
@@ -38,8 +38,8 @@ export class InventoryService {
           const data = a.payload.doc.data() as Inventory;
           const id = a.payload.doc.id;
           return {id, data};
-        });
-      });
+        })
+      })
   }
 
   addRoom(room, hotelId) {

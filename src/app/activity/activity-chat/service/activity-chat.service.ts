@@ -44,7 +44,7 @@ export class ActivityChatService {
 
 
     msg.date = timestamp;
-   /* msg.author = userName;*/
+    /*msg.author = userName;*/
 
     this.afs.collection('messages').add(msg);
   }

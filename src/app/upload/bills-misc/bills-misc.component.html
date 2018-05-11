@@ -3,7 +3,7 @@
 
 <section id="main">
   <div class="main__block">
-    <div class="main__table" *ngFor="let bill of bills | async" (click)="setBills(bill.id)">
+    <div class="main__table" *ngFor="let bill of bills" (click)="setBills(bill.id)">
         <div class="table__block" >
           <div class="name__block">
             <p class="text__block__name">{{bill.data.name}}</p>

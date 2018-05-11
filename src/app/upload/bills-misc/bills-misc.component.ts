@@ -65,7 +65,9 @@ export class BillsMiscComponent implements OnInit {
               private http: Http) { }
 
   ngOnInit() {
-    this.bills = this.billService.getBills();
+    this.billService.getBills().subscribe(res => {
+      this.bills = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
+    });
   }
 
   addNewBill(form: NgForm) {  /*Save*/
