@@ -157,79 +157,6 @@ export class TransactionsDateComponent implements OnInit {
     });
   }
 
-  addFormInputT() {
-    const inventory = this.createFormInput();
-    this.inventories.push(inventory);
-  }
-
-  get inventories(): FormArray {
-    return this.form.get('inventories') as FormArray;
-  }
-
-  openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  createFormInput(): FormGroup {
-    return this.formBuilder.group({
-      item: '',
-      price: ''
-    });
-  }
-
-  addFormInputT() {
-    const inventory = this.createFormInput();
-    this.inventories.push(inventory);
-  }
-
-  get inventories(): FormArray {
-    return this.form.get('inventories') as FormArray;
-  }
-
-  openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  getDates(dates) {
-    if(!dates) return;
-    this.dateFrom = dates[dates.length -1].date;
-    this.dateTo = dates[0].date;
-    this.inventoryDates = [];
-    dates.forEach(item => {
-      this.inventoryDates.push(item.date);
-    });
-
-  }
-
-
   getLabels(items) {
     for (let key in items) {
       this.inventoryLabels.push(key);
@@ -240,6 +167,15 @@ export class TransactionsDateComponent implements OnInit {
     return this.inventoryDates.indexOf(date);
   }
 
+  getDates(dates) {
+    if(!dates) return;
+    this.dateFrom = dates[dates.length -1].date;
+    this.dateTo = dates[0].date;
+    this.inventoryDates = [];
+    dates.forEach(item => {
+      this.inventoryDates.push(item.date);
+    });
+  }
 
 // FILTER
   updateItemsByDate() {
