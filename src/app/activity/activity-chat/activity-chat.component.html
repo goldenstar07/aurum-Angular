@@ -4,43 +4,45 @@
   <div #scroller class="main__block">
     <div class="w-90 m-auto">
       <!--<div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203 </div></div>-->
-   <!-- <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
-      <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
-      <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
-      <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>-->
-    <div class="message__block__cover" *ngFor="let message of messages " ngx-auto-scroll>
-     <!-- <div [ngStyle]="{background: message.data.managerId === current.managerId ? 'green': 'red'}">-->
+      <!-- <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
+         <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
+         <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
+         <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>-->
+      <div class="message__block__cover" *ngFor="let message of messages; let i = index" ngx-auto-scroll>
+        <!-- <div [ngStyle]="{background: message.data.managerId === current.managerId ? 'green': 'red'}">-->
 
-   <!--   <div [ngClass]="{'right' : managerId === currentUser,
-      'left': managerId !== currentUser}">
-    </div>-->
-       <p style="text-align: right">
-         <b> {{ message.data.managerId }} </b><br>
-          {{message.data.author}}
-          {{message.data.date}}
-       </p>
-        <div class="message__block right">
-          {{message.data.text}}
+        <!--   <div [ngClass]="{'right' : managerId === currentUser,
+           'left': managerId !== currentUser}">
+         </div>-->
+        <!--<div class="message__block__item" [ngClass]="{'right':checkOrder(i)}">-->
+        <div class="message__block__item">
+          <p>
+            <b> {{ message.data.managerId }} </b><br>
+            {{message.data.author}}
+            {{message.data.date}}
+          </p>
+          <div class="message__block">
+            {{message.data.text}}
+          </div>
         </div>
-
-     <!-- // other user
-      <p style="text-align: left">
-        <b> {{ message.data.managerId }} </b><br>
-        {{message.data.author}}
-        {{message.data.date}}
-      </p>
-      <div class="message__block left">
-        {{message.data.text}}
-      </div>-->
-    <!--<div class="message__block__cover"><div class="message__block right">{{messages}}</div></div>-->
-    </div>
-    <div class="message__block__write">
-      <div class="m-auto w-90">
-        <form (keydown.enter)="onKey(form)" #form="ngForm">
-          <input type="text" placeholder="Enter your message" class="input" ngModel name="text" required>
-        </form>
+        <!-- // other user
+         <p style="text-align: left">
+           <b> {{ message.data.managerId }} </b><br>
+           {{message.data.author}}
+           {{message.data.date}}
+         </p>
+         <div class="message__block left">
+           {{message.data.text}}
+         </div>-->
+        <!--<div class="message__block__cover"><div class="message__block right">{{messages}}</div></div>-->
+      </div>
+      <div class="message__block__write">
+        <div class="m-auto w-90">
+          <form (keydown.enter)="onKey(form)" #form="ngForm">
+            <input type="text" placeholder="Enter your message" class="input" ngModel name="text" required>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </section>

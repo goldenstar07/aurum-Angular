@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
-import { NgStyle, CommonModule } from '@angular/common';
+import {NgStyle, CommonModule} from '@angular/common';
 import {Observable} from "rxjs/Observable";
 import {NgxAutoScroll} from "ngx-auto-scroll";
-import { IntervalObservable } from "rxjs/observable/IntervalObservable";
+import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 import {FormBuilder, NgForm} from '@angular/forms';
 import {AngularFirestore} from 'angularfire2/firestore';
 // Interfaces
@@ -19,7 +19,7 @@ import {DataStorageService} from '../../shared/services/data-storage.service';
   templateUrl: './activity-chat.component.html',
   styleUrls: ['./activity-chat.component.scss']
 })
-export class ActivityChatComponent implements OnInit{
+export class ActivityChatComponent implements OnInit {
 
   // Bug with scrollDown
 
@@ -34,6 +34,7 @@ export class ActivityChatComponent implements OnInit{
   managerId: any;
   objectOfMAnager: any;
   hotel: Observable<Hotel>;
+  checker: boolean
 
   constructor(private chatService: ActivityChatService,
               public dataProcessingService: DataProcessingService,
@@ -59,7 +60,8 @@ export class ActivityChatComponent implements OnInit{
   }
 
   ngOnInit() {
-   this.chatService.getMessages().subscribe(res => {
+    this.checker = false;
+    this.chatService.getMessages().subscribe(res => {
       this.messages = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
     });
   }
@@ -67,6 +69,16 @@ export class ActivityChatComponent implements OnInit{
   public forceScrollDown(): void {
     this.ngxAutoScroll.forceScrollDown();
   }
+
+  // checkOrder(index) {
+  //   debugger
+  //   if (index - 1 >= 0) {
+  //     if (this.messages[index].data.managerId !== this.messages[index - 1].data.managerId) {
+  //       this.checker = true;
+  //     }
+  //   }
+  //   return this.checker;
+  // }
 
   // ngAfterViewChecked():void{
   //   this.feedContainer.nativeElement.scrollTop =

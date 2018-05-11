@@ -9,7 +9,7 @@
 
 <section id="header">
   <div class="header__block">
-    <div class="header__text">Home</div>
+    <div class="header__text"></div>
   </div>
 </section>
 
@@ -21,7 +21,7 @@
       <h2>Select a property</h2>
     </div>
     <div class="main__table">
-      <div class="table__block" *ngFor="let hotel of hotels | async" (click)="goToHotelUsers(hotel.id)">
+      <div class="table__block" *ngFor="let hotel of hotels" (click)="goToHotelUsers(hotel.id)">
         <img [src]="hotel.data.image" alt="hotel" class="table__image__item">
         <hr> <hr>
         <p class="table__link__item">{{ hotel.data.name }}</p>

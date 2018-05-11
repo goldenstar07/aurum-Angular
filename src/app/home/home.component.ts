@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import * as firebase from 'firebase';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Observable} from "rxjs/Observable";
@@ -13,6 +14,7 @@ import {HelperService} from "../shared/services/helper.service";
 // models
 import {Manager} from './interfaces/manager';
 import {DataProcessingService} from "../shared/services/data-processing.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-home',
@@ -24,11 +26,14 @@ export class HomeComponent implements OnInit {
   closeResult: string;
 
   managersCol: any;
-  managers: Array<Manager>;
+  managers: Array<any>;
 
   name: string;
   email: string;
   password: string;
+
+  AdminName: string;
+  AdminPassword: string;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -36,7 +41,8 @@ export class HomeComponent implements OnInit {
               private authService: AuthService,
               private formBuilder: FormBuilder,
               private hotelSevice: HotelService,
-              public dataProcessingService: DataProcessingService
+              public dataProcessingService: DataProcessingService,
+              public dataStorageService: DataStorageService
   ) {}
 
   ngOnInit() {
@@ -80,13 +86,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDeleteComform(contentDeleteComform) {
-    this.modalService.open(contentDeleteComform).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -100,6 +99,19 @@ export class HomeComponent implements OnInit {
 
   deleteManager(managerId) {
     this.afs.doc('managers/'+managerId).delete();
+  }
+
+  checkAdmin(){
+    firebase.auth().signInWithEmailAndPassword(this.AdminName, this.AdminPassword)
+      .then(
+        response => {
+          if(response.uid ==  this.dataStorageService.getUser().id) {
+            this.managers.forEach(e => {
+              this.deleteManager(e.id);
+            })
+          }
+        }
+      )
   }
 
 }

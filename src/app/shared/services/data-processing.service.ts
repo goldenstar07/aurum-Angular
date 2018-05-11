@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import {DataStorageService} from "./data-storage.service";
 
 @Injectable()
 export class DataProcessingService {
 
-  constructor() { }
+  constructor(private dataStorageService: DataStorageService) { }
 
   createArrayOfItemsbyHotelId(items){
       let hotelId = localStorage.hotelId;
@@ -16,7 +17,16 @@ export class DataProcessingService {
       let arrayOfFilterItems = [];
       items.forEach(item => {if(item.data.htId === hotelId) arrayOfFilterItems.push(item)});
       return arrayOfFilterItems;
-    }
-
+  }
+  createArrayOfAdmins(items){
+      let arrayOfFilterItems = [];
+      items.forEach(item => {if(item.data.role === "admin") arrayOfFilterItems.push(item)});
+      return arrayOfFilterItems;
+  }
+  createArrayOfHotelsByAdminId(items){
+      let arrayOfFilterItems = [];
+      items.forEach(item => {if(item.data.adminId === this.dataStorageService.getUser().id) arrayOfFilterItems.push(item)});
+      return arrayOfFilterItems;
+  }
 
   }

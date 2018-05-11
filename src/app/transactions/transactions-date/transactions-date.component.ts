@@ -75,7 +75,6 @@ export class TransactionsDateComponent implements OnInit {
   }
 
   addItem(item,hotelId){
-    debugger
     this.transactionService.addTransaction(item, hotelId);
   }
 
@@ -112,7 +111,6 @@ export class TransactionsDateComponent implements OnInit {
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
 
     this.sortByDate();
-    debugger
     this.addItem(this.inventoryItems, localStorage.hotelId);
   }
   addNewItem(name) {
@@ -194,5 +192,23 @@ export class TransactionsDateComponent implements OnInit {
         this.byType = true;
     }
   }
+
+  openNewProperty(contentNewProperty) {
+    this.modalService.open(contentNewProperty).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
 }

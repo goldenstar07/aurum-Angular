@@ -1,15 +1,15 @@
-<section id="logo">
+<section id="logo" class="logo" [ngClass]="{'logo-hide':true}">
   <div class="logo__block">
     <div class="logo__image">
       <!--<img src="../images/logo__image.png" alt="logo" class="logo__item">-->
       <div class="logo__item"></div>
     </div>
 
-    <div id="menu-sidebar">
+    <div id="menu-sidebar" *ngIf="noSuperAdmin">
       <div class="select__block">
         <a routerLink="/home" class="select__item" *ngIf="isAdmin">Home</a>
         <a routerLink="/transactions-date" class="select__item">Daily Transactions</a>
-        <a routerLink="/houskeeping-data" class="select__item">HK Goals</a>
+        <!--<a routerLink="/houskeeping-data" class="select__item">HK Goals</a>-->
         <div class="dropdown">
           <button class="dropbtn d-flex align-items-center justify-content-between">
             Inventory
@@ -76,7 +76,6 @@
           </div>
         </div>
         <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/hotels">Properties</a>
-        <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/super-admin">Super Admin</a>
         <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/rate-page">Rate Page</a>
         <a (click)="onLogout()"
            class="select__item">Logout</a>
@@ -88,7 +87,7 @@
 
 <section id="header">
   <div class="header__block">
-    <div class="header__text">Home</div>
+    <div class="header__text">{{stateTitle}}</div>
   </div>
 </section>
 

@@ -9,6 +9,7 @@ import {HotelService} from "./services/hotel.service";
 import {DataStorageService} from "../shared/services/data-storage.service";
 // Classes
 import {FileUpload} from '../shared/classes/file-upload';
+import {DataProcessingService} from "../shared/services/data-processing.service";
 
 
 @Component({
@@ -35,12 +36,16 @@ export class HotelsComponent implements OnInit {
               private modalService: NgbModal,
               private authService: AuthService,
               private dataStorageService: DataStorageService,
+              private dataProcessingService: DataProcessingService,
               private uploadService: UploadFileService,
               private hotelService: HotelService
   ) { }
 
   ngOnInit() {
-    this.hotels = this.hotelService.getHotels();
+    this.hotelService.getHotels().subscribe(res => {
+      this.hotels = this.dataProcessingService.createArrayOfHotelsByAdminId(res);
+    });
+
   }
 
   openNewHotel(contentNewHotel) {
@@ -66,7 +71,8 @@ export class HotelsComponent implements OnInit {
       'name': this.name,
       'address': this.address,
       'city': this.city,
-      'image': this.currentFileUpload.url
+      'image': this.currentFileUpload.url,
+      'adminId': this.dataStorageService.getUser().id
     })
   }
 

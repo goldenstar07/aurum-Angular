@@ -18,7 +18,7 @@
             <th scope="col" class="col__items">Delete ?</th>
           </tr>
           </thead>
-          <tbody *ngFor="let admin of admins" (click)="setAdmins(admin.id)">
+          <tbody *ngFor="let admin of admins">
           <tr>
             <td scope="row" class="type">{{admin.data.name}}</td>
             <td>

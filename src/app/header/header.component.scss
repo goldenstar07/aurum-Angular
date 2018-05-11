@@ -28,7 +28,7 @@ a , a:hover {
 a:hover,select:hover{
   background-color: $primary-color;
 }
-#logo {
+.logo {
   background: #0d0d0d;
   position: fixed;
   height: 100vh;
@@ -41,7 +41,7 @@ a:hover,select:hover{
     width: 72px;
   }
 }
-#logo:hover {
+.logo:hover {
   width: 310px;
   z-index: 1;
   overflow: visible;
@@ -49,6 +49,9 @@ a:hover,select:hover{
     display: block;
     margin-left: 72px;
   }
+}
+.logo.logo-hide:hover{
+  width: 72px;
 }
 
 #header {

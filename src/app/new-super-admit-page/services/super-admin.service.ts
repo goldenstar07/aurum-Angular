@@ -37,7 +37,7 @@ export class SuperAdminService {
               private authService: AuthService) {}
 
   getAdmins() {
-    this.adminsCol = this.afs.collection('admins');
+    this.adminsCol = this.afs.collection('managers');
     return this.adminsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -48,25 +48,7 @@ export class SuperAdminService {
       })
   }
 
-
-  addAdmin(admin) {
-    this.afs.collection('admins').add(admin);
-
-    this.authService.signUpAdmin(admin, admin.password);
-    /* let admin: Admin = {
-       name: this.name,
-       city: this.city,
-       phone: this.phone,
-       email: this.email,
-       number: this.number,
-       status: this.status,
-       role: "admin",
-       hotelId: localStorage.hotelId
-     };
-     this.authService.signUpAdmin(admin, this.password);*/
-  }
-
   deleteAdminService(adminId) {
-    this.afs.doc('admins/' +adminId).delete();
+    this.afs.doc('managers/'+adminId).delete();
   }
 }

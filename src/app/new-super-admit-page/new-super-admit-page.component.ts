@@ -51,40 +51,20 @@ export class NewSuperAdmitPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* this.admins = this.superAdminService.getAdmins();
-     console.log(this.admins);*/
     this.superAdminService.getAdmins().subscribe(res => {
-      this.admins  = res;
+      this.admins  = this.dataProcessingService.createArrayOfAdmins(res);
       console.log(this.admins);
     });
   }
 
   addNewSuperAdmin(form: NgForm) {
-    console.log(form.value);
-    this.hotelId = localStorage.hotelId;
-    form.value.htId = this.hotelId;
-    console.log(form.value);
-    this.superAdminService.addAdmin(form.value);
+    let password = form.value.password;
+    let admin = form.value;
+    admin.role = "admin";
+    delete admin.password;
+    this.authService.signUpUser(admin, password);
   }
 
-  setAdmins() {
-    let admin: Admin = {
-      name: this.name,
-      city: this.city,
-      phone: this.phone,
-      email: this.email,
-      number: this.number,
-      status: this.status,
-      role: "admin",
-      hotelId: localStorage.hotelId
-    };
-    this.authService.signUpAdmin(admin, admin.password);
-  }
-
-   /*deleteSuperAdmin(adminId) {
-   console.log(adminId);
-     this.afs.doc('admins/' + adminId).delete();
-   }*/
   deleteSuperAdmin(adminId) {
     this.deletedAdmin = this.superAdminService.deleteAdminService(adminId);
   }

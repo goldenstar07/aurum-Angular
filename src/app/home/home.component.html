@@ -39,7 +39,7 @@
    </div>
 
     <div class="delete__button">
-      <button type="button" class="button__item" (click)="open(content)">Delete Property</button>
+      <button type="button" class="button__item" (click)="open(content)">Delete Users</button>
       <!--<pre>{{closeResult}}</pre>-->
     </div>
 
@@ -54,13 +54,13 @@
         <form action="#" class="log__form">
           <div class="email__block">
             <label for="email"><p>Email:</p></label>
-            <input type="text" placeholder="" name="email" class="input" required>
+            <input type="text" [(ngModel)]="AdminName" placeholder="" name="email" class="input" required>
           </div>
           <div class="pass__block">
             <label for="password"><p>Password:</p></label>
-            <input type="password" placeholder="" name="psw" class="input" required>
+            <input type="password" [(ngModel)]="AdminPassword" placeholder="" name="psw" class="input" required>
           </div>
-          <button type="submit" class="form__btn">
+          <button type="submit" class="form__btn" (click)="checkAdmin()">
             Delete Property
           </button>
         </form>
