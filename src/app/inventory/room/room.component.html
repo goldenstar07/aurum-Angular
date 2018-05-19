@@ -76,15 +76,15 @@
         <button class="button__item">Save</button>
       </div>
     </div>
-  
+
     <!--///////////////////////////DEFAULT///////////////////////////////////-->
     <div class="main__title d-flex align-items-center" *ngIf="!byType && inventoryDates">
       <table class="table table-bordered">
         <thead>
         <tr>
           <th scope="col">Items</th>
-          <th scope="col" class="col__items" colspan="2"
-              *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 5)">
+          <th scope="col" class="col__items" colspan="2" (click)="selectedDate = i"
+              *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 5); let i = index">
             {{date | date:'yyyy/dd/MM'}}
             <i class="far fa-edit"></i>
           </th>
@@ -105,17 +105,20 @@
         </thead>
         <tr *ngFor="let label of inventoryLabels">
           <td scope="row" class="type">{{label}}</td>
-          <ng-container *ngFor="let item of inventoryItems.room[label].slice(dateIndex, dateIndex + 5)">
+          <ng-container *ngFor="let item of inventoryItems.room[label].slice(dateIndex, dateIndex + 5); let i = index">
             <td>
-              <input class="td-numb" [(ngModel)]="item.have">
+              <input class="td-numb have_need" [class.editable]="selectedDate == i" [(ngModel)]="item.have">
             </td>
             <td>
-              <input class="td-numb" [(ngModel)]="item.need">
+              <input class="td-numb have_need"  [class.editable]="selectedDate == i" [(ngModel)]="item.need">
             </td>
           </ng-container>
         </tr>
       </table>
-      <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
+      <div class="save__btn" *ngIf="selectedDate != -1" (click)="selectedDate = -1">
+        <button class="add__btn">Save</button>
+      </div>
+      <div class="plus__circle" *ngIf="selectedDate == -1" (click)="openNewProperty(contentNewProperty)">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve" width="40px" height="40px">
                     <g>
                         <path d="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M26,50C12.767,50,2,39.233,2,26   S12.767,2,26,2s24,10.767,24,24S39.233,50,26,50z" fill="#707070"/>

@@ -23,6 +23,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
   closeResult: string;
   form: FormGroup;
   password: string;
+  newPass: string;
 
   adminsCol: AngularFirestoreCollection<Admin>;
   admins: any;
@@ -67,6 +68,10 @@ export class NewSuperAdmitPageComponent implements OnInit {
 
   deleteSuperAdmin(adminId) {
     this.deletedAdmin = this.superAdminService.deleteAdminService(adminId);
+  }
+
+  changePassword(email) {
+    this.superAdminService.changePassword(email);
   }
 
   /*Popup*/

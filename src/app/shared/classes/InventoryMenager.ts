@@ -16,6 +16,7 @@ export class InventoryManeger {
   inventoryItems: any;
   inventoryLabels: Array<any>;
   inventoryDates: Array<any>;
+  selectedDate: number;
 
   hotelId: string;
 
@@ -35,7 +36,7 @@ export class InventoryManeger {
               public dataProcessingService: DataProcessingService,
               public dataStorageService: DataStorageService,
               public datePipe: DatePipe) {
-
+    this.selectedDate = -1;
     this.dateIndex = 0;
     this.byDate = false;
     this.byType = false;

@@ -52,8 +52,12 @@ export class ActivityChatComponent implements OnInit {
     this.objectOfMAnager = this.dataStorage.getUser();
     form.value.managerId = this.objectOfMAnager.name;
     form.value.htId = this.hotelId;
+    const msg = {
+        ...form.value,
+      idOsManager: this.objectOfMAnager.id,
+    };
     console.log(form.value);
-    this.chatService.sendMessage(form.value);
+    this.chatService.sendMessage(msg);
     console.log(form.value);
     // AddVendors
     form.resetForm();
@@ -63,11 +67,20 @@ export class ActivityChatComponent implements OnInit {
     this.checker = false;
     this.chatService.getMessages().subscribe(res => {
       this.messages = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
+      this.messages.sort((a, b) => +new Date(a.data.date) - +new Date(b.data.date));
     });
   }
 
   public forceScrollDown(): void {
     this.ngxAutoScroll.forceScrollDown();
+  }
+
+  checkMessagePosition(id) {
+    if(id == this.chatService.getUserId()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // checkOrder(index) {

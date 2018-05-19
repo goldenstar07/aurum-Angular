@@ -31,6 +31,10 @@ export class ActivityChatService {
     });
   }
 
+  getUserId() {
+    return this.user.uid;
+  }
+
   getUser(){
     const userId = this.user.uid;
     const path = `/messages/${userId}`;

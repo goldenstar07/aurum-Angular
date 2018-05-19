@@ -16,6 +16,7 @@
             <th scope="col" class="col__items">No of property's</th>
             <th scope="col" class="col__items">Active/Inactive</th>
             <th scope="col" class="col__items">Delete ?</th>
+            <th scope="col" class="col__items">Password</th>
           </tr>
           </thead>
           <tbody *ngFor="let admin of admins">
@@ -39,7 +40,12 @@
             <td>
               <p class="td-numb"></p>
               <div class="text__block__btn" (click)="deleteSuperAdmin(admin.id)">
-                <a href="#" class="btn__item">Delete</a>
+                <span class="btn__item">Delete</span>
+              </div>
+            </td>
+            <td>
+              <div class="text__block__btn" (click)="changePassword(admin.data.email)">
+                <span class="btn__item">Reset password</span>
               </div>
             </td>
           </tr>
@@ -60,7 +66,7 @@
   <!--POPUP ADD PROPERTY FORM-->
   <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
     <!-- <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">-->
-    <form action="#" class="main__block"  (ngSubmit)="getAdmins(f)" #f="ngForm">
+    <form action="#" class="main__block"  (ngSubmit)="addNewSuperAdmin(f)" #f="ngForm">
       <div class="super__admin__block d-flex flex-column align-items-center">
         <h1>Create an Admin</h1>
         <div class="select__date">

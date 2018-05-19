@@ -19,6 +19,7 @@ import {BillService} from "../services/bill.service";
 import {UploadFileService} from '../../shared/services/upload-file.service';
 // Classes
 import {FileUpload} from '../../shared/classes/file-upload';
+import * as firebase from "firebase";
 
 
 @Component({
@@ -146,9 +147,39 @@ export class BillsMiscComponent implements OnInit {
   }
 
   downloadImage(downloadLink) {
-    this.billService.downloadImage(downloadLink).subscribe(res => {
-    })
+    let url = decodeURIComponent(downloadLink.data.image);
+    let arr = url.split('/');
+    let name = arr[arr.length - 1].substr(0, arr[arr.length - 1].indexOf('?alt'));
+    debugger
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`/uploads/${name}`) .getDownloadURL().then((url) => {
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = (event) => {
+        /* Create a new Blob object using the response
+        *  data of the onload object.
+        */
+        const blob = new Blob([xhr.response], { type: 'image/jpg' });
+        const a: any = document.createElement('a');
+        a.style = 'display: none';
+        document.body.appendChild(a);
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      };
+      xhr.open('GET', url);
+      xhr.send();
+    }).catch(function(error) {
+      // Handle any errors
+      console.log(error);
+    });
   }
+
+  //   this.billService.downloadImage(downloadLink).subscribe(res => {
+  //   })
+  // }
 
   // downloadZip(): Promise<void> {
   //   const blob = await this.billService.downloadResource(this.bills);

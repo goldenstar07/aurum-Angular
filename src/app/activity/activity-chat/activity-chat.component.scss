@@ -122,6 +122,10 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  &.my-message{
+    align-items: flex-end;
+    text-align: right;
+  }
 }
 .message__block__item.right {
   align-items: flex-end;

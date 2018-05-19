@@ -55,7 +55,7 @@ export class BillService {
 
   downloadImage(applicationId) {
     const _self = this;
-    return this.http.get( applicationId)
+    return this.http.get( applicationId);
   }
 
   addBill(bill) {

@@ -15,7 +15,7 @@
            'left': managerId !== currentUser}">
          </div>-->
         <!--<div class="message__block__item" [ngClass]="{'right':checkOrder(i)}">-->
-        <div class="message__block__item">
+        <div class="message__block__item" [class.my-message]="checkMessagePosition(message.data.idOsManager)">
           <p>
             <b> {{ message.data.managerId }} </b><br>
             {{message.data.author}}

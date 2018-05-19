@@ -23,7 +23,8 @@ export class AuthService {
     firebase.auth().createUserWithEmailAndPassword(user.email, password)
       .then(response => {
         user.id = response.uid;
-        this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user))
+        user.password = password;
+        this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user));
       })
       .catch(
         error => console.log(error)
