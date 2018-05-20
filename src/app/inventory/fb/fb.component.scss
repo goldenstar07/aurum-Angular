@@ -9,6 +9,8 @@ $font-gray:            #707070;
 $font-gray4:           #F3F2F0;
 $font-bold:            700;
 $font-sz-12:           12px;
+$font-gray2:           #575652;
+$font-gray3:           #E6E5E2;
 
 body {
   font-family: $font-main, Helvetica,  Arial,sans-serif;
@@ -27,6 +29,9 @@ hr {
   height: 1px;
   opacity: 0.5;
 }
+input{
+  border: none;
+}
 #main {
   padding: 55px 0 0 72px;
 }
@@ -36,7 +41,6 @@ hr {
   height: calc(100vh - 55px);
   overflow-y: auto;
 }
-
 .search__block {
   padding: 20px;
   .search__text__block {
@@ -70,7 +74,7 @@ hr {
     box-shadow: 0 4px 5px -2px #000;
     .search__date__item {
       border: 1px solid $font-gray;
-      width: 110px;
+      width: 100px;
       height: 35px;
       display: flex;
       justify-content: center;
@@ -96,7 +100,7 @@ hr {
     border: 1px solid $font-gray;
     box-shadow: 0 4px 5px -2px #000;
     .custom-select {
-      width: 30%;
+      width: 25%;
       background: gray;
       color: $primary-color;
     }
@@ -125,10 +129,19 @@ hr {
     }
   }
 }
+.have_need{
+  pointer-events: none;
+  &.editable{
+    pointer-events: all;
+    background: gainsboro;
+  }
+
+}
+
 .table {
   width: 600px;
   margin-top: 70px;
-  margin-left: 15px;
+  margin-left: 30px;
   margin-bottom: 70px;
   th {
     background-color: $font-gray4;
@@ -160,6 +173,8 @@ hr {
     text-align: center;
     margin: 5px;
     display: block;
+    border: none;
+    width: 50px;
   }
   .td-input {
     width: 80px;
@@ -178,8 +193,8 @@ hr {
   }
 }
 .plus__circle {
-  cursor: pointer;
   margin-left: 20px;
+  cursor: pointer;
 }
 .save__button {
   position: relative;
@@ -206,7 +221,7 @@ hr {
 //popup
 .user__block {
   width: 600px;
-  /* border: 1px solid #000;*/
+  /*  border: 1px solid #000;*/
   margin: 20px auto 0 auto;
   border-radius: 3px;
 }
@@ -275,6 +290,7 @@ hr {
   border-radius: 5px;
   border: 1px solid $primary-color;
 }
+
 //==========media screen===========
 @media screen and (max-width:1199px){
   .search__block .search__date__block {
@@ -326,10 +342,9 @@ hr {
     width: 90px!important;
   }
 }
-@media screen and (max-width: 425px){
+@media screen and (max-width:425px){
   .search__block .search__text__block p {
     font-size: 18px;
-    text-align: center;
   }
   .button__item {
     font-size: 10px!important;

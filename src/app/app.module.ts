@@ -97,6 +97,7 @@ import { DatePipe } from '@angular/common';
 import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
 import {HkGoalsDateComponent} from "./housekeeping/hk-goals-date/hk-goals-date.component";
 import {NgxAutoScroll} from 'ngx-auto-scroll';
+import { ItemsManagerComponent } from './shared/classes/items-manager/items-manager.component';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -143,7 +144,8 @@ import {NgxAutoScroll} from 'ngx-auto-scroll';
     NewSuperAdmitPageComponent,
     RatePageComponent,
     FilterByDatePipe,
-    HkGoalsDateComponent
+    HkGoalsDateComponent,
+    ItemsManagerComponent
   ],
   imports: [
     BrowserModule,
