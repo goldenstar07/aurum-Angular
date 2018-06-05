@@ -1,86 +1,82 @@
 body {
-  background: #0d0d0d !important;
-  overflow-x: hidden;
+    background: #0d0d0d !important;
+    overflow-x: hidden;
 }
-
 
 .auth-container {
-  background-color: #0d0d0d;
-  height: 100vh;
-  .login-container {
-    background: #fff;
-    border: 2px solid #15668C;
-    border-radius: 30px;
-    color: #000;
-    margin: auto;
-    margin-top: 30%;
-    max-width: 100%;
-    max-height: 100%;
-    width: 500px;
-
-    .user-login-text {/*
-    font-weight: 200;*/
-      padding-right: 10px;
-      color: #000;
-      margin-top: 12px;
+    width: 107%;
+    background-color: #000000;
+    height: 100vh;
+    .login-cover {
+        padding: 7% 0 0 1%;
     }
-    .fa-user{
-      padding-right: 10px;
-      color: #000;
+    .login-container {
+        background: #000000;
+        border: 4px solid #b1d1ff;
+        border-radius: 59px;
+        color: #000;
+        margin: auto;
+        width: 398px;
+        width: 331px;
+        .user-login-text {
+            padding-left: 10%;
+            font-weight: 200;
+            color: #b1d1ff;
+            margin-top: 12px;
+            font-size: 30px;
+        }
+        .fa-user {
+            padding-right: 10px;
+            color: #b1d1ff;
+        }
     }
-  }
-  .form-login{
-    padding: 20px;
-    float: right;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    .user-name{
-      margin-bottom: 20px;
+    .row {
+        width: 100%;
+        flex-direction: row;
+        display: flex;
+        justify-content: space-between;
     }
-    .password{
-      margin-bottom: 20px;
+    .form-login {
+        padding: 4px;
+        /* float: right; */
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: 14%;
+        .user-name {
+            margin-bottom: 20px;
+        }
+        .password {
+            margin-bottom: 20px;
+        }
     }
-  }
-  .forget-password{
-    display: flex;
-    justify-content: flex-end;
-    .anchor-default {
-      color: #176F98;
-      a {
-        text-decoration: none;
-        background-color: transparent;
-      }
+    .forget-password {
+        display: flex;
+        justify-content: flex-end;
+        .anchor-default {
+            color: #b1d1ff;
+            font-weight: 200;
+            a {
+                text-decoration: none;
+                background-color: transparent;
+            }
+        }
     }
-  }
-  .main-logo{
-    background: url("../../images/aurum-logo-slogan.png");
-    height: 500px;
-    width: 500px;
-    margin-top: 50px;
-  }
+    .login {
+        background: #b1d1ff;
+        color: #000;
+    }
+    .image {
+        padding-right: 10%;
+    }
+    .main-logo {
+        background: url("../../images/aurum-logo-slogan.jpg");
+        height: 511px;
+        width: 555px;
+    }
 }
 
-//MEDIA SCREEN===================================!
-
-@media screen and (max-width: 1029px){
-  .media__row {
-    justify-content: center;
-    overflow-x: hidden;
-  }
-  .image {
-    order: -1;
-  }
-  .login-container {
-    margin-top: 0!important;
-  }
-  .auth-container {
-    background-color: #0d0d0d;
-    padding-bottom: 40px;
-    height: auto;
-  }
-}
 
 /*
 .login-content {

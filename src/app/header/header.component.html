@@ -1,94 +1,129 @@
 <section id="logo" class="logo" [ngClass]="{'logo-hide':true}">
-  <div class="logo__block">
-    <div class="logo__image">
-      <!--<img src="../images/logo__image.png" alt="logo" class="logo__item">-->
-      <div class="logo__item"></div>
+    <div class="image">
+        <div class="col-md-6">
+            <div class="main-logo"></div>
+        </div>
+    </div>
+    <div id="menu-sidebar" *ngIf="noSuperAdmin">
+        <div class="flex__item">
+            <i class="fas fa-home"></i>
+            <a routerLink="/home" class="select__item" *ngIf="isAdmin">Home</a>
+        </div>
+
+
+        <div class="flex__item">
+
+            <i class="fas fa-credit-card"></i>
+            <a routerLink="/transactions-date" class="select__item">Daily Transactions</a>
+        </div>
+        <!--<a routerLink="/houskeeping-data" class="select__item">HK Goals</a>-->
+        <div class="flex__item">
+
+            <i class="fas fa-book"></i>
+            <div class="dropdown">
+                <button class="dropbtn d-flex align-items-center justify-content-between">
+         			<a class="select__item">Inventory</a>
+					<i class="fas fa-chevron-right"></i>
+          		</button>
+                <div class="dropdown-content" style="padding-left: 50%;">
+                    <div class="flex__item">
+                        <i class="fas fa-bed"></i>
+                        <a routerLink="/room">Room H/K</a>
+                    </div>
+                    <div class="flex__item">
+                        <i class="fas fa-wrench"></i>
+                        <a routerLink="/maintenance">Maintenance</a>
+                    </div>
+                    <div class="flex__item">
+                        <i class="fas fa-utensils"></i>
+                        <a routerLink="/fb">F&B</a>
+                    </div>
+                    <div class="flex__item">
+                        <i class="fas fa-desktop"></i>
+                        <a routerLink="/fd-misc">FD/Misc</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex__item">
+
+            <i class="fas fa-comments"></i>
+            <a routerLink="/activity-chat" class="select__item">Activity Log</a>
+        </div>
+        <div class="flex__item">
+
+            <i class="fas fa-hand-holding-usd"></i>
+            <a routerLink="/payroll" class="select__item">Payroll</a>
+        </div>
+        <div class="flex__item property">
+
+            <i class="fas fa-info-circle"></i>
+            <div class="dropdown">
+                <button class="  dropbtn d-flex align-items-center justify-content-between">
+					 <a  class="select__item" >Property Info</a>
+            		<i class="fas fa-chevron-right"></i>
+          </button>
+                <div class="dropdown-content">
+                    <div class="flex__item">
+                        <i class="fas fa-address-card"></i>
+                        <a routerLink="/vendors">Vendors</a>
+                    </div>
+                    <div class="flex__item">
+                        <i class="fas fa-key"></i>
+                        <a routerLink="/credentials">Credentials</a>
+                    </div>
+                    <div class="flex__item">
+                        <i class="fas fa-users"></i>
+                        <a routerLink="/employee">Employees</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex__item">
+            <i class="fas fa-cloud-upload-alt"></i>
+
+
+            <div class="dropdown">
+                <button class="dropbtn d-flex align-items-center justify-content-between">
+					<a href="#" class="select__item">Upload</a>
+    				<i class=" fa fas fa-chevron-right"></i>
+        		</button>
+                <div class="dropdown-content" style="padding-left: 75%;">
+                    <div class="flex__item">
+                        <i class="fas fa-file-alt"></i>
+                        <a routerLink="/bills-misc">Bills/Misc</a>
+                    </div>
+                    <div class="flex__item">
+                        <i class="fas fa-paperclip"></i>
+                        <a routerLink="/forms">Forms</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex__item">
+            <i class="fas fa-exchange-alt"></i>
+            <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/hotels">Properties</a>
+        </div>
+        <div class="flex__item">
+            <i class="fas fa-dollar-sign"></i>
+            <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/rate-page">Rate Page</a>
+        </div>
+        <div class="flex__item">
+            <i class="fas fa-sign-out-alt"></i>
+            <a (click)="onLogout()" class="select__item" style="color:#b1d1ff">Logout</a>
+        </div>
     </div>
 
-    <div id="menu-sidebar" *ngIf="noSuperAdmin">
-      <div class="select__block">
-        <a routerLink="/home" class="select__item" *ngIf="isAdmin">Home</a>
-        <a routerLink="/transactions-date" class="select__item">Daily Transactions</a>
-        <!--<a routerLink="/houskeeping-data" class="select__item">HK Goals</a>-->
-        <div class="dropdown">
-          <button class="dropbtn d-flex align-items-center justify-content-between">
-            Inventory
-            <div class="circle__block">
-              <svg version="1.1" id="Capa_1" class="arrow__triangle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="292.362px" height="292.362px" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 292.362 292.362;"
-	 xml:space="preserve">
-                       <g>
-                           <path d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424
-		C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428
-		s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
-                       </g>
-                   </svg>
-            </div>
-          </button>
-          <div class="dropdown-content">
-            <a routerLink="/room">Room H/K</a>
-            <a routerLink="/maintenance">Maintenance</a>
-            <a routerLink="/fb">F&B</a>
-            <a routerLink="/fd-misc">FD/Misc</a>
-          </div>
-        </div>
-        <a routerLink="/activity-chat" class="select__item">Activity Log</a>
-        <a routerLink="/payroll" class="select__item">Payroll</a>
-        <div class="dropdown">
-          <button class="dropbtn d-flex align-items-center justify-content-between">
-            Property Info
-            <div class="circle__block">
-              <svg version="1.1" id="Capa_1" class="arrow__triangle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="292.362px" height="292.362px" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 292.362 292.362;"
-	 xml:space="preserve">
-                       <g>
-                           <path d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424
-		C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428
-		s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
-                       </g>
-                   </svg>
-            </div>
-          </button>
-          <div class="dropdown-content">
-            <a routerLink="/vendors">Vendors</a>
-            <a routerLink="/credentials">Credentials</a>
-            <a routerLink="/employee">Employees</a>
-          </div>
-        </div>
-        <div class="dropdown">
-          <button class="dropbtn d-flex align-items-center justify-content-between">
-            Upload
-            <div class="circle__block">
-              <svg version="1.1" id="Capa_1" class="arrow__triangle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="292.362px" height="292.362px" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 292.362 292.362;"
-	 xml:space="preserve">
-                       <g>
-                           <path d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424
-		C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428
-		s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
-                       </g>
-                   </svg>
-            </div>
-          </button>
-          <div class="dropdown-content">
-            <a routerLink="/bills-misc">Bills/Misc</a>
-            <a routerLink="/forms">Forms</a>
-          </div>
-        </div>
-        <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/hotels">Properties</a>
-        <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/rate-page">Rate Page</a>
-        <a (click)="onLogout()"
-           class="select__item">Logout</a>
-      </div>
-    </div>
-  </div>
 </section>
 
 
 <section id="header">
-  <div class="header__block">
-    <div class="header__text">{{stateTitle}}</div>
-  </div>
+    <div class="header__block">
+        <div class="header__text">{{stateTitle}}</div>
+    </div>
 </section>
 
 <!--
