@@ -47,12 +47,12 @@ export class RoomComponent extends InventoryManeger implements OnInit {
     console.log(this.form);
   }
 
-  addItem(item,hotelId){
+  addItem(item, hotelId) {
     this.inventoryService.addRoom(item, hotelId);
   }
 
   saveFormInput() {
-    if(!this.inventoryItems) {
+    if (!this.inventoryItems) {
       this.inventoryItems = {
         room: {}
       };
@@ -60,18 +60,20 @@ export class RoomComponent extends InventoryManeger implements OnInit {
       this.inventoryService.addNewField();
     }
 
-    if(!this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]) {
+    if (!this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]) {
       this.inventoryDates = [];
     }
 
     this.form.value.inventories.forEach(item => {
-      if (!this.inventoryItems.room[item.item]) this.addNewItem(item.item);
+      if (!this.inventoryItems.room[item.item]) {
+ this.addNewItem(item.item);
+      }
     });
 
     let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     let indexOfItem = this.checkIfDateExist(date);
 
-    if (indexOfItem == -1) {
+    if (indexOfItem === -1) {
       this.addNewDate(date);
       indexOfItem = this.inventoryDates.length - 1;
     }
