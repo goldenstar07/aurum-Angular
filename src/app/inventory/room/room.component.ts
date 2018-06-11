@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef , OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
@@ -16,8 +16,11 @@ import {HelperService} from "../../shared/services/helper.service";
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.scss']
 })
-export class RoomComponent extends InventoryManeger implements OnInit {
 
+export class RoomComponent extends InventoryManeger implements OnInit {
+  public archiveToggle = true;
+   @ViewChild('checkMe') checkMe: ElementRef;
+     @ViewChild('fname') fname: ElementRef;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -29,17 +32,22 @@ export class RoomComponent extends InventoryManeger implements OnInit {
 
 
   ngOnInit() {
+
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
-      if(!this.inventoryItems) {
+      if (!this.inventoryItems) {
         return;
       }
+              //   this.inventoryItems.data.room = {
+        // 'brush': [{'date': '2018-06-01', have: '1', need: '8'}, {
+        //   'date': '2018-03-01', have: '1', need: '8'
+        // }]};
+        // JSON.stringify(this.inventoryItems.room);
       this.inventoryItems = this.inventoryItems.data;
       this.inventoryLabels = [];
       this.getDates(this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]);
       this.getLabels(this.inventoryItems.room);
     });
-
     this.form = this.formBuilder.group({
       date: [''],
       inventories: this.formBuilder.array([this.createFormInput()])
@@ -65,15 +73,14 @@ export class RoomComponent extends InventoryManeger implements OnInit {
     }
 
     this.form.value.inventories.forEach(item => {
-      if (!this.inventoryItems.room[item.item]) {
+      if (!this.inventoryItems.room[item.item]) 
  this.addNewItem(item.item);
-      }
     });
 
-    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd'): this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     let indexOfItem = this.checkIfDateExist(date);
 
-    if (indexOfItem === -1) {
+    if (indexOfItem == -1) {
       this.addNewDate(date);
       indexOfItem = this.inventoryDates.length - 1;
     }
@@ -97,8 +104,14 @@ export class RoomComponent extends InventoryManeger implements OnInit {
         have: "",
         need: ""
       })
-    })
+    }) 
   }
+
+updateItem() {
+  console.log("find a way to update the dom with archived rows");
+   this.sortByDate();
+    this.addItem(this.inventoryItems.room, localStorage.hotelId);
+}
 
   addNewDate(date) {
     this.inventoryDates.push(date);
@@ -125,6 +138,18 @@ export class RoomComponent extends InventoryManeger implements OnInit {
     this.currentItem = this.inventoryItems.room[this.nameOfItem];
   }
 
+  archiveRow() { 
+ let checkboxes = document.getElementsByTagName("input");
+
+    for (var i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked == true) { 
+     let table = <HTMLElement>document.getElementById('table');
+      checkboxes[i].closest('tr').classList.add('archive');
+      table.appendChild(checkboxes[i].closest('tr')); 
+    }
+
+//  }
+ } 
 }
 
 

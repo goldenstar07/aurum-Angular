@@ -98,6 +98,11 @@ export class MaintenanceComponent extends InventoryManeger implements OnInit {
     })
   }
 
+updateItem() {
+   this.sortByDate();
+    this.addItem(this.inventoryItems.maintenance, localStorage.hotelId);
+  
+}
   addNewDate(date) {
     this.inventoryDates.push(date)
     for (let key in this.inventoryItems.maintenance) {

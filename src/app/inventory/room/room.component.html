@@ -50,7 +50,7 @@
                         <th scope="col">Items</th>
                         <th scope="col" class="col__items" colspan="2">
                             {{nameOfItem}}
-                            <i class="far fa-edit"></i>
+                            <!--<i class="far fa-edit"></i>-->
                         </th>
                     </tr>
                 </thead>
@@ -88,9 +88,17 @@
 
         <!--///////////////////////////DEFAULT///////////////////////////////////-->
         <div class="main__title d-flex align-items-center" *ngIf="!byType && inventoryDates">
-            <table class="table table-bordered">
+            <div *ngIf="archiveToggle==true" class="save__btn" (click)="isEnabled=true;">
+                <button class="add__btn">Archive</button>
+            </div>
+            <div *ngIf="archiveToggle==false" class="save__btn" (click)="archiveRow();updateItem();archiveToggle =true;isEnabled=false;">
+                <button class="add__btn">save archives</button>
+            </div>
+            <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
+
+
                         <th scope="col">Items</th>
                         <th scope="col" class="col__items" colspan="2" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 5); let i = index">
                             {{date | date:'yyyy/dd/MM'}}
@@ -111,9 +119,14 @@
                         </ng-container>
                     </tr>
                 </thead>
-                <tr *ngFor="let label of inventoryLabels">
-                    <td scope="row" class="type">{{label}}</td>
-                    <ng-container *ngFor="let item of inventoryItems.room[label].slice(dateIndex, dateIndex + 5); let i = index">
+
+                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">
+
+                    <td scope="row" class="type" id="fname">
+                        <input class="checkbox" type="checkbox" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
+                    </td>
+
+                    <ng-container id="toggle" *ngFor="let item of inventoryItems.room[label].slice(dateIndex, dateIndex + 5); let i = index">
                         <td>
                             <input class="td-numb have_need" [class.editable]="selectedDate == i" [(ngModel)]="item.have">
                         </td>
@@ -123,13 +136,12 @@
                     </ng-container>
                 </tr>
             </table>
-            <div class="save__btn" *ngIf="selectedDate != -1" (click)="selectedDate = -1">
+            <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
                 <button class="add__btn">Save</button>
             </div>
-            <div class="plus__circle" *ngIf="selectedDate == -1" (click)="openNewProperty(contentNewProperty)">
+            <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
                 <i class="fas fa-plus"></i>
             </div>
-
             <div class="save__button">
                 <button class="button__item">Save</button>
             </div>

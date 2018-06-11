@@ -100,7 +100,12 @@ export class FdMiscComponent extends InventoryManeger implements OnInit {
       })
     })
   }
-
+updateItem() {
+  console.log(this.inventoryItems.misc);
+   this.sortByDate();
+    this.addItem(this.inventoryItems.misc, localStorage.hotelId);
+  
+}
   addNewDate(date) {
     this.inventoryDates.push(date)
     for (let key in this.inventoryItems.misc) {

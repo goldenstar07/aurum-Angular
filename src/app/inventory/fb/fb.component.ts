@@ -45,7 +45,12 @@ export class FbComponent extends InventoryManeger implements OnInit {
     });
     console.log(this.form);
   }
-
+updateItem() {
+  console.log(this.inventoryItems.fb);
+   this.sortByDate();
+    this.addItem(this.inventoryItems.fb, localStorage.hotelId);
+  
+}
   addItem(item,hotelId){
     this.inventoryService.addFb(item, hotelId);
   }

@@ -278,6 +278,9 @@ input:focus {
 }
 
 .add__btn {
+    position: absolute;
+    display: inline-block;
+    margin-top: 20%;
     font-size: 16px;
     padding: 8px 27px;
     text-align: center;
@@ -285,6 +288,11 @@ input:focus {
     background-color: #fff;
     -webkit-box-shadow: 0 4px 5px -2px #000;
     box-shadow: 0 4px 5px -2px #000;
+}
+
+.add__btn:hover {
+    background-color: #707070;
+    color: #fff;
 }
 
 .input {
@@ -392,4 +400,45 @@ input:focus {
 .dark-button {
     background-color: $font-gray !important;
     color: $color-fff !important;
+}
+
+.archive {
+    background-color: darkgray;
+    .td-numb {
+        background-color: darkgray;
+    }
+}
+
+.checkbox:checked {
+    color: red;
+    .type {
+        color: red;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+td:focus::after,
+th:focus::after {
+    content: '';
+    background-color: lightblue;
+    position: absolute;
+    left: 0;
+    height: 10000px;
+    top: -5000px;
+    width: 100%;
+    z-index: -1;
+}
+
+td:focus::before {
+    background-color: lightblue;
+    content: '';
+    height: 100%;
+    top: 0;
+    left: -5000px;
+    position: absolute;
+    width: 10000px;
+    z-index: -1;
 }
