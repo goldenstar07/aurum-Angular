@@ -65,7 +65,7 @@ export class EmployeeComponent implements OnInit {
 
 
   deleteEmployee(employeeId) {
-    this.afs.doc('employees/'+employeeId).delete();
+    this.afs.doc('employees/' + employeeId).delete();
   }
 
   // popup

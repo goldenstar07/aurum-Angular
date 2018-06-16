@@ -22,6 +22,8 @@ import {HelperService} from "../../shared/services/helper.service";
   styleUrls: ['./transactions-date.component.scss']
 })
 export class TransactionsDateComponent implements OnInit {
+    public archiveToggle = true;
+
   closeResult: string;
   form: FormGroup;
 
@@ -135,7 +137,10 @@ export class TransactionsDateComponent implements OnInit {
   updateRooms() {
     this.addItem(this.inventoryItems, localStorage.hotelId);
   }
-
+updateItem() {
+   this.sortByDate();
+    this.addItem(this.inventoryItems, localStorage.hotelId);
+}
   sortByDate() {
     for (let key in this.inventoryItems) {
       this.inventoryItems[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
@@ -209,6 +214,28 @@ export class TransactionsDateComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  archiveRow() {
+    if(localStorage.getItem('table')!= null){
+        document.getElementsByTagName('input[type=checkbox]').checked = localStorage.getItem('table');
 
+    }  
+    let checkboxes = document.getElementsByTagName('input');
+
+    let arr = [];
+
+console.log('reloaded checkboxes', checkboxes);
+//  let checkboxes = document.getElementsByTagName('input');
+    for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked === true) {
+     let table = <HTMLElement>document.getElementById('table');
+      checkboxes[i].closest('tr').classList.add('archive');
+      table.appendChild(checkboxes[i].closest('tr'));
+arr.push(checkboxes[i].checked=true);
+    } else {
+arr.push(checkboxes[i].checked=false);
+}
+    }localStorage.setItem('table', JSON.stringify(arr));
+    console.log('saved states of check boxes',arr);
+}
 
 }

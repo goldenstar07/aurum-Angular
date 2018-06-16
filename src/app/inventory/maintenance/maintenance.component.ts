@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
@@ -17,6 +17,9 @@ import {HelperService} from "../../shared/services/helper.service";
   styleUrls: ['./maintenance.component.scss']
 })
 export class MaintenanceComponent extends InventoryManeger implements OnInit {
+     public archiveToggle = true;
+   @ViewChild('checkMe') checkMe: ElementRef;
+     @ViewChild('fname') fname: ElementRef;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -30,9 +33,11 @@ export class MaintenanceComponent extends InventoryManeger implements OnInit {
   ngOnInit() {
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
-      if(!this.inventoryItems) {
+      if (!this.inventoryItems) {
         return;
       }
+     
+     
       this.inventoryItems = this.inventoryItems.data;
       this.inventoryLabels = [];
       this.getDates(this.inventoryItems.maintenance[Object.keys(this.inventoryItems.maintenance)[0]]);
@@ -46,7 +51,7 @@ export class MaintenanceComponent extends InventoryManeger implements OnInit {
     console.log(this.form);
   }
 
-  addItem(item,hotelId){
+  addItem(item, hotelId) {
     this.inventoryService.addMaintenance(item, hotelId);
   }
 
@@ -67,7 +72,7 @@ export class MaintenanceComponent extends InventoryManeger implements OnInit {
     });
 
 
-    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'MM-dd-YYYY');
     let indexOfItem = this.checkIfDateExist(date);
 
 
@@ -85,6 +90,12 @@ export class MaintenanceComponent extends InventoryManeger implements OnInit {
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
 
     this.sortByDate();
+
+      //to reset all add this code  
+  // this.addItem({
+  //        'hammer': [{'date': '2018-06-01', have: '1', need: '8'}, {
+  //          'date': '2018-03-01', have: '1', need: '8'
+  //        }]}, localStorage.hotelId);
     this.addItem(this.inventoryItems.maintenance, localStorage.hotelId);
   }
   addNewItem(name) {
@@ -127,7 +138,29 @@ updateItem() {
   updateItemsByType() {
     this.currentItem = this.inventoryItems.maintenance[this.nameOfItem];
   }
+  archiveRow() {
+    if(localStorage.getItem('table')!= null){
+       document.getElementsByTagName('input').checked = localStorage.getItem('table');
 
+    }  
+    let checkboxes =  document.getElementsByTagName('input');
+
+    let arr = [];
+
+console.log('reloaded checkboxes',checkboxes);
+//  let checkboxes = document.getElementsByTagName('input');
+    for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked === true) {
+     let table = <HTMLElement>document.getElementById('table');
+      checkboxes[i].closest('tr').classList.add('archive');
+      table.appendChild(checkboxes[i].closest('tr'));
+arr.push(checkboxes[i].checked=true);
+    } else {
+arr.push(checkboxes[i].checked=false);
+}
+    }localStorage.setItem('table', JSON.stringify(arr));
+    console.log('saved states of check boxes',arr);
+}
 }
 
 

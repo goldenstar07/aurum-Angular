@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef , OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
@@ -17,6 +17,9 @@ import {HelperService} from "../../shared/services/helper.service";
   styleUrls: ['./fd-misc.component.scss']
 })
 export class FdMiscComponent extends InventoryManeger implements OnInit {
+    public archiveToggle = true;
+   @ViewChild('checkMe') checkMe: ElementRef;
+     @ViewChild('fname') fname: ElementRef;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -130,5 +133,30 @@ updateItem() {
   updateItemsByType() {
     this.currentItem = this.inventoryItems.misc[this.nameOfItem];
   }
+   archiveRow() {
+    if (localStorage.getItem('table') != null) {
+        document.getElementsByTagName('input').checked = localStorage.getItem('table');
+
+    }
+    let checkboxes =  document.getElementsByTagName('input')
+
+    let arr = [];
+
+console.log('reloaded checkboxes',checkboxes);
+//  let checkboxes = document.getElementsByTagName('input');
+    for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked === true) {
+
+     	let table = <HTMLElement>document.getElementById('table');
+      	checkboxes[i].closest('tr').classList.add('archive');
+      	table.appendChild(checkboxes[i].closest('tr'));
+		arr.push(checkboxes[i].checked=true);
+    } else {
+		arr.push(checkboxes[i].checked=false);
+}
+    }localStorage.setItem('table', JSON.stringify(arr));
+    console.log('saved states of check boxes',arr);
+}
+
 
 }

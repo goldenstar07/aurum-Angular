@@ -77,7 +77,7 @@ export class RoomComponent extends InventoryManeger implements OnInit {
  this.addNewItem(item.item);
     });
 
-    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd'): this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'MM-dd-yyyy'): this.datePipe.transform(new Date(), 'MM-dd-yyyy');
     let indexOfItem = this.checkIfDateExist(date);
 
     if (indexOfItem == -1) {
@@ -108,7 +108,6 @@ export class RoomComponent extends InventoryManeger implements OnInit {
   }
 
 updateItem() {
-  console.log("find a way to update the dom with archived rows");
    this.sortByDate();
     this.addItem(this.inventoryItems.room, localStorage.hotelId);
 }
@@ -124,6 +123,8 @@ updateItem() {
     }
   }
   updateRooms() {
+      console.log("find a way to update the dom with archived rows");
+
     this.addItem(this.inventoryItems.room, localStorage.hotelId);
   }
 
@@ -138,19 +139,29 @@ updateItem() {
     this.currentItem = this.inventoryItems.room[this.nameOfItem];
   }
 
-  archiveRow() { 
- let checkboxes = document.getElementsByTagName("input");
+  archiveRow() {
+    if(localStorage.getItem('table')!= null){
+        document.getElementsByTagName('input').checked = localStorage.getItem('table');
 
-    for (var i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].checked == true) { 
+    }  
+    let checkboxes = document.getElementsByTagName('input');
+
+    let arr = [];
+
+console.log('reloaded checkboxes', checkboxes);
+//  let checkboxes = document.getElementsByTagName('input');
+    for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked === true) {
      let table = <HTMLElement>document.getElementById('table');
       checkboxes[i].closest('tr').classList.add('archive');
-      table.appendChild(checkboxes[i].closest('tr')); 
-    }
-
-//  }
- } 
+      table.appendChild(checkboxes[i].closest('tr'));
+arr.push(checkboxes[i].checked = true);
+    } else {
+arr.push(checkboxes[i].checked = false);
+}
+    }localStorage.setItem('table', JSON.stringify(arr));
+    console.log('saved states of check boxes', arr);
 }
 
 
-
+}

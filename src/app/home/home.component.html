@@ -72,7 +72,7 @@
         </button>
             </div>
             <div class="user__block">
-                <form action="#" class="user__form" (ngSubmit)="onSignup(f)" #f="ngForm">
+                <form action="#" class="user__form  d-flex flex-column" (ngSubmit)="onSignup(f)" #f="ngForm">
                     <div class="name__block">
                         <label for="name"><p>Name:</p></label>
                         <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input_user" required>
