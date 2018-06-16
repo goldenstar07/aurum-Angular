@@ -93,6 +93,10 @@ export class RoomComponent extends InventoryManeger implements OnInit {
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
 
     this.sortByDate();
+     // this.addItem({
+    //      'toner': [{'date': '2018-06-01', have: '1', need: '8'}, {
+    //        'date': '2018-03-01', have: '1', need: '8'
+    //      }]}, localStorage.hotelId);
     this.addItem(this.inventoryItems.room, localStorage.hotelId);
   }
 

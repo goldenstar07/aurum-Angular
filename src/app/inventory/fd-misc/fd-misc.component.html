@@ -120,10 +120,10 @@
                     </td>
                     <ng-container *ngFor="let item of inventoryItems.misc[label].slice(dateIndex, dateIndex + 8); let i = index">
                         <td>
-                            <input class="td-numb have_need" [class.editable]="selectedDate == i" [(ngModel)]="item.have">
+                            <input class="td-numb " [class.editable]="selectedDate == i" [(ngModel)]="item.have">
                         </td>
                         <td>
-                            <input class="td-numb have_need" [class.editable]="selectedDate == i" [(ngModel)]="item.need">
+                            <input class="td-numb" [class.editable]="selectedDate == i" [(ngModel)]="item.need">
                         </td>
                     </ng-container>
                 </tr>
@@ -161,7 +161,7 @@
 
                             <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__form">
                                 <div class="name__block" [formGroupName]="i">
-                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input">
+                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input " style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()">
                                     <input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input">
                                     <input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input">
                                 </div>

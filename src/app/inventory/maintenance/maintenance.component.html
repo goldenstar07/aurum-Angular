@@ -158,7 +158,7 @@
                             </div>
                             <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__form">
                                 <div class="name__block" [formGroupName]="i">
-                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input">
+                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()">
                                     <input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input">
                                     <input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input">
                                 </div>

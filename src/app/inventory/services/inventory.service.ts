@@ -64,7 +64,7 @@ export class InventoryService {
     });
   }
 
-  addNewField(){
+  addNewField() {
     this.afs.collection('inventories').doc(localStorage.hotelId).set({
       "room" : {} ,
       "maintenance" : {},
