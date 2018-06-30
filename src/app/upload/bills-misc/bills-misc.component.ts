@@ -103,11 +103,11 @@ export class BillsMiscComponent implements OnInit {
   selectFile(event) {
     const file = event.target.files.item(0);
 
-    if (file.type.match('image.*')) {
+    // if (file.type.match('image.*')) {
       this.selectedFiles = event.target.files;
-    } else {
-      alert('invalid format!');
-    }
+    // } else {
+    //   alert('invalid format!');
+    // }
     this.upload();
     /*return this.fileName = file;*/
     console.log(file.name);
@@ -135,6 +135,8 @@ export class BillsMiscComponent implements OnInit {
 
   // popup view img
   openViewImg(contentViewImg) {
+
+debugger
     this.modalService.open(contentViewImg).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -150,7 +152,6 @@ export class BillsMiscComponent implements OnInit {
     let url = decodeURIComponent(downloadLink.data.image);
     let arr = url.split('/');
     let name = arr[arr.length - 1].substr(0, arr[arr.length - 1].indexOf('?alt'));
-    debugger
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`/uploads/${name}`) .getDownloadURL().then((url) => {
       const xhr = new XMLHttpRequest();

@@ -1,6 +1,8 @@
 export interface Payroll {
-  name?: string;
-  regular?: any;
-  over: any;
-  hotelId?: string;
+  item: string;
+  dt:  any;
+  mt: any;
+  rt: any;
+  ot: any;
+  hotelId: string;
 }

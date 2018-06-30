@@ -30,10 +30,24 @@ export class PayrollService {
         });
       });
   }
+  
 
-  addPayroll(payroll) {
-      console.log(payroll);
-    this.afs.collection('payrolls').add(payroll);
+  addPayroll(item, hotelId) {
+      console.log(item);
+    this.afs.collection('payrolls').add(item);
+    // this.afs.collection('inventories').doc(hotelId).update({
+    //   "payroll" : item
+    // });
   }
-
+addNewField() {
+    this.afs.collection('payrolls').doc(localStorage.hotelId).set({
+      "payroll" : {}
+    });
+  }
 }
+//  {date: "",
+//        payrolls:
+//        [{date: "2018-06-01", name: "Vitaliy Ploshchinskiy", regular: 3, over: 12}],
+//         htId: "PHIFzkoZSXttVM6ENSsu"} );
+//     console.log(form.value, this.hotelId);
+//   }
