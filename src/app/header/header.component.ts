@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
       "/home": "Home",
       "/activity-chat": "Activity Log",
       "/payroll": "Payroll",
+      "/hk":"HK-Goals",
       "/vendors": "Information - Vendor",
       "/credentials": "Information - Credential",
       "/employee": "Information - Employee",

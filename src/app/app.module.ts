@@ -47,7 +47,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { HousekeepingComponent } from './housekeeping/housekeeping.component';
 import { RoomComponent } from './inventory/room/room.component';
 import { MaintenanceComponent } from './inventory/maintenance/maintenance.component';
 import { FbComponent } from './inventory/fb/fb.component';
@@ -74,13 +73,9 @@ import { TransactionsHeaderComponent } from './transactions/transactions-header/
 import { TransactionsDateComponent } from './transactions/transactions-date/transactions-date.component';
 import { TransactionsTypeComponent } from './transactions/transactions-type/transactions-type.component';
 import {TransactionService} from './transactions/services/transaction.service';
-import { HkGoalsDataComponent } from './housekeeping/hk-goals-data/hk-goals-data.component';
-import { HkGoalsHkComponent } from './housekeeping/hk-goals-hk/hk-goals-hk.component';
-import { HkHeaderComponent } from './housekeeping/hk-header/hk-header.component';
 import { InventoryHeaderComponent } from './inventory/inventory-header/inventory-header.component';
 import {ChangePropertyComponent} from './change-property/change-property.component';
 import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
-import {HouskeepingService} from "./housekeeping/services/houskeeping.service";
 import {InventoryService} from "./inventory/services/inventory.service";
 import {ActivityChatService} from "./activity/activity-chat/service/activity-chat.service";
 import {CredentialsService} from "./property/services/credentials.service";
@@ -95,9 +90,10 @@ import {SuperAdminService} from './new-super-admit-page/services/super-admin.ser
 import { RatePageComponent } from './rate-page/rate-page.component';
 import { DatePipe } from '@angular/common';
 import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
-import {HkGoalsDateComponent} from "./housekeeping/hk-goals-date/hk-goals-date.component";
 import {NgxAutoScroll} from 'ngx-auto-scroll';
 import { ItemsManagerComponent } from './shared/classes/items-manager/items-manager.component';
+import { HKComponent } from './hk-goals/hk.component';
+import { HKService } from './hk-goals/services/hk.service';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -115,13 +111,13 @@ import { ItemsManagerComponent } from './shared/classes/items-manager/items-mana
     HeaderComponent,
     HomeComponent,
     TransactionsComponent,
-    HousekeepingComponent,
     RoomComponent,
     MaintenanceComponent,
     FbComponent,
     FdMiscComponent,
     ActivityComponent,
     PayrollComponent,
+    HKComponent,
     VendorsComponent,
     CredentialsComponent,
     EmployeeComponent,
@@ -131,20 +127,15 @@ import { ItemsManagerComponent } from './shared/classes/items-manager/items-mana
     TransactionsHeaderComponent,
     TransactionsDateComponent,
     TransactionsTypeComponent,
-    HkGoalsDataComponent,
-    HkGoalsHkComponent,
-    HkHeaderComponent,
     InventoryHeaderComponent,
     ChangePropertyComponent,
     ActivityChatComponent,
-    PayrollComponent,
     CredentialsComponent,
     EmployeeComponent,
     VendorsComponent,
     NewSuperAdmitPageComponent,
     RatePageComponent,
     FilterByDatePipe,
-    HkGoalsDateComponent,
     ItemsManagerComponent
   ],
   imports: [
@@ -201,7 +192,6 @@ import { ItemsManagerComponent } from './shared/classes/items-manager/items-mana
     AdminGuard,
     TransactionService,
     HomeService,
-    HouskeepingService,
     InventoryService,
     ActivityChatService,
     CredentialsService,
@@ -209,6 +199,7 @@ import { ItemsManagerComponent } from './shared/classes/items-manager/items-mana
     VendorsService,
     PayrollService,
     BillService,
+    HKService,
     FormService,
     AngularFireAuth,
     SuperAdminService,

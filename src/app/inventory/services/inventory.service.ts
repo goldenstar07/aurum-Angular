@@ -58,6 +58,13 @@ export class InventoryService {
       'payroll' : item
     });
   }
+
+  addHK(item, hotelId) {
+
+    this.afs.collection('inventories').doc(hotelId).update({
+      'hk' : item
+    });
+  }
   addFb(item, hotelId) {
     this.afs.collection('inventories').doc(hotelId).update({
       'fb' : item
@@ -74,6 +81,7 @@ export class InventoryService {
     this.afs.collection('inventories').doc(localStorage.hotelId).set({
       'room' : {} ,
       'payroll': {},
+      'hk': {},
       'maintenance' : {},
       'fb' : {},
       'misc' : {},

@@ -65,7 +65,7 @@ export class PayrollComponent extends PayrollManager implements OnInit {
   }
 
   saveFormInput() {
-    if(!this.inventoryItems) {
+    if (!this.inventoryItems) {
       this.inventoryItems = {
         payroll: {}
       };
@@ -131,8 +131,10 @@ updateItem() {
     for (let key in this.inventoryItems.payroll) {
       this.inventoryItems.payroll[key].push({
         date: date,
-        have: "",
-        need: ""
+        rt: "",
+        ot: "",
+        dt: "",
+        mt: ""
       })
     }
   }

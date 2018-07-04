@@ -11,8 +11,6 @@ import {AdminGuard} from "./shared/classes/admin.guard";
 import {AutGuard} from "./shared/classes/auth.guard";
 import {TransactionsDateComponent} from "./transactions/transactions-date/transactions-date.component";
 import {TransactionsTypeComponent} from "./transactions/transactions-type/transactions-type.component";
-import {HkGoalsDataComponent} from "./housekeeping/hk-goals-data/hk-goals-data.component";
-import {HkGoalsHkComponent} from "./housekeeping/hk-goals-hk/hk-goals-hk.component";
 import {RoomComponent} from "./inventory/room/room.component";
 import {MaintenanceComponent} from "./inventory/maintenance/maintenance.component";
 import {FbComponent} from "./inventory/fb/fb.component";
@@ -27,7 +25,7 @@ import {BillsMiscComponent} from "./upload/bills-misc/bills-misc.component";
 import {FormsComponent} from "./upload/forms/forms.component";
 import {NewSuperAdmitPageComponent} from './new-super-admit-page/new-super-admit-page.component';
 import {RatePageComponent} from './rate-page/rate-page.component';
-/*import {InventoryTypeComponent} from "./inventory/inventory-type/inventory-type.component";*/
+import { HKComponent } from './hk-goals/hk.component';
 
 
 const appRoutes: Routes = [
@@ -38,13 +36,13 @@ const appRoutes: Routes = [
   { path: 'hotels', component:  HotelsComponent , canActivate: [AutGuard, AdminGuard] },
   { path: 'transactions-date', component: TransactionsDateComponent, canActivate: [AutGuard] },
   { path: 'transactions-type', component: TransactionsTypeComponent, canActivate: [AutGuard] },
-  { path: 'houskeeping-data', component: HkGoalsDataComponent, canActivate: [AutGuard] },
-  { path: 'houskeeping-hk', component: HkGoalsHkComponent, canActivate: [AutGuard] },
   { path: 'room', component: RoomComponent, canActivate: [AutGuard] },
   { path: 'maintenance', component: MaintenanceComponent, canActivate: [AutGuard] },
   { path: 'fb', component: FbComponent, canActivate: [AutGuard] },
   { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] },
   { path: 'payroll', component: PayrollComponent, canActivate: [AutGuard] },
+
+  { path: 'hk', component: HKComponent, canActivate: [AutGuard] },
   { path: 'vendors', component: VendorsComponent, canActivate: [AutGuard] },
   { path: 'employee', component: EmployeeComponent, canActivate: [AutGuard] },
   { path: 'credentials', component: CredentialsComponent, canActivate: [AutGuard] },
