@@ -41,7 +41,6 @@ const appRoutes: Routes = [
   { path: 'fb', component: FbComponent, canActivate: [AutGuard] },
   { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] },
   { path: 'payroll', component: PayrollComponent, canActivate: [AutGuard] },
-
   { path: 'hk', component: HKComponent, canActivate: [AutGuard] },
   { path: 'vendors', component: VendorsComponent, canActivate: [AutGuard] },
   { path: 'employee', component: EmployeeComponent, canActivate: [AutGuard] },
