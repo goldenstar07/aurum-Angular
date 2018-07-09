@@ -145,7 +145,7 @@ updateItem() {
 
   archiveRow() {
     if(localStorage.getItem('table')!= null){
-        document.getElementsByTagName('input').checked = localStorage.getItem('table');
+        // document.getElementsByTagName('input').checked = localStorage.getItem('table');
 
     }  
     let checkboxes = document.getElementsByTagName('input');
