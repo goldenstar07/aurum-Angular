@@ -49,7 +49,8 @@ export class NewSuperAdmitPageComponent implements OnInit {
   hotelId: FormControl;
   role: FormControl;
   password: FormControl;
-
+  addAdminErrorMessage: string;
+  addAdminHasError:boolean;
   constructor(private router: Router,
               private modalService: NgbModal,
               private formBuilder: FormBuilder,
@@ -88,6 +89,19 @@ export class NewSuperAdmitPageComponent implements OnInit {
       password: this.password
     });
   }
+  addNewUserSuccess = response => {
+    console.log("successfully added")
+  }
+
+  addNewUserFail =error => {
+    console.log(error)
+    this.addAdminErrorMessage =error.message;
+    this.addAdminHasError = true;
+  }
+
+  addNewFormChange(){
+    console.log("wee")
+  }
   addNewSuperAdmin(form: NgForm) {
     // let password = form.value.password;
     // let admin = form.value;
@@ -104,13 +118,8 @@ export class NewSuperAdmitPageComponent implements OnInit {
       role:'admin'    
     }
     let _password = this.password.value
-    this.authService.signUpUser(admin, _password);
+    this.authService.signUpNewUser(admin, _password, this.addNewUserSuccess, this.addNewUserFail);
     console.log(this.city.value)
-  }
-
-  saveFormInput() {
-    console.log('haha');
-    return true;
   }
 
   deleteSuperAdmin(adminId) {

@@ -19,6 +19,19 @@ export class AuthService {
   }
 
 
+  signUpNewUser(user, password, successCallback, failCallback) {
+    firebase.auth().createUserWithEmailAndPassword(user.email, password)
+      .then(response => {        
+        user.id = response.uid;
+        user.password = password;
+        this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user)).then(successCallback);
+      })
+      .catch(
+        // error => console.log(error)
+        failCallback
+      );
+  }
+
   signUpUser(user, password) {
     firebase.auth().createUserWithEmailAndPassword(user.email, password)
       .then(response => {        
