@@ -30,7 +30,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
   hotel: Observable<Hotel>;
   deletedAdmin: any;
   adminn: Array<Admin>;
-
+  addAdminModalRef: any;
   // city: string;
   // name: string;
   // phone: any;
@@ -51,6 +51,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
   password: FormControl;
   addAdminErrorMessage: string;
   addAdminHasError:boolean;
+
   constructor(private router: Router,
               private modalService: NgbModal,
               private formBuilder: FormBuilder,
@@ -90,7 +91,9 @@ export class NewSuperAdmitPageComponent implements OnInit {
     });
   }
   addNewUserSuccess = response => {
-    console.log("successfully added")
+    console.log("successfully added");
+    this.addAdminModalRef.close()
+    
   }
 
   addNewUserFail =error => {
@@ -98,10 +101,7 @@ export class NewSuperAdmitPageComponent implements OnInit {
     this.addAdminErrorMessage =error.message;
     this.addAdminHasError = true;
   }
-
-  addNewFormChange(){
-    console.log("wee")
-  }
+ 
   addNewSuperAdmin(form: NgForm) {
     // let password = form.value.password;
     // let admin = form.value;
@@ -132,7 +132,8 @@ export class NewSuperAdmitPageComponent implements OnInit {
 
   /*Popup*/
   openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
+    this.addAdminModalRef = this.modalService.open(contentNewProperty);
+    this.addAdminModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
