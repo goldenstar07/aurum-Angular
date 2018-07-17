@@ -52,6 +52,12 @@ select {
     height: calc(100vh - 55px);
     overflow-y: auto;
 }
+.add_admin_main__block{
+    border: 10px solid #b1d1ff;
+    position: relative;
+    // height: calc(100vh - 55px);
+    overflow-y: auto;
+}
 
 .search__block {
     padding: 20px;
@@ -143,9 +149,9 @@ select {
 }
 
 .table {
-    margin-top: 70px;
+    margin-top: 20px;
     margin-left: 30px;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
     th {
         background-color: $font-gray4;
         text-align: center;
@@ -217,32 +223,44 @@ select {
     vertical-align: middle;
 }
 
-.save__button {
-    position: relative;
-    top: 160px;
-    right: 20px;
-    display: none;
-    .button__item {
-        font-size: 26px;
-        border: 1px solid $color-fff;
-        padding: 0 20px;
-        width: 120px;
-        text-align: center;
-        border-radius: 15px;
-        background-color: $primary-color;
-        color: $color-fff;
-        font-weight: $font-bold;
-        cursor: pointer;
-    }
-    .button__item:focus {
-        outline: none;
-    }
+
+.save_admin__button {
+    // position: relative;
+    // top: 160px;
+    // right: 20px;
+    // display: block;
+    // margin:auto;
+    // .button__item {
+    //     font-size: 26px;
+    //     border: 1px solid $color-fff;
+    //     padding: 0 20px;
+    //     width: 120px;
+    //     text-align: center;
+    //     border-radius: 15px;
+    //     background-color: $primary-color;
+    //     color: $color-fff;
+    //     font-weight: $font-bold;
+    //     cursor: pointer;
+    // }
+    // .button__item:focus {
+    //     outline: none;
+    // }
+    font-size: 26px;
+    border: 1px solid $color-fff;
+    padding: 0 20px;
+    width: 120px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: $primary-color;
+    color: $color-fff;
+    font-weight: $font-bold;
+    cursor: pointer;
+    margin:15px auto;
 }
 
 // popup
-.super__admin__block {
-    height: 100%;
-    display: flex;
+.super__admin__block {   
+    // display: flex;
     justify-content: center;
     align-items: center;
     .select__date {
@@ -290,7 +308,22 @@ select {
     input:focus {
         outline: none;
     }
-    .save__btn {
+    // .save__btn {
+    //     .button__item {
+    //         font-size: 26px;
+    //         border: 1px solid $color-fff;
+    //         padding: 0 20px;
+    //         width: 120px;
+    //         text-align: center;
+    //         border-radius: 15px;
+    //         background-color: $primary-color;
+    //         color: $color-fff;
+    //         font-weight: $font-bold;
+    //         cursor: pointer;
+    //         margin-top: 30px;
+    //     }
+    // }
+     .save__btn {
         .button__item {
             font-size: 26px;
             border: 1px solid $color-fff;
@@ -302,9 +335,22 @@ select {
             color: $color-fff;
             font-weight: $font-bold;
             cursor: pointer;
-            margin-top: 30px;
         }
     }
+}
+.form__btn {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: $font-bold;
+    border: 1px solid $color-ff;
+    padding: 18px 40px;
+    text-align: center;
+    border-radius: 50px;
+    background-color: $color-ff;
+    box-shadow: 0 0 5px 1px black;
+    text-transform: uppercase;
+    display: block;
+    margin: 40px auto;
 }
 
 //==========media screen===========

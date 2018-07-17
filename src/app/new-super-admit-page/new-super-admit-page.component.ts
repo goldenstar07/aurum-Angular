@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
 import { Observable} from "rxjs/Observable";
-import { NgForm, Validators, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { NgForm, Validators, FormArray, FormBuilder, FormGroup ,FormControl } from '@angular/forms';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 // Interfaces
 import { Admin } from './interfaces/admin';
@@ -21,8 +21,7 @@ import {AuthService} from '../auth/auth.service';
 })
 export class NewSuperAdmitPageComponent implements OnInit {
   closeResult: string;
-  form: FormGroup;
-  password: string;
+
   newPass: string;
 
   adminsCol: AngularFirestoreCollection<Admin>;
@@ -32,14 +31,24 @@ export class NewSuperAdmitPageComponent implements OnInit {
   deletedAdmin: any;
   adminn: Array<Admin>;
 
-  city: string;
-  name: string;
-  phone: any;
-  email: string;
-  number: any;
-  status: any;
-  hotelId: string;
-  role: any;
+  // city: string;
+  // name: string;
+  // phone: any;
+  // email: string;
+  // number: any;
+  // status: any;
+  // hotelId: string;
+  // role: any;
+  form: FormGroup;
+  city: FormControl;
+  name: FormControl;
+  phone: FormControl;
+  email: FormControl;
+  number: FormControl;
+  status: FormControl;
+  hotelId: FormControl;
+  role: FormControl;
+  password: FormControl;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -49,6 +58,9 @@ export class NewSuperAdmitPageComponent implements OnInit {
               public dataStorageService: DataStorageService,
               private superAdminService: SuperAdminService,
               private authService: AuthService) {
+
+    this.createAdminAddingForm()
+
   }
 
   ngOnInit() {
@@ -57,13 +69,48 @@ export class NewSuperAdmitPageComponent implements OnInit {
       console.log(this.admins);
     });
   }
-
+  createAdminAddingForm(){
+    this.city = new FormControl('', Validators.required);
+    this.name = new FormControl('', Validators.required);
+    this.phone = new FormControl('', Validators.required);
+    this.email = new FormControl('', Validators.required);
+    this.number = new FormControl('',[ Validators.required, Validators.min(1)]),
+    this.status = new FormControl('', [Validators.required, Validators.pattern('(inactive|active)')]),
+    this.password = new FormControl('', Validators.required);
+    
+    this.form = new FormGroup({
+      name: this.name,
+      city: this.city,
+      phone: this.phone,
+      email: this.email,
+      number: this.number,
+      status: this.status,
+      password: this.password
+    });
+  }
   addNewSuperAdmin(form: NgForm) {
-    let password = form.value.password;
-    let admin = form.value;
-    admin.role = "admin";
-    delete admin.password;
-    this.authService.signUpUser(admin, password);
+    // let password = form.value.password;
+    // let admin = form.value;
+    // admin.role = "admin";
+    // delete admin.password;
+    // this.authService.signUpUser(admin, password);
+    let admin = {
+      name: this.name.value,
+      city: this.city.value,
+      phone: this.phone.value,
+      email: this.email.value,
+      number: this.number.value,
+      status: this.status.value,
+      role:'admin'    
+    }
+    let _password = this.password.value
+    this.authService.signUpUser(admin, _password);
+    console.log(this.city.value)
+  }
+
+  saveFormInput() {
+    console.log('haha');
+    return true;
   }
 
   deleteSuperAdmin(adminId) {
@@ -91,5 +138,9 @@ export class NewSuperAdmitPageComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+  onLogout() {
+    this.authService.logout();
+    this.dataStorageService.removeDataFromLocalStorage();
   }
 }

@@ -56,17 +56,24 @@
                 </div>
             </div>
         </div>
+        <button type="submit" class="form__btn" (click)="onLogout()">
+            Logout
+        </button>
     </div>
 
     <!--POPUP ADD PROPERTY FORM-->
     <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
-        <!-- <form class="main__block" [formGroup]="form" (submit)="saveFormInput()">-->
-        <form action="#" class="main__block" (ngSubmit)="addNewSuperAdmin(f)" #f="ngForm">
-            <div class="super__admin__block d-flex flex-column align-items-center">
+        <form class="add_admin_main__block" [formGroup]="form"  (ngSubmit)="saveFormInput()">
+
+           
+
+       
+                <!-- <form action="#" class="main__block" (ngSubmit)="addNewSuperAdmin(f)" #f="ngForm"> -->
+            <!-- <div class="super__admin__block d-flex flex-column align-items-center">            
                 <h1>Create an Admin</h1>
                 <div class="select__date">
                     <p>Admin Name</p>
-                    <input type="text" name="name" id="name" [(ngModel)]="name" class="td-input" placeholder="">
+                    <input type="text" name="name" id="name" [(ngModel)]="name"  placeholder="">
                 </div>
                 <div class="select__date">
                     <p>Admin Login Email</p>
@@ -95,7 +102,93 @@
                 <div class="save__btn">
                     <button class="button__item" type="submit" (click)="addNewSuperAdmin(f)" value="submit">Save</button>
                 </div>
-            </div>
+            </div> -->
+            <div class="panel"> 
+                    <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
+                        <h1>Create an Admin</h1>   
+                    </div>             
+                    <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
+                                <tr>
+                                    <td><p>Admin Name</p></td>
+                                    <td>
+                                        <input type="text" id="name" formControlName = "name" class = "form-control"  placeholder="">
+                                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                                           Admin name is required
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>Admin Login Email</p></td>                                    
+                                    <td>
+                                        <input type="text" id="email" formControlName="email" class = "form-control" placeholder="">
+                                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                                            Admin login email is required
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>Password</p></td>
+                                    <td>
+                                        <input type="password" id="password" formControlName="password" placeholder="" class = "form-control">
+                                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                                            Password is required
+                                        </div>
+                                    </td>  
+                                    
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>City/State</p></td>
+                                    <td>
+                                        <input type="text" id="city" formControlName="city"  placeholder="" class = "form-control" class = "form-control">
+                                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                                            City is required
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>Phone #</p></td> 
+                                    <td>
+                                        <input type="text" id="phone" formControlName="phone" placeholder="" class = "form-control" class = "form-control">
+                                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                                            Phone number is required
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>No of property</p></td>
+                                    <td>
+                                        <input type="number" id="number" min="1" formControlName="number" placeholder="" class = "form-control">
+                                    
+                                        <div *ngIf="number.value =='' && (number.dirty || number.touched)" class="alert alert-danger">
+                                            Number of property is required
+                                        </div>
+                                        <div *ngIf="(number.value < 1 && number.value!='') && (number.dirty || number.touched)" class="alert alert-danger">
+                                            Number of property must be a positive number
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>Status</p></td>
+                                    <td>
+                                        <input type="text" id="status" formControlName="status"  placeholder="active/inactive" class = "form-control">
+                                        <div *ngIf="status.value=='' && (status.dirty || status.touched)" class="alert alert-danger">
+                                           Status is required
+                                        </div>
+                                        <div *ngIf="(status.invalid && status.value!='') && (number.dirty || number.touched)" class="alert alert-danger">
+                                            Please input active or inactive
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                    </table>
+                    <div align="center">
+                        <button class="save_admin__button" type="submit" value="submit" [disabled] = "form.invalid" >Save</button>
+                    </div>                    
+                    
+                    
+                    
+                    
+                </div>
         </form>
     </ng-template>
 </section>
