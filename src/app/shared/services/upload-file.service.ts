@@ -29,6 +29,7 @@ export class UploadFileService {
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
         this.saveFileData(fileUpload);
+        progress.percentage = 100;
       }
     );
   }

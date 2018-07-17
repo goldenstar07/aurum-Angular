@@ -33,7 +33,7 @@ a:hover {
   text-shadow: 1px 0 10px #0d0d0d, 1px 1px 3px yellow;;
 }
 
-#logo {
+#logo { 
   background: #0d0d0d;
   position: fixed;
   height: 100vh;
@@ -168,6 +168,40 @@ input:focus {
   justify-content: center;
   overflow: auto;
 }
+
+.add_property_block{
+    border: 10px solid #b1d1ff;
+    position: relative;
+    // height: calc(100vh - 55px);
+    overflow-y: auto;
+    padding:30px;
+}
+
+.save_button{
+  font-size: 26px;
+  border: 1px solid $color-fff;
+  padding: 0 20px; 
+  text-align: center;
+  border-radius: 15px;
+  background-color: $primary-color;
+  color: $color-fff;
+  font-weight: $font-bold;
+  cursor: pointer;
+  margin:15px auto;
+}
+.image_button {
+  font-size: 13px;
+  border: 1px solid $color-fff;
+  padding: 0 20px; 
+  text-align: center;
+  border-radius: 15px;
+  background-color: #ccc;
+  color: yellow;
+  font-weight: $font-bold;
+  cursor: pointer;
+  margin:15px auto;
+}
+
 .user__block {
   width: 600px;
   height: 350px;

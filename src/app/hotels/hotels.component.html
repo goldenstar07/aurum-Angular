@@ -41,7 +41,7 @@
 
 
   <!--POPUP ADD HOTEL FORM-->
-  <ng-template #contentNewHotel let-c="close" let-d="dismiss">
+  <ng-template #contentNewHotel let-c="close" let-d="dismiss" class="modal-lg">
     <!-- <div class="user__component d-flex flex-column">
       <div class="user__block">
         <div class="user__block__header d-flex justify-content-between align-items-center">
@@ -53,14 +53,18 @@
       </button>
     </div>
     <hr> -->
-    <form class="user__form" [formGroup]="form"  (ngSubmit)="addNewSuperAdmin()">
-        <div class="panel">                        
+    
+    <form  [formGroup]="form" class="add_property_block" (ngSubmit)="addNewHotel()">
+        <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
+            <h1> Add New Hotel</h1>   
+        </div> 
+     <div class="panel">                     
             <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
                         <tr>
                             <td><p>Name</p></td>
                             <td>
                                 <input type="text" id="name" formControlName = "name" class = "form-control"  placeholder="">
-                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert-danger">
                                    Propery name is required
                                 </div>
                             </td>
@@ -68,36 +72,36 @@
                         <tr class="select__date">
                             <td><p>Address</p></td>                                    
                             <td>
-                                <input type="text" id="address" formControlName="email" class = "form-control" placeholder="">
-                                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                                <input type="text" id="address" formControlName="address" class = "form-control" placeholder="">
+                                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert-danger">
                                    Address is required
                                 </div>
                             </td>
                         </tr>
-                        <tr class="select__date">
+                        <tr>
                             <td><p>City</p></td>
                             <td>
                                 <input type="text" id="city" formControlName="city"  placeholder="" class = "form-control" class = "form-control">
-                                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert-danger">
                                     City is required
                                 </div>
                             </td>
                         </tr>                        
-                        <tr class="select__date">
-                            <td><p>Status</p></td>
+                        <tr>
+                            <td><p>Image</p></td>
                             <td>
-                                <button type="button" class="image__btn">
-                                    <input type="file" class="image__btn" (change)="selectFile($event)" id="image">
+                                <button type="button" class="image_button">
+                                    <input type="file" (change)="selectFile($event)" id="image">
                                     <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                    Upload
+                                      Uploaded {{progress.percentage}}%
                                   </button>
                             </td>
                         </tr>
                         
             </table>
             <div align="center">
-                <button type="submit" class="add__btn" (click)="addNewHotel()" [disabled] = "form.invalid" value="submit">Add New Property</button>
-                <h1 (click)="upload()">CLICK</h1>
+                <button type="submit"  class="save_button" (click)="addNewHotel()" [disabled] = "form.invalid || progress.percentage!=100" value="submit">Add New Property</button>
+                <!-- <h1 (click)="upload()">CLICK</h1> -->
             </div>
             
             
@@ -105,7 +109,7 @@
             
             
             
-        </div>
+        </div> 
 </form>
     <!-- <form action="#" class="user__form">
       <div class="name__block">
