@@ -26,7 +26,7 @@
                     <span class="prof__name">{{ manager.data.role }}</span>
                 </div>
             </div>
-            <div class="plus__circle" (click)="openNewUser(contentNewUser)">
+            <div [hidden]="!canAddMoreManager" class="plus__circle" (click)="openNewUser(contentNewUser)">
                 <i class="fas fa-plus"></i>
             </div>
 

@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   AdminName: string;
   AdminPassword: string;
   propertyName: string;
+  canAddMoreManager: boolean;
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -55,6 +56,8 @@ export class HomeComponent implements OnInit {
         this.propertyName = ''
       }
     });
+
+
     console.log(localStorage.hotelId);
     this.managersCol.snapshotChanges()
       .map(actions => {
@@ -66,8 +69,12 @@ export class HomeComponent implements OnInit {
       })
       .subscribe(res => {
         this.managers = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
+        this.canAddMoreManager = this.managers.length < 3;         
+        console.log("Managers")
+        console.log(this.managers.length)
       });
-      
+    
+     
       
   }
 
