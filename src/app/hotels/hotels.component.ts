@@ -31,6 +31,7 @@ export class HotelsComponent implements OnInit {
   name: string;
   address: any;
   city: string;
+  canAddMoreProperty: boolean;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -44,7 +45,10 @@ export class HotelsComponent implements OnInit {
   ngOnInit() {
     this.hotelService.getHotels().subscribe(res => {
       this.hotels = this.dataProcessingService.createArrayOfHotelsByAdminId(res);
-    });
+      this.canAddMoreProperty = this.dataStorageService.getUser().number > this.hotels.length;
+      console.log(this.hotels.length)
+      console.log(this.dataStorageService.getUser().number)
+      });
 
   }
 
@@ -66,7 +70,7 @@ export class HotelsComponent implements OnInit {
     }
   }
 
-  addNewHotel() {
+  addNewHotel() {    
     this.hotelService.addHotel({
       'name': this.name,
       'address': this.address,

@@ -12,7 +12,8 @@ export class HeaderComponent implements OnInit {
   isAdmin: boolean;
   noSuperAdmin: boolean;
   stateTitle: any;
-
+  isHotel: boolean;
+  hotelName: string;
   constructor(private authService: AuthService, private dataStorageService: DataStorageService, private router: Router) {
     this.stateTitle = "";
     let stateDependence = {
@@ -46,6 +47,16 @@ export class HeaderComponent implements OnInit {
     if(this.dataStorageService.getUser().role == "superadmin"){
       this.noSuperAdmin = false;
     }
+    
+    if(this.dataStorageService.getIsHotel()){
+      this.isHotel = true;
+      this.hotelName = this.dataStorageService.getHotelName();
+    }else{
+      this.isHotel = false;
+      this.hotelName = ''
+    }
+
+    
 
   }
 

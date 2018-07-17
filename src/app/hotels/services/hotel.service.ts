@@ -31,6 +31,9 @@ export class HotelService {
   }
 
   addHotel(hotel) {
+    console.log(hotel)
+    hotel.adminId = "Qll6jGpR77N27Ln55PCYEcIWXvr2"
+    hotel.image = "https://firebasestorage.googleapis.com/v0/b/aurumbackend.appspot.com/o/uploads%2FStockUP_Video_Background-min.jpeg?alt=media&token=46f7b892-e35e-421b-9a49-b812db4b7ba8"
     this.afs.collection('hotels').add(hotel);
   }
 }

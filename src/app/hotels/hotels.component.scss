@@ -7,6 +7,9 @@ $font-thin:            HelveticaNeue Thin;
 $font-gray:            #707070;
 $font-bold:            700;
 $font-sz-12:           12px;
+$font-gray4:          #F3F2F0;
+$font-gray2:          #575652;
+$color-fff:           #fff;
 
 /*@font-face {
   font-family: HelveticaNeue Thin;
@@ -187,9 +190,88 @@ input:focus {
   margin-top: 20px;
   margin-bottom: 1rem;
 }
-.user__form {
-  margin-top: 15px;
-  padding: 20px;
+// .user__form {
+//   margin-top: 15px;
+//   padding: 20px;
+// }
+.user__form {   
+  // display: flex;
+  justify-content: center;
+  align-items: center;
+  .select__date {
+      margin-top: 10px;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      width: 360px;
+  }
+  .search__date__item {
+      border: 1px solid $font-gray;
+      width: 100px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: $font-bold;
+      background-color: $font-gray4;
+      margin-left: 37px;
+      box-shadow: 0 4px 5px -2px #000;
+  }
+  .input__transaction {
+      margin-top: 20px;
+  }
+  .td-input {
+      width: 200px;
+      height: 35px;
+      padding-left: 8px;
+      color: $primary-color;
+      font-size: 20px;
+      text-align: center;
+      font-weight: $font-bold;
+      box-shadow: 0 4px 5px -2px #000;
+  }
+  .td-input:nth-child(2) {
+      margin-left: 20px;
+  }
+   ::placeholder {
+      color: $font-gray2;
+      font-size: 20px;
+      text-align: center;
+      font-weight: $font-bold;
+  }
+  input:focus {
+      outline: none;
+  }
+  // .save__btn {
+  //     .button__item {
+  //         font-size: 26px;
+  //         border: 1px solid $color-fff;
+  //         padding: 0 20px;
+  //         width: 120px;
+  //         text-align: center;
+  //         border-radius: 15px;
+  //         background-color: $primary-color;
+  //         color: $color-fff;
+  //         font-weight: $font-bold;
+  //         cursor: pointer;
+  //         margin-top: 30px;
+  //     }
+  // }
+   .save__btn {
+      .button__item {
+          font-size: 26px;
+          border: 1px solid $color-fff;
+          padding: 0 20px;
+          width: 120px;
+          text-align: center;
+          border-radius: 15px;
+          background-color: $primary-color;
+          color: $color-fff;
+          font-weight: $font-bold;
+          cursor: pointer;
+      }
+  }
 }
 .city__block {
   input {

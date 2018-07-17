@@ -19,6 +19,21 @@ export class DataStorageService {
     localStorage.hotelId = id;
   }
 
+  setHotelName(hotelName){
+    localStorage.hotelName = hotelName;
+  }
+
+  getHotelName(){
+    return localStorage.hotelName;
+  }
+  
+  getIsHotel(){
+    return localStorage.isHotel;
+  }
+
+  setIsHotel(yn){
+    localStorage.isHotel = yn;
+  }
   setUser(user): void {
     localStorage.user = JSON.stringify(user);
   }
@@ -30,5 +45,7 @@ export class DataStorageService {
   removeDataFromLocalStorage() {
     localStorage.clear();
   }
+  
+  
 }
 

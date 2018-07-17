@@ -125,8 +125,11 @@
 
 
 <section id="header">
-    <div class="header__block">
-        <div class="header__text">{{stateTitle}}</div>
+    <div class = "inline">
+        <div class="header__block">
+            <div class="header__text">{{stateTitle}} <div [hidden] = "!isHotel" class="inline" class="hotel_name float-right">{{hotelName}}</div> </div>            
+        </div>
+        
     </div>
 </section>
 

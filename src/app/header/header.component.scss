@@ -19,7 +19,15 @@ body {
     overflow-x: hidden;
     height: 100vh;
 }
-
+.hotel_name{
+    margin-right:10;
+    color: #fff;    
+    text-shadow:2px 2px #e61818;
+    font-family: cursive;
+}
+.inline{
+    display: inline; 
+}
 a,
 a:hover {
     padding-top: 2%;

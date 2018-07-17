@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   AdminName: string;
   AdminPassword: string;
-
+  propertyName: string;
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -47,6 +47,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.managersCol = this.afs.collection('managers');
+    this.afs.collection('hotels').doc(localStorage.hotelId).ref.get().then((doc)=>{
+      if(doc.exists){
+        this.dataStorageService.setHotelName(doc.data().name)
+        this.dataStorageService.setIsHotel(true);    
+      }else{
+        this.propertyName = ''
+      }
+    });
+    console.log(localStorage.hotelId);
     this.managersCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -58,6 +67,8 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         this.managers = this.dataProcessingService.createArrayOfItemsbyHotelId(res);
       });
+      
+      
   }
 
   addNewManager() {
@@ -66,6 +77,7 @@ export class HomeComponent implements OnInit {
       email: this.email,
       role: "manager",
       hotelId: localStorage.hotelId
+    
     }
     this.authService.signUpUser(manager, this.password);
   }

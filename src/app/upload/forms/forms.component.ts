@@ -71,6 +71,7 @@ export class FormsComponent implements OnInit {
     this.hotelId = localStorage.hotelId;
     form.value.htId = this.hotelId;
     form.value.image = this.currentFileUpload.url;
+    form.value.date="2018/07/26"    
     console.log(form.value);
     this.formService.addForm(form.value);
   }

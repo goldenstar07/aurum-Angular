@@ -11,13 +11,21 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   ngOnInit() {
+    // firebase.initializeApp({
+    //   apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
+    //   authDomain: "aurum-249ae.firebaseapp.com",
+    //   databaseURL: "https://aurum-249ae.firebaseio.com",
+    //   projectId: "aurum-249ae",
+    //   storageBucket: "aurum-249ae.appspot.com",
+    //   messagingSenderId: "1041935493149",
+    // });
     firebase.initializeApp({
-      apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
-      authDomain: "aurum-249ae.firebaseapp.com",
-      databaseURL: "https://aurum-249ae.firebaseio.com",
-      projectId: "aurum-249ae",
-      storageBucket: "aurum-249ae.appspot.com",
-      messagingSenderId: "1041935493149",
+      apiKey: "AIzaSyCwQzXTZz4ByxLsrju5qQv5zgL3dVA5tc0",
+      authDomain: "aurumbackend.firebaseapp.com",
+      databaseURL: "https://aurumbackend.firebaseio.com",
+      projectId: "aurumbackend",
+      storageBucket: "aurumbackend.appspot.com",
+      messagingSenderId: "832150769171"
     });
   }
 }

@@ -99,13 +99,14 @@ export class ChangePropertyComponent implements OnInit {
     }
   }
 
-  addNewHotel() {
-    this.afs.collection('hotels').add({
-      'name': this.name,
-      'address': this.address,
-      'city': this.city,
-      'image': this.currentFileUpload.url
-    });
+  addNewHotel() {    
+    console.log("Hello")
+    // this.afs.collection('hotels').add({
+    //   'name': this.name,
+    //   'address': this.address,
+    //   'city': this.city,
+    //   'image': this.currentFileUpload.url
+    // });
   }
   getHotel(hotelId) {
     this.hotelDoc = this.afs.doc('hotels/' + hotelId);

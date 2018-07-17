@@ -21,7 +21,7 @@ export class AuthService {
 
   signUpUser(user, password) {
     firebase.auth().createUserWithEmailAndPassword(user.email, password)
-      .then(response => {
+      .then(response => {        
         user.id = response.uid;
         user.password = password;
         this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user));
@@ -35,6 +35,7 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
+          console.log(JSON.stringify(response.uid))
           this.afs.doc('managers/' + response.uid).valueChanges().subscribe(res => {
             this.dataStoreService.setUser(res);
             let currentUser = this.dataStoreService.getUser();

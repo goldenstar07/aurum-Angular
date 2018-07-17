@@ -49,6 +49,7 @@ export class FormService {
   addForm(form) {
     /*this.afs.collection('vendors').doc(hotelId).set(vendor);*/
     /*this.afs.collection('bills').add(bill);*/
+    
     this.afs.collection('forms').add(form);
   }
 
