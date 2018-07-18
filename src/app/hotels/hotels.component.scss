@@ -177,7 +177,8 @@ input:focus {
     padding:30px;
 }
 
-.save_button{
+.save_button, button.save_button:hover {
+
   font-size: 26px;
   border: 1px solid $color-fff;
   padding: 0 20px; 
@@ -195,7 +196,7 @@ input:focus {
   padding: 0 20px; 
   text-align: center;
   border-radius: 15px;
-  background-color: #ccc;
+  background-color: #aaa;
   color: yellow;
   font-weight: $font-bold;
   cursor: pointer;
