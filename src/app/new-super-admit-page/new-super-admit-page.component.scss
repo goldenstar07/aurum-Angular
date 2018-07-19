@@ -161,7 +161,6 @@ select {
         font-size: 14px;
     }
     .col__items {
-        width: 105px;
         text-align: center;
         vertical-align: middle;
         padding: 0;
@@ -174,7 +173,7 @@ select {
         position: relative;
         top: 2px;
     }
-    .td-numb {
+    .numb {
         text-align: center;
         margin: 2px;
         display: block;
@@ -194,6 +193,13 @@ select {
     }
     input:focus {
         outline: none;
+    }
+    td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        p {
+            width: auto;
+        }
     }
 }
 

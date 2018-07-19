@@ -63,4 +63,24 @@ export class SuperAdminService {
       .then(() => console.log('email sent'))
       .catch((error) => console.log(error));
   }
+
+  deleteHotelAndManagers(adminId){
+    this.afs.collection('hotels', ref => ref.where("adminId",'==', adminId)).ref.get()
+    .then(
+      hotels => {
+          hotels.docs.forEach((hotel)=>{
+            this.afs.collection('manaagers', ref => ref.where('hotelId', '==', hotel.id)).ref.get()
+            .then(
+              managers => {
+                managers.docs.forEach(manager =>{
+                  manager.ref.delete();
+                })
+              }
+            )
+
+          hotel.ref.delete();
+        })
+      },
+    ) 
+  }
 }

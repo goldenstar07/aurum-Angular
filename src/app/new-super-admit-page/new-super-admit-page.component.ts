@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Observable} from "rxjs/Observable";
 import { NgForm, Validators, FormArray, FormBuilder, FormGroup ,FormControl } from '@angular/forms';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import * as firebase from 'firebase';
 // Interfaces
 import { Admin } from './interfaces/admin';
 import {Hotel} from '../hotels/interfaces/hotel';
@@ -13,6 +14,7 @@ import { SuperAdminService } from './services/super-admin.service';
 import {DataProcessingService} from '../shared/services/data-processing.service';
 import {DataStorageService} from '../shared/services/data-storage.service';
 import {AuthService} from '../auth/auth.service';
+import { HotelService } from '../hotels/services/hotel.service';
 
 @Component({
   selector: 'app-new-super-admit-page',
@@ -52,6 +54,12 @@ export class NewSuperAdmitPageComponent implements OnInit {
   addAdminErrorMessage: string;
   addAdminHasError:boolean;
 
+  checkPassword: FormControl;
+  checkPasswordForm: FormGroup;
+  checkPasswordModalRef: any;
+  deleteAdminName: string;
+  deleteAdminId: string;
+  deleteAdminError: string;
   constructor(private router: Router,
               private modalService: NgbModal,
               private formBuilder: FormBuilder,
@@ -62,13 +70,19 @@ export class NewSuperAdmitPageComponent implements OnInit {
               private authService: AuthService) {
 
     this.createAdminAddingForm()
-
+    this.createDeleteConfirmForm()            
   }
 
   ngOnInit() {
     this.superAdminService.getAdmins().subscribe(res => {
       this.admins  = this.dataProcessingService.createArrayOfAdmins(res);
       console.log(this.admins);
+    });
+  }
+  createDeleteConfirmForm(){
+    this.checkPassword = new FormControl('', [Validators.required, Validators.min(6)]);
+    this.checkPasswordForm = new FormGroup({
+      checkPassword:this.checkPassword
     });
   }
   createAdminAddingForm(){
@@ -122,17 +136,70 @@ export class NewSuperAdmitPageComponent implements OnInit {
     console.log(this.city.value)
   }
 
-  deleteSuperAdmin(adminId) {
-    this.deletedAdmin = this.superAdminService.deleteAdminService(adminId);
+  cancelDeleteAdmin(){
+    this.createDeleteConfirmForm()
+    this.checkPasswordModalRef.close();
+
   }
 
+  deleteSuperAdmin(adminId, adminName, checkPasswordDelete) {
+    this.deleteAdminName = adminName;
+    this.deleteAdminId = adminId;
+    this.deleteAdminError = '';
+    this.checkPasswordModalRef = this.modalService.open(checkPasswordDelete);
+
+    this.checkPasswordModalRef.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+    // this.deletedAdmin = this.superAdminService.deleteAdminService(adminId);
+  }
+
+  deleteAdminUser(){   
+  console.log(this.deleteAdminId);
+   firebase.auth().currentUser.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(firebase.auth().currentUser.email, this.checkPassword.value))
+   .then(
+      response => {
+        this.afs.collection('hotels').ref.where("adminId",'==', this.deleteAdminId).get()
+        .then(
+          hotels => {
+              hotels.docs.forEach((hotel)=>{
+                console.log(hotel.data);
+                this.afs.collection('manaagers').ref.where('hotelId', '==', hotel.id).get()
+                .then(
+                  managers => {
+                    managers.docs.forEach(manager =>{
+                      manager.ref.delete();
+                    })
+                  }
+                )
+
+            
+            })
+          }
+        )    
+   
+         this.superAdminService.deleteAdminService(this.deleteAdminId)
+         this.checkPasswordModalRef.close();
+    
+   })
+   .catch(
+     error => this.deleteAdminError = error.message
+   );
+
+  }
+  
   changePassword(email) {
     this.superAdminService.changePassword(email);
   }
 
   /*Popup*/
   openNewProperty(contentNewProperty) {
+    this.createAdminAddingForm()
     this.addAdminModalRef = this.modalService.open(contentNewProperty);
+    
+
     this.addAdminModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

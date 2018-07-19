@@ -22,7 +22,7 @@
                     <tbody *ngFor="let admin of admins">
                         <tr>
                             <td scope="row" class="type">{{admin.data.name}}</td>
-                            <td>
+                            <td class="col__email">
                                 <p class="td-numb">{{admin.data.email}}</p>
                             </td>
                             <td>
@@ -39,7 +39,7 @@
                             </td>
                             <td>
                                 <p class="td-numb"></p>
-                                <div class="text__block__btn" (click)="deleteSuperAdmin(admin.id)">
+                                <div class="text__block__btn" (click)="deleteSuperAdmin(admin.id, admin.data.name, checkPasswordDelete)">
                                     <span class="btn__item">Delete</span>
                                 </div>
                             </td>
@@ -73,7 +73,7 @@
                                     <td><p>Admin Name</p></td>
                                     <td>
                                         <input type="text" id="name" formControlName = "name" class = "form-control"  placeholder="">
-                                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert-danger">
                                            Admin name is required
                                         </div>
                                     </td>
@@ -82,7 +82,7 @@
                                     <td><p>Admin Login Email</p></td>                                    
                                     <td>
                                         <input type="text" id="email" formControlName="email" class = "form-control" placeholder="">
-                                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert-danger">
                                             Admin login email is required
                                         </div>
                                     </td>
@@ -91,7 +91,7 @@
                                     <td><p>Password</p></td>
                                     <td>
                                         <input type="password" id="password" formControlName="password" placeholder="" class = "form-control">
-                                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert-danger">
                                             Password is required
                                         </div>
                                     </td>  
@@ -101,7 +101,7 @@
                                     <td><p>City/State</p></td>
                                     <td>
                                         <input type="text" id="city" formControlName="city"  placeholder="" class = "form-control" class = "form-control">
-                                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert-danger">
                                             City is required
                                         </div>
                                     </td>
@@ -110,7 +110,7 @@
                                     <td><p>Phone #</p></td> 
                                     <td>
                                         <input type="text" id="phone" formControlName="phone" placeholder="" class = "form-control" class = "form-control">
-                                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert-danger">
                                             Phone number is required
                                         </div>
                                     </td>
@@ -123,7 +123,7 @@
                                         <div *ngIf="number.value =='' && (number.dirty || number.touched)" class="alert alert-danger">
                                             Number of property is required
                                         </div>
-                                        <div *ngIf="(number.value < 1 && number.value!='') && (number.dirty || number.touched)" class="alert alert-danger">
+                                        <div *ngIf="(number.value < 1 && number.value!='') && (number.dirty || number.touched)" class="alert-danger">
                                             Number of property must be a positive number
                                         </div>
                                     </td>
@@ -132,10 +132,10 @@
                                     <td><p>Status</p></td>
                                     <td>
                                         <input type="text" id="status" formControlName="status"  placeholder="active/inactive" class = "form-control">
-                                        <div *ngIf="status.value=='' && (status.dirty || status.touched)" class="alert alert-danger">
+                                        <div *ngIf="status.value=='' && (status.dirty || status.touched)" class="alert-danger">
                                            Status is required
                                         </div>
-                                        <div *ngIf="(status.invalid && status.value!='') && (number.dirty || number.touched)" class="alert alert-danger">
+                                        <div *ngIf="(status.invalid && status.value!='') && (number.dirty || number.touched)" class="alert-danger">
                                             Please input active or inactive
                                         </div>
                                     </td>
@@ -153,6 +153,35 @@
                     
                     
                 </div>
+        </form>
+    </ng-template>
+
+    <ng-template #checkPasswordDelete let-c="close" let-d="dismiss" class="modal-lg">
+        <form class="add_admin_main__block" [formGroup]="checkPasswordForm"  (ngSubmit)="deleteAdminUser()">
+            <div class="panel"> 
+                
+                    <h2>
+                        Are you sure you want to delete {{deleteAdminName}}?
+                        Please input your password to confirm.
+                    </h2>  
+                
+                 
+                                                                        
+                <input type="password" id="checkPassword" formControlName ="checkPassword" class = "form-control"  placeholder="Input password here">
+                <div *ngIf="checkPassword.invalid && (checkPassword.dirty || checkPassword.touched)" class="alert alert-danger">
+                    Admin name is required
+                </div> 
+                <div [hidden]="!addAdminHasError" class="alert alert-danger">
+                    {{addAdminErrorMessage}}
+                </div>
+                <div [hidden]="deleteAdminError==''" class="alert alert-danger">
+                    {{deleteAdminError}}
+                </div>
+                <div align="center">
+                    <button class="save_admin__button" type="submit" value="submit" [disabled] = "checkPasswordForm.invalid">confirm</button>
+                    <button class="save_admin__button" value="submit" (click)="cancelDeleteAdmin()">Cancel</button>
+                </div> 
+            </div>
         </form>
     </ng-template>
 </section>
