@@ -116,7 +116,9 @@ hr {
 .message__block.right{
   display: block;
 }
-
+::placeholder{
+  opacity: 0.5;
+}
 //MEDIA SCREEN
 @media screen and (max-width: 767px){
   .message__block {
