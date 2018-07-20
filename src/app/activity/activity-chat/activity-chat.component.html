@@ -17,11 +17,11 @@
         <!--<div class="message__block__item" [ngClass]="{'right':checkOrder(i)}">-->
         <div class="message__block__item" [class.my-message]="checkMessagePosition(message.data.idOsManager)" *ngIf="checkMessagePosition(message.data.idOsManager)">
           <p>
-            
+            <span class="message_meta">
             <b> {{ message.data.managerId }} </b>
             {{message.data.author}}
             {{message.data.date}}
-         
+          </span>
           <span class="message__block">
             {{message.data.text}}
           </span>
@@ -32,12 +32,12 @@
               
             <span class="message__block">
                 {{message.data.text}}
-              </span>
-              
+            </span>
+            <span class="message_meta">
               <b> {{ message.data.managerId }} </b>
               {{message.data.author}}
               {{message.data.date}}
-           
+            </span>
           </p>
           </div>
         <!-- // other user
