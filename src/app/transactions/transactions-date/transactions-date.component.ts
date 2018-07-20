@@ -53,7 +53,7 @@ export class TransactionsDateComponent implements OnInit {
               public transactionService: TransactionService) {
 
     this.dateIndex = 0;
-    this.byDate = false;
+    this.byDate = true;
     this.byType = false;
   }
 
