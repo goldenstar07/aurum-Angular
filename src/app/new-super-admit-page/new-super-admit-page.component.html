@@ -15,7 +15,8 @@
                             <th scope="col" class="col__items">Phone #</th>
                             <th scope="col" class="col__items">No of property's</th>
                             <th scope="col" class="col__items">Active/Inactive</th>
-                            <th scope="col" class="col__items">Delete ?</th>
+                            <th scope="col" class="col__items">Edit</th>
+                            <th scope="col" class="col__items">Delete</th>
                             <th scope="col" class="col__items">Password</th>
                         </tr>
                     </thead>
@@ -34,8 +35,15 @@
                             <td>
                                 <p class="td-numb">{{admin.data.number}}</p>
                             </td>
+
                             <td>
                                 <p class="td-numb">{{admin.data.status}}</p>
+                            </td>
+                            <td>
+                                <p class="td-numb"></p>
+                                <div class="text__block__btn" (click)="editAdminModalShow(admin, editAdmin)">
+                                    <span class="btn__item">Edit</span>
+                                </div>
                             </td>
                             <td>
                                 <p class="td-numb"></p>
@@ -43,6 +51,7 @@
                                     <span class="btn__item">Delete</span>
                                 </div>
                             </td>
+                            
                             <td>
                                 <div class="text__block__btn" (click)="changePassword(admin.data.email)">
                                     <span class="btn__item">Reset password</span>
@@ -81,9 +90,9 @@
                                 <tr class="select__date">
                                     <td><p>Admin Login Email</p></td>                                    
                                     <td>
-                                        <input type="text" id="email" formControlName="email" class = "form-control" placeholder="">
+                                        <input type="email" id="email" formControlName="email" class = "form-control" placeholder="">
                                         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert-danger">
-                                            Admin login email is required
+                                            Admin login email is required                                           
                                         </div>
                                     </td>
                                 </tr>
@@ -163,13 +172,10 @@
                     <h2>
                         Are you sure you want to delete {{deleteAdminName}}?
                         Please input your password to confirm.
-                    </h2>  
-                
-                 
-                                                                        
+                    </h2>                                                                                                
                 <input type="password" id="checkPassword" formControlName ="checkPassword" class = "form-control"  placeholder="Input password here">
                 <div *ngIf="checkPassword.invalid && (checkPassword.dirty || checkPassword.touched)" class="alert alert-danger">
-                    Admin name is required
+                    Please input password
                 </div> 
                 <div [hidden]="!addAdminHasError" class="alert alert-danger">
                     {{addAdminErrorMessage}}
@@ -182,6 +188,95 @@
                     <button class="save_admin__button" value="submit" (click)="cancelDeleteAdmin()">Cancel</button>
                 </div> 
             </div>
+        </form>
+    </ng-template>
+
+    <ng-template #editAdmin let-c="close" let-d="dismiss" class="modal-lg">
+        <form class="add_admin_main__block" [formGroup]="editForm"  (ngSubmit)="updateAdmin()">
+            <div class="panel"> 
+                    <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
+                        <h1>Edit an Admin</h1>   
+                    </div>             
+                    <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
+
+                                <tr>
+                                    <td><p>Admin Name</p></td>
+                                    <td>
+                                        <input type="text" formControlName = "name" class = "form-control"  placeholder=""/>
+                                        <div *ngIf="editForm.controls['name'].invalid" class="alert-danger">
+                                           Admin name is required
+                                        </div>
+                                    </td>
+                                </tr>
+                               <tr class="select__date">
+                                    <td><p>Admin Login Email</p></td>                                    
+                                    <td>
+                                        <input type="email" id="email" formControlName="email"  disabled class = "form-control" placeholder="">
+                                        <div *ngIf="editForm.controls['email'].invalid" class="alert-danger">
+                                            Admin login email is required                                           
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="select__date">
+                                    <td><p>City/State</p></td>
+                                    <td>
+                                        <input type="text"  formControlName="city"  placeholder="" class = "form-control">
+                                        <div *ngIf="editForm.controls['city'].invalid" class="alert-danger">
+                                            City is required
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>Phone*</p></td> 
+                                    <td>
+                                        <input type="text" formControlName="phone" placeholder=""  class = "form-control">
+                                        <div *ngIf="editForm.controls['phone'].invalid" class="alert-danger">
+                                            Phone number is required
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>No of property</p></td>
+                                    <td>
+                                        <input type="number"  formControlName="number" class = "form-control">
+                                    
+                                        <!-- <div *ngIf="editForm.controls['number'].value =='' " class="alert alert-danger">
+                                            Number of property is required
+                                          
+                                        </div> -->
+                                        <div *ngIf="editForm.controls['number'].value < editingAdminInfo.currentHotelNumbers" class="alert alert-danger">
+                                                Number of property couldn't be less than {{editingAdminInfo.currentHotelNumbers}}
+                                              
+                                            </div>
+                                        
+                                        <div *ngIf="(editForm.controls['number'].value < 1 && editForm.controls['number'].value!='')" class="alert-danger">
+                                            Number of property must be a positive number
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="select__date">
+                                    <td><p>Status</p></td>
+                                    <td>
+                                        <input type="text"  formControlName="status"  placeholder="active/inactive" class = "form-control">
+                                        <div *ngIf="editForm.controls['status'].value==''" class="alert-danger">
+                                          The status is required
+                                        </div>
+                                        <div *ngIf="(editForm.controls['status'].invalid && editForm.controls['status'].value!='') " class="alert-danger">
+                                            Please input active or inactive
+                                        </div>
+                                    </td>
+                                </tr> 
+                    </table>
+                  
+                    <div align="center">
+                        <button class="save_admin__button" type="submit" [disabled] = "editForm.invalid || editForm.pristine">Save</button>
+                    </div>                    
+                    
+                    
+                    
+                    
+                </div>
         </form>
     </ng-template>
 </section>

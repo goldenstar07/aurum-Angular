@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {DataStorageService} from "../shared/services/data-storage.service";
 import {AngularFireAuth} from "angularfire2/auth";
+import { hostViewClassName } from '@angular/compiler';
 
 @Injectable()
 export class AuthService {
@@ -44,20 +45,48 @@ export class AuthService {
       );
   }
 
+ checkAdminStatus(manager){
+  
+    this.afs.doc(`hotels/${manager.hotelId}`).ref.get()
+    .then(
+      hotel => {        
+        console.log(hotel.data().adminId)
+        this.afs.doc(`managers/${hotel.data().adminId}`).ref.get()
+        .then(
+          admin => {
+            if(admin.data().status=='active'){
+              this.router.navigate(['transactions-date']);
+              this.dataStoreService.setHotelId(manager.hotelId);
+            }
+          }
+        )        
+      }
+    )
+    .catch(
+      error=>{
+        console.log(error);
+        status = 'inactive';
+      }
+    )    
+  }
+
   signInUser(email: string, password: string) {
+    
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
           console.log(JSON.stringify(response.uid))
+          
           this.afs.doc('managers/' + response.uid).valueChanges().subscribe(res => {
+            
             this.dataStoreService.setUser(res);
             let currentUser = this.dataStoreService.getUser();
             switch (currentUser.role) {
               case "manager":
-                this.router.navigate(['transactions-date']);
-                this.dataStoreService.setHotelId(currentUser.hotelId);
+                this.checkAdminStatus(currentUser);                
                 break;
               case "admin":
+                if(currentUser.status=='inactive') return "Account is inactive";
                 this.router.navigate(['hotels']);
                 break;
               case "superadmin":

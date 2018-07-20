@@ -15,6 +15,7 @@ import {DataProcessingService} from '../shared/services/data-processing.service'
 import {DataStorageService} from '../shared/services/data-storage.service';
 import {AuthService} from '../auth/auth.service';
 import { HotelService } from '../hotels/services/hotel.service';
+import { AdminGuard } from '../shared/classes/admin.guard';
 
 @Component({
   selector: 'app-new-super-admit-page',
@@ -23,28 +24,18 @@ import { HotelService } from '../hotels/services/hotel.service';
 })
 export class NewSuperAdmitPageComponent implements OnInit {
   closeResult: string;
-
   newPass: string;
-
   adminsCol: AngularFirestoreCollection<Admin>;
   admins: any;
   admin: Observable<Admin>;
   hotel: Observable<Hotel>;
   deletedAdmin: any;
   adminn: Array<Admin>;
-  addAdminModalRef: any;
-  // city: string;
-  // name: string;
-  // phone: any;
-  // email: string;
-  // number: any;
-  // status: any;
-  // hotelId: string;
-  // role: any;
+  addAdminModalRef: any; 
   form: FormGroup;
   city: FormControl;
   name: FormControl;
-  phone: FormControl;
+  phone: FormControl; 
   email: FormControl;
   number: FormControl;
   status: FormControl;
@@ -53,13 +44,18 @@ export class NewSuperAdmitPageComponent implements OnInit {
   password: FormControl;
   addAdminErrorMessage: string;
   addAdminHasError:boolean;
-
+  editForm: FormGroup;
   checkPassword: FormControl;
   checkPasswordForm: FormGroup;
   checkPasswordModalRef: any;
   deleteAdminName: string;
   deleteAdminId: string;
   deleteAdminError: string;
+  editAdminModalRef:any;
+  editingAdminInfo:{
+    id: string,
+    currentHotelNumbers: number
+  };
   constructor(private router: Router,
               private modalService: NgbModal,
               private formBuilder: FormBuilder,
@@ -215,6 +211,64 @@ export class NewSuperAdmitPageComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  editAdminModalShow(admin, editAdmin){
+   
+    this.editingAdminInfo = {
+      id: admin.id,
+      currentHotelNumbers: 0
+    }
+    this.afs.collection('hotels').ref.where("adminId",'==', admin.id).get()
+        .then(
+          hotels => {
+              this.editingAdminInfo.currentHotelNumbers = hotels.docs.length
+              console.log("-------------------")
+              console.log(this.editingAdminInfo.currentHotelNumbers)
+          }
+        )   
+    this.editForm = new FormGroup({ 
+      id:new FormControl(admin.id, Validators.required),
+      name:new FormControl(admin.data.name, Validators.required ),
+      email:new FormControl(admin.data.email, [Validators.required, Validators.email]),
+      city:new FormControl(admin.data.city, Validators.required),
+      phone:new FormControl(admin.data.phone, Validators.required),
+      number:new FormControl(admin.data.number, [Validators.required, Validators.min(1)]),
+      status:new FormControl(admin.data.status, [Validators.required, Validators.pattern("(active|inactive)")])
+   
+     });
+     
+     this.editAdminModalRef = this.modalService.open(editAdmin);
+     this.editAdminModalRef.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  updateAdmin(){    
+    this.editingAdminInfo.id;
+    let _admin = {
+      name:     this.editForm.controls.name.value,
+      city:     this.editForm.controls.city.value,
+      phone:    this.editForm.controls.phone.value,
+      number:   this.editForm.controls.number.value,
+      status:   this.editForm.controls.status.value
+    }
+    this.afs.doc(`managers/${this.editingAdminInfo.id}`).update(_admin)   
+    .then(
+
+      response => {
+        console.log(response);
+        this.editAdminModalRef.close();
+      }
+    )
+    .catch(
+      error => {
+        console.log(error);
+        this.editAdminModalRef.close();
+      }
+    );
   }
   onLogout() {
     this.authService.logout();
