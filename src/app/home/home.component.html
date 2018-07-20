@@ -26,7 +26,7 @@
                     <span class="prof__name">{{ manager.data.role }}</span>
                 </div>
             </div>
-            <div [hidden]="!canAddMoreManager" class="plus__circle" (click)="openNewUser(contentNewUser)">
+            <div [hidden]="!canAddMoreManager" class="plus__circle" (click)="openNewUser(addNewManagerModal)">
                 <i class="fas fa-plus"></i>
             </div>
 
@@ -63,7 +63,7 @@
     </ng-template>
 
     <!--POPUP ADD USER FORM-->
-    <ng-template #contentNewUser let-c="close" let-d="dismiss">
+    <!-- <ng-template #contentNewUser let-c="close" let-d="dismiss">
         <div class="user__component d-flex flex-column">
             <div class="user__text">
                 <h1>Create New User</h1>
@@ -91,8 +91,56 @@
                 </form>
             </div>
         </div>
-    </ng-template>
-
+    </ng-template> -->
+    <ng-template #addNewManagerModal let-c="close" let-d="dismiss" class="modal-lg">
+           <form class="add_admin_main__block" [formGroup]="addNewManagerForm"  (ngSubmit)="addNewManager()">
+                <div class="panel"> 
+                        <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
+                            <h1>Create new manager</h1>   
+                        </div>             
+                        <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">    
+                                    <tr>
+                                        <td><p>Manager Name</p></td>
+                                        <td>
+                                            <input type="text" formControlName = "name" class = "form-control"  placeholder=""/>
+                                            <div *ngIf="addNewManagerForm.controls['name'].invalid && ( addNewManagerForm.controls['name'].dirty || addNewManagerForm.controls['name'].touched)" class="alert-danger">
+                                               Manager name is required
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  <tr class="select__date">
+                                        <td><p>Manager Login Email</p></td>                                    
+                                        <td>
+                                            <input type="email" formControlName="email"   class = "form-control" placeholder="">
+                                            <div *ngIf="addNewManagerForm.controls['email'].invalid && (addNewManagerForm.controls['email'].dirty || addNewManagerForm.controls['email'].touched)" class="alert-danger">
+                                                Manager login email is required                                           
+                                            </div>
+                                        </td>
+                                    </tr>
+                                     <tr class="select__date">
+                                            <td><p>Password</p></td>                                    
+                                            <td>
+                                                <input type="password" formControlName="password"   class = "form-control" placeholder="">
+                                                <div *ngIf="addNewManagerForm.controls['password'].invalid && (addNewManagerForm.controls['password'].touched || addNewManagerForm.controls['password'].dirty)" class="alert-danger">
+                                                    Login password is required                                           
+                                                </div>
+                                            </td>
+                                    </tr>                                      
+                        </table>          
+                        <div *ngIf="addManagerError !=''" class="alert-danger">
+                                {{addManagerError}}                                      
+                            </div>
+                      
+                        <div align="center">
+                            <button class="save_manager_button" type="submit" [disabled] = "addNewManagerForm.invalid">Create</button>
+                        </div>                    
+                        
+                        
+                        
+                        
+                    </div>
+            </form>
+        </ng-template>
 
     <!-- POPUP conform DELETE user
   <ng-template #contentDeleteComform let-c="close" let-d="dismiss">

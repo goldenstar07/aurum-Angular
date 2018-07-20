@@ -14,7 +14,7 @@ $font-gray4: #F3F2F0;
 $font-gray5: #76756F;
 $font-bold: 700;
 $font-sz-12: 12px;
-
+$color-fff: #fff;
 /*@font-face {
   font-family: HelveticaNeue Thin;
   src: url("../fonts/HelveticaNeue Thin.ttf") format("opentype");
@@ -322,6 +322,30 @@ input:active,
  :focus {
     outline: 0;
     outlite-offset: 0;
+}
+
+.add_admin_main__block{
+    border: 10px solid #b1d1ff;
+    position: relative;
+    // height: calc(100vh - 55px);
+    overflow-y: auto;
+    
+}
+.add_admin_main__block table{
+    margin: auto;
+}
+.save_manager_button {
+    font-size: 26px;
+    border: 1px solid $color-fff;
+    padding: 0 20px;
+    width: 120px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: $primary-color;
+    color: $color-fff;
+    font-weight: $font-bold;
+    cursor: pointer;
+    margin:15px auto;
 }
 
 

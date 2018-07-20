@@ -5,7 +5,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 // services
 import {AuthService} from '../auth/auth.service';
 import {HotelService} from "../hotels/services/hotel.service";
@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit {
   AdminPassword: string;
   propertyName: string;
   canAddMoreManager: boolean;
+  addNewManagerModalRef: any;
+  addNewManagerForm: FormGroup;
+  addManagerError: string; 
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -80,13 +83,18 @@ export class HomeComponent implements OnInit {
 
   addNewManager() {
     let manager: Manager = {
-      name: this.name,
-      email: this.email,
+      name: this.addNewManagerForm.controls.name.value,
+      email: this.addNewManagerForm.controls.email.value,
       role: "manager",
       hotelId: localStorage.hotelId
     
     }
-    this.authService.signUpUser(manager, this.password);
+    
+    console.log(manager)
+    this.authService.signUpNewUser(manager, this.addNewManagerForm.controls.password.value,
+       response => this.addNewManagerModalRef.close(),
+       error => this.addManagerError = error.message            
+      );
   }
 
   open(content) {
@@ -97,14 +105,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openNewUser(contentNewUser) {
-    this.modalService.open(contentNewUser).result.then((result) => {
+  openNewUser(canAddMoreManagerModal) {
+    this.createAddNewManagerForm();
+    this. addNewManagerModalRef =  this.modalService.open(canAddMoreManagerModal);
+    this.addNewManagerModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
+  createAddNewManagerForm(){
+    this.addManagerError = '';  
+    this.addNewManagerForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      email: new FormControl('',  Validators.required)
+    });
+  }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

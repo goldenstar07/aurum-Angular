@@ -28,7 +28,7 @@ export class AuthService {
         this.afs.collection('managers').doc(response.uid).set(Object.assign({}, user)).then(successCallback);
       })
       .catch(
-        // error => console.log(error)
+        //error => console.log(error)
         failCallback
       );
   }
