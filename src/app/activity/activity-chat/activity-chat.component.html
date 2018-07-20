@@ -17,7 +17,7 @@
         <!--<div class="message__block__item" [ngClass]="{'right':checkOrder(i)}">-->
         <div class="message__block__item" [class.my-message]="checkMessagePosition(message.data.idOsManager)">
           <p>
-            <b> {{ message.data.managerId }} </b><br>
+            <b> {{ message.data.managerId }} </b>
             {{message.data.author}}
             {{message.data.date}}
           </p>
