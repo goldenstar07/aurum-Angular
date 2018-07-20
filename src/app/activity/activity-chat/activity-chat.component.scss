@@ -43,10 +43,17 @@ hr {
 }
 .main__block {
   border: 20px solid $font-gray;
-  position: relative;
-  height: calc(100vh - 55px);
+ 
+  padding:0px;
+ 
+}
+.message__history{
+  height: calc(100vh - 140px);
   overflow-y: auto;
   overflow-x: hidden;
+  padding-left:20px;
+  padding-right:20px;
+  
 }
 .input {
   height: 50px;
@@ -97,10 +104,14 @@ hr {
   display: inline-block;
 }
 .message__block__write{
+  
+  top:calc(100vh-140px);
+  bottom:10px;
+  width:100%;
   padding: 10px;
 }
 .w-90{
-  width: 90%;
+  width: 100%;
 }
 .message__block.right{
   display: block;

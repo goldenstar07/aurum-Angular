@@ -2,13 +2,13 @@
 
 <section id="main">
   <div #scroller class="main__block">
-    <div class="w-90 m-auto">
+    <div class="w-90 m-auto message__history" (scroll)="setWheelState()" id = "message__history" ngx-auto-scroll >
       <!--<div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203 </div></div>-->
       <!-- <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
          <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
          <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
          <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>-->
-      <div class="message__block__cover" *ngFor="let message of messages; let i = index" ngx-auto-scroll>
+      <div class="message__block__cover" *ngFor="let message of messages; let i = index" >
         <!-- <div [ngStyle]="{background: message.data.managerId === current.managerId ? 'green': 'red'}">-->
 
         <!--   <div [ngClass]="{'right' : managerId === currentUser,
@@ -51,13 +51,14 @@
          </div>-->
         <!--<div class="message__block__cover"><div class="message__block right">{{messages}}</div></div>-->
       </div>
-      <div class="message__block__write">
+
+    </div>
+    <div class="message__block__write">
         <div class="m-auto w-90">
           <form (keydown.enter)="onKey(form)" #form="ngForm">
             <input type="text" placeholder="Enter your message" class="input" ngModel name="text" required>
           </form>
         </div>
       </div>
-    </div>
   </div>
 </section>

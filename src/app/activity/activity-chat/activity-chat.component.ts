@@ -34,19 +34,27 @@ export class ActivityChatComponent implements OnInit {
   managerId: any;
   objectOfMAnager: any;
   hotel: Observable<Hotel>;
-  checker: boolean
-
+  checker: boolean;
+  autoScroll:boolean; 
   constructor(private chatService: ActivityChatService,
               public dataProcessingService: DataProcessingService,
               public dataStorage: DataStorageService,
               private afs: AngularFirestore,
               private formBuilder: FormBuilder) {
-    IntervalObservable.create(200).subscribe(() => {
 
+    
+    IntervalObservable.create(200).subscribe(() => {
+      if (this.autoScroll){    
+        document.getElementById("message__history").scrollTo(0,document.getElementById("message__history").scrollHeight);
+      }
     });
   }
 
   onKey(form: NgForm): void {
+    
+    console.log(document.getElementById("message__history").scrollHeight)
+    this.autoScroll = true;
+    // window.scrollTo(0,document.body.scrollHeight);
     this.hotelId = localStorage.hotelId;
     this.managerId = localStorage.user;
     this.objectOfMAnager = this.dataStorage.getUser();
@@ -58,12 +66,15 @@ export class ActivityChatComponent implements OnInit {
     };
     console.log(form.value);
     this.chatService.sendMessage(msg);
+
     console.log(form.value);
     // AddVendors
     form.resetForm();
+    
   }
 
   ngOnInit() {
+    this.autoScroll = true;
     this.checker = false;
     this.chatService.getMessages().subscribe(res => {
       this.messages = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
@@ -74,7 +85,9 @@ export class ActivityChatComponent implements OnInit {
   public forceScrollDown(): void {
     this.ngxAutoScroll.forceScrollDown();
   }
-
+  setWheelState(){
+    this.autoScroll = false;
+  }
   checkMessagePosition(id) {
     if(id == this.chatService.getUserId()) {
       return true;
