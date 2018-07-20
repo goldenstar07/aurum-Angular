@@ -44,7 +44,7 @@ export class TransactionsDateComponent implements OnInit {
   byType: boolean;
 
   currentItem: any;
-
+  currentUser: any;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -67,6 +67,7 @@ export class TransactionsDateComponent implements OnInit {
       this.inventoryLabels = [];
       this.getDates(this.inventoryItems[Object.keys(this.inventoryItems)[0]]);
       this.getLabels(this.inventoryItems);
+      this.currentUser = this.dataStorageService.getUser();
     });
 
     this.form = this.formBuilder.group({

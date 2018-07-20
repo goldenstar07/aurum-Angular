@@ -13,7 +13,7 @@
                     <div class="type_button">
                         <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Type</a>
                     </div>
-                    <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
+                    <div *ngIf=" (currentUser.role=='admin') &&(archiveToggle==true && !byType && inventoryDates)" class="type_button">
                         <a class="button__item" (click)="isEnabled=true;archiveRow();">Archive</a>
 
                     </div>
