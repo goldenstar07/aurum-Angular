@@ -53,7 +53,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Items</th>
+                        <th scope="col">Type</th>
                         <th scope="col" class="col__items" colspan="2">
                             {{nameOfItem}}
                             <!--<i class="far fa-edit"></i>-->
@@ -81,7 +81,7 @@
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col">Items</th>
+                        <th scope="col">Type</th>
                         <th scope="col" class="col__items" colspan="1" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8);let i = index">
                             {{date | date:'yyyy/dd/MM'}}
                             <i class="far fa-edit"></i>
@@ -132,8 +132,8 @@
                             <hr>
                             <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__form">
                                 <div class="name__block" [formGroupName]="i">
-                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input">
-                                    <input type="text" formControlName="price" id="need" name="price" placeholder="Need" class="input">
+                                    <input type="text" formControlName="item"  name="item" placeholder="Type">
+                                    <input type="text" formControlName="price" name="price" placeholder="Need" >
                                 </div>
                             </form>
                             <div class="add__item__block" (click)="addFormInputT()">
