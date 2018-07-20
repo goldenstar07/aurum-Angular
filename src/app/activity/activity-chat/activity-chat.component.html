@@ -15,16 +15,31 @@
            'left': managerId !== currentUser}">
          </div>-->
         <!--<div class="message__block__item" [ngClass]="{'right':checkOrder(i)}">-->
-        <div class="message__block__item" [class.my-message]="checkMessagePosition(message.data.idOsManager)">
+        <div class="message__block__item" [class.my-message]="checkMessagePosition(message.data.idOsManager)" *ngIf="checkMessagePosition(message.data.idOsManager)">
           <p>
+            
             <b> {{ message.data.managerId }} </b>
             {{message.data.author}}
             {{message.data.date}}
-          </p>
-          <div class="message__block">
+         
+          <span class="message__block">
             {{message.data.text}}
-          </div>
+          </span>
+        </p>
         </div>
+        <div class="message__block__item" [class.my-message]="checkMessagePosition(message.data.idOsManager)" *ngIf="!checkMessagePosition(message.data.idOsManager)">
+            <p>
+              
+            <span class="message__block">
+                {{message.data.text}}
+              </span>
+              
+              <b> {{ message.data.managerId }} </b>
+              {{message.data.author}}
+              {{message.data.date}}
+           
+          </p>
+          </div>
         <!-- // other user
          <p style="text-align: left">
            <b> {{ message.data.managerId }} </b><br>

@@ -68,7 +68,7 @@ hr {
   padding-bottom:5px;
   padding-right:15px;
   padding-left:5px;
-  border: 1px solid #0d0d0d;
+  // border: 1px solid #0d0d0d;
   border-radius: 20px;
   box-shadow: 0 4px 5px -2px #000;
   background-color: $font-gray4;
@@ -84,8 +84,8 @@ hr {
 }
 .message__block__cover{
   width: 100%;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 1px;
+  padding-bottom: 0;
 }
 .message__block__sender{
   width: 10%;
