@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date" (change)="dateChangeOnAdd()" class="search__date__item" formControlName="date" placeholder="">
+                                    <input type="date" (change)="dateChangeOnAdd()" class="datePickerWidth" class="search__date__item" formControlName="date" placeholder="">
                                 </div>
                             </div>
                             <hr>
@@ -138,7 +138,7 @@
                                
                             </table>    
                             <div *ngIf="dateExists" class="alert alert-danger">
-                                {{dateExistsErrorMessage}}das
+                                {{dateExistsErrorMessage}}
                             </div>                      
                                 <button type="button" class="add_type__btn" (click)="addItemInput()">Add Type</button>                           
                                 <button class="save_transactions_btn" [disabled]="form.invalid">Save</button>                                                          
