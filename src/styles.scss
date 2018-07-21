@@ -396,7 +396,7 @@ input:focus {
 .add__btn {
     position: absolute;
     display: inline-block;
-    margin-top: 20%;
+    margin-top: 20%;   
     font-size: 16px;
     padding: 8px 27px;
     text-align: center;
@@ -405,7 +405,45 @@ input:focus {
     -webkit-box-shadow: 0 4px 5px -2px #000;
     box-shadow: 0 4px 5px -2px #000;
 }
-
+.add_type__btn {
+    position: absolute;
+    display: inline-block;
+    margin-top: 4%;   
+    font-size: 16px;
+    margin-left:100px;
+    padding: 8px 27px;
+    text-align: center;
+    border-radius: 46px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 5px -2px #000;
+    box-shadow: 0 4px 5px -2px #000;
+}
+.save_transactions_btn {
+    position: absolute;
+    display: inline-block;
+    margin-top: 4%;
+    margin-left:250px;
+    font-size: 16px;
+    padding: 8px 27px;
+    text-align: center;
+    border-radius: 46px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 5px -2px #000;
+    box-shadow: 0 4px 5px -2px #000;
+}
+.cancel__btn {
+    position: absolute;
+    display: inline-block;
+    margin-top: 4%;
+    margin-left:350px;
+    font-size: 16px;
+    padding: 8px 27px;
+    text-align: center;
+    border-radius: 46px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 5px -2px #000;
+    box-shadow: 0 4px 5px -2px #000;
+}
 .add__btn:hover {
     background-color: #707070;
     color: #fff;
@@ -419,6 +457,12 @@ input:focus {
     border: 1px solid $primary-color;
 }
 
+.m-auto{
+    margin:auto;
+}
+::placeholder{
+    opacity: 0.4;
+}
 //==========media screen===========
 @media screen and (max-width:1199px) {
     .search__block .search__date__block {

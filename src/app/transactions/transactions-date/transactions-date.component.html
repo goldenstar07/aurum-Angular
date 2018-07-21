@@ -117,29 +117,32 @@
                      </button>
 
                     <div class="user__component d-flex flex-column">
-                        <div class="user__block">
+                        <div>
                             <div class="user__block__header d-flex justify-content-between align-items-center">
                                 <div class="user__text">
                                     <p>Add Property</p>
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date" class="search__date__item" formControlName="date" placeholder="">
+                                    <input type="date" (change)="dateChangeOnAdd()" class="search__date__item" formControlName="date" placeholder="">
                                 </div>
                             </div>
                             <hr>
-                            <form formArrayName="inventories" *ngFor="let item of form.controls.inventories.controls; let i=index" class="user__form">
-                                <div class="name__block" [formGroupName]="i">
-                                    <input type="text" formControlName="item"  name="item" placeholder="Type">
-                                    <input type="text" formControlName="price" name="price" placeholder="Need" >
-                                </div>
-                            </form>
-                            <div class="add__item__block" (click)="addItemInput()">
-                                <button type="button" class="add__item__btn">Add Type</button>
-                            </div>
-                            <div class="save__btn">
-                                <button class="add__btn" [disabled]="form.invalid">Save</button>
-                            </div>
+                            <table class="table  table-hover table-responsive m-auto">                             
+                                <form formArrayName="inventories" *ngFor="let item of form.controls.inventories.controls; let i=index" >
+                                    <tr class="name__block" [formGroupName]="i" class="form-group">
+                                        <td><input type="text" formControlName="item"  name="item" placeholder="Type"  class="form-control"></td> 
+                                        <td><input type="text" formControlName="price" name="price" placeholder="Need" class="form-control"></td>
+                                    </tr>
+                                </form>
+                               
+                            </table>    
+                            <div *ngIf="dateExists" class="alert alert-danger">
+                                {{dateExistsErrorMessage}}das
+                            </div>                      
+                                <button type="button" class="add_type__btn" (click)="addItemInput()">Add Type</button>                           
+                                <button class="save_transactions_btn" [disabled]="form.invalid">Save</button>                                                          
+                                <button class="cancel__btn" (click)="dismissAddItemModal()">Cancel</button>
                         </div>
                     </div>
                 </form>

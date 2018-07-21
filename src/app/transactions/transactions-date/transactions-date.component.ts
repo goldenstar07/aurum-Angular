@@ -47,6 +47,10 @@ export class TransactionsDateComponent implements OnInit {
   currentUser: any;
 
   editingColumnNumber: number;
+  addItemModalRef: any;
+  
+  dateExists:boolean;
+  dateExistsErrorMessage: string;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -81,6 +85,19 @@ export class TransactionsDateComponent implements OnInit {
     this.transactionService.addTransaction(item, hotelId);
   }
 
+  dateChangeOnAdd(){
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let indexOfItem = this.checkIfDateExist(date);
+
+    
+    if(indexOfItem>-1  && this.currentUser.role=='manager'){
+      this.dateExists = true;
+      this.dateExistsErrorMessage = "The date you selected already exists. Please contact the admin to change it."
+      return;
+    }
+    this.dateExists = false;
+  }
+
   saveFormInput() {
     console.log("hello")
     if(!this.inventoryItems) {
@@ -101,8 +118,12 @@ export class TransactionsDateComponent implements OnInit {
     let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     let indexOfItem = this.checkIfDateExist(date);
 
-
-
+    
+    if(indexOfItem>-1  && this.currentUser.role=='manager'){
+      this.dateExists = true;
+      this.dateExistsErrorMessage = "The date you selected already exists. Please contact the admin to change it."
+      return;
+    }
     if (indexOfItem == -1) {
       this.addNewDate(date);
       indexOfItem = this.inventoryDates.length - 1;
@@ -116,6 +137,7 @@ export class TransactionsDateComponent implements OnInit {
 
     this.sortByDate();
     this.addItem(this.inventoryItems, localStorage.hotelId);
+    this.addItemModalRef.close();
   }
   addNewItem(name) {
     this.inventoryItems[name] = [];
@@ -196,13 +218,16 @@ sortByDate() {
     }
   }
 
-
-
+  dismissAddItemModal(){
+    this.addItemModalRef.close();
+  }
   openNewProperty(contentNewProperty) {
+    this.dateExists = false;
     console.log(this.inventoryLabels)
     this.createDailyTransactionForm()
     console.log(this.form);
-    this.modalService.open(contentNewProperty).result.then((result) => {
+    this.addItemModalRef = this.modalService.open(contentNewProperty)
+    this.addItemModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -267,7 +292,7 @@ createFormInput(): FormGroup[] {
   )
   return formgrouparray;
 }
-recCeateFormInput(): FormGroup[] {
+reCeateFormInput(): FormGroup[] {
   let formgrouparray = [];
   
   this.form.value.inventories.forEach(
@@ -289,7 +314,7 @@ recCeateFormInput(): FormGroup[] {
  addItemInput(){
   this.form = this.formBuilder.group({
     date: [this.form.controls.date.value, Validators.required],
-    inventories: this.formBuilder.array(this.recCeateFormInput())
+    inventories: this.formBuilder.array(this.reCeateFormInput())
   });
  }
 } 
