@@ -75,20 +75,7 @@ export class TransactionsDateComponent implements OnInit {
    
   }
 
-  createFormInput(): FormGroup[] {
-    let formgrouparray = [];
-    
-    this.inventoryLabels.forEach(
-      label => {
-        console.log(label);
-        formgrouparray.push(this.formBuilder.group({
-          item:label,
-          price:''
-        }))
-      }
-    )
-    return formgrouparray;
-  }
+ 
 
   addItem(item,hotelId){
     this.transactionService.addTransaction(item, hotelId);
@@ -209,12 +196,11 @@ sortByDate() {
     }
   }
 
+
+
   openNewProperty(contentNewProperty) {
     console.log(this.inventoryLabels)
-    this.form = this.formBuilder.group({
-      date: ['', Validators.required],
-      inventories: this.formBuilder.array(this.createFormInput())
-    });
+    this.createDailyTransactionForm()
     console.log(this.form);
     this.modalService.open(contentNewProperty).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -260,4 +246,50 @@ setEditingColumn(editingColumnNumber){
   console.log(editingColumnNumber);
 }
 
+createDailyTransactionForm(){
+  this.form = this.formBuilder.group({
+    date: ['', Validators.required],
+    inventories: this.formBuilder.array(this.createFormInput())
+  });
+}
+
+createFormInput(): FormGroup[] {
+  let formgrouparray = [];
+  
+  this.inventoryLabels.forEach(
+    label => {
+      console.log(label);
+      formgrouparray.push(this.formBuilder.group({
+        item:label,
+        price:''
+      }))
+    }
+  )
+  return formgrouparray;
+}
+recCeateFormInput(): FormGroup[] {
+  let formgrouparray = [];
+  
+  this.form.value.inventories.forEach(
+    inventory => {
+      console.log(inventory);
+      formgrouparray.push(this.formBuilder.group({
+        item:inventory.item,
+        price:inventory.price
+      }))
+    }
+  )
+  formgrouparray.push(this.formBuilder.group({
+    item:'',
+    price:''
+  }))
+
+  return formgrouparray;
+}
+ addItemInput(){
+  this.form = this.formBuilder.group({
+    date: [this.form.controls.date.value, Validators.required],
+    inventories: this.formBuilder.array(this.recCeateFormInput())
+  });
+ }
 }
