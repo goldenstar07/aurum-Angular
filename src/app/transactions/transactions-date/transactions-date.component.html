@@ -84,7 +84,7 @@
                         <th scope="col">Type</th>
                         <th scope="col" class="col__items" colspan="1" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8);let i = index">
                             {{date | date:'yyyy/dd/MM'}}
-                            <i class="far fa-edit"></i>
+                            <div class='inline_edit_icon' (click)="setEditingColumn(i)"><i class="far fa-edit"></i></div>                            
                         </th>
                     </tr>
                 </thead>
@@ -95,7 +95,7 @@
                     </td>
                     <ng-container *ngFor="let item of inventoryItems[label].slice(dateIndex, dateIndex + 8);let i = index">
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.price" [class.editable]="selectedDate == i">
+                            <input class="td-numb" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i">
                         </td>
                     </ng-container>
                 </tr>

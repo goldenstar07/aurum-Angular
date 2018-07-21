@@ -45,6 +45,8 @@ export class TransactionsDateComponent implements OnInit {
 
   currentItem: any;
   currentUser: any;
+
+  editingColumnNumber: number;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -237,6 +239,11 @@ arr.push(checkboxes[i].checked=false);
 }
     }localStorage.setItem('table', JSON.stringify(arr));
     console.log('saved states of check boxes',arr);
+}
+
+setEditingColumn(editingColumnNumber){
+  this.editingColumnNumber = editingColumnNumber;
+  console.log(editingColumnNumber);
 }
 
 }
