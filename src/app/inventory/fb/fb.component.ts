@@ -17,6 +17,7 @@ import {HelperService} from "../../shared/services/helper.service";
   styleUrls: ['./fb.component.scss']
 })
 export class FbComponent extends InventoryManeger implements OnInit {
+   currentEditingColNumber: number;
    public archiveToggle = true;
    @ViewChild('checkMe') checkMe: ElementRef;
      @ViewChild('fname') fname: ElementRef;
@@ -31,6 +32,7 @@ export class FbComponent extends InventoryManeger implements OnInit {
 
 
   ngOnInit() {
+    this.currentEditingColNumber = -1;
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
       if(!this.inventoryItems) {
@@ -48,6 +50,11 @@ export class FbComponent extends InventoryManeger implements OnInit {
     });
     console.log(this.form);
   }
+
+setCurrentEditingColNumber(i){
+  this.currentEditingColNumber = i;
+}
+
 updateItem() {
   console.log(this.inventoryItems.fb);
    this.sortByDate();

@@ -466,6 +466,9 @@ input:focus {
 ::placeholder{
     opacity: 0.4;
 }
+.inline{
+    display: inline;
+}
 //==========media screen===========
 @media screen and (max-width:1199px) {
     .search__block .search__date__block {
