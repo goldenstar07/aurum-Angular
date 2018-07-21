@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import {Transaction} from "../interfaces/transaction";
 // Services
 import {TransactionService} from '../services/transaction.service';
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFirestore} from "angularfire2/firestore";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
@@ -72,11 +72,22 @@ export class TransactionsDateComponent implements OnInit {
       this.currentUser = this.dataStorageService.getUser();
     });
 
-    this.form = this.formBuilder.group({
-      date: [''],
-      inventories: this.formBuilder.array([this.createFormInput()])
-    });
-    console.log(this.form);
+   
+  }
+
+  createFormInput(): FormGroup[] {
+    let formgrouparray = [];
+    
+    this.inventoryLabels.forEach(
+      label => {
+        console.log(label);
+        formgrouparray.push(this.formBuilder.group({
+          item:label,
+          price:''
+        }))
+      }
+    )
+    return formgrouparray;
   }
 
   addItem(item,hotelId){
@@ -84,6 +95,7 @@ export class TransactionsDateComponent implements OnInit {
   }
 
   saveFormInput() {
+    console.log("hello")
     if(!this.inventoryItems) {
       this.inventoryItems = {};
       this.inventoryDates = [];
@@ -144,24 +156,20 @@ updateItem() {
    this.sortByDate();
     this.addItem(this.inventoryItems, localStorage.hotelId);
 }
-  sortByDate() {
-    for (let key in this.inventoryItems) {
-      this.inventoryItems[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
-    }
-    this.getDates(this.inventoryItems[Object.keys(this.inventoryItems)[0]]);
+
+sortByDate() {
+  for (let key in this.inventoryItems) {
+    this.inventoryItems[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
   }
+  this.getDates(this.inventoryItems[Object.keys(this.inventoryItems)[0]]);
+}
 
   updateItemsByType() {
     this.currentItem = this.inventoryItems[this.nameOfItem];
   }
 
 
-  createFormInput(): FormGroup {
-    return this.formBuilder.group({
-      item: '',
-      price: ''
-    });
-  }
+
 
   getLabels(items) {
     for (let key in items) {
@@ -202,6 +210,12 @@ updateItem() {
   }
 
   openNewProperty(contentNewProperty) {
+    console.log(this.inventoryLabels)
+    this.form = this.formBuilder.group({
+      date: ['', Validators.required],
+      inventories: this.formBuilder.array(this.createFormInput())
+    });
+    console.log(this.form);
     this.modalService.open(contentNewProperty).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
