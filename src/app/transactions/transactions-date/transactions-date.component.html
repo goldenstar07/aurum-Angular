@@ -25,8 +25,8 @@
 
             <div class="search__date__block d-flex flex-column justify-content-center">
                 <p class="date-range__title" style="color: darkslategray; font-style:normal;opacity: 0.5;font-weight: 600;" [hidden]="!byDate">Select Date</p>
-                <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
-                    <option selected>Select Date</option>
+                <select class="custom-select" [(ngModel)]="dateOfItem"  name="date" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
+                    <option selected value="null">Select Date</option>
                     <option *ngFor="let date of inventoryDates" value="{{date}}">{{date}}</option>
                 </select>
             </div>
@@ -35,7 +35,7 @@
             <div class="search__date-range__block d-flex justify-content-around align-items-center">
                 <div class="d-flex flex-column">
                     <p class="date-range__title" [hidden]="!byType" style="color: darkslategray;opacity: 0.6;font-weight: 600; font-size:16px;">Select Type</p>
-                    <select placeholder="Select Type" class="custom-select" [(ngModel)]="nameOfItem" [hidden]="!byType" (change)="updateItemsByType()">
+                    <select placeholder="Select Type" class="custom-select" [(ngModel)]="nameOfItem" name="type" [hidden]="!byType" (change)="updateItemsByType()">
                <option selected>Select Type</option>
           <option *ngFor="let label of inventoryLabels" value="{{label}}">{{label}}</option>
         </select>

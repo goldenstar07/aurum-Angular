@@ -292,4 +292,4 @@ recCeateFormInput(): FormGroup[] {
     inventories: this.formBuilder.array(this.recCeateFormInput())
   });
  }
-}
+} 
