@@ -51,13 +51,14 @@
 
 
     <!--POPUP ADD PROPERTY FORM-->
-    <ng-template #contentNewProperty let-c="close" let-d="dismiss">
-        <div *ngIf="closeModal==0;" class="user__component d-flex flex-column">
+    <!-- <ng-template #contentNewProperty let-c="close" let-d="dismiss">
+       
+        <div class="user__component d-flex flex-column">
             <div class="user__text">
                 <h1>Add a bill</h1>
                 <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true" class="cros">&times;</span>
-        </button>
+                <span aria-hidden="true" class="cros">&times;</span>
+                </button>
             </div>
             <div class="user__block">
                 <form action="#" class="user__form d-flex flex-column" (ngSubmit)="getBill(f)" #f="ngForm">
@@ -78,8 +79,52 @@
                 </form>
             </div>
         </div>
-    </ng-template>
+    </ng-template> -->
 
-
+    <ng-template #contentNewProperty let-c="close" let-d="dismiss">
+       
+            <div class="d-flex flex-column">
+                    <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
+                            <h1> Add a bill</h1>   
+                        </div> 
+                <div class="panel">
+                    <form action="#" [formGroup] = "form" class="d-flex flex-column form-group" (ngSubmit)="getBill()">
+                        <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
+                            <tr>
+                                <td><p>Select Date</p></td>
+                                <td>
+                                    <input type="date" formControlName="date" placeholder="" class="form-control" required>
+                                    <div *ngIf="form.controls.date.invalid && (form.controls.date.dirty || form.controls.date.touched)" class="alert-danger">
+                                       Date is required
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><p>Bill Title</p></td>
+                                <td>
+                                    <input type="text" formControlName="name" placeholder=""  class="form-control" required>
+                                    <div *ngIf="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)" class="alert-danger">
+                                        Name is required
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><p>Attachment</p></td>
+                                <td>
+                                    <button type="button" class="image_button">
+                                        <input type="file" (change)="selectFile($event)" id="image" class="form-control" required>
+                                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                            Uploaded {{progress.percentage}}%
+                                    </button>
+                                </td>
+                                    
+                            </tr>
+                            <button type="submit" class="save_button" [disabled] = "form.invalid || progress.percentage!=100" (click)="addNewBill(f);closeModal=1; " value="submit">Save Bill</button>
+                            <button type = "button" class="save_button" (click)="closeAddBillModal()">Close</button>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </ng-template>
 
 </section>

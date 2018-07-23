@@ -4,7 +4,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, Form, FormGroup, FormControl } from '@angular/forms';
 import {Http} from "@angular/http";
 // Interfaces
 import { Bill } from "../interfaces/bill";
@@ -52,7 +52,8 @@ export class BillsMiscComponent implements OnInit {
   fileName: any;
   url: any;
   title: any;
-
+  form:FormGroup;
+  addNewBillModalRef: any;
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -69,17 +70,24 @@ export class BillsMiscComponent implements OnInit {
     this.billService.getBills().subscribe(res => {
       this.bills = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
     });
+  } 
+
+  createAddBillForm(){
+    this.form = new FormGroup({
+      date: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
+    });
   }
 
-  addNewBill(form: NgForm) {  /*Save*/
+  addNewBill() {  /*Save*/
 
-    console.log(form.value);
+    console.log(this.form.value);
     this.hotelId = localStorage.hotelId;
-    form.value.htId = this.hotelId;
-    form.value.image = this.currentFileUpload.url;
-    console.log(form.value);
-    this.billService.addBill(form.value);
-
+    this.form.value.htId = this.hotelId;
+    this.form.value.image = this.currentFileUpload.url;
+    console.log(this.form.value);
+    this.billService.addBill(this.form.value);
+    this.addNewBillModalRef.close();
   }
 
 
@@ -116,11 +124,18 @@ export class BillsMiscComponent implements OnInit {
 
   // popup
   openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
+    this.progress.percentage = 0;
+    this.createAddBillForm();
+    this.addNewBillModalRef = this.modalService.open(contentNewProperty)
+    this.addNewBillModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  closeAddBillModal(){
+    this.addNewBillModalRef.close();
   }
 
   private getDismissReason(reason: any): string {
@@ -135,8 +150,6 @@ export class BillsMiscComponent implements OnInit {
 
   // popup view img
   openViewImg(contentViewImg) {
-
-debugger
     this.modalService.open(contentViewImg).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
