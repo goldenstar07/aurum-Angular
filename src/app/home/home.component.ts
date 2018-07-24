@@ -39,6 +39,9 @@ export class HomeComponent implements OnInit {
   addNewManagerModalRef: any;
   addNewManagerForm: FormGroup;
   addManagerError: string; 
+  deletePropertyMessage:string;
+  deletePropertyNotAuthorized: boolean;
+  deletePropertyModalRef:any;
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -98,7 +101,10 @@ export class HomeComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content).result.then((result) => {
+    this.deletePropertyNotAuthorized = false;
+    this.deletePropertyMessage='';
+    this.deletePropertyModalRef =  this.modalService.open(content);
+    this.deletePropertyModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -107,7 +113,7 @@ export class HomeComponent implements OnInit {
 
   openNewUser(canAddMoreManagerModal) {
     this.createAddNewManagerForm();
-    this. addNewManagerModalRef =  this.modalService.open(canAddMoreManagerModal);
+    this.addNewManagerModalRef =  this.modalService.open(canAddMoreManagerModal);
     this.addNewManagerModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -139,16 +145,27 @@ export class HomeComponent implements OnInit {
   }
 
   checkAdmin(){
-    firebase.auth().signInWithEmailAndPassword(this.AdminName, this.AdminPassword)
-      .then(
-        response => {
-          if(response.uid ==  this.dataStorageService.getUser().id) {
-            this.managers.forEach(e => {
-              this.deleteManager(e.id);
-            })
+    firebase.auth().currentUser.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(this.AdminName, this.AdminPassword))
+      .then(response => {
+        this.deletePropertyNotAuthorized = false;
+        this.managers.forEach(e => {
+          this.deleteManager(e.id);
+        })
+        this.afs.doc(`hotels/${localStorage.hotelId}`).delete()
+        .then(
+          response =>{
+            this.addNewManagerModalRef.close();
+            this.router.navigate(['hotels']);
           }
-        }
-      )
+        )
+     
+    })
+    .catch(
+      error => {
+        this.deletePropertyMessage = error.message;
+        this.deletePropertyNotAuthorized = true;
+      }
+    );
   }
 
 }

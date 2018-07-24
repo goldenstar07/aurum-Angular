@@ -55,6 +55,9 @@
                     <label for="password"><p>Password:</p></label>
                     <input type="password" [(ngModel)]="AdminPassword" placeholder="" name="psw" class="input" required>
                 </div>
+                <div *ngIf="deletePropertyNotAuthorized" class="alert alert-danger">
+                    {{deletePropertyMessage}}
+                </div>
                 <button type="submit" class="form__btn" (click)="checkAdmin()">
                     Delete Property
                 </button>
