@@ -1,4 +1,4 @@
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Form} from "@angular/forms";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DataProcessingService} from "../services/data-processing.service";
 import {DataStorageService} from "../services/data-storage.service";
@@ -30,7 +30,9 @@ export class InventoryManeger {
   byType: boolean;
 
   currentItem: any;
-
+  addNewInventoryModalRef: any;
+  currentEditingColNumber: number;
+ 
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -40,6 +42,7 @@ export class InventoryManeger {
     this.dateIndex = 0;
     this.byDate = false;
     this.byType = false;
+    this.currentEditingColNumber = -1;
   }
 
 
@@ -47,12 +50,15 @@ export class InventoryManeger {
     return this.formBuilder.group({
       item: '',
       have: '',
-      need: ''
+      need: ''  
     });
   }
 
+  setCurrentEditingColNumber(i){
+    this.currentEditingColNumber = i;
+  }
   addFormInput() {
-    const inventory = this.createFormInput();
+    let inventory = this.createFormInput();
     this.inventories.push(inventory);
   }
 
@@ -61,7 +67,8 @@ export class InventoryManeger {
   }
 
   openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
+    this.addNewInventoryModalRef = this.modalService.open(contentNewProperty);
+    this.addNewInventoryModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

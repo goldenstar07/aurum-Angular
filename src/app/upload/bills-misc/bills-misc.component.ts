@@ -150,9 +150,6 @@ export class BillsMiscComponent implements OnInit {
   }
 
   isPdf(fileName){
-    //console.log(fileName);     
-    console.log(fileName.split('?') .slice(-2)[0])
-   
     return fileName.split('?').slice(-2)[0].split('.').slice(-1)[0].toLowerCase()=='pdf';
   }
   // popup view img
