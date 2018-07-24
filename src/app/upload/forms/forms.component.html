@@ -5,7 +5,7 @@
   <div class="main__block">
    <!-- <div class="main__table" *ngFor="let form of forms | async" (click)="setForms(form.id)">-->
       <div class="main__table" *ngFor="let form of forms" >
-      <div class="table__block" >
+      <div class="table__block"  (click)="openViewImg(contentViewImg)">
         <div class="name__block">
           <p class="text__block__name">{{form.data.name}}</p>
         </div>
