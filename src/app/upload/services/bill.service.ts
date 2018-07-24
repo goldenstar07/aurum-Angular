@@ -42,7 +42,7 @@ export class BillService {
   }
 
   getBills() {
-    this.billsCol = this.afs.collection('bills');
+    this.billsCol = this.afs.collection('bills', ref => ref.orderBy('date'));
     return this.billsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
