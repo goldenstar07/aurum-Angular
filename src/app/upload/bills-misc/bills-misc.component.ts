@@ -54,6 +54,7 @@ export class BillsMiscComponent implements OnInit {
   title: any;
   form:FormGroup;
   addNewBillModalRef: any;
+  showPdf:boolean;
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -148,8 +149,15 @@ export class BillsMiscComponent implements OnInit {
     }
   }
 
+  isPdf(fileName){
+    //console.log(fileName);     
+    console.log(fileName.split('?') .slice(-2)[0])
+   
+    return fileName.split('?').slice(-2)[0].split('.').slice(-1)[0].toLowerCase()=='pdf';
+  }
   // popup view img
   openViewImg(contentViewImg) {
+    
     this.modalService.open(contentViewImg).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
