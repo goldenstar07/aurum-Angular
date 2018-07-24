@@ -94,6 +94,7 @@ import {NgxAutoScroll} from 'ngx-auto-scroll';
 import { ItemsManagerComponent } from './shared/classes/items-manager/items-manager.component';
 import { HKComponent } from './hk-goals/hk.component';
 import { HKService } from './hk-goals/services/hk.service';
+import { SafePipe } from './shared/pipes/SafePipe';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAoaxNAMyoOh5JHUAVfzx8ua4m_fau7GVk",
@@ -136,7 +137,8 @@ import { HKService } from './hk-goals/services/hk.service';
     NewSuperAdmitPageComponent,
     RatePageComponent,
     FilterByDatePipe,
-    ItemsManagerComponent
+    ItemsManagerComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
