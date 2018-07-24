@@ -4,7 +4,7 @@
 <section id="main">
   <div class="main__block">
    <!-- <div class="main__table" *ngFor="let form of forms | async" (click)="setForms(form.id)">-->
-      <div class="main__table" *ngFor="let form of forms | async" (click)="setForms(form.id)">
+      <div class="main__table" *ngFor="let form of forms" >
       <div class="table__block" >
         <div class="name__block">
           <p class="text__block__name">{{form.data.name}}</p>
@@ -14,6 +14,9 @@
         </div>
       </div>
       <div class="table__block_btn">
+          <div class="text__block__btn">
+              <button class="btn__item default" (click)="openViewImg(contentViewImg)">view</button>
+            </div>
         <div class="text__block__btn">
           <button class="btn__item default">Download</button>
         </div>
@@ -22,7 +25,10 @@
         </div>
       </div>
 
-
+      <ng-template #contentViewImg let-c="close" let-d="dismiss" class="modal-lg">            
+          <iframe *ngIf="isPdf(form.data.image)" [src]="form.data.image | safe" class="main__block"></iframe>
+          <img  *ngIf="!isPdf(form.data.image)" [src]="form.data.image | safe" [alt]="form.data.name"  class="main__block">                      
+       </ng-template>
 
     </div>
     <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
@@ -38,35 +44,56 @@
 
   <!--POPUP ADD PROPERTY FORM-->
   <ng-template #contentNewProperty let-c="close" let-d="dismiss">
-    <div class="main__block d-flex justify-content-center align-items-center">
-      <div class="housekeeper__block d-flex flex-column align-items-center">
+      <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
+     
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
           <span aria-hidden="true" class="cros">&times;</span>
         </button>
         <h1>Upload a form</h1>
 
 
-        <form action="#" class="user__form" (ngSubmit)="getForm(f)" #f="ngForm">
-          <div class="name__block">
-            <label for="Select Date" style="width: 120px"><p>Select Date</p></label>
-            <input type="date" id="date" [(ngModel)]="date" placeholder="" name="date" class="input" required>
-          </div>
-          <div class="name__block">
-            <label for="Bill Name" style="width: 120px"><p>Bill Name</p></label>
-            <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input" required>
-          </div>
-          <div class="name__block">
-            <label for="Attachment" style="width: 120px"><p>Attachment</p></label>
-            <input type="file" (change)="selectFile($event)" id="image" class="input" required>
-          </div>
+        <form action="#" class="d-flex flex-column form-group" (ngSubmit)="addNewForm()" [formGroup]="formForm">
+            <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
+          <tr>
+            <td><p>Select Date</p></td>
+            <td>
+                <input type="date" formControlName="date" placeholder="" class="form-control" required>
+                <div *ngIf="formForm.controls.date.invalid && (formForm.controls.date.dirty || formForm.controls.date.touched)" class="alert-danger">
+                   Date is required
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td><p>Bill Name</p></td>
+            <td>
+                <input type="text" formControlName="name" placeholder=""  class="form-control" required>
+                <div *ngIf="formForm.controls.name.invalid && (formForm.controls.name.dirty || formForm.controls.name.touched)" class="alert-danger">
+                    Name is required
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td><p>Attachment</p></td>
+            <td> 
+                <button type="button" class="image_button">
+                    <input type="file" (change)="selectFile($event)" id="image" class="input" required>
+                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                      Uploaded {{progress.percentage}}%
+                </button>
+            </td>
+                
+          </tr>
+        </table>
           <div class="save__btn">
-            <button class="button__item" (click)="addNewForm(f)">Save</button>
-            <h1 (click)="upload()">Click</h1>
+            <button type="submit" class="button__item" [disabled]="formForm.invaild  || progress.percentage!=100 ">Save</button>
+            <button type="button" class="button__item" (click)="addFormModalRef.close()">Close</button>
+           
           </div>
+          
         </form>
 
 
-      </div>
+     
     </div>
   </ng-template>
 

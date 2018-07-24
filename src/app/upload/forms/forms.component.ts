@@ -4,7 +4,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import * as firebase from 'firebase';
 // Interfaces
 import { Form } from '../interfaces/form';
 import {Hotel} from "../../hotels/interfaces/hotel";
@@ -43,7 +44,9 @@ export class FormsComponent implements OnInit {
   image: any;
   hotelId: any;
   url: any;
-
+  formForm: FormGroup;
+  addFormModalRef: any;
+  currentUser:any;
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -60,20 +63,39 @@ export class FormsComponent implements OnInit {
     this.formService.getForms().subscribe(res => {
       this.forms = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
     });
+    this.currentUser = firebase.auth().currentUser;
+  }
+ 
+ 
+  createFormForm(){
+    this.formForm = new FormGroup({
+      date: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required)
+
+    })
+  }
+  
+  openViewImg(contentViewImg) {
+    
+    this.modalService.open(contentViewImg).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
-  addNewForm(form: NgForm) {  /*Save*/
+
+  addNewForm() {  /*Save*/
     /*console.log(form.value);
     this.hotelId = this.afs.collection('forms').doc(localStorage.hotelId).ref.id;
     this.formService.addForm(form.value, this.hotelId);*/
     /*this.hotelId = this.afs.collection('vendors').doc(localStorage.hotelId).ref.id;*/
-    console.log(form.value);
+    // console.log(form.value);
     this.hotelId = localStorage.hotelId;
-    form.value.htId = this.hotelId;
-    form.value.image = this.currentFileUpload.url;
-    form.value.date="2018/07/26"    
-    console.log(form.value);
-    this.formService.addForm(form.value);
+    this.formForm.value.htId = this.hotelId;
+    this.formForm.value.image = this.currentFileUpload.url;         
+    this.formService.addForm(this.formForm.value);
+    this.addFormModalRef.close()
   }
 
   setForms() {
@@ -93,10 +115,14 @@ export class FormsComponent implements OnInit {
     this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress);
   }
 
+  isPdf(fileName){
+    return fileName.split('?').slice(-2)[0].split('.').slice(-1)[0].toLowerCase()=='pdf';
+  }
+
   selectFile(event) {
     const file = event.target.files.item(0);
 
-    if (file.type.match('image.*')) {
+    if (file.type.match('image.*')|| file.type.match('pdf.*')) {
       this.selectedFiles = event.target.files;
     } else {
       alert('invalid format!');
@@ -113,7 +139,9 @@ export class FormsComponent implements OnInit {
 
   // popup
   openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
+    this.createFormForm()
+    this.addFormModalRef = this.modalService.open(contentNewProperty);
+    this.addFormModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
