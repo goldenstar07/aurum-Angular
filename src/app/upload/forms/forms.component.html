@@ -20,7 +20,7 @@
         <div class="text__block__btn">
           <button class="btn__item default">Download</button>
         </div>
-        <div class="text__block__btn">
+        <div class="text__block__btn" *ngIf="currentUser.role=='admin'">
           <button class="btn__item danger" (click)="deleteForm(form.id)">Delete</button>
         </div>
       </div>

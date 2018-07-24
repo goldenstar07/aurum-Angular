@@ -60,14 +60,17 @@ export class FormsComponent implements OnInit {
               private http: Http) { }
 
   ngOnInit() {
+    this.currentUser = this.dataStorageService.getUser();
+    console.log(this.currentUser)
     this.formService.getForms().subscribe(res => {
       this.forms = this.dataProcessingService.createArrayOfItemsbyHotelId2(res);
     });
-    this.currentUser = firebase.auth().currentUser;
+    
   }
  
  
   createFormForm(){
+   
     this.formForm = new FormGroup({
       date: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required)
@@ -77,7 +80,8 @@ export class FormsComponent implements OnInit {
   
   openViewImg(contentViewImg) {
     
-    this.modalService.open(contentViewImg).result.then((result) => {
+    this.addFormModalRef =  this.modalService.open(contentViewImg);
+    this.addFormModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
