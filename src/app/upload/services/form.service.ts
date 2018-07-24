@@ -35,7 +35,7 @@ export class FormService {
   }
 
   getForms() {
-    this.formsCol = this.afs.collection('forms');
+    this.formsCol = this.afs.collection('forms', ref => ref.orderBy('date'));
     return this.formsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
