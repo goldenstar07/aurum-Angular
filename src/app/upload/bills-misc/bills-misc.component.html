@@ -15,30 +15,11 @@
           <img [src]="bill.data.image" alt="image">
           </div>-->
             </div>
-            <!--<img [src]="bill.data.image" alt="">-->
-            <!--POPUP VIEW IMAGE-->
-            <ng-template #contentViewImg let-c="close" let-d="dismiss" class="modal-lg">
-                <!-- <div class="main__block d-flex justify-content-center align-items-center"> -->
-                   
-                    <!-- <div class="housekeeper__block d-flex flex-column align-items-center"> -->
-                       
-                        <!-- <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-              <span aria-hidden="true" class="cros">&times;</span>
-            </button> -->
-                                                   
-                            <iframe *ngIf="isPdf(bill.data.image)" [src]="bill.data.image | safe" class="main__block"></iframe>
-                                                  -->
-                            <img  *ngIf="!isPdf(bill.data.image)" [src]="bill.data.image" [alt]="bill.data.name"  class="main__block">
-                         
-                       
-                        <!--<div> <img bind-src="bill.data.image"/> </div>-->
-                        <!-- <object [data]="bill.data.image" type="application/pdf" width="100%" height="100%">
-                            <a [href]="bill.data.image">test.pdf</a>
-                        </object> -->
-                       
-                   
-                
-            </ng-template>
+            
+            <ng-template #contentViewImg let-c="close" let-d="dismiss" class="modal-lg">            
+                <iframe *ngIf="isPdf(bill.data.image)" [src]="bill.data.image | safe" class="main__block"></iframe>
+                <img  *ngIf="!isPdf(bill.data.image)" [src]="bill.data.image | safe" [alt]="bill.data.name"  class="main__block">                      
+             </ng-template>
 
             <div class="table__block_btn">
                 <div class="text__block__btn">
