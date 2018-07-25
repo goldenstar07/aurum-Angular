@@ -64,16 +64,20 @@ export class TransactionsDateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.transactionService.getTransactions().subscribe(res => {
+      this.currentUser = this.dataStorageService.getUser();
+      console.log(this.currentUser);
+      this.inventoryLabels = [];
+      this.inventoryDates = [];
+      this.transactionService.getTransactions().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
       if(!this.inventoryItems) {
         return;
       }
       this.inventoryItems = this.inventoryItems.data;
-      this.inventoryLabels = [];
+      
       this.getDates(this.inventoryItems[Object.keys(this.inventoryItems)[0]]);
       this.getLabels(this.inventoryItems);
-      this.currentUser = this.dataStorageService.getUser();
+      
     });
 
    
@@ -111,8 +115,12 @@ export class TransactionsDateComponent implements OnInit {
     }
 
     this.form.value.inventories.forEach(item => {
-      if (!this.inventoryItems[item.item]) this.addNewItem(item.item);
+      console.log(item.item)
+      console.log("ehll")
+      if (!this.inventoryItems[item.item] && item.item!='') this.addNewItem(item.item);
     });
+    this.inventoryLabels = []
+    this.getLabels(this.inventoryItems);
 
 
     let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -150,7 +158,7 @@ export class TransactionsDateComponent implements OnInit {
   }
 
   addNewDate(date) {
-    this.inventoryDates.push(date)
+     this.inventoryDates.push(date)
     for (let key in this.inventoryItems) {
       this.inventoryItems[key].push({
         date: date,
@@ -181,6 +189,7 @@ sortByDate() {
 
 
   getLabels(items) {
+    this.inventoryLabels = []
     for (let key in items) {
       this.inventoryLabels.push(key);
     }
