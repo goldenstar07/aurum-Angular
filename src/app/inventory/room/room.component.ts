@@ -62,7 +62,7 @@ export class RoomComponent extends InventoryManeger implements OnInit {
   }
 
   addItem(item, hotelId) {
-    this.inventoryService.addRoom(item, hotelId);
+    this.inventoryService.addInventory(item, hotelId, this.key);
   }
 
   saveFormInput() {
