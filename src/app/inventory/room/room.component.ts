@@ -45,8 +45,12 @@ export class RoomComponent extends InventoryManeger implements OnInit {
         // JSON.stringify(this.inventoryItems.room);
      
       this.inventoryLabels = [];
-      this.getDates(this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]);
-      this.getLabels(this.inventoryItems.room);
+      this.inventoryDates = [];
+      this.inventoryLabels = [];
+      if(this.inventoryItems.room) {
+        this.getDates(this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]);
+        this.getLabels(this.inventoryItems.room);
+      }
     });
     this.form = this.formBuilder.group({
       date: [''],
@@ -68,13 +72,14 @@ export class RoomComponent extends InventoryManeger implements OnInit {
       this.inventoryService.addNewField();
     }
 
-    if (!this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]) {
+    if (!this.inventoryItems.room) {
       this.inventoryDates = [];
+      this.inventoryItems.room = {}
     }
 
     this.form.value.inventories.forEach(item => {
       if (!this.inventoryItems.room[item.item]) 
- this.addNewItem(item.item);
+        this.addNewItem(item.item);
     });
 
     let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'MM-dd-yyyy'): this.datePipe.transform(new Date(), 'MM-dd-yyyy');
@@ -86,8 +91,8 @@ export class RoomComponent extends InventoryManeger implements OnInit {
     }
 
     this.form.value.inventories.forEach(item => {
-      this.inventoryItems.room[item.item][indexOfItem].need = item.need;
-      this.inventoryItems.room[item.item][indexOfItem].have = item.have;
+      this.inventoryItems.room[item.item].data[indexOfItem].need = item.need;
+      this.inventoryItems.room[item.item].data[indexOfItem].have = item.have;
     });
 
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
@@ -98,12 +103,16 @@ export class RoomComponent extends InventoryManeger implements OnInit {
     //        'date': '2018-03-01', have: '1', need: '8'
     //      }]}, localStorage.hotelId);
     this.addItem(this.inventoryItems.room, localStorage.hotelId);
+    this.addNewInventoryModalRef.close()
   }
 
   addNewItem(name) {
-    this.inventoryItems.room[name] = [];
+    this.inventoryItems.room[name] = {
+      archive: false,
+      data:[]
+    };
     this.inventoryDates.forEach(date => {
-      this.inventoryItems.room[name].push({
+      this.inventoryItems.room[name].data.push({
         date: date,
         have: "",
         need: ""
@@ -119,7 +128,7 @@ updateItem() {
   addNewDate(date) {
     this.inventoryDates.push(date);
     for (let key in this.inventoryItems.room) {
-      this.inventoryItems.room[key].push({
+      this.inventoryItems.room[key].data.push({
         date: date,
         have: "",
         need: ""
@@ -133,9 +142,13 @@ updateItem() {
   }
 
   sortByDate() {
+   
+    console.log("sortByDate")
+    console.log(this.inventoryItems.room)
     for (let key in this.inventoryItems.room) {
-      this.inventoryItems.room[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+      this.inventoryItems.room[key].data.sort((a, b) => +new Date(b.date) - +new Date(a.date));
     }
+    console.log(this.inventoryItems.room)
     this.getDates(this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]);
   }
 
