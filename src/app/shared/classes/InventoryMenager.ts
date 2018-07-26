@@ -1,4 +1,4 @@
-import {FormArray, FormBuilder, FormGroup, Form} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Form, Validators} from "@angular/forms";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DataProcessingService} from "../services/data-processing.service";
 import {DataStorageService} from "../services/data-storage.service";
@@ -32,7 +32,10 @@ export class InventoryManeger {
   currentItem: any;
   addNewInventoryModalRef: any;
   currentEditingColNumber: number;
- 
+  showArchive:boolean;
+  currentUser:any;
+  dateExists: boolean;
+  dateExistsErrorMessage:string;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -40,9 +43,11 @@ export class InventoryManeger {
               public datePipe: DatePipe) {
     this.selectedDate = -1;
     this.dateIndex = 0;
-    this.byDate = false;
+    this.byDate = true;
     this.byType = false;
     this.currentEditingColNumber = -1;
+    this.showArchive = false;
+    this.currentUser = this.dataStorageService.getUser();
   }
 
 
@@ -66,7 +71,54 @@ export class InventoryManeger {
     return this.form.get('inventories') as FormArray;
   }
 
-  openNewProperty(contentNewProperty) {
+  createFormArray(key){
+    let formArray = [];
+    switch(key){
+      case 'room':
+        this.inventoryLabels.forEach(label =>{
+           if(!this.inventoryItems.room[label].archive){           
+            formArray.push(       
+              this.formBuilder.group({
+                item:label,
+                need:'',
+                have:''
+              })
+            )
+          }
+        })
+    }
+    return formArray;
+  }
+  recreateForm(key){
+    switch(key){
+      case 'room':
+        this.form = this.formBuilder.group({
+          date:['', Validators.required],
+          inventories:this.formBuilder.array(this.createFormArray('room'))
+
+
+        })
+        break;
+      default:
+        break;
+    }
+  }
+
+  dateChangeOnAdd(){  
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'MM-dd-yyyy'): this.datePipe.transform(new Date(), 'MM-dd-yyyy');
+    let indexOfItem = this.checkIfDateExist(date);   
+    if(indexOfItem>-1  && this.currentUser.role=='manager'){
+      this.dateExists = true;
+      this.dateExistsErrorMessage = "The date you selected already exists. Please contact the admin to change it."
+      return;
+    }
+    this.dateExists = false;
+  }
+
+  openNewProperty(contentNewProperty, key) {
+    this.dateExists = false;
+    this.dateExistsErrorMessage="";
+    this.recreateForm(key)
     this.addNewInventoryModalRef = this.modalService.open(contentNewProperty);
     this.addNewInventoryModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

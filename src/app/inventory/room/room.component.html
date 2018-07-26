@@ -14,11 +14,11 @@
                         <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Type</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="isEnabled=true;archiveRow();">Archive</a>
+                        <a class="button__item" (click)="showArchive=!showArchive;">Archive</a>
 
                     </div>
                     <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="archiveRow();archiveToggle =true;isEnabled=false;"> Save Archive</a>
+                        <a class="button__item" (click)="updateItem();selectedDate=-1;archiveToggle =true;showArchive=false;"> Save Archive</a>
                     </div>
                 </div>
             </div>
@@ -114,25 +114,42 @@
                 </thead>
 
                 <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">
-
-                    <td scope="row" class="type" id="fname">
-                        <input class="checkbox" type="checkbox" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
-                    </td>
-
-                    <ng-container *ngFor="let item of inventoryItems.room[label].slice(dateIndex, dateIndex + 8); let i = index">
-                        <td>
-                            <input class="td-numb " [class.editable]="selectedDate == i" [(ngModel)]="item.have">
+                    <ng-container *ngIf="! inventoryItems.room[label].archive">
+                        <td scope="row" class="type" id="fname">
+                            <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems.room[label].archive" (change)="archiveToggle=false;"> {{label}}
                         </td>
-                        <td>
-                            <input class="td-numb" [class.editable]="selectedDate == i" [(ngModel)]="item.need">
-                        </td>
-                    </ng-container>
+
+                        <ng-container *ngFor="let item of inventoryItems.room[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <td>
+                                <input class="td-numb " [class.editable]="selectedDate == i" [(ngModel)]="item.have">
+                            </td>
+                            <td>
+                                <input class="td-numb" [class.editable]="selectedDate == i" [(ngModel)]="item.need">
+                            </td>
+                        </ng-container>
+                    </ng-container> 
                 </tr>
+                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive" class = "archive">
+                    <ng-container *ngIf="showArchive && inventoryItems.room[label].archive">
+                        <td scope="row" class="type" id="fname">
+                            <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems.room[label].archive" (change)="archiveToggle=false;"> {{label}}
+                        </td>
+    
+                        <ng-container *ngFor="let item of inventoryItems.room[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <td>
+                                <input class="td-numb " [class.editable]="selectedDate == i" [(ngModel)]="item.have">
+                            </td>
+                            <td>
+                                <input class="td-numb" [class.editable]="selectedDate == i" [(ngModel)]="item.need">
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                    </tr>
             </table>
             <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
                 <button class="add__btn">Save</button>
             </div>
-            <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
+            <div class="plus__circle" (click)="openNewProperty(contentNewProperty, 'room')">
                 <i class="fas fa-plus"></i>
             </div>
 
@@ -152,7 +169,7 @@
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date" class="search__date__item" formControlName="date" id="date" name="date" placeholder="">
+                                    <input type="date" class="search__date__item" formControlName="date"  (change)="dateChangeOnAdd()" required name="date" placeholder="">
                                 </div>
                             </div>
                             <hr>
@@ -166,8 +183,11 @@
                             <div class="add__item__block" (click)="addFormInput()">
                                 <button type="button" class="add__item__btn">Add Item</button>
                             </div>
+                            <div *ngIf="dateExists" class="alert alert-danger">
+                                    {{dateExistsErrorMessage}}
+                                </div>  
                             <div class="save__btn">
-                                <button class="add__btn">Save</button>
+                                <button class="add__btn" [disabled]="form.invalid">Save</button>
                             </div>
                         </div>
                     </div>
