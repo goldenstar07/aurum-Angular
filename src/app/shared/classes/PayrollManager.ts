@@ -1,4 +1,4 @@
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DataProcessingService} from "../services/data-processing.service";
 import {DataStorageService} from "../services/data-storage.service";
@@ -31,10 +31,11 @@ export class PayrollManager {
   currentUser:any;
   currentItem: any;
   showArchive:boolean;
+  addPropertyModalRef:any;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
-              public dataStorageService: DataStorageService,
+              public dataStorageService: DataStorageService,  
               public datePipe: DatePipe) {
     this.selectedDate = -1;
     this.dateIndex = 0;
@@ -42,18 +43,9 @@ export class PayrollManager {
     this.byType = false;
     this.currentUser = this.dataStorageService.getUser();
     this.showArchive = false;
+    
   }
 
-
-  createFormInput(): FormGroup {
-    return this.formBuilder.group({
-      item: '',
-      rt: '',
-      ot: '',
-      dt: '',
-      mt: ''
-    });
-  }
 
   addFormInput() {
     const inventory = this.createFormInput();
@@ -65,7 +57,13 @@ export class PayrollManager {
   }
 
   openNewProperty(contentNewProperty) {
-    this.modalService.open(contentNewProperty).result.then((result) => {
+    this.form = this.formBuilder.group({
+      date: ['', Validators.required],
+      inventories:this.formBuilder.array([])
+    })
+    this.recreateForm()
+    this.addPropertyModalRef = this.modalService.open(contentNewProperty);
+    this.addPropertyModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -116,7 +114,33 @@ export class PayrollManager {
     this.dateIndex = this.inventoryDates.indexOf(this.dateOfItem);
   }
 
+  recreateForm(){
+    this.inventoryLabels.forEach(
+      label=>{
+        if(!this.inventoryItems.payroll[label].archive){
+          this.inventories.push(
+            this.formBuilder.group({
+              item: label,
+              rt:'',
+              ot:'',
+              dt:'',
+              mt:''
+            })
+          )
+      }
+      }
+    )
+  }
 
+  createFormInput(): FormGroup {
+    return this.formBuilder.group({
+      item: '',
+      rt: '',
+      ot: '',
+      dt: '',
+      mt: ''
+    });
+  }
   changeTable(type) {
     switch (type) {
       case "date":
