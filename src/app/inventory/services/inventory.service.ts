@@ -42,16 +42,21 @@ export class InventoryService {
       })
   }
 
-  addRoom(room, hotelId) {
+  addInventory(inventory, hotelId, key){
     this.afs.collection('inventories').doc(hotelId).update({
-      'room' : room
+      [key] : inventory
     });
   }
-  addMaintenance(item, hotelId) {
-    this.afs.collection('inventories').doc(hotelId).update({
-      'maintenance' : item
-    });
-  }
+  // addRoom(room, hotelId) {
+  //   this.afs.collection('inventories').doc(hotelId).update({
+  //     'room' : room
+  //   });
+  // }
+  // addMaintenance(item, hotelId) {
+  //   this.afs.collection('inventories').doc(hotelId).update({
+  //     'maintenance' : item
+  //   });
+  // }
    addPayroll(item, hotelId) {
 
     this.afs.collection('inventories').doc(hotelId).update({
@@ -65,17 +70,17 @@ export class InventoryService {
       'hk' : item
     });
   }
-  addFb(item, hotelId) {
-    this.afs.collection('inventories').doc(hotelId).update({
-      'fb' : item
-    });
-  }
+  // addFb(item, hotelId) {
+  //   this.afs.collection('inventories').doc(hotelId).update({
+  //     'fb' : item
+  //   });
+  // }
 
-  addMisc(item, hotelId) {
-    this.afs.collection('inventories').doc(hotelId).update({
-      'misc' : item
-    });
-  }
+  // addMisc(item, hotelId) {
+  //   this.afs.collection('inventories').doc(hotelId).update({
+  //     'misc' : item
+  //   });
+  // }
 
   addNewField() {
     this.afs.collection('inventories').doc(localStorage.hotelId).set({
