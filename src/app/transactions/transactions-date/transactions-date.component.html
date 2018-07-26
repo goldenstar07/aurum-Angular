@@ -13,13 +13,14 @@
                     <div class="type_button">
                         <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Type</a>
                     </div>
-                    <div *ngIf="(currentUser.role=='admin') &&(archiveToggle==true && !byType && inventoryDates)" class="type_button">
-                        <a class="button__item" (click)="isEnabled=true;archiveRow();">Archive</a>
+                    <div *ngIf="(currentUser.role=='admin') &&(!byType && inventoryDates)" class="type_button">
+                        <!-- <a class="button__item" (click)="isEnabled=true;archiveRow();">Archive</a> -->
+                        <a class="button__item" (click)="showArchive = !showArchive">Archive</a>
 
                     </div>
-                    <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
+                    <!-- <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
                         <a class="button__item" (click)="archiveRow();archiveToggle =true;isEnabled=false;"> Save Archive</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -88,19 +89,32 @@
                         </th>
                     </tr>
                 </thead>
-                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">
-
+                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive"  >
+                    <ng-container *ngIf="!inventoryItems[label].archive">
                     <td scope="row" class="type" id="fname">
-                        <input class="checkbox" type="checkbox" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
+                        <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems[label].archive" (change)="archiveToggle=false;"> {{label}}
                     </td>
                     <ng-container *ngFor="let item of inventoryItems[label].data.slice(dateIndex, dateIndex + 8);let i = index">
-                        <td>
+                        <td>                        
                             <input class="td-numb" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i">
                         </td>
                     </ng-container>
+                   </ng-container>
                 </tr>
+                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive" class="archive" >
+                        <ng-container *ngIf="inventoryItems[label].archive && showArchive">
+                        <td scope="row" class="type" id="fname">
+                            <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems[label].archive" (change)="archiveToggle=false;"> {{label}}
+                        </td>
+                        <ng-container *ngFor="let item of inventoryItems[label].data.slice(dateIndex, dateIndex + 8);let i = index">
+                            <td>                        
+                                <input class="td-numb" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i">
+                            </td>
+                        </ng-container>
+                       </ng-container>
+                    </tr>
             </table>
-            <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
+            <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();editingColumnNumber=-1">
                 <button class="add__btn">Save</button>
             </div>
             <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
