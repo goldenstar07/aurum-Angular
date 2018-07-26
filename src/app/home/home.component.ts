@@ -154,7 +154,7 @@ export class HomeComponent implements OnInit {
         this.afs.doc(`hotels/${localStorage.hotelId}`).delete()
         .then(
           response =>{
-            this.addNewManagerModalRef.close();
+            this.deletePropertyModalRef.close();
             this.router.navigate(['hotels']);
           }
         )
