@@ -38,7 +38,8 @@ export class PayrollComponent extends PayrollManager implements OnInit {
     super(modalService, formBuilder, dataProcessingService, dataStorageService, datePipe);
   }
 
-
+  dateExists:boolean;
+  dateExistsErrorMessage: string;
   ngOnInit() {
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
@@ -62,6 +63,18 @@ export class PayrollComponent extends PayrollManager implements OnInit {
     console.log(this.form);
   }
 
+  dateChangeOnAdd(){
+   
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let indexOfItem = this.checkIfDateExist(date);
+   
+    if(indexOfItem>-1  && this.currentUser.role=='manager'){
+      this.dateExists = true;
+      this.dateExistsErrorMessage = "The date you selected already exists. Please contact the admin to change it."
+      return;
+    }
+    this.dateExists = false;
+  }
   addItem(item, hotelId) {
     this.inventoryService.addPayroll(item, hotelId);
   }
@@ -87,7 +100,11 @@ export class PayrollComponent extends PayrollManager implements OnInit {
     let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'MM-dd-YYYY');
     let indexOfItem = this.checkIfDateExist(date);
 
-
+    if(indexOfItem>-1  && this.currentUser.role=='manager'){
+      this.dateExists = true;
+      this.dateExistsErrorMessage = "The date you selected already exists. Please contact the admin to change it."
+      return;
+    }
 
     if (indexOfItem == -1) {
       this.addNewDate(date);

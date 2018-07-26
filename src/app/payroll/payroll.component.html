@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date" class="search__date__item" formControlName="date" required placeholder="">
+                                    <input type="date"  (change)="dateChangeOnAdd()" class="search__date__item" formControlName="date" required placeholder="">
                                 </div>
                                 <!-- <button type="button" class="close" aria-label="Close">
                   <span aria-hidden="true" class="cros">&times;</span>
@@ -255,7 +255,9 @@
                   Add Item
                 </button>
                             </div>
-
+                            <div *ngIf="dateExists" class="alert alert-danger">
+                                    {{dateExistsErrorMessage}}
+                                </div>  
                             <div class="save__btn">
                                 <button class="add__btn" [disabled]="form.invalid">Save</button>
                                
