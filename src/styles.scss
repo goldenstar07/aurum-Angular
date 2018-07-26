@@ -468,7 +468,7 @@ input:focus {
 }
 .inline{
     display: inline;
-}
+} 
 //==========media screen===========
 @media screen and (max-width:1199px) {
     .search__block .search__date__block {
@@ -611,4 +611,15 @@ td:focus::before {
 
 .inline_edit_icon{
     display: inline;
+}
+
+.input_cell input[type="text"]:disabled{
+    background-color:#fff !important;
+}
+.input_cell input[type="text"]:enabled{
+    background-color:gray !important;
+}
+
+.datePicker{
+    width:175px;
 }

@@ -83,7 +83,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Type</th>
-                        <th scope="col" class="col__items" colspan="1" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8);let i = index">
+                        <th scope="col" class="col__items dataPicker" colspan="1" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8);let i = index">
                             {{date | date:'yyyy/dd/MM'}}
                             <div class='inline_edit_icon' (click)="setEditingColumn(i)"><i class="far fa-edit"></i></div>                            
                         </th>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date" (change)="dateChangeOnAdd()" class="datePickerWidth" class="search__date__item" formControlName="date" placeholder="">
+                                    <input type="date" (change)="dateChangeOnAdd()"  class="search__date__item datePicker" formControlName="date" placeholder="">
                                 </div>
                             </div>
                             <hr>

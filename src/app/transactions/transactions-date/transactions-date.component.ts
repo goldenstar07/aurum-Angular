@@ -74,10 +74,7 @@ export class TransactionsDateComponent implements OnInit {
       if(!this.inventoryItems) {
         return;
       }
-     
-      console.log(this.inventoryItems[Object.keys(this.inventoryItems)[0]])
-      console.log("----")
-      console.log(this.inventoryItems)
+ 
       this.getDates(this.inventoryItems[Object.keys(this.inventoryItems)[0]]);
       this.getLabels(this.inventoryItems);
       this.showArchive = false;
@@ -305,11 +302,12 @@ createFormInput(): FormGroup[] {
   
   this.inventoryLabels.forEach(
     label => {
-      console.log(label);
-      formgrouparray.push(this.formBuilder.group({
-        item:label,
-        price:''
-      }))
+      if(!this.inventoryItems[label].archive){
+        formgrouparray.push(this.formBuilder.group({
+          item:label,
+          price:''
+        }))
+    }
     }
   )
   return formgrouparray;
