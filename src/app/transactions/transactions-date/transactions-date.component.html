@@ -93,7 +93,7 @@
                     <td scope="row" class="type" id="fname">
                         <input class="checkbox" type="checkbox" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
                     </td>
-                    <ng-container *ngFor="let item of inventoryItems[label].slice(dateIndex, dateIndex + 8);let i = index">
+                    <ng-container *ngFor="let item of inventoryItems[label].data.slice(dateIndex, dateIndex + 8);let i = index">
                         <td>
                             <input class="td-numb" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i">
                         </td>
@@ -142,7 +142,7 @@
                             </div>                      
                                 <button type="button" class="add_type__btn" (click)="addItemInput()">Add Type</button>                           
                                 <button class="save_transactions_btn" [disabled]="form.invalid">Save</button>                                                          
-                                <button class="cancel__btn" (click)="dismissAddItemModal()">Cancel</button>
+                                <button type="button" class="cancel__btn" (click)="dismissAddItemModal()">Cancel</button>
                         </div>
                     </div>
                 </form>

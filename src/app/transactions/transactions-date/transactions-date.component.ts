@@ -51,6 +51,7 @@ export class TransactionsDateComponent implements OnInit {
   
   dateExists:boolean;
   dateExistsErrorMessage: string;
+  showArchive:boolean;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -69,15 +70,17 @@ export class TransactionsDateComponent implements OnInit {
       this.inventoryLabels = [];
       this.inventoryDates = [];
       this.transactionService.getTransactions().subscribe(res => {
-      this.inventoryItems = HelperService.getItemsByHotelId(res);
+      this.inventoryItems = HelperService.getItemsByHotelId(res)
       if(!this.inventoryItems) {
         return;
       }
-      this.inventoryItems = this.inventoryItems.data;
-      
+     
+      console.log(this.inventoryItems[Object.keys(this.inventoryItems)[0]])
+      console.log("----")
+      console.log(this.inventoryItems)
       this.getDates(this.inventoryItems[Object.keys(this.inventoryItems)[0]]);
       this.getLabels(this.inventoryItems);
-      
+      this.showArchive = false;
     });
 
    
@@ -105,7 +108,7 @@ export class TransactionsDateComponent implements OnInit {
   saveFormInput() {
     console.log("hello")
     if(!this.inventoryItems) {
-      this.inventoryItems = {};
+      this.inventoryItems = {}
       this.inventoryDates = [];
       // this.transactionService.addNewField();
     }
@@ -138,9 +141,10 @@ export class TransactionsDateComponent implements OnInit {
     }
 
     this.form.value.inventories.forEach(item => {
-      this.inventoryItems[item.item][indexOfItem].price = item.price;
+      this.inventoryItems[item.item]['data'][indexOfItem].price = item.price;
+      
     });
-
+    
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
 
     this.sortByDate();
@@ -148,19 +152,26 @@ export class TransactionsDateComponent implements OnInit {
     this.addItemModalRef.close();
   }
   addNewItem(name) {
-    this.inventoryItems[name] = [];
+    if (!this.inventoryItems[name]){
+      // this.inventoryItems[name]['data'] = []
+      this.inventoryItems[name] = {
+        archive:false,
+        data:[]
+      }
+    }
     this.inventoryDates.forEach(date => {
-      this.inventoryItems[name].push({
+        this.inventoryItems[name].data.push({
         date: date,
         price: ""
       })
+     
     })
-  }
+      }
 
   addNewDate(date) {
      this.inventoryDates.push(date)
     for (let key in this.inventoryItems) {
-      this.inventoryItems[key].push({
+      this.inventoryItems[key].data.push({
         date: date,
         price: ""
       })
@@ -176,7 +187,8 @@ updateItem() {
 
 sortByDate() {
   for (let key in this.inventoryItems) {
-    this.inventoryItems[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+    // this.inventoryItems[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+    this.inventoryItems[key].data.sort((a, b) => +new Date(b.date) - +new Date(a.date));
   }
   this.getDates(this.inventoryItems[Object.keys(this.inventoryItems)[0]]);
 }
@@ -199,8 +211,9 @@ sortByDate() {
     return this.inventoryDates.indexOf(date);
   }
 
-  getDates(dates) {
-    if(!dates) return;
+  getDates(_data) {
+    if(!_data) return;
+    let dates = _data.data
     this.dateFrom = dates[dates.length -1].date;
     this.dateTo = dates[0].date;
     this.inventoryDates = [];

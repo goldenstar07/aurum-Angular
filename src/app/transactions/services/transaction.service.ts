@@ -27,6 +27,7 @@ export class TransactionService {
   }
 
   addTransaction(item, hotelId) {
+    
     this.afs.collection('transactions').doc(hotelId).set(item);
   }
 
