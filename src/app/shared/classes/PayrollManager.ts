@@ -30,7 +30,7 @@ export class PayrollManager {
   byType: boolean;
   currentUser:any;
   currentItem: any;
-
+ 
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -41,6 +41,7 @@ export class PayrollManager {
     this.byDate = false;
     this.byType = false;
     this.currentUser = this.dataStorageService.getUser();
+         
   }
 
 
