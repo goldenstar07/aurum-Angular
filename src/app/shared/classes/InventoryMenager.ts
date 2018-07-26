@@ -72,11 +72,9 @@ export class InventoryManeger {
   }
 
   createFormArray(key){
-    let formArray = [];
-    switch(key){
-      case 'room':
+    let formArray = [];   
         this.inventoryLabels.forEach(label =>{
-           if(!this.inventoryItems.room[label].archive){           
+           if(!this.inventoryItems[key][label].archive){           
             formArray.push(       
               this.formBuilder.group({
                 item:label,
@@ -86,22 +84,15 @@ export class InventoryManeger {
             )
           }
         })
-    }
+    
     return formArray;
   }
-  recreateForm(key){
-    switch(key){
-      case 'room':
+  recreateForm(key){   
         this.form = this.formBuilder.group({
           date:['', Validators.required],
-          inventories:this.formBuilder.array(this.createFormArray('room'))
-
-
-        })
-        break;
-      default:
-        break;
-    }
+          inventories:this.formBuilder.array(this.createFormArray(key))
+        })      
+      
   }
 
   dateChangeOnAdd(){  

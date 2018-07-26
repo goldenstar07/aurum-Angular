@@ -2,7 +2,7 @@ import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import 'rxjs/add/operator/map';
-import {FormArray, FormBuilder, FormGroup, NgForm} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {AngularFirestore} from "angularfire2/firestore";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
@@ -17,7 +17,7 @@ import {HelperService} from "../../shared/services/helper.service";
   styleUrls: ['./fb.component.scss']
 })
 export class FbComponent extends InventoryManeger implements OnInit {
-   currentEditingColNumber: number;
+  
    public archiveToggle = true;
    @ViewChild('checkMe') checkMe: ElementRef;
      @ViewChild('fname') fname: ElementRef;
@@ -44,6 +44,7 @@ export class FbComponent extends InventoryManeger implements OnInit {
       this.getLabels(this.inventoryItems.fb);
     });
 
+
     this.form = this.formBuilder.group({
       date: [''],
       inventories: this.formBuilder.array([this.createFormInput()])
@@ -51,22 +52,49 @@ export class FbComponent extends InventoryManeger implements OnInit {
     console.log(this.form);
   }
 
-setCurrentEditingColNumber(i){
-  this.currentEditingColNumber = i;
-}
-
-updateItem() {
-  console.log(this.inventoryItems.fb);
-   this.sortByDate();
-    this.addItem(this.inventoryItems.fb, localStorage.hotelId);
-  
-}
-  addItem(item,hotelId){
-    this.inventoryService.addFb(item, hotelId);
+  createListForms():FormGroup[] {
+      let formarray:FormGroup[];
+      formarray = [];
+      for( let label of this.inventoryLabels){
+        let formGroup = this.formBuilder.group({
+          item:label,
+          have:'',
+          need:''
+        })   
+      formarray.push(formGroup);
+      }
+      return formarray;
+     }
+  createAddInventoryList(){
+    this.form = this.formBuilder.group({
+      date:['', Validators.required],
+      inventories: this.formBuilder.array(this.createListForms())
+    })
   }
 
-  saveFormInput() {
+  openNewProperty(contentNewProperty) {
+    this.createAddInventoryList();
+    this.addNewInventoryModalRef = this.modalService.open(contentNewProperty);
+    this.addNewInventoryModalRef.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed}`;
+    });
+  }
+updateItem() {
+  console.log(this.inventoryItems.fb);
+  console.log("updateItem")
+  this.sortByDate();
+  this.addItem(this.inventoryItems.fb, localStorage.hotelId);  
+}
 
+ addItem(item,hotelId){
+  console.log("addItem")
+  this.inventoryService.addFb(item, hotelId);
+}
+
+  saveFormInput() {
+    console.log("adsaveFormInputdItem")
     if(!this.inventoryItems) {
       this.inventoryItems = {
         fb: {}
@@ -103,8 +131,10 @@ updateItem() {
 
     this.sortByDate();
     this.addItem(this.inventoryItems.fb, localStorage.hotelId);
+    this.addNewInventoryModalRef.close();
   }
   addNewItem(name) {
+    console.log("addNewItem")
     this.inventoryItems.fb[name] = [];
     this.inventoryDates.forEach(date => {
       this.inventoryItems.fb[name].push({
@@ -116,6 +146,7 @@ updateItem() {
   }
 
   addNewDate(date) {
+    console.log("addNewDate")
     this.inventoryDates.push(date)
     for (let key in this.inventoryItems.fb) {
       this.inventoryItems.fb[key].push({
@@ -126,10 +157,12 @@ updateItem() {
     }
   }
   updateRooms() {
+    console.log("updateRooms")
     this.addItem(this.inventoryItems.fb, localStorage.hotelId);
   }
 
   sortByDate() {
+    console.log("sortByDate")
     for (let key in this.inventoryItems.fb) {
       this.inventoryItems.fb[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
     }
@@ -137,9 +170,11 @@ updateItem() {
   }
 
   updateItemsByType() {
+    console.log("updateItemsByType")
     this.currentItem = this.inventoryItems.fb[this.nameOfItem];
   }
   archiveRow() {
+    console.log("archiveRow")
     if (localStorage.getItem('table') != null) {
         // document.getElementsByTagName('input').checked = localStorage.getItem('table');
         console.log('archive row');

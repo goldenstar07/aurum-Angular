@@ -113,13 +113,14 @@
                         </ng-container>
                     </tr>
                 </thead>
-                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">
+                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">                    
                     <td scope="row" class="type" id="fname">
                         <input class="checkbox" type="checkbox" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
                     </td>
 
                     <ng-container id="toggle" *ngFor="let item of inventoryItems.fb[label].slice(dateIndex, dateIndex + 8); let i = index">
                         <td>
+                            
                             <input class="td-numb" [class.editable]="selectedDate == i" [disabled]="currentEditingColNumber != i" [(ngModel)]="item.have">
                         </td>
                         <td>
@@ -143,7 +144,7 @@
                 <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true" class="cros">&times;</span>
-          </button>
+            </button>
                     <div class="user__component d-flex flex-column">
                         <div class="user__block">
                             <div class="user__block__header d-flex justify-content-between align-items-center">
@@ -154,17 +155,16 @@
                                     <div>Select Date:</div>
                                     <input type="date" class="search__date__itemg datePickerWidth" formControlName="date" id="date" name="date" placeholder="">
                                 </div>
-                                <!-- <button type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true" class="cros">&times;</span>
-                </button>-->
                             </div>
-                            <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__form">
-                                <div class="name__block" [formGroupName]="i">
-                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Type" class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()">
-                                    <input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input">
-                                    <input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input">
-                                </div>
-                            </form>
+                            <table class ="table table-hover table-responisv" style="border:none;">
+                                <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="form-group">                                   
+                                    <tr class="name__block" [formGroupName]="i"  style="border:none;">
+                                        <td><input type="text" formControlName="item" id="item" name="item" placeholder="Type" class="form-control" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()"></td>  
+                                        <td><input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="form-control"></td>
+                                        <td><input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="form-control"></td>                                    
+                                    </tr>
+                                </form>
+                            </table>
                             <div class="add__item__block" (click)="addFormInput()">
                                 <button type="button" class="add__item__btn">
                   Add Item
@@ -172,7 +172,7 @@
                             </div>
 
                             <div class="save__btn">
-                                <button class="add__btn">Save</button>
+                                <button class="add__btn" [disabled]="form.invalid">Save</button>
                             </div>
                         </div>
                     </div>
