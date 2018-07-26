@@ -30,7 +30,7 @@ export class PayrollManager {
   byType: boolean;
   currentUser:any;
   currentItem: any;
- 
+  showArchive:boolean;
   constructor(public modalService: NgbModal,
               public formBuilder: FormBuilder,
               public dataProcessingService: DataProcessingService,
@@ -38,10 +38,10 @@ export class PayrollManager {
               public datePipe: DatePipe) {
     this.selectedDate = -1;
     this.dateIndex = 0;
-    this.byDate = false;
+    this.byDate = true;
     this.byType = false;
     this.currentUser = this.dataStorageService.getUser();
-         
+    this.showArchive = false;
   }
 
 

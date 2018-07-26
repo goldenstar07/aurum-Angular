@@ -14,11 +14,11 @@
                         <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Employee</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="isEnabled=true;archiveRow();">Archive</a>
+                        <a class="button__item" (click)="showArchive = !showArchive">Archive</a>
 
                     </div>
                     <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="archiveRow();archiveToggle =true;isEnabled=false;"> Save Archive</a>
+                        <a class="button__item" (click)="updateItem();selectedDate=-1;showArchive=false;archiveToggle=true;"> Save Archive</a>
                     </div>
                 </div>
             </div>
@@ -130,25 +130,67 @@
                         </ng-container>
                     </tr>
                 </thead>
-                <tr *ngFor="let label of inventoryLabels">
+                <!-- <tr *ngFor="let label of inventoryLabels">
                     <td scope="row" class="type" id="fname">
-                        <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
+                        <input class="checkbox" type="checkbox" [(ngModel)] = "inventoryItems.payroll[label].archive" value="onoffswitch" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
                     </td>
                     <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                         <td>
-                            <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.rt">
+                            <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
                         </td>
                         <td>
                             <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
                         </td>
                         <td>
-                            <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.dt">
+                            <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
                         </td>
                         <td>
                             <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
                         </td>
                     </ng-container>
+                </tr> -->
+                <tr *ngFor="let label of inventoryLabels">
+                    <ng-container *ngIf="!inventoryItems.payroll[label].archive">
+                        <td scope="row" class="type" id="fname">
+                            <input class="checkbox" type="checkbox"   [(ngModel)] = "inventoryItems.payroll[label].archive" value="onoffswitch" id='checkMe' *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                        </td>
+                        <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <td>
+                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
+                            </td>
+                            <td>
+                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
+                            </td>
+                            <td>
+                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
+                            </td>
+                            <td>
+                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
+                            </td>
+                        </ng-container>
+                    </ng-container>
                 </tr>
+                <tr *ngFor="let label of inventoryLabels" class="archive">
+                        <ng-container *ngIf="inventoryItems.payroll[label].archive && showArchive" >
+                            <td scope="row" class="type" id="fname">
+                                <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' [(ngModel)]="inventoryItems.payroll[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                            </td>
+                            <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                                <td>
+                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
+                                </td>
+                                <td>
+                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
+                                </td>
+                                <td>
+                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
+                                </td>
+                                <td>
+                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
+                                </td>
+                            </ng-container>
+                        </ng-container>
+                    </tr>
             </table>
             <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
                 <button class="add__btn">Save</button>
@@ -174,7 +216,7 @@
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date" class="search__date__item" formControlName="date" id="date" name="date" placeholder="">
+                                    <input type="date" class="search__date__item" formControlName="date" required placeholder="">
                                 </div>
                                 <!-- <button type="button" class="close" aria-label="Close">
                   <span aria-hidden="true" class="cros">&times;</span>
@@ -215,7 +257,8 @@
                             </div>
 
                             <div class="save__btn">
-                                <button class="add__btn">Save</button>
+                                <button class="add__btn" [disabled]="form.invalid">Save</button>
+                               
                             </div>
                         </div>
                     </div>

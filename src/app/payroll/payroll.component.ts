@@ -48,10 +48,11 @@ export class PayrollComponent extends PayrollManager implements OnInit {
      console.log(this.inventoryItems)    
       this.inventoryLabels = [];
       this.inventoryDates = [];
-     if(Object.keys(this.inventoryItems.payroll).length>0) {
-        this.getDates(this.inventoryItems.payroll[Object.keys(this.inventoryItems.payroll)[0]]);        
+     if(this.inventoryItems.payroll) {
+        this.getDates(this.inventoryItems.payroll[Object.keys(this.inventoryItems.payroll)[0]]); 
+        this.getLabels(this.inventoryItems.payroll);       
        }
-       this.getLabels(this.inventoryItems.payroll);
+       
     });
 
     this.form = this.formBuilder.group({
@@ -74,7 +75,8 @@ export class PayrollComponent extends PayrollManager implements OnInit {
       this.inventoryService.addNewField();
     }
 
-    if(!this.inventoryItems.payroll[Object.keys(this.inventoryItems.payroll)[0]]) {
+    if(!this.inventoryItems.payroll) {
+      this.inventoryItems.payroll = {}
       this.inventoryDates = [];
     }
     this.form.value.inventories.forEach(item => {
@@ -114,6 +116,7 @@ export class PayrollComponent extends PayrollManager implements OnInit {
   //        'carolina': [{'date': '2018-06-01', rt: '1', ot: '8',dt: '1', mt: '8'},
   //         {'date': '2018-05-01', rt: '1', ot: '8',dt: '1', mt: '8'}]}, localStorage.hotelId);
     this.addItem(this.inventoryItems.payroll, localStorage.hotelId);
+   this.addPropertyModalRef.close();
   }
   addNewItem(name) {
     this.inventoryItems.payroll[name] = {
