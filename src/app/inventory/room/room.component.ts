@@ -43,7 +43,7 @@ export class RoomComponent extends InventoryManeger implements OnInit {
         //   'date': '2018-03-01', have: '1', need: '8'
         // }]};
         // JSON.stringify(this.inventoryItems.room);
-      this.inventoryItems = this.inventoryItems.data;
+     
       this.inventoryLabels = [];
       this.getDates(this.inventoryItems.room[Object.keys(this.inventoryItems.room)[0]]);
       this.getLabels(this.inventoryItems.room);
@@ -141,6 +141,7 @@ updateItem() {
 
   updateItemsByType() {
     this.currentItem = this.inventoryItems.room[this.nameOfItem];
+    console.log(this.inventoryItems.room)
   }
 
   archiveRow() {
