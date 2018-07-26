@@ -14,23 +14,21 @@
                         <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Type</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="isEnabled=true;archiveRow();">Archive</a>
+                        <a class="button__item" (click)="showArchive=!showArchive;">Archive</a>
 
                     </div>
                     <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="archiveRow();archiveToggle =true;isEnabled=false;"> Save Archive</a>
+                        <a class="button__item" (click)="updateItem();selectedDate=-1;archiveToggle =true;showArchive=false;"> Save Archive</a>
                     </div>
                 </div>
             </div>
 
             <div class="search__date__block d-flex flex-column justify-content-center">
-                <p class="date-range__title" style="color: darkslategray; font-style:normal;	
-            opacity: 0.5;
-            font-weight: 600;" [hidden]="!byDate">Select Date</p>
+                <p class="date-range__title" style="color: darkslategray; font-style:normal;opacity: 0.5;font-weight: 600;" [hidden]="!byDate">Select Date</p>
                 <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
-          <option selected>Select Date</option>
-          <option *ngFor="let date of inventoryDates" value="{{date}}">{{date}}</option>
-        </select>
+                    <option selected>Select Date</option>
+                    <option *ngFor="let date of inventoryDates" value="{{date}}">{{date}}</option>
+                </select>
             </div>
 
 
@@ -54,7 +52,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Items</th>
+                        <th scope="col">{{keyTitle}}</th>
                         <th scope="col" class="col__items" colspan="2">
                             {{nameOfItem}}
                             <!--<i class="far fa-edit"></i>-->
@@ -73,7 +71,7 @@
                     </tr>
                 </thead>
                 <ng-container *ngIf="currentItem">
-                    <tr *ngFor="let item of currentItem | filterByDate: dateFrom: dateTo">
+                    <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
                         <td scope="row" class="type">{{item.date}}</td>
                         <td>
                             <input class="td-numb" [(ngModel)]="item.have" disabled>
@@ -84,20 +82,21 @@
                     </tr>
                 </ng-container>
             </table>
-            <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
+            <div class="plus__circle" (click)="openNewProperty(contentNewProperty, key)">
                 <i class="fas fa-plus"></i>
             </div>
-
         </div>
+
         <!--///////////////////////////DEFAULT///////////////////////////////////-->
+
         <div class="main__title d-flex align-items-center" *ngIf="!byType && inventoryDates">
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col">Items</th>
-                        <th scope="col" class="col__items" colspan="2" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
-                            {{date | date:'yyyy/dd/MM'}}
-                            <i class="far fa-edit"></i>
+                        <th scope="col" style="width:10%;">{{keyTitle}}</th>
+                        <th scope="col" class="col__items" colspan="2" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
+                            {{date | date:'MM/dd/yyyy'}}
+                            <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
                         </th>
                     </tr>
                 </thead>
@@ -114,25 +113,44 @@
                         </ng-container>
                     </tr>
                 </thead>
-                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">
-                    <td scope="row" class="type" id="fname">
-                        <input class="checkbox" type="checkbox" id='checkMe' *ngIf="isEnabled==true" (change)="archiveToggle=false;"> {{label}}
-                    </td>
-                    <ng-container *ngFor="let item of inventoryItems.misc[label].slice(dateIndex, dateIndex + 8); let i = index">
-                        <td>
-                            <input class="td-numb " [class.editable]="selectedDate == i" [(ngModel)]="item.have">
-                        </td>
-                        <td>
-                            <input class="td-numb" [class.editable]="selectedDate == i" [(ngModel)]="item.need">
-                        </td>
-                    </ng-container>
-                </tr>
-            </table>
 
+                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">
+                    <ng-container *ngIf="! inventoryItems[key][label].archive">
+                        <td scope="row" class="type" id="fname">
+                            <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems[key][label].archive" (change)="archiveToggle=false;"> {{label}}
+                        </td>
+
+                        <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <td>
+                                <input class="td-numb " [disabled]="selectedDate != i" [(ngModel)]="item.have">
+                            </td>
+                            <td>
+                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.need">
+                            </td>
+                        </ng-container>
+                    </ng-container> 
+                </tr>
+                <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive" class = "archive">
+                    <ng-container *ngIf="showArchive && inventoryItems[key][label].archive">
+                        <td scope="row" class="type" id="fname">
+                            <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems[key][label].archive" (change)="archiveToggle=false;"> {{label}}
+                        </td>
+    
+                        <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <td>
+                                <input class="td-numb " [disabled]="selectedDate != i" [(ngModel)]="item.have">
+                            </td>
+                            <td>
+                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.need">
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                    </tr>
+            </table>
             <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
                 <button class="add__btn">Save</button>
             </div>
-            <div class="plus__circle" *ngIf="selectedDate == -1" (click)="openNewProperty(contentNewProperty)">
+            <div class="plus__circle" (click)="openNewProperty(contentNewProperty, key)">
                 <i class="fas fa-plus"></i>
             </div>
 
@@ -148,32 +166,45 @@
                         <div class="user__block">
                             <div class="user__block__header d-flex justify-content-between align-items-center">
                                 <div class="user__text">
-                                    <p>Add Misc Item</p>
+                                    <p>Add {{keyTitle}} Inventory Item</p>
                                 </div>
-                                <div class="select__date d-flex justify-content-center align-items-center">
+                                <div class="select__date d-flex justify-content-center align-items-center" >
                                     <div>Select Date:</div>
-                                    <input type="date" class="search__date__item" formControlName="date" id="date" name="date" placeholder="">
+                                    <input type="date" class="search__date__item" formControlName="date" style="width:170px;"  (change)="dateChangeOnAdd()" required name="date" placeholder="">
                                 </div>
-                                <!-- <button type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true" class="cros">&times;</span>
-                </button>-->
                             </div>
-
-                            <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__form">
-                                <div class="name__block" [formGroupName]="i">
-                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input " style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()">
-                                    <input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input">
-                                    <input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input">
-                                </div>
-                            </form>
+                            <hr>
+                              
+                                <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__array_form">
+                                    <table>
+                                        <tr *ngIf="i==0">
+                                            <td style="background-color: #F3F2F0;">
+                                                    <p class="td-numb">{{keyTitle}}</p>
+                                                </td>
+                                            <td style="background-color: #F3F2F0;">
+                                                <p class="td-numb">Stock</p>
+                                            </td>
+                                            <td style="background-color: #F3F2F0;">
+                                                <p class="td-numb">Order</p>
+                                            </td>                                                 
+                                        </tr>
+                                        <tr [formGroupName]="i">
+                                          <td><input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()"></td>  
+                                            <td><input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input"></td>
+                                            <td><input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input"></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            
+                            
                             <div class="add__item__block" (click)="addFormInput()">
-                                <button type="button" class="add__item__btn">
-                  Add Item
-                </button>
+                                <button type="button" class="add__item__btn">Add </button>
                             </div>
-
+                            <div *ngIf="dateExists" class="alert alert-danger">
+                                    {{dateExistsErrorMessage}}
+                                </div>  
                             <div class="save__btn">
-                                <button class="add__btn">Save</button>
+                                <button class="add__btn" [disabled]="form.invalid">Save</button>
                             </div>
                         </div>
                     </div>
