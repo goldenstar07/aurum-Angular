@@ -45,12 +45,13 @@ export class PayrollComponent extends PayrollManager implements OnInit {
       if (!this.inventoryItems) {
         return;
       }
-     
-     
-      this.inventoryItems = this.inventoryItems.data;
+     console.log(this.inventoryItems)    
       this.inventoryLabels = [];
-      this.getDates(this.inventoryItems.payroll[Object.keys(this.inventoryItems.payroll)[0]]);
-      this.getLabels(this.inventoryItems.payroll);
+      this.inventoryDates = [];
+     if(Object.keys(this.inventoryItems.payroll).length>0) {
+        this.getDates(this.inventoryItems.payroll[Object.keys(this.inventoryItems.payroll)[0]]);        
+       }
+       this.getLabels(this.inventoryItems.payroll);
     });
 
     this.form = this.formBuilder.group({
@@ -92,10 +93,16 @@ export class PayrollComponent extends PayrollManager implements OnInit {
     }
 
     this.form.value.inventories.forEach(item => {
-      this.inventoryItems.payroll[item.item][indexOfItem].rt = item.rt;
-      this.inventoryItems.payroll[item.item][indexOfItem].ot = item.ot;
-      this.inventoryItems.payroll[item.item][indexOfItem].dt = item.dt;
-      this.inventoryItems.payroll[item.item][indexOfItem].mt = item.mt;
+      if(!this.inventoryItems.payroll[item.item]){
+        this.inventoryItems.payroll[item.item] = {
+          archive:false,
+          data:[]
+        }
+      }
+      this.inventoryItems.payroll[item.item].data[indexOfItem].rt = item.rt;
+      this.inventoryItems.payroll[item.item].data[indexOfItem].ot = item.ot;
+      this.inventoryItems.payroll[item.item].data[indexOfItem].dt = item.dt;
+      this.inventoryItems.payroll[item.item].data[indexOfItem].mt = item.mt;
     });
 
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
@@ -109,9 +116,13 @@ export class PayrollComponent extends PayrollManager implements OnInit {
     this.addItem(this.inventoryItems.payroll, localStorage.hotelId);
   }
   addNewItem(name) {
-    this.inventoryItems.payroll[name] = [];
+    this.inventoryItems.payroll[name] = {
+      archive:false,
+      data:[]
+
+    };
     this.inventoryDates.forEach(date => {
-      this.inventoryItems.payroll[name].push({
+      this.inventoryItems.payroll[name].data.push({
         date: date,
         rt: "",
         ot: "",
@@ -129,7 +140,8 @@ updateItem() {
   addNewDate(date) {
     this.inventoryDates.push(date)
     for (let key in this.inventoryItems.payroll) {
-      this.inventoryItems.payroll[key].push({
+
+      this.inventoryItems.payroll[key].data.push({
         date: date,
         rt: "",
         ot: "",
@@ -144,7 +156,7 @@ updateItem() {
 
   sortByDate() {
     for (let key in this.inventoryItems.payroll) {
-      this.inventoryItems.payroll[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+      this.inventoryItems.payroll[key].data.sort((a, b) => +new Date(b.date) - +new Date(a.date));
     }
     this.getDates(this.inventoryItems.payroll[Object.keys(this.inventoryItems.payroll)[0]]);
   }

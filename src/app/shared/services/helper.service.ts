@@ -7,7 +7,7 @@ export class HelperService {
   constructor() { }
 
   public static getItemsByHotelId(arr){
-    return arr.find(e => e.id == localStorage.hotelId);
+    return arr.find(e => e.id == localStorage.hotelId).data;
   }
 
 }

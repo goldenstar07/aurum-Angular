@@ -78,7 +78,7 @@
                     </tr>
                 </thead>
                 <ng-container *ngIf="currentItem">
-                    <tr *ngFor="let item of currentItem | filterByDate: dateFrom: dateTo">
+                    <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
                         <td scope="row" class="type">{{item.date}}</td>
                         <td>
                             <input class="td-numb" [(ngModel)]="item.rt" disabled>
@@ -180,14 +180,33 @@
                   <span aria-hidden="true" class="cros">&times;</span>
                 </button>-->
                             </div>
-                            <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__form">
-                                <div class="name__block" [formGroupName]="i">
-                                    <input type="text" formControlName="item" id="item" name="item" placeholder="Employee" class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()">
-                                    <input type="text" formControlName="rt" id="rt" name="rt" placeholder="Regular" class="input">
-                                    <input type="text" formControlName="ot" id="ot" name="ot" placeholder="Over" class="input">
-                                    <input type="text" formControlName="dt" id="dt" name="dt" placeholder="Double" class="input">
-                                    <input type="text" formControlName="mt" id="mt" name="mt" placeholder="Missed" class="input">
-                                </div>
+                            <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__array_form">
+                                <table>
+                                    <tr *ngIf="i==0">
+                                            <td style="background-color: #F3F2F0;">
+                                                    <p class="td-numb">Employee</p>
+                                                </td>
+                                        <td style="background-color: #F3F2F0;">
+                                                <p class="td-numb">RT</p>
+                                            </td>
+                                            <td style="background-color: #F3F2F0;">
+                                                <p class="td-numb">OT</p>
+                                            </td>
+                                            <td style="background-color: #F3F2F0;">
+                                                <p class="td-numb">DT</p>
+                                            </td>
+                                            <td style="background-color: #F3F2F0;">
+                                                <p class="td-numb">MT</p>
+                                            </td>
+                                        </tr>
+                                    <tr [formGroupName]="i">
+                                        <td><input type="text" formControlName="item" id="item" name="item" placeholder="Employee" class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()"></td>
+                                        <td><input type="text" formControlName="rt" id="rt" name="rt" placeholder="Regular" class="input"></td>
+                                        <td><input type="text" formControlName="ot" id="ot" name="ot" placeholder="Over" class="input"></td>
+                                        <td><input type="text" formControlName="dt" id="dt" name="dt" placeholder="Double" class="input"></td>
+                                        <td><input type="text" formControlName="mt" id="mt" name="mt" placeholder="Missed" class="input"></td>
+                                    </tr>
+                                </table>
                             </form>
                             <div class="add__item__block" (click)="addFormInput()">
                                 <button type="button" class="add__item__btn">

@@ -28,7 +28,7 @@ export class PayrollManager {
 
   byDate: boolean;
   byType: boolean;
-
+  currentUser:any;
   currentItem: any;
 
   constructor(public modalService: NgbModal,
@@ -40,6 +40,7 @@ export class PayrollManager {
     this.dateIndex = 0;
     this.byDate = false;
     this.byType = false;
+    this.currentUser = this.dataStorageService.getUser();
   }
 
 
@@ -80,8 +81,9 @@ export class PayrollManager {
     }
   }
 
-  getDates(dates) {
-    if(!dates) return;
+  getDates(_dates) {
+    if(!_dates) return;
+    let dates = _dates.data;
     this.dateFrom = dates[dates.length -1].date;
     this.dateTo = dates[0].date;
     this.inventoryDates = [];
