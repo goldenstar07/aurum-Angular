@@ -18,7 +18,8 @@ import {HelperService} from "../../shared/services/helper.service";
 })
 export class FbComponent extends InventoryManeger implements OnInit {
   
-   public archiveToggle = true;
+  
+  public archiveToggle = true;
    @ViewChild('checkMe') checkMe: ElementRef;
      @ViewChild('fname') fname: ElementRef;
   constructor(public modalService: NgbModal,
@@ -30,21 +31,30 @@ export class FbComponent extends InventoryManeger implements OnInit {
     super(modalService, formBuilder, dataProcessingService, dataStorageService, datePipe);
   }
 
-
+  key:string;
+  keyTitle:string;
   ngOnInit() {
-    this.currentEditingColNumber = -1;
+
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
-      if(!this.inventoryItems) {
+      if (!this.inventoryItems) {
         return;
       }
-      this.inventoryItems = this.inventoryItems.data;
+              //   this.inventoryItems.data.room = {
+        // 'brush': [{'date': '2018-06-01', have: '1', need: '8'}, {
+        //   'date': '2018-03-01', have: '1', need: '8'
+        // }]};
+        // JSON.stringify(this.inventoryItems.room);
+      this.key = 'fb';
+      this.keyTitle= 'F&B';
       this.inventoryLabels = [];
-      this.getDates(this.inventoryItems.fb[Object.keys(this.inventoryItems.fb)[0]]);
-      this.getLabels(this.inventoryItems.fb);
+      this.inventoryDates = [];
+      this.inventoryLabels = [];
+      if(this.inventoryItems[this.key]) {
+        this.getDates(this.inventoryItems[this.key][Object.keys(this.inventoryItems[this.key])[0]]);
+        this.getLabels(this.inventoryItems[this.key]);
+      }
     });
-
-
     this.form = this.formBuilder.group({
       date: [''],
       inventories: this.formBuilder.array([this.createFormInput()])
@@ -52,70 +62,32 @@ export class FbComponent extends InventoryManeger implements OnInit {
     console.log(this.form);
   }
 
-  createListForms():FormGroup[] {
-      let formarray:FormGroup[];
-      formarray = [];
-      for( let label of this.inventoryLabels){
-        let formGroup = this.formBuilder.group({
-          item:label,
-          have:'',
-          need:''
-        })   
-      formarray.push(formGroup);
-      }
-      return formarray;
-     }
-  createAddInventoryList(){
-    this.form = this.formBuilder.group({
-      date:['', Validators.required],
-      inventories: this.formBuilder.array(this.createListForms())
-    })
+  addItem(item, hotelId) {
+    this.inventoryService.addInventory(item, hotelId, this.key);
   }
-
-  openNewProperty(contentNewProperty) {
-    this.createAddInventoryList();
-    this.addNewInventoryModalRef = this.modalService.open(contentNewProperty);
-    this.addNewInventoryModalRef.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed}`;
-    });
-  }
-updateItem() {
-  console.log(this.inventoryItems.fb);
-  console.log("updateItem")
-  this.sortByDate();
-  this.addItem(this.inventoryItems.fb, localStorage.hotelId);  
-}
-
- addItem(item,hotelId){
-  console.log("addItem")
-  this.inventoryService.addFb(item, hotelId);
-}
 
   saveFormInput() {
-    console.log("adsaveFormInputdItem")
-    if(!this.inventoryItems) {
+    if (!this.inventoryItems) {
       this.inventoryItems = {
-        fb: {}
+        [this.key]: {}
       };
       this.inventoryDates = [];
       this.inventoryService.addNewField();
     }
 
-    if(!this.inventoryItems.fb[Object.keys(this.inventoryItems.fb)[0]]) {
+    if (!this.inventoryItems[this.key]) {
       this.inventoryDates = [];
+      this.inventoryItems[this.key] = {}
     }
 
     this.form.value.inventories.forEach(item => {
-      if (!this.inventoryItems.fb[item.item]) this.addNewItem(item.item);
+
+      if (!this.inventoryItems[this.key][item.item] && item.item!='') 
+        this.addNewItem(item.item);
     });
 
-
-    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'MM/dd/yyyy') : this.datePipe.transform(new Date(), 'MM/dd/yyyy');
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'MM-dd-yyyy'): this.datePipe.transform(new Date(), 'MM-dd-yyyy');
     let indexOfItem = this.checkIfDateExist(date);
-
-
 
     if (indexOfItem == -1) {
       this.addNewDate(date);
@@ -123,33 +95,46 @@ updateItem() {
     }
 
     this.form.value.inventories.forEach(item => {
-      this.inventoryItems.fb[item.item][indexOfItem].need = item.need;
-      this.inventoryItems.fb[item.item][indexOfItem].have = item.have;
+      if(item.item!=''){
+        this.inventoryItems[this.key][item.item].data[indexOfItem].need = item.need;
+        this.inventoryItems[this.key][item.item].data[indexOfItem].have = item.have;
+      }
     });
 
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
 
     this.sortByDate();
-    this.addItem(this.inventoryItems.fb, localStorage.hotelId);
-    this.addNewInventoryModalRef.close();
+     // this.addItem({
+    //      'toner': [{'date': '2018-06-01', have: '1', need: '8'}, {
+    //        'date': '2018-03-01', have: '1', need: '8'
+    //      }]}, localStorage.hotelId);
+    this.addItem(this.inventoryItems[this.key], localStorage.hotelId);
+    this.addNewInventoryModalRef.close()
   }
+
   addNewItem(name) {
-    console.log("addNewItem")
-    this.inventoryItems.fb[name] = [];
+    this.inventoryItems[this.key][name] = {
+      archive: false,
+      data:[]
+    };
     this.inventoryDates.forEach(date => {
-      this.inventoryItems.fb[name].push({
+      this.inventoryItems[this.key][name].data.push({
         date: date,
         have: "",
         need: ""
       })
-    })
+    }) 
   }
 
+updateItem() {
+   this.sortByDate();
+    this.addItem(this.inventoryItems[this.key], localStorage.hotelId);
+}
+
   addNewDate(date) {
-    console.log("addNewDate")
-    this.inventoryDates.push(date)
-    for (let key in this.inventoryItems.fb) {
-      this.inventoryItems.fb[key].push({
+    this.inventoryDates.push(date);
+    for (let key in this.inventoryItems[this.key] ){
+      this.inventoryItems[this.key][key].data.push({
         date: date,
         have: "",
         need: ""
@@ -157,47 +142,26 @@ updateItem() {
     }
   }
   updateRooms() {
-    console.log("updateRooms")
-    this.addItem(this.inventoryItems.fb, localStorage.hotelId);
+      console.log("find a way to update the dom with archived rows");
+
+    this.addItem(this.inventoryItems[this.key], localStorage.hotelId);
   }
 
   sortByDate() {
+   
     console.log("sortByDate")
-    for (let key in this.inventoryItems.fb) {
-      this.inventoryItems.fb[key].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+    console.log(this.inventoryItems[this.key])
+    for (let key in this.inventoryItems[this.key]) {
+      this.inventoryItems[this.key][key].data.sort((a, b) => +new Date(b.date) - +new Date(a.date));
     }
-    this.getDates(this.inventoryItems.fb[Object.keys(this.inventoryItems.fb)[0]]);
+    console.log(this.inventoryItems[this.key])
+    this.getDates(this.inventoryItems[this.key][Object.keys(this.inventoryItems[this.key])[0]]);
   }
 
   updateItemsByType() {
-    console.log("updateItemsByType")
-    this.currentItem = this.inventoryItems.fb[this.nameOfItem];
+    this.currentItem = this.inventoryItems[this.key][this.nameOfItem];
+    console.log(this.inventoryItems[this.key])
   }
-  archiveRow() {
-    console.log("archiveRow")
-    if (localStorage.getItem('table') != null) {
-        // document.getElementsByTagName('input').checked = localStorage.getItem('table');
-        console.log('archive row');
-
-    }
-    let checkboxes =  document.getElementsByTagName('input');
-
-    let arr = [];
-
-console.log('reloaded checkboxes',checkboxes);
-//  let checkboxes = document.getElementsByTagName('input');
-    for (let i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].checked === true) {
-     let table = <HTMLElement>document.getElementById('table');
-      checkboxes[i].closest('tr').classList.add('archive');
-      table.appendChild(checkboxes[i].closest('tr'));
-arr.push(checkboxes[i].checked = true);
-    } else {
-arr.push(checkboxes[i].checked=false);
-}
-    }localStorage.setItem('table', JSON.stringify(arr));
-    console.log('saved states of check boxes',arr);
-}
 
 }
 
