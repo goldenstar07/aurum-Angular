@@ -167,6 +167,7 @@ export class BillsMiscComponent implements OnInit {
   }
 
   downloadImage(downloadLink) {
+    console.log("hello")
     let url = decodeURIComponent(downloadLink.data.image);
     let arr = url.split('/');
     let name = arr[arr.length - 1].substr(0, arr[arr.length - 1].indexOf('?alt'));
@@ -174,6 +175,7 @@ export class BillsMiscComponent implements OnInit {
     const uploadTask = storageRef.child(`/uploads/${name}`) .getDownloadURL().then((url) => {
       const xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';
+      
       xhr.onload = (event) => {
         /* Create a new Blob object using the response
         *  data of the onload object.
@@ -189,6 +191,7 @@ export class BillsMiscComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       };
       xhr.open('GET', url);
+      xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
       xhr.send();
     }).catch(function(error) {
       // Handle any errors

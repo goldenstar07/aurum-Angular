@@ -19,7 +19,7 @@
             
             <ng-template #contentViewImg let-c="close" let-d="dismiss" class="modal-lg">            
                 <iframe *ngIf="isPdf(bill.data.image)" [src]="bill.data.image | safe" class="main__block"></iframe>
-                <img  *ngIf="!isPdf(bill.data.image)" [src]="bill.data.image | safe" [alt]="bill.data.name"  class="main__block">                      
+                <a  download [href]="bill.data.image | safe"> <img controls *ngIf="!isPdf(bill.data.image)" [src]="bill.data.image | safe" [alt]="bill.data.name"  class="main__block"></a>
              </ng-template>
 
             <div class="table__block_btn">

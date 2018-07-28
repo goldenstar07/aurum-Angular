@@ -54,18 +54,24 @@ export class HKComponent extends HKManager implements OnInit {
     );
   }
 
+  showArchive: boolean;
   ngOnInit() {
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
       if (!this.inventoryItems) {
         return;
       }
-
-      this.inventoryItems = this.inventoryItems.data;
+      this.showArchive = false;
+      this.inventoryItems = this.inventoryItems;
       this.inventoryLabels = [];
+
+      if(this.inventoryItems.hk){
       this.getDates(
         this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]);
       this.getLabels(this.inventoryItems.hk);
+      }else{
+        this.inventoryDates=[]
+      }
     });
 
     this.form = this.formBuilder.group({
@@ -78,7 +84,18 @@ export class HKComponent extends HKManager implements OnInit {
   addItem(item, hotelId) {
     this.inventoryService.addHK(item, hotelId);
   }
-
+ 
+  getMinso(date){
+    let data = this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]].data;
+    for(let i = 0; i< data.length; i++){      
+        if(data[i].date == date ){
+          return {
+            minso: data[i].minso,
+            minco: data[i].minco
+        }
+     }
+    }
+  }
   saveFormInput() {
     if (!this.inventoryItems) {
       this.inventoryItems = {
@@ -104,25 +121,27 @@ export class HKComponent extends HKManager implements OnInit {
       this.addNewDate(date);
       indexOfItem = this.inventoryDates.length - 1;
     }
-
+    let minco = this.form.value.inventories[0].minco/60;
+    let minso = this.form.value.inventories[0].minso/60;
     this.form.value.inventories.forEach(item => {
       console.log(item.dnd);
-      this.inventoryItems.hk[item.item][indexOfItem].dnd = item.dnd;
-      this.inventoryItems.hk[item.item][indexOfItem].so = item.so;
-      this.inventoryItems.hk[item.item][indexOfItem].co = item.co;
-      this.inventoryItems.hk[item.item][indexOfItem].time = item.time;
-      this.inventoryItems.hk[item.item][indexOfItem].minso = item.minso;
-      this.inventoryItems.hk[item.item][indexOfItem].minco = item.minco;
-
-      this.inventoryItems.hk[item.item][indexOfItem].threshold =
-        item.minso * item.so + item.minco * item.co - item.minso * item.dnd;
-      this.inventoryItems.hk[item.item][indexOfItem].variance =
-        item.threshold - item.time;
+      this.inventoryItems.hk[item.item].data[indexOfItem].dnd = item.dnd;
+      this.inventoryItems.hk[item.item].data[indexOfItem].so = item.so;
+      this.inventoryItems.hk[item.item].data[indexOfItem].co = item.co;
+      this.inventoryItems.hk[item.item].data[indexOfItem].time = item.time;
+      this.inventoryItems.hk[item.item].data[indexOfItem].minso = minso;
+      this.inventoryItems.hk[item.item].data[indexOfItem].minco = minco;
+      this.inventoryItems.hk[item.item].data[indexOfItem].threshold =
+        // item.minso * item.so + item.minco * item.co - item.minso * item.dnd;
+       minso*item.so + minco*item.minco - minso*item.dnd;
+      this.inventoryItems.hk[item.item].data[indexOfItem].variance =
+        // item.threshold - item.time;
+        this.inventoryItems.hk[item.item].data[indexOfItem].threshold - item.time;
     });
 
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
 
-    this.sortByDate();
+    this.sortByDate();  
 
     //to reset all add this code
     // this.addItem({
@@ -131,9 +150,12 @@ export class HKComponent extends HKManager implements OnInit {
     this.addItem(this.inventoryItems.hk, localStorage.hotelId);
   }
   addNewItem(name) {
-    this.inventoryItems.hk[name] = [];
+    this.inventoryItems.hk[name] = {
+      archive:false,
+      data:[]
+    };
     this.inventoryDates.forEach(date => {
-      this.inventoryItems.hk[name].push({
+      this.inventoryItems.hk[name].data.push({
         date: date,
         dnd: "",
         so: "",
@@ -153,7 +175,7 @@ export class HKComponent extends HKManager implements OnInit {
   addNewDate(date) {
     this.inventoryDates.push(date);
     for (let key in this.inventoryItems.hk) {
-      this.inventoryItems.hk[key].push({
+      this.inventoryItems.hk[key].data.push({
         date: date,
         dnd: "",
         so: "",
@@ -170,8 +192,10 @@ export class HKComponent extends HKManager implements OnInit {
   }
 
   sortByDate() {
-    for (let key in this.inventoryItems.hk) {
-      this.inventoryItems.hk[key].sort(
+    for (let key in this.inventoryItems.hk) {                                           
+      console.log("-------------- key --------------")
+      console.log( JSON.stringify(this.inventoryItems.hk[key].data))
+      this.inventoryItems.hk[key].data.sort(
         (a, b) => +new Date(b.date) - +new Date(a.date)
       );
     }
@@ -179,6 +203,7 @@ export class HKComponent extends HKManager implements OnInit {
       this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]
     );
   }
+
 
   updateItemsByType() {
     this.currentItem = this.inventoryItems.hk[this.nameOfItem];

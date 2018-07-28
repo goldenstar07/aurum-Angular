@@ -102,8 +102,7 @@ export class TransactionsDateComponent implements OnInit {
     this.dateExists = false;
   }
 
-  saveFormInput() {
-    console.log("hello")
+  saveFormInput() { 
     if(!this.inventoryItems) {
       this.inventoryItems = {}
       this.inventoryDates = [];

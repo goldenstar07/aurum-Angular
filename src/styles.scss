@@ -375,7 +375,12 @@ input:focus {
     display: flex;
     justify-content: center;
 }
-
+.user__array_form{
+    margin-top: 0px;
+    margin-bottom:0px;
+    display: flex;
+    justify-content: center;
+}
 .name__block {
     input {
         margin-left: 30px;
